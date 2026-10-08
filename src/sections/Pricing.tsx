@@ -10,7 +10,7 @@ const plans = [
     tagline: 'Der klassische Google-NFC-Tag',
     price: 60,
     note: 'Kein Dashboard, keine Folgekosten.',
-    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'Direkter Google-Bewertungslink', 'Einrichtung inklusive'],
+    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'Direkter Google-Bewertungslink', 'Einrichtung inklusive', 'Versand in 2–5 Werktagen'],
     popular: false,
   },
   {
@@ -19,7 +19,7 @@ const plans = [
     tagline: 'Alles aus Klassik, plus Kontrolle',
     price: 99,
     note: 'inkl. 12 Monate Dashboard, danach 15 €/Monat (monatlich kündbar). Ohne Dashboard funktioniert die Karte weiter wie Klassik.',
-    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'YANQIVA Dashboard, 12 Monate inklusive', 'Statistiken zu Taps und Scans', 'Ziel-Link jederzeit änderbar', 'Einrichtung inklusive'],
+    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'YANQIVA Dashboard, 12 Monate inklusive', 'Statistiken zu Taps und Scans', 'Ziel-Link jederzeit änderbar', 'Einrichtung inklusive', 'Versand in 7 Werktagen'],
     popular: true,
   },
 ]

@@ -125,7 +125,7 @@ export const agb: LegalDoc = {
           p: 'Wir liefern nur an Lieferadressen in Deutschland, und zwar an die Rechnungsadresse oder an die in der Bestellung angegebene abweichende Lieferadresse.',
         },
         {
-          p: 'Die voraussichtliche Lieferzeit nennen wir in der Auftragsbestätigung. Sie beginnt mit dem Zahlungseingang, frühestens jedoch, wenn Rückfragen zur Einrichtung (Ziffer 4) geklärt sind. Verbindlich ist ein Liefertermin nur, wenn er ausdrücklich als verbindlich vereinbart ist. Überschreiten wir die genannte Lieferzeit, kann der Kunde uns eine angemessene Nachfrist setzen; seine gesetzlichen Rechte bleiben unberührt.',
+          p: 'Wir versenden die Produkte in der Regel innerhalb von 2 bis 5 Werktagen (Variante Klassik) bzw. innerhalb von 7 Werktagen (Variante Dashboard, einschließlich Einrichtung des Dashboards). Die voraussichtliche Lieferzeit bestätigen wir zusätzlich in der Auftragsbestätigung. Sie beginnt mit dem Zahlungseingang, frühestens jedoch, wenn Rückfragen zur Einrichtung (Ziffer 4) geklärt sind. Verbindlich ist ein Liefertermin nur, wenn er ausdrücklich als verbindlich vereinbart ist. Überschreiten wir die genannte Lieferzeit, kann der Kunde uns eine angemessene Nachfrist setzen; seine gesetzlichen Rechte bleiben unberührt.',
         },
         {
           p: 'Die Gefahr des zufälligen Untergangs und der zufälligen Verschlechterung der Ware geht mit der Übergabe an das Versandunternehmen auf den Kunden über (§ 447 BGB). Geht eine Sendung verloren oder kommt sie beschädigt an, unterstützen wir den Kunden bei der Abwicklung mit dem Versandunternehmen. Äußerlich erkennbare Transportschäden soll der Kunde möglichst bei der Zustellung beim Zusteller reklamieren und uns unverzüglich mitteilen.',

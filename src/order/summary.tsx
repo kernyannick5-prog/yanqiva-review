@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react'
-import { DASHBOARD_RENEWAL_EUR, FORMATS, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, VAT_NOTE } from './catalog'
+import { DASHBOARD_RENEWAL_EUR, FORMATS, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
 import { effectiveQuantity, type OrderForm } from './state'
 
 /** Sticky Bestellübersicht (Desktop-Seitenleiste). */
@@ -31,6 +31,7 @@ export function OrderSidebar({ form }: { form: OrderForm }) {
           {pid === 'review-dashboard' ? `Dashboard 12 Monate inklusive, danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort. Kein automatisches Abo.` : 'keine.'}
         </p>
       )}
+      {p && <p className="mt-3 text-[13px] text-muted">Lieferzeit: {shippingText(p)}.</p>}
       <p className="mt-3 text-[13px] text-muted">Zahlung per Rechnung (Überweisung), nur für Unternehmer.</p>
     </aside>
   )

@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import {
   DASHBOARD_RENEWAL_EUR, FORMAT_LIST, FORMATS, formatEuro, PRODUCT_LIST, PRODUCTS, QTY_MAX, QTY_MIN, SHIPPING_EUR, subtotal, total, VAT_NOTE,
+  shippingText,
 } from './catalog'
 import { CheckboxField, ErrorSummary, FieldError, Fieldset, RequiredLegend, TextField, type FormCtx } from './fields'
 import { errId, fieldId } from './ids'
@@ -100,6 +101,11 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
                   <span className="font-semibold text-text">Laufende Kosten: </span>
                   {p.running}
                 </span>
+                <span className="mt-2 block text-[13px] leading-snug text-muted">
+                  <span className="font-semibold text-text">Lieferzeit: </span>
+                  {shippingText(p)}
+                  {p.id === 'review-dashboard' ? ' (inklusive Einrichtung des Dashboards)' : ''}.
+                </span>
               </span>
             </label>
           ))}
@@ -188,18 +194,18 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
         </p>
       </div>
 
-      <NextSteps dashboard={form.product === 'review-dashboard'} />
+      <NextSteps dashboard={form.product === '' ? undefined : form.product === 'review-dashboard'} />
     </div>
   )
 }
 
-export function NextSteps({ dashboard, done = false }: { dashboard: boolean; done?: boolean }) {
+export function NextSteps({ dashboard, done = false }: { dashboard?: boolean; done?: boolean }) {
   const all = [
     'Sie senden Ihre Bestellung ab. Das ist Ihr verbindliches Angebot.',
     'Sie erhalten eine Eingangsbestätigung per E-Mail. Das ist noch keine Annahme.',
     'Mit der Auftragsbestätigung per E-Mail, in der Regel innerhalb eines Werktags, kommt der Vertrag zustande. Die Rechnung folgt zusammen mit ihr.',
     'Sie überweisen den Betrag innerhalb von 14 Tagen.',
-    `Nach Zahlungseingang richten wir Ihre Karte mit Ihrem Google-Link ein, produzieren und versenden sie.${dashboard ? ' Den Dashboard-Zugang erhalten Sie per E-Mail mit dem Versand.' : ''}`,
+    `Nach Zahlungseingang richten wir Ihre Karte mit Ihrem Google-Link ein, produzieren und versenden sie, ${dashboard === undefined ? 'in der Regel innerhalb von 2–5 Werktagen (Klassik) bzw. 7 Werktagen (Dashboard).' : dashboard ? 'in der Regel innerhalb von 7 Werktagen. Den Dashboard-Zugang erhalten Sie per E-Mail mit dem Versand.' : 'in der Regel innerhalb von 2–5 Werktagen.'}`,
   ]
   const items = done ? all.slice(1) : all
   return (
@@ -409,6 +415,10 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Versand (Deutschland)</dt>
             <dd className="text-right text-text">{formatEuro(SHIPPING_EUR)} (inklusive)</dd>
+          </div>
+          <div className="flex justify-between gap-4">
+            <dt className="text-muted">Lieferzeit</dt>
+            <dd className="max-w-[26ch] text-right text-text sm:max-w-[40ch]">{shippingText(p)}</dd>
           </div>
           <div className="flex items-baseline justify-between gap-4 border-t border-line pt-3">
             <dt className="font-display text-base font-semibold text-text">Gesamtbetrag einmalig</dt>

@@ -1,4 +1,4 @@
-import { FORMATS, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, VAT_NOTE } from './catalog'
+import { FORMATS, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
 import { effectiveQuantity, productOf, trimmed, type OrderForm } from './state'
 
 export const MESSAGE_MAX = 3500
@@ -27,6 +27,7 @@ export function buildMessage(input: OrderForm): string {
     `Versand (Deutschland): ${formatEuro(SHIPPING_EUR)} (inklusive)`,
     `Gesamtbetrag einmalig: ${formatEuro(total(pid, qty))}`,
     `Laufende Kosten: ${p.running}`,
+    `Lieferzeit: ${shippingText(p)}`,
     `Zahlungsart: Rechnung (Überweisung). ${VAT_NOTE}`,
     '',
     'EINRICHTUNG',

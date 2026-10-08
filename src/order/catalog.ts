@@ -15,6 +15,8 @@ export interface Product {
   features: readonly string[]
   /** Laufende Kosten in Worten (für Übersicht und Bestätigung). */
   running: string
+  /** Versandzeit ab Zahlungseingang (Richtwert, Werktage). */
+  shipping: string
 }
 
 export interface FormatOption {
@@ -28,6 +30,8 @@ export const QTY_MAX = 10
 export const SHIPPING_EUR = 0
 export const DASHBOARD_RENEWAL_EUR = 15
 export const CONTACT_EMAIL = 'support@yanqiva.de'
+/** Versandzeit als Satz, z. B. für Karten und Übersicht. */
+export const shippingText = (p: Product): string => `Versand in der Regel innerhalb von ${p.shipping} nach Zahlungseingang`
 export const VAT_NOTE = 'Endpreise. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.'
 
 export const PRODUCTS: Record<ProductId, Product> = {
@@ -40,6 +44,7 @@ export const PRODUCTS: Record<ProductId, Product> = {
     unitPrice: 60,
     features: ['NFC-Chip und QR-Code', 'Direkter Link zum Google-Bewertungsformular', 'Einrichtung inklusive'],
     running: 'Keine laufenden Kosten',
+    shipping: '2–5 Werktagen',
   },
   'review-dashboard': {
     id: 'review-dashboard',
@@ -56,6 +61,7 @@ export const PRODUCTS: Record<ProductId, Product> = {
       'Einrichtung inklusive',
     ],
     running: `12 Monate Dashboard inklusive. Danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar, nur wenn Sie aktiv verlängern. Ohne Verlängerung funktioniert die Karte weiter und leitet direkt zur Google-Bewertung.`,
+    shipping: '7 Werktagen',
   },
 }
 
