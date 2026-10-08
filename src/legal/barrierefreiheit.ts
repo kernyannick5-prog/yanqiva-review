@@ -134,7 +134,31 @@ export const barrierefreiheit: LegalDoc = {
       heading: '8. Bestellprozess',
       blocks: [
         {
-          p: 'Seit dem 9. Oktober 2026 können Sie YANQIVA REVIEW über den Bestellprozess unter /bestellen/ bestellen. Er besteht aus vier Schritten (Produkt, Einrichtung, Ihre Daten, Prüfen) und einer Bestätigung. Wir haben ihn mit Beschriftungen, Pflichtfeld-Hinweisen, Fehlermeldungen und einer Bedienung per Tastatur gebaut. Die ausführliche Prüfung auf Barrierefreiheit läuft noch; das Ergebnis tragen wir hier nach. Bis dahin gilt: Wenn Sie beim Bestellen auf eine Barriere stoßen, schreiben Sie uns an support@yanqiva.de – wir nehmen Ihre Bestellung dann auch gern per E-Mail entgegen.',
+          p: 'Seit dem 9. Oktober 2026 können Sie YANQIVA REVIEW über den Bestellprozess unter /bestellen/ bestellen. Er besteht aus vier Schritten (Produkt, Einrichtung, Ihre Daten, Prüfen) und einer Bestätigungsseite. Wir haben ihn am 9. Oktober 2026 selbst geprüft: mit dem Prüfwerkzeug axe-core in den Breiten 320, 390 und 1280 Pixel für jeden Schritt, auch mit Fehlermeldungen und für die Bestätigung, und von Hand nur mit der Tastatur bis zur Bestellübersicht.',
+        },
+        {
+          list: [
+            'Jedes Feld hat eine sichtbare Beschriftung. Pflichtfelder sind mit * und im Quelltext als Pflichtfeld gekennzeichnet, freiwillige Angaben mit „(freiwillig)“. Zusammengehörende Auswahlmöglichkeiten (Variante, Ausführung, Adressen) sind als Gruppe mit Überschrift ausgezeichnet. Ihr Browser kann Name, E-Mail, Telefon und Adresse automatisch ausfüllen.',
+            'Eine Fortschrittsanzeige nennt den aktuellen Schritt auch als Text („Schritt 2 von 4“). Bei jedem Schrittwechsel setzt die Seite den Tastaturfokus auf die Überschrift des neuen Schritts.',
+            'Wenn Angaben fehlen oder nicht stimmen, nennt eine Zusammenfassung oben alle Fehler mit Links zu den Feldern. Der Fokus springt zum ersten fehlerhaften Feld, und jede Fehlermeldung steht als Text direkt am Feld und ist nicht nur durch Farbe erkennbar.',
+            'Vor dem verbindlichen Absenden sehen Sie eine Übersicht aller Angaben mit „Ändern“-Links. Ihre Eingaben bleiben beim Zurückgehen und beim Neuladen der Seite in dieser Sitzung erhalten.',
+            'Das Absenden wird als Status mitgeteilt („Bestellung wird gesendet …“). Die Bestätigung nimmt den Fokus auf. Wenn die Übermittlung nicht klappt, erhalten Sie eine Meldung mit den Möglichkeiten „Erneut senden“, „Bestellung per E-Mail senden“ und „Bestelltext kopieren“.',
+            'Es gibt keine Zeitlimits. Der Bestellprozess ist bis 320 Pixel Breite ohne waagerechtes Scrollen bedienbar, Bedienelemente sind mindestens 24 × 24 Pixel groß, und eine fixierte Leiste am unteren Rand verdeckt auf dem Smartphone nicht das Feld, in dem Sie gerade sind.',
+          ],
+        },
+        {
+          p: 'Bekannte Einschränkungen:',
+        },
+        {
+          list: [
+            'Der Seitentitel bleibt in allen Schritten gleich („Bestellen – YANQIVA REVIEW“). Welcher Schritt aktiv ist, erfahren Sie aus der Überschrift und der Fortschrittsanzeige.',
+            'Bei der Produktauswahl liest ein Screenreader zu jeder Variante Preis, Kurzbeschreibung, alle Leistungen und die laufenden Kosten vor. Das ist ausführlich.',
+            'Beim Ändern der Stückzahl wird der Zwischenpreis bei jeder Eingabe vorgelesen. Die Fortschrittsanzeige ist als Navigationsbereich ausgezeichnet, obwohl sie keine Links enthält. Auf dem Desktop erscheint die Bestellübersicht in Schritt 4 doppelt (Seitenleiste und Prüfblock).',
+            'Die Ansagen für Screenreader (zum Beispiel bei Fehlern und beim Absenden) haben wir nicht mit echten Screenreadern geprüft (siehe Abschnitt 6). Ob Fehlermeldungen dort nicht doppelt vorgelesen werden, wissen wir nicht sicher.',
+          ],
+        },
+        {
+          p: 'Wenn Sie beim Bestellen auf eine Barriere stoßen, schreiben Sie uns an support@yanqiva.de. Wir nehmen Ihre Bestellung dann auch gern per E-Mail entgegen.',
         },
         {
           p: 'Eine Anmeldung (Login) und ein Video gibt es auf dieser Website nicht.',
