@@ -33,7 +33,7 @@ export function CardTile({ card, index, onEdit, onStats, onQr }: CardTileProps) 
         <div aria-hidden className="pointer-events-none absolute -bottom-28 -left-20 h-52 w-52 rounded-full bg-[radial-gradient(closest-side,rgb(94_234_212/0.2),transparent)]" />
         <div className="relative flex h-full flex-col justify-between">
           <div className="flex items-start justify-between">
-            <span className="text-[10px] font-semibold tracking-[0.22em] text-text/80">{cardLabel(card.cardNumber)}</span>
+            <span className="text-[11px] font-semibold tracking-[0.2em] text-text/80">{cardLabel(card.cardNumber)}</span>
             <NfcIcon className="h-6 w-6 text-mint" />
           </div>
           <div aria-hidden className="h-6 w-9 rounded-md bg-gradient-to-br from-mint/70 to-mint/20 ring-1 ring-white/20" />

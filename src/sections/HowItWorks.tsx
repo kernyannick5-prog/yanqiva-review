@@ -2,7 +2,7 @@ import { motion, useScroll, useSpring } from 'framer-motion'
 import { useRef, type CSSProperties, type ReactNode } from 'react'
 import { useLoopVisible } from '../lib/useLoopVisible'
 import { Reveal } from '../components/Reveal'
-import { Container, Eyebrow, sectionTitle } from './ui'
+import { Container, SectionHead } from './ui'
 
 /** Rahmen für eine Mini-Illustration; die CSS-Loops pausieren, solange sie offscreen ist. */
 function Stage({ children }: { children: ReactNode }) {
@@ -11,10 +11,11 @@ function Stage({ children }: { children: ReactNode }) {
     <div
       ref={loop}
       aria-hidden
-      className="relative grid h-44 place-items-center overflow-hidden rounded-2xl border border-line bg-ink-900/60"
+      className="relative grid h-40 place-items-center overflow-hidden rounded-2xl border border-line bg-ink-900/60 shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] sm:h-44 lg:h-48"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_100%,rgb(139_92_246/0.22),transparent)]" />
-      {children}
+      <div className="absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_100%,rgb(139_92_246/0.28),transparent)]" />
+      {/* Statisch skaliert (kein Animations-Einfluss): Illustration fuellt den Rahmen auch auf kleinen Displays */}
+      <div className="relative grid w-full origin-center scale-[1.25] place-items-center sm:scale-[1.2] lg:scale-[1.1]">{children}</div>
     </div>
   )
 }
@@ -22,8 +23,8 @@ function Stage({ children }: { children: ReactNode }) {
 function MiniCard({ className = '' }: { className?: string }) {
   return (
     <div className={`relative flex h-[68px] w-24 flex-col justify-between rounded-lg border border-white/15 bg-[linear-gradient(135deg,#1e1b4b,#2e1065)] p-2 ${className}`}>
-      <span className="font-display text-[8px] font-bold tracking-[0.18em]">YANQIVA</span>
-      <span className="text-[9px] leading-none tracking-wider text-amber-300">★★★★★</span>
+      <span className="font-display text-[9px] font-bold tracking-[0.16em]">YANQIVA</span>
+      <span className="text-[10px] leading-none tracking-wider text-amber-300">★★★★★</span>
     </div>
   )
 }
@@ -99,16 +100,15 @@ export function HowItWorks() {
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 })
 
   return (
-    <section id="how" className="relative overflow-hidden py-20 sm:py-28" aria-labelledby="how-title">
+    <section id="how" className="section-y section-sep section-tint relative overflow-hidden" aria-labelledby="how-title">
       <Container>
-        <Reveal className="max-w-2xl">
-          <Eyebrow>So funktioniert’s</Eyebrow>
-          <h2 id="how-title" className={`${sectionTitle} mt-4`}>
+        <Reveal>
+          <SectionHead eyebrow="So funktioniert’s" id="how-title">
             Drei Schritte. Keine Reibung.
-          </h2>
+          </SectionHead>
         </Reveal>
 
-        <div ref={ref} className="relative mt-14">
+        <div ref={ref} className="relative mt-9 sm:mt-14">
           {/* Linie: mobil vertikal, ab lg horizontal */}
           <div aria-hidden className="absolute bottom-0 left-7 top-0 w-px -translate-x-1/2 bg-line lg:hidden">
             <motion.div className="h-full w-full origin-top bg-gradient-to-b from-mint to-violet-glow" style={{ scaleY: progress }} />
@@ -117,16 +117,16 @@ export function HowItWorks() {
             <motion.div className="h-full w-full origin-left bg-gradient-to-r from-mint to-violet-glow" style={{ scaleX: progress }} />
           </div>
 
-          <ol className="grid gap-12 lg:grid-cols-3 lg:gap-8">
+          <ol className="grid gap-10 sm:gap-12 lg:grid-cols-3 lg:gap-8">
             {steps.map(({ n, title, text, Illustration }, i) => (
-              <li key={n} className="relative pl-[72px] lg:pl-0">
+              <li key={n} className="relative pl-[68px] lg:pl-0">
                 <span className="absolute left-0 top-0 block rounded-full bg-ink-900 lg:static lg:w-14">
                   <span className="glass grid size-14 place-items-center rounded-full font-display text-lg font-semibold text-mint">{n}</span>
                 </span>
                 <Reveal delay={i * 0.1}>
-                  <h3 className="mt-1.5 font-display text-2xl font-semibold tracking-tight lg:mt-6">{title}</h3>
-                  <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-muted">{text}</p>
-                  <div className="mt-5">
+                  <h3 className="mt-2 font-display text-[1.375rem] font-semibold tracking-tight sm:text-2xl lg:mt-6">{title}</h3>
+                  <p className="mt-2 max-w-sm text-[15px] leading-relaxed text-muted sm:text-base">{text}</p>
+                  <div className="mt-4 sm:mt-5">
                     <Illustration />
                   </div>
                 </Reveal>

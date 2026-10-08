@@ -19,7 +19,7 @@ interface LineChartProps {
   ariaLabel: string
 }
 
-const PAD = { top: 14, right: 12, bottom: 28, left: 38 }
+const PAD = { top: 14, right: 14, bottom: 30, left: 42 }
 const TICKS = 4
 
 /** Rundet das Maximum so auf, dass 4 gleichmäßige Rasterlinien mit „glatten“ Werten entstehen. */
@@ -68,7 +68,7 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
   const baseline = PAD.top + innerH
   const area = coords.length ? `${line} L${x(n - 1)},${baseline} L${x(0)},${baseline} Z` : ''
 
-  const labelEvery = Math.max(1, Math.ceil(n / Math.max(2, Math.floor(innerW / 54))))
+  const labelEvery = Math.max(1, Math.ceil(n / Math.max(2, Math.floor(innerW / 62))))
   const dataKey = `${n}-${points[0]?.key ?? ''}`
 
   // Touch: Tooltip bleibt stehen, bis außerhalb des Diagramms getippt wird.
@@ -144,10 +144,10 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
                 y1={y(value)}
                 y2={y(value)}
                 stroke="rgb(148 163 255)"
-                strokeOpacity={i === 0 ? 0.28 : 0.12}
+                strokeOpacity={i === 0 ? 0.3 : 0.15}
                 strokeDasharray={i === 0 ? undefined : '3 5'}
               />
-              <text x={PAD.left - 8} y={y(value) + 4} textAnchor="end" fontSize="11" fill="#6b7399" className="tabular-nums">
+              <text x={PAD.left - 9} y={y(value) + 4} textAnchor="end" fontSize="12" fill="#a4acd2" className="tabular-nums">
                 {formatInt(value)}
               </text>
             </g>
@@ -156,7 +156,7 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
 
         {points.map((p, i) =>
           i % labelEvery === 0 ? (
-            <text key={p.key} x={x(i)} y={height - 8} textAnchor="middle" fontSize="11" fill="#6b7399">
+            <text key={p.key} x={x(i)} y={height - 9} textAnchor="middle" fontSize="12" fill="#a4acd2">
               {p.axisLabel}
             </text>
           ) : null,

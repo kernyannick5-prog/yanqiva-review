@@ -26,7 +26,7 @@ for (let y = 0; y < N; y++) {
 
 function DecorativeQr() {
   return (
-    <svg viewBox={`0 0 ${N} ${N}`} className="h-[46px] w-[46px] rounded-[5px] bg-text p-[3px]" aria-hidden>
+    <svg viewBox={`0 0 ${N} ${N}`} className="h-[48px] w-[48px] rounded-[5px] bg-text p-[3px]" aria-hidden>
       {FINDERS.map(([fx, fy]) => (
         <g key={`${fx}-${fy}`} fill="var(--color-ink-950)">
           <rect x={fx + 0.5} y={fy + 0.5} width={3} height={3} fill="none" stroke="var(--color-ink-950)" strokeWidth={1} />
@@ -78,7 +78,7 @@ export function Stand({ rotX, rotY, glareX }: StandProps) {
               children: (
                 <>
                   <span className="h-1.5 w-1.5 rounded-full bg-mint" />
-                  <span className="font-display text-[10px] font-semibold tracking-[0.28em] text-muted">YANQIVA</span>
+                  <span className="font-display text-[11px] font-semibold tracking-[0.26em] text-muted">YANQIVA</span>
                 </>
               ),
             }}
@@ -107,24 +107,24 @@ export function Stand({ rotX, rotY, glareX }: StandProps) {
                 },
                 children: (
                   <>
-                    <div className="flex h-full flex-col items-center px-[18px] py-[16px] text-center">
-                      <div className="flex items-center gap-1.5 font-display text-[11px] font-semibold tracking-[0.22em] text-text">
+                    <div className="flex h-full flex-col items-center px-[16px] py-[14px] text-center">
+                      <div className="flex items-center gap-1.5 font-display text-[12px] font-semibold tracking-[0.2em] text-text">
                         <span className="h-1.5 w-1.5 rounded-full bg-mint" />
                         YANQIVA <span className="text-mint">REVIEW</span>
                       </div>
-                      <div className="mt-2 text-[17px] leading-none tracking-[0.12em]" style={{ color: STAR_GOLD }}>
+                      <div className="mt-2 text-[18px] leading-none tracking-[0.12em]" style={{ color: STAR_GOLD }}>
                         ★★★★★
                       </div>
-                      <p className="mt-1.5 font-display text-[13px] font-semibold leading-snug text-text">
+                      <p className="mt-1.5 font-display text-[15px] font-semibold leading-snug text-text">
                         Wir freuen uns über Ihre Bewertung
                       </p>
-                      <div className="mt-3 grid h-16 w-16 place-items-center rounded-full border border-mint/50 bg-mint/10">
+                      <div className="mt-2.5 grid h-14 w-14 place-items-center rounded-full border border-mint/50 bg-mint/10">
                         <NfcIcon className="h-8 w-8" />
                       </div>
-                      <p className="mt-2 text-[11px] font-medium tracking-wide text-mint">Hier kontaktlos bewerten</p>
+                      <p className="mt-2 text-[12.5px] font-medium tracking-wide text-mint">Hier kontaktlos bewerten</p>
                       <div className="mt-auto flex items-center gap-2.5">
                         <DecorativeQr />
-                        <span className="text-left text-[9px] leading-tight text-muted">
+                        <span className="text-left text-[11px] leading-tight text-muted">
                           Oder QR-Code
                           <br />
                           scannen
@@ -149,7 +149,7 @@ export function Stand({ rotX, rotY, glareX }: StandProps) {
                 children: (
                   <>
                     <NfcIcon className="h-9 w-9 opacity-60" />
-                    <span className="font-display text-[10px] font-semibold tracking-[0.24em] text-faint">YANQIVA REVIEW</span>
+                    <span className="font-display text-[11px] font-semibold tracking-[0.2em] text-faint">YANQIVA REVIEW</span>
                   </>
                 ),
               }}

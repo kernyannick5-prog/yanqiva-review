@@ -1,6 +1,7 @@
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
 import { useCallback, useState } from 'react'
 import { Reveal } from '../components/Reveal'
+import { SectionHead } from '../sections/ui'
 import { useLoopVisible } from '../lib/useLoopVisible'
 import { AccountChip } from './components/AccountChip'
 import { LockIcon } from './components/Icons'
@@ -47,24 +48,25 @@ export function DashboardDemo() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <section id="demo" ref={loop} className="relative overflow-x-clip py-20 sm:py-28">
+      <section id="demo" ref={loop} aria-labelledby="demo-title" className="section-y section-sep relative overflow-x-clip">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mint">Interaktive Demo</p>
-            <h2 className="mt-3 font-display text-3xl font-semibold leading-tight sm:text-5xl">
+          <Reveal className="text-center">
+            <SectionHead
+              center
+              eyebrow="Interaktive Demo"
+              id="demo-title"
+              lead="Klick dich durch: Verwalte Karten und Links, lege eine neue Karte an und teste den QR-Code."
+            >
               Dein YANQIVA <span className="text-gradient">Dashboard</span>
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-              Klick dich durch: Verwalte Karten und Links, lege eine neue Karte an und teste den QR-Code.
-            </p>
-            <p className="mt-4 inline-flex items-center gap-2 rounded-2xl border border-line bg-white/[0.04] px-3 py-1.5 text-xs text-muted">
-              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-violet-glow" />
+            </SectionHead>
+            <p className="mt-5 inline-flex items-center gap-2 rounded-2xl border border-line bg-white/[0.04] px-3.5 py-2 text-left text-[13px] leading-snug text-muted">
+              <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-violet-glow" />
               Demo-Daten – alle Firmen und Zahlen sind erfunden
             </p>
           </Reveal>
 
           <motion.div
-            className="relative mt-10 sm:mt-14"
+            className="relative mt-8 sm:mt-12"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.08 }}
@@ -82,7 +84,7 @@ export function DashboardDemo() {
                   <LockIcon className="h-3 w-3 shrink-0 text-faint" />
                   <span className="truncate">app.yanqiva.de/dashboard</span>
                 </div>
-                <span className="shrink-0 rounded-md border border-mint/40 bg-mint/10 px-2 py-0.5 text-[10px] font-semibold tracking-wider text-mint">
+                <span className="shrink-0 rounded-md border border-mint/40 bg-mint/10 px-2 py-0.5 text-[11px] font-semibold tracking-wider text-mint">
                   DEMO
                 </span>
               </div>
@@ -90,11 +92,11 @@ export function DashboardDemo() {
               <div className="grid grid-cols-1 lg:grid-cols-[14.5rem_minmax(0,1fr)]">
                 <Sidebar view={view} onChange={navigate} cardCount={cards.length} />
 
-                <div className="min-h-[34rem] min-w-0 p-4 sm:p-6 lg:min-h-[40rem]">
+                <div className="min-h-[34rem] min-w-0 p-4 sm:p-6 lg:min-h-[40rem] lg:p-7">
                   <div className="mb-5 flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <h3 className="font-display text-xl font-semibold text-text sm:text-2xl">{meta.title}</h3>
-                      <p className="mt-1 text-sm text-muted">{meta.description}</p>
+                      <p className="mt-1 max-w-[65ch] text-sm leading-snug text-muted sm:text-[15px]">{meta.description}</p>
                     </div>
                     <AccountChip cardCount={cards.length} className="hidden shrink-0 sm:flex lg:hidden" />
                   </div>

@@ -4,9 +4,12 @@ import { QrCode } from '../components/QrCode'
 import { Reveal } from '../components/Reveal'
 import { useLoopVisible } from '../lib/useLoopVisible'
 import { demoRedirectUrl, productionRedirectUrl } from '../lib/redirectUrl'
-import { Container, Eyebrow, sectionTitle } from './ui'
+import { Container, SectionHead } from './ui'
 
 const SLUG = 'demo-baeckerei'
+const redirectUrl = productionRedirectUrl(SLUG)
+const cut = Math.max(0, redirectUrl.indexOf('/r/'))
+const redirectParts = [redirectUrl.slice(0, cut), redirectUrl.slice(cut)] as const
 
 /** Verbindungsstück mit wanderndem Punkt. */
 function Connector({ reduce }: { reduce: boolean }) {
@@ -23,21 +26,21 @@ function Connector({ reduce }: { reduce: boolean }) {
 function RedirectDiagram({ reduce }: { reduce: boolean }) {
   return (
     <figure className="glass rounded-3xl p-5 sm:p-6">
-      <figcaption className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-faint">So läuft die Weiterleitung</figcaption>
+      <figcaption className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-faint">So läuft die Weiterleitung</figcaption>
       <div className="flex justify-center gap-3">
         {['NFC', 'QR-Code'].map((l) => (
-          <span key={l} className="rounded-full border border-line bg-white/[0.05] px-4 py-2 text-sm font-medium">{l}</span>
+          <span key={l} className="rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-sm font-medium">{l}</span>
         ))}
       </div>
       <Connector reduce={reduce} />
       <div className="rounded-2xl border border-mint/40 bg-mint/[0.08] px-4 py-3 text-center shadow-[0_0_30px_-10px_rgb(94_234_212/0.6)]">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mint">YANQIVA Redirect-URL</p>
-        <p className="mt-1 break-all font-mono text-[13px] text-text sm:text-sm">{productionRedirectUrl(SLUG)}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-mint">YANQIVA Redirect-URL</p>
+        <p className="mt-1 font-mono text-[13px] text-text sm:text-sm">{redirectParts[0]}<wbr />{redirectParts[1]}</p>
       </div>
       <Connector reduce={reduce} />
       <div className="rounded-2xl border border-line bg-white/[0.05] px-4 py-3 text-center">
         <p className="text-sm font-medium">Google-Bewertung</p>
-        <p className="mt-0.5 text-xs text-faint">Ziel änderbar im Dashboard</p>
+        <p className="mt-0.5 text-xs text-muted">Ziel änderbar im Dashboard</p>
       </div>
     </figure>
   )
@@ -49,9 +52,9 @@ export function QrDemo() {
   const loop = useLoopVisible<HTMLElement>()
 
   return (
-    <section id="qr" ref={loop} className="relative overflow-hidden py-20 sm:py-28" aria-labelledby="qr-title">
-      <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-        <Reveal className="mx-auto w-full max-w-[340px] lg:mx-0">
+    <section id="qr" ref={loop} className="section-y section-sep relative overflow-hidden" aria-labelledby="qr-title">
+      <Container className="grid items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
+        <Reveal className="mx-auto w-full max-w-[300px] sm:max-w-[340px] lg:mx-0">
           <div className="relative rounded-[2rem] p-3 shadow-[0_0_80px_-10px_rgb(94_234_212/0.35)]">
             <div aria-hidden className="absolute -inset-px rounded-[2rem] bg-gradient-to-br from-mint via-violet-glow to-mint/20 opacity-70" />
             <div className="relative rounded-[1.6rem] bg-ink-900 p-4">
@@ -69,25 +72,25 @@ export function QrDemo() {
 
         <div>
           <Reveal>
-            <Eyebrow>QR + NFC</Eyebrow>
-            <h2 id="qr-title" className={`${sectionTitle} mt-4`}>Scanne den QR-Code</h2>
-            <p className="mt-4 text-xl text-muted">oder tippe mit deinem Smartphone auf die NFC-Karte.</p>
+            <SectionHead eyebrow="QR + NFC" id="qr-title" lead="oder tippe mit deinem Smartphone auf die NFC-Karte.">
+              Scanne den QR-Code
+            </SectionHead>
           </Reveal>
 
-          <Reveal delay={0.1} className="mt-8">
+          <Reveal delay={0.1} className="mt-7 sm:mt-8">
             <RedirectDiagram reduce={reduce} />
           </Reveal>
 
           <Reveal delay={0.15} className="mt-5">
-            <p className="text-[15px] leading-relaxed text-muted">
+            <p className="max-w-[65ch] text-[15px] leading-relaxed text-muted sm:text-base">
               Auf der Karte steht nur die Redirect-URL. Wohin sie führt, änderst du jederzeit im Dashboard, ohne die Karte neu zu programmieren.
             </p>
-            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center [&>a]:w-full sm:[&>a]:w-auto">
               <LinkButton href={demoRedirectUrl(SLUG)} target="_blank" rel="noopener">
                 Weiterleitung testen<span aria-hidden>↗</span>
                 <span className="sr-only">(öffnet in neuem Tab)</span>
               </LinkButton>
-              <p className="text-xs leading-snug text-faint sm:max-w-[16rem]">
+              <p className="text-[13px] leading-snug text-faint sm:max-w-[16rem]">
                 Demo: Das Ziel ist eine simulierte Bewertungsseite, keine echte Google-Seite.
               </p>
             </div>

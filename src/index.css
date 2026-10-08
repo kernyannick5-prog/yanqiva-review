@@ -15,19 +15,26 @@
   --color-mint: #5eead4;      /* Akzent */
   --color-mint-strong: #2dd4bf;
   --color-text: #e6e9ff;
-  --color-muted: #9aa3cc;
-  --color-faint: #6b7399;
-  --color-line: rgb(148 163 255 / 0.12);
+  /* Kontrast (WCAG AA >= 4.5:1 auf ink-950 und auf Glasflaechen): muted ~9:1, faint ~5.8:1 */
+  --color-muted: #b4bcdf;
+  --color-faint: #8f98c4;
+  --color-line: rgb(148 163 255 / 0.14);
 
-  --shadow-glow: 0 0 0 1px rgb(94 234 212 / 0.25), 0 10px 40px -10px rgb(94 234 212 / 0.45);
-  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 30px 60px -30px rgb(0 0 0 / 0.6);
+  --shadow-glow: 0 1px 0 0 rgb(255 255 255 / 0.12) inset, 0 0 0 1px rgb(94 234 212 / 0.28), 0 14px 44px -14px rgb(94 234 212 / 0.4);
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.1) inset, 0 -1px 0 0 rgb(0 0 0 / 0.25) inset, 0 2px 6px -2px rgb(0 0 0 / 0.35), 0 28px 56px -32px rgb(0 0 0 / 0.7);
+
+  /* Kleinster Fliesstext/Label: 13 px (statt 12 px) */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.4;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 88px;
+  /* Navbar (ca. 68-76 px) + Sektions-Innenabstand: Ueberschriften landen frei unter der Leiste */
+  scroll-padding-top: 1.5rem;
   -webkit-text-size-adjust: 100%;
 }
+@media (min-width: 1024px) { html { scroll-padding-top: 0; } }
 body {
   margin: 0;
   background: var(--color-ink-950);
@@ -40,9 +47,82 @@ body {
 
 /* Glas-Oberfläche */
 @utility glass {
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.025)), rgb(13 18 51 / 0.55);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.075), rgb(255 255 255 / 0.02) 55%), rgb(13 18 51 / 0.62);
   border: 1px solid var(--color-line);
   box-shadow: var(--shadow-card);
+}
+
+/* Akzent-Glas: Verlaufsrand (mint -> violett) per padding-/border-box, ohne Pseudo-Element */
+@utility glass-accent {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.02) 55%) padding-box,
+    linear-gradient(rgb(13 18 51 / 0.92), rgb(13 18 51 / 0.92)) padding-box,
+    linear-gradient(140deg, rgb(94 234 212 / 0.65), rgb(139 92 246 / 0.4) 55%, rgb(94 234 212 / 0.12)) border-box;
+  box-shadow: var(--shadow-glow);
+}
+
+/* Einheitliche Chips/Badges */
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(94 234 212 / 0.32);
+  background: rgb(94 234 212 / 0.1);
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mint);
+}
+
+/* Sektions-Rhythmus: mobil kompakt, Desktop grosszuegig */
+@utility section-y {
+  padding-block: 3rem;
+  @media (min-width: 640px) { padding-block: 5rem; }
+  @media (min-width: 1024px) { padding-block: 7rem; }
+}
+
+/* Feine Trennlinie mit Glow-Verlauf am oberen Rand der Sektion */
+@utility section-sep {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(calc(100% - 2.5rem), 72rem);
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, rgb(139 92 246 / 0.55) 25%, rgb(94 234 212 / 0.6) 50%, rgb(139 92 246 / 0.55) 75%, transparent);
+    pointer-events: none;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(calc(100% - 2.5rem), 60rem);
+    height: 3.5rem;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse 50% 100% at 50% 0, rgb(94 234 212 / 0.09), transparent 75%);
+    pointer-events: none;
+  }
+}
+
+/* Leicht abgesetzte Sektionsflaeche (statisch, scrollt normal mit) */
+@utility section-tint {
+  background: linear-gradient(180deg, transparent, rgb(30 27 75 / 0.34) 18%, rgb(30 27 75 / 0.34) 82%, transparent);
+}
+
+/* Scrollbare Leiste mit Fade-Kante (data-fade wird per JS ohne Re-Render gesetzt) */
+@utility yq-fade {
+  &[data-fade='end']   { mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent); }
+  &[data-fade='start'] { mask-image: linear-gradient(to left, #000 calc(100% - 2.5rem), transparent); }
+  &[data-fade='both']  { mask-image: linear-gradient(to right, transparent, #000 2rem, #000 calc(100% - 2.5rem), transparent); }
 }
 
 /* Verlaufstext Mint -> Violett */
@@ -64,7 +144,6 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-mint);
   outline-offset: 3px;
-  border-radius: 8px;
 }
 
 @media (prefers-reduced-motion: reduce) {

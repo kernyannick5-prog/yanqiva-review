@@ -40,13 +40,13 @@ export function Navbar() {
         aria-label="Hauptnavigation"
         className={`relative z-10 mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 transition-[background-color,border-color,box-shadow,height] duration-300 sm:px-6 ${
           scrolled || open
-            ? 'h-14 border-line bg-ink-900/70 shadow-[0_10px_40px_-15px_rgb(0_0_0/0.8)] backdrop-blur-xl'
+            ? 'h-14 border-line bg-ink-900/85 shadow-[inset_0_1px_0_rgb(255_255_255/0.06),0_10px_40px_-15px_rgb(0_0_0/0.8)] backdrop-blur-xl'
             : 'h-16 border-transparent bg-transparent'
         }`}
       >
         <a href="#top" onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-2.5" aria-label="YANQIVA REVIEW – zum Seitenanfang">
           <span className="font-display text-lg font-bold tracking-[0.12em] text-text">YANQIVA</span>
-          <span className="rounded-full border border-mint/40 bg-mint/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-mint">Review</span>
+          <span className="rounded-full border border-mint/40 bg-mint/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-widest text-mint">Review</span>
         </a>
 
         <ul className="hidden items-center gap-1 md:flex">
@@ -65,7 +65,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="relative flex size-11 items-center justify-center rounded-full border border-line bg-white/[0.04] md:hidden"
+          className="relative flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Menü schließen' : 'Menü öffnen'}

@@ -141,7 +141,7 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
                 <tr>
                   <td className="w-[3.75rem] sm:w-28" />
                   {WEEKDAYS.map((d) => (
-                    <th key={d} scope="col" className="pb-1 text-center text-[11px] font-medium text-faint">
+                    <th key={d} scope="col" className="pb-1 text-center text-xs font-medium text-muted">
                       {d}
                     </th>
                   ))}
@@ -150,9 +150,9 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
               <tbody>
                 {DAY_PARTS.map((part, row) => (
                   <tr key={part.label}>
-                    <th scope="row" className="pr-1 text-left text-[11px] font-medium text-muted sm:text-xs">
+                    <th scope="row" className="pr-1 text-left text-xs font-medium text-muted">
                       <span className="block truncate">{part.label}</span>
-                      <span className="hidden text-[10px] font-normal text-faint sm:block">{part.range}</span>
+                      <span className="hidden text-xs font-normal text-faint sm:block">{part.range}</span>
                     </th>
                     {heat[row].map((count, col) => {
                       const intensity = count / heatMax
@@ -160,7 +160,7 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
                         <td
                           key={WEEKDAYS[col]}
                           title={`${WEEKDAYS[col]}, ${part.range}: ${count} Scans`}
-                          className={`h-10 rounded-md text-center text-[11px] tabular-nums transition-transform duration-200 hover:scale-110 sm:text-xs ${intensity > 0.55 ? 'font-semibold text-ink-950' : 'text-text'}`}
+                          className={`h-10 rounded-md text-center text-xs tabular-nums transition-transform duration-200 hover:scale-110 ${intensity > 0.55 ? 'font-semibold text-ink-950' : 'text-text'}`}
                           style={{ backgroundColor: `rgb(94 234 212 / ${(0.06 + intensity * 0.8).toFixed(2)})` }}
                         >
                           {count}

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import type { PointerEvent, ReactNode } from 'react'
 import { Reveal } from '../components/Reveal'
-import { Container, Eyebrow, sectionTitle } from './ui'
+import { Container, SectionHead } from './ui'
 
 const svgProps = {
   viewBox: '0 0 24 24',
@@ -71,16 +71,15 @@ function trackPointer(e: PointerEvent<HTMLElement>) {
 /** Vier Vorteile als Glas-Cards mit Hover-Spotlight. */
 export function Benefits() {
   return (
-    <section className="relative overflow-hidden py-20 sm:py-28" aria-labelledby="benefits-title">
+    <section className="section-y section-sep relative overflow-hidden" aria-labelledby="benefits-title">
       <Container>
-        <Reveal className="max-w-2xl">
-          <Eyebrow>Vorteile</Eyebrow>
-          <h2 id="benefits-title" className={`${sectionTitle} mt-4`}>
+        <Reveal>
+          <SectionHead eyebrow="Vorteile" id="benefits-title">
             Weniger Aufwand für dich. Weniger Hürden für deine Kunden.
-          </h2>
+          </SectionHead>
         </Reveal>
 
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5">
+        <ul className="mt-9 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5">
           {items.map((it, i) => (
             <li key={it.tag}>
               <Reveal delay={i * 0.08} className="h-full">
@@ -88,7 +87,7 @@ export function Benefits() {
                   onPointerMove={trackPointer}
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.25 }}
-                  className="glass group relative h-full overflow-hidden rounded-3xl p-6 sm:p-8"
+                  className="glass group relative h-full overflow-hidden rounded-3xl p-5 sm:p-8"
                 >
                   <div
                     aria-hidden
@@ -96,12 +95,12 @@ export function Benefits() {
                     style={{ background: 'radial-gradient(320px circle at var(--x, 50%) var(--y, 50%), rgb(94 234 212 / 0.14), transparent 70%)' }}
                   />
                   <div className="relative">
-                    <span className="grid size-12 place-items-center rounded-2xl border border-mint/30 bg-mint/10 text-mint transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
+                    <span className="grid size-11 place-items-center rounded-2xl border border-mint/30 bg-mint/10 shadow-[inset_0_1px_0_rgb(255_255_255/0.12)] sm:size-12 text-mint transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
                       {it.icon}
                     </span>
-                    <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-mint">{it.tag}</p>
-                    <h3 className="mt-2 font-display text-2xl font-semibold leading-tight tracking-tight text-balance">{it.title}</h3>
-                    <p className="mt-3 text-[15px] leading-relaxed text-muted">{it.text}</p>
+                    <p className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-mint sm:mt-6">{it.tag}</p>
+                    <h3 className="mt-2 font-display text-[1.375rem] font-semibold leading-tight tracking-tight text-balance sm:text-2xl">{it.title}</h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-muted sm:text-base">{it.text}</p>
                   </div>
                 </motion.article>
               </Reveal>

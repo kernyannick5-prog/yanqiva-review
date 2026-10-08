@@ -73,14 +73,14 @@ export function LiveFeed({ cards }: { cards: Card[] }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="flex min-h-11 items-center gap-3 rounded-xl border border-line bg-ink-950/40 px-3 py-2"
+                className="flex min-h-12 items-center gap-3 rounded-xl border border-line bg-ink-950/40 px-3 py-2.5"
               >
                 <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${e.channel === 'nfc' ? 'bg-mint/10 text-mint' : 'bg-violet-glow/15 text-violet-glow'}`}>
                   {e.channel === 'nfc' ? <NfcIcon className="h-4 w-4" /> : <QrIcon className="h-4 w-4" />}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm text-text">{e.channel === 'nfc' ? 'Neuer NFC-Tap' : 'Neuer QR-Scan'}</span>
-                  <span className="flex gap-1.5 text-xs text-faint">
+                  <span className="flex gap-1.5 text-xs text-muted">
                     <span className="truncate">{e.business}</span>
                     <span className="shrink-0 tabular-nums">· {ago(e.at, now)}</span>
                   </span>

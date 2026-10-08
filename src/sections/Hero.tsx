@@ -23,7 +23,7 @@ const lines: { words: string[]; gradient?: boolean }[] = [
 function Headline({ reduce }: { reduce: boolean }) {
   let n = 0
   return (
-    <h1 className="font-display text-[clamp(2.5rem,9.5vw,5.75rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
+    <h1 className="font-display text-[clamp(2.35rem,1.2rem+7.2vw,5.75rem)] font-semibold leading-[1.03] tracking-[-0.04em]">
       {lines.map((line, li) => (
         <span key={li} className="block">
           {line.words.map((w, wi) => {
@@ -106,21 +106,21 @@ function NfcCard({ reduce }: { reduce: boolean }) {
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-2">
                 <span className="font-display text-sm font-bold tracking-[0.18em] sm:text-base">YANQIVA</span>
-                <span className="rounded-full border border-mint/40 px-1.5 py-px text-[8px] font-semibold uppercase tracking-widest text-mint sm:text-[9px]">Review</span>
+                <span className="rounded-full border border-mint/40 px-1.5 py-px text-[10px] font-semibold uppercase tracking-widest text-mint">Review</span>
               </div>
               <NfcWaves className="size-7 text-mint sm:size-8" />
             </div>
 
             <div>
               <Stars className="text-xl sm:text-2xl" />
-              <p className="mt-1 font-display text-[15px] font-medium leading-snug tracking-tight sm:text-xl">
+              <p className="mt-1 font-display text-base font-medium leading-snug tracking-tight sm:text-xl">
                 Wir freuen uns über
                 <br />
                 Ihre Bewertung
               </p>
             </div>
 
-            <p className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.18em] text-mint sm:text-xs">
+            <p className="flex items-center gap-2 whitespace-nowrap text-[11px] font-medium uppercase tracking-[0.14em] text-mint">
               <span aria-hidden className="size-1.5 rounded-full bg-mint" />
               Hier kontaktlos bewerten
             </p>
@@ -142,21 +142,21 @@ function NfcCard({ reduce }: { reduce: boolean }) {
 export function Hero() {
   const reduce = useReducedMotion() ?? false
   const loop = useLoopVisible<HTMLElement>()
-  const parallax = !reduce && !lowPower
+  const parallax = !reduce && !lowPower && window.innerWidth >= 640
   const { scrollYProgress } = useScroll({ target: loop, offset: ['start start', 'end start'] })
   const cardY = useTransform(scrollYProgress, [0, 1], [0, parallax ? -50 : 0])
   const chipA = useTransform(scrollYProgress, [0, 1], [0, parallax ? -110 : 0])
   const chipB = useTransform(scrollYProgress, [0, 1], [0, parallax ? 70 : 0])
 
   return (
-    <section id="top" ref={loop} className="relative overflow-x-clip pb-20 pt-32 sm:pt-40 lg:pb-32">
-      <Container className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
+    <section id="top" ref={loop} className="relative overflow-x-clip pb-14 pt-24 sm:pb-20 sm:pt-36 lg:pb-32 lg:pt-40">
+      <Container className="grid items-center gap-8 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
         <div>
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-mint/30 bg-mint/10 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-mint"
+            className="chip mb-5 sm:mb-6"
           >
             <span aria-hidden className="size-1.5 rounded-full bg-mint" />
             Demo · Prototyp
@@ -168,7 +168,7 @@ export function Hero() {
             initial={reduce ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7, ease }}
-            className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted sm:text-xl"
+            className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted sm:mt-6 sm:text-xl"
           >
             YANQIVA REVIEW verbindet NFC und QR-Code zu einem einfachen Bewertungssystem für Unternehmen.
           </motion.p>
@@ -177,7 +177,7 @@ export function Hero() {
             initial={reduce ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.85, ease }}
-            className="mt-9 flex flex-col gap-3 sm:flex-row"
+            className="mt-7 flex gap-3 sm:mt-9 [&>a]:min-w-0 [&>a]:flex-1 [&>a]:px-3 [&>a]:text-sm sm:[&>a]:flex-none sm:[&>a]:px-6 sm:[&>a]:text-[15px]"
           >
             <LinkButton href="#demo">Demo ansehen</LinkButton>
             <LinkButton href="#how" variant="ghost">So funktioniert’s</LinkButton>
@@ -189,26 +189,29 @@ export function Hero() {
           initial={reduce ? false : { opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.4, ease }}
-          className="relative mx-auto w-full max-w-[440px] px-1 py-8 lg:mx-0 lg:ml-auto"
+          className="relative mx-auto w-full max-w-[440px] px-1 py-2 sm:py-8 lg:mx-0 lg:ml-auto"
         >
           <div aria-hidden className="absolute inset-x-6 bottom-0 h-24 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.55),transparent)] opacity-80" />
           <NfcCard reduce={reduce} />
 
-          <motion.div
-            style={{ y: chipA }}
-            className="glass absolute -top-1 right-0 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 text-sm sm:-right-4"
-          >
-            <span aria-hidden className="size-2 rounded-full bg-mint shadow-[0_0_10px_var(--color-mint)]" />
-            <span className="font-medium">+32 Bewertungen</span>
-          </motion.div>
-          <motion.div
-            style={{ y: chipB }}
-            className="glass absolute -bottom-1 left-0 flex items-center gap-2 rounded-2xl px-3.5 py-2.5 text-sm sm:-left-4"
-          >
-            <span aria-hidden className="text-amber-300">★</span>
-            <span className="font-medium">4,8</span>
-            <span className="text-faint">Ø Bewertung</span>
-          </motion.div>
+          {/* Mobil: Chips in einer Zeile unter der Karte (nichts überdeckt die Karte); ab sm als schwebende Chips */}
+          <div className="relative mt-4 flex flex-wrap justify-center gap-2 sm:contents">
+            <motion.div
+              style={{ y: chipA }}
+              className="glass flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm sm:absolute sm:-top-1 sm:-right-4 sm:py-2.5"
+            >
+              <span aria-hidden className="size-2 rounded-full bg-mint shadow-[0_0_10px_var(--color-mint)]" />
+              <span className="font-medium">+32 Bewertungen</span>
+            </motion.div>
+            <motion.div
+              style={{ y: chipB }}
+              className="glass flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm sm:absolute sm:-bottom-1 sm:-left-4 sm:py-2.5"
+            >
+              <span aria-hidden className="text-amber-300">★</span>
+              <span className="font-medium">4,8</span>
+              <span className="text-muted">Ø Bewertung</span>
+            </motion.div>
+          </div>
         </motion.div>
       </Container>
     </section>

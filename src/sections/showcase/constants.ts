@@ -4,7 +4,7 @@ export const P3D = '[transform-style:preserve-3d] [-webkit-transform-style:prese
 /** Logische Szenengröße (px); wird per Skalierung an die Bühne angepasst. */
 export const SCENE_H = 500
 export const SCENE_W_WIDE = 700
-export const SCENE_W_NARROW = 430
+export const SCENE_W_NARROW = 392
 
 /** Breite der Szenenfläche, ab der das breite Layout gilt. */
 export const WIDE_BREAKPOINT = 560

@@ -14,6 +14,26 @@ interface SidebarProps {
 export function Sidebar({ view, onChange, cardCount }: SidebarProps) {
   const navRef = useRef<HTMLElement>(null)
 
+  // Fade-Kanten als Scroll-Hinweis: Zustand wird direkt ins DOM geschrieben (kein Re-Render).
+  useEffect(() => {
+    const nav = navRef.current
+    if (!nav) return
+    const update = () => {
+      const max = nav.scrollWidth - nav.clientWidth
+      const start = nav.scrollLeft > 4
+      const end = nav.scrollLeft < max - 4
+      nav.dataset.fade = max <= 4 ? 'none' : start && end ? 'both' : end ? 'end' : start ? 'start' : 'none'
+    }
+    update()
+    nav.addEventListener('scroll', update, { passive: true })
+    const ro = new ResizeObserver(update)
+    ro.observe(nav)
+    return () => {
+      nav.removeEventListener('scroll', update)
+      ro.disconnect()
+    }
+  }, [])
+
   // Aktiven Tab in der mobilen Leiste zentrieren, ohne die Seite zu scrollen.
   useEffect(() => {
     const nav = navRef.current
@@ -23,11 +43,11 @@ export function Sidebar({ view, onChange, cardCount }: SidebarProps) {
   }, [view])
 
   return (
-    <aside className="flex min-w-0 flex-col border-b border-line bg-ink-950/30 p-2 lg:border-b-0 lg:border-r lg:p-4">
+    <aside className="flex min-w-0 flex-col border-b border-line bg-ink-950/30 py-2 pl-2 pr-0 sm:px-3 lg:border-b-0 lg:border-r lg:p-4">
       <nav
         ref={navRef}
         aria-label="Dashboard-Navigation"
-        className="relative flex gap-1 overflow-x-auto overscroll-x-contain [scrollbar-width:none] lg:flex-col lg:overflow-visible [&::-webkit-scrollbar]:hidden"
+        className="yq-fade relative flex gap-1 overflow-x-auto overscroll-x-contain [scrollbar-width:none] lg:flex-col lg:overflow-visible lg:[mask-image:none] [&::-webkit-scrollbar]:hidden"
       >
         {NAV_ITEMS.map(({ id, label, Icon }) => {
           const active = id === view

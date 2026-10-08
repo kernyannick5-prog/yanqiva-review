@@ -1,7 +1,7 @@
 import { LinkButton } from '../components/Button'
 import { CountUp } from '../components/CountUp'
 import { Reveal } from '../components/Reveal'
-import { Container, Eyebrow, sectionTitle } from './ui'
+import { Container, SectionHead } from './ui'
 
 const plans = [
   {
@@ -23,32 +23,32 @@ const plans = [
 /** Preise (einmalig, Endpreise). */
 export function Pricing() {
   return (
-    <section id="pricing" className="relative overflow-hidden py-20 sm:py-28" aria-labelledby="pricing-title">
+    <section id="pricing" className="section-y section-sep section-tint relative overflow-hidden" aria-labelledby="pricing-title">
       <Container>
-        <Reveal className="max-w-2xl">
-          <Eyebrow>Preise</Eyebrow>
-          <h2 id="pricing-title" className={`${sectionTitle} mt-4`}>Einmal zahlen. Sofort loslegen.</h2>
-          <p className="mt-4 text-muted">
-            Einmalpreise, keine Abo-Pflicht. Mehrere Karten oder Filialen auf Anfrage.
-          </p>
+        <Reveal>
+          <SectionHead
+            eyebrow="Preise"
+            id="pricing-title"
+            lead="Einmalpreise, keine Abo-Pflicht. Mehrere Karten oder Filialen auf Anfrage."
+          >
+            Einmal zahlen. Sofort loslegen.
+          </SectionHead>
         </Reveal>
 
-        <ul className="mx-auto mt-12 grid max-w-4xl items-stretch gap-5 md:grid-cols-2">
+        <ul className="mx-auto mt-9 grid max-w-4xl items-stretch gap-5 sm:mt-12 md:grid-cols-2">
           {plans.map((p, i) => (
             <li key={p.name} className={p.popular ? 'md:-my-3' : ''}>
               <Reveal delay={i * 0.1} className="h-full">
                 <div
-                  className={`glass relative flex h-full flex-col rounded-3xl p-6 sm:p-8 ${
-                    p.popular ? 'border-mint/40 shadow-glow' : ''
-                  }`}
+                  className={`relative flex h-full flex-col rounded-3xl p-6 sm:p-8 ${p.popular ? 'glass-accent' : 'glass'}`}
                 >
                   {p.popular && (
-                    <span className="absolute right-6 top-0 -translate-y-1/2 rounded-full bg-mint px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink-950">
+                    <span className="absolute right-6 top-0 -translate-y-1/2 rounded-full bg-gradient-to-b from-[#7ff0dc] to-mint px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink-950 shadow-[0_6px_18px_-6px_rgb(94_234_212/0.7)]">
                       Beliebt
                     </span>
                   )}
                   <h3 className="font-display text-lg font-semibold uppercase tracking-[0.16em] text-muted">{p.name}</h3>
-                  <p className="mt-1 text-sm text-faint">{p.tagline}</p>
+                  <p className="mt-1 text-sm text-muted">{p.tagline}</p>
                   <p className="mt-4 font-display text-5xl font-semibold tracking-tight">
                     <CountUp to={p.price} suffix=" €" />
                   </p>
@@ -73,7 +73,7 @@ export function Pricing() {
             </li>
           ))}
         </ul>
-        <p className="mt-8 text-center text-xs text-faint">Demo: Es erfolgt keine echte Bestellung.</p>
+        <p className="mt-8 text-center text-[13px] text-faint">Demo: Es erfolgt keine echte Bestellung.</p>
       </Container>
     </section>
   )

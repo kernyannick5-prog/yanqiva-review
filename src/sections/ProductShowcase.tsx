@@ -7,13 +7,13 @@ import { Scene } from './showcase/Scene'
 import { Captions, StepList } from './showcase/Steps'
 
 const titleClass =
-  'font-display text-[clamp(1.6rem,6.6vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-balance'
+  'font-display text-[clamp(1.75rem,1.1rem+3vw,3.4rem)] font-semibold leading-[1.06] tracking-[-0.03em] text-balance'
 
 function Heading() {
   return (
     <>
       <Eyebrow>Das Produkt</Eyebrow>
-      <h2 id="produkt-title" className={`mt-3 lg:mt-5 ${titleClass}`}>
+      <h2 id="produkt-title" className={`mt-2.5 lg:mt-5 ${titleClass}`}>
         <span className="block">Ein Aufsteller.</span>
         <span className="text-gradient block">Unzählige Bewertungen.</span>
       </h2>
@@ -55,15 +55,29 @@ function FullShowcase() {
     >
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <StageBackdrop />
-        <Container className="relative flex h-full flex-col gap-3 pb-3 pt-[4.5rem] lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-10 lg:py-24">
-          <div className="flex shrink-0 flex-col gap-3 lg:gap-8">
-            <div>
-              <Heading />
+        {/* Mobil/Tablet hoch: Kopf oben, Szene (volle Breite) in der Mitte, Schritte + Kurztext unten (Daumenzone).
+            Ab lg: Text links, Szene rechts. */}
+        <Container className="relative flex h-full flex-col gap-2 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[4.75rem] lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-10 lg:py-24">
+          <div className="order-1 lg:order-none lg:flex lg:flex-col lg:gap-8">
+            <div className="lg:contents">
+              <div>
+                <Heading />
+              </div>
+              <div className="hidden lg:block">
+                <StepList p={p} />
+              </div>
+              <div className="hidden lg:block">
+                <Captions p={p} />
+              </div>
             </div>
-            <StepList p={p} />
-            <Captions p={p} />
           </div>
-          <div className="relative min-h-0 flex-1 lg:h-[min(680px,78svh)] lg:flex-none">{near && <Scene p={p} />}</div>
+          <div className="relative order-2 -mx-5 min-h-0 flex-1 sm:-mx-8 lg:order-none lg:mx-0 lg:h-[min(680px,78svh)] lg:flex-none">
+            {near && <Scene p={p} />}
+          </div>
+          <div className="order-3 flex shrink-0 flex-col gap-3 lg:hidden">
+            <Captions p={p} />
+            <StepList p={p} />
+          </div>
         </Container>
       </div>
     </section>
@@ -74,10 +88,10 @@ function FullShowcase() {
 function LiteShowcase() {
   const p = useMotionValue(1)
   return (
-    <section id="produkt" aria-labelledby="produkt-title" className="relative overflow-hidden py-20 sm:py-28">
+    <section id="produkt" aria-labelledby="produkt-title" className="section-y relative overflow-hidden">
       <StageBackdrop />
       <Container className="relative grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-10">
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6 sm:gap-8">
           <Reveal>
             <Heading />
           </Reveal>
@@ -90,7 +104,7 @@ function LiteShowcase() {
             </p>
           </Reveal>
         </div>
-        <Reveal delay={0.1} className="relative h-[min(460px,120vw)] lg:h-[560px]">
+        <Reveal delay={0.1} className="relative -mx-5 h-[min(480px,112vw)] sm:-mx-8 lg:mx-0 lg:h-[560px]">
           <Scene p={p} lite />
         </Reveal>
       </Container>

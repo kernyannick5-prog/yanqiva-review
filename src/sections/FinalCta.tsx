@@ -7,7 +7,7 @@ import { Container, Eyebrow } from './ui'
 export function FinalCta() {
   const loop = useLoopVisible<HTMLElement>()
   return (
-    <section id="cta" ref={loop} className="relative overflow-hidden py-24 sm:py-32" aria-labelledby="cta-title">
+    <section id="cta" ref={loop} className="section-y section-sep relative overflow-hidden" aria-labelledby="cta-title">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div
           className="yq-breathe absolute left-1/2 top-1/2 h-[60vmax] w-[60vmax] max-w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.45),rgb(46_16_101/0.2)_55%,transparent)]"
@@ -16,13 +16,15 @@ export function FinalCta() {
       </div>
 
       <Container>
-        <Reveal className="glass relative mx-auto max-w-3xl rounded-[2rem] px-6 py-14 text-center sm:px-12 sm:py-20">
-          <Eyebrow>Los geht’s</Eyebrow>
-          <h2 id="cta-title" className="mt-5 font-display text-[clamp(2.1rem,6vw,4rem)] font-semibold leading-[1.04] tracking-[-0.035em] text-balance">
+        <Reveal className="glass-accent relative mx-auto max-w-3xl overflow-hidden rounded-[2rem] px-5 py-12 text-center sm:px-12 sm:py-20">
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+          <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000,transparent)]" />
+          <Eyebrow className="relative">Los geht’s</Eyebrow>
+          <h2 id="cta-title" className="relative mt-4 font-display text-[clamp(1.95rem,1.1rem+3.8vw,3.9rem)] font-semibold leading-[1.06] tracking-[-0.035em] text-balance sm:mt-5">
             Bereit für mehr Bewertungen?
             <span className="text-gradient block">Mach es deinen Kunden einfach.</span>
           </h2>
-          <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="relative mt-8 flex flex-col justify-center gap-3 sm:mt-10 sm:flex-row">
             <LinkButton href="#qr">YANQIVA REVIEW testen</LinkButton>
             <LinkButton href="#demo" variant="ghost">Demo öffnen</LinkButton>
           </div>

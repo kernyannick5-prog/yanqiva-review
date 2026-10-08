@@ -3,13 +3,13 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'reac
 type Variant = 'primary' | 'ghost'
 
 const base =
-  'group relative inline-flex min-h-12 items-center justify-center gap-2 overflow-hidden rounded-full px-6 text-[15px] font-medium transition-[transform,box-shadow,background-color,border-color] duration-300 active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50'
+  'group relative inline-flex min-h-12 items-center justify-center gap-2 overflow-hidden rounded-full px-5 text-[15px] sm:px-6 font-medium transition-[transform,box-shadow,background-color,border-color] duration-300 active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50'
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-mint text-ink-950 shadow-[0_0_0_1px_rgb(94_234_212/0.4),0_8px_30px_-8px_rgb(94_234_212/0.6)] hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgb(94_234_212/0.6),0_14px_40px_-8px_rgb(94_234_212/0.75)]',
+    'bg-gradient-to-b from-[#7ff0dc] to-mint text-ink-950 shadow-[inset_0_1px_0_rgb(255_255_255/0.55),0_0_0_1px_rgb(94_234_212/0.4),0_8px_30px_-8px_rgb(94_234_212/0.6)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgb(255_255_255/0.55),0_0_0_1px_rgb(94_234_212/0.6),0_14px_40px_-8px_rgb(94_234_212/0.75)]',
   ghost:
-    'border border-line bg-white/[0.03] text-text backdrop-blur hover:-translate-y-0.5 hover:border-mint/40 hover:bg-white/[0.06]',
+    'border border-white/15 bg-white/[0.04] text-text shadow-[inset_0_1px_0_rgb(255_255_255/0.08)] hover:-translate-y-0.5 hover:border-mint/40 hover:bg-white/[0.07]',
 }
 
 /** Glanz-Sweep, der beim Hover über den Button läuft. */

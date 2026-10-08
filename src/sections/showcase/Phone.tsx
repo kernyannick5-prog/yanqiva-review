@@ -68,7 +68,7 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
               <span className="mt-6 grid h-14 w-14 place-items-center rounded-full border border-mint/40 bg-mint/10">
                 <NfcIcon className="h-7 w-7" />
               </span>
-              <span className="mt-4 text-[12px] font-medium leading-snug text-muted">
+              <span className="mt-4 text-[13px] font-medium leading-snug text-muted">
                 Halte dein Handy
                 <br />
                 an den Aufsteller
@@ -83,30 +83,30 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
                 </span>
                 <span className="min-w-0 text-left">
                   <span className="block truncate font-display text-[12.5px] font-semibold leading-tight text-text">Bäckerei Müller</span>
-                  <span className="block text-[9.5px] leading-tight text-muted">Google Bewertung</span>
+                  <span className="block text-[11px] leading-tight text-muted">Google Bewertung</span>
                 </span>
               </div>
-              <p className="mt-5 text-center font-display text-[13px] font-semibold text-text">Wie war dein Besuch?</p>
+              <p className="mt-4 text-center font-display text-[14.5px] font-semibold text-text">Wie war dein Besuch?</p>
               <div className="mt-3 flex justify-center gap-0.5">
                 {[0, 1, 2, 3, 4].map((i) => (
                   <Star key={i} p={p} from={0.64 + i * 0.02} to={0.68 + i * 0.02} />
                 ))}
               </div>
               <motion.div
-                className="mt-4 rounded-xl border border-white/10 bg-white/[0.05] p-2.5 text-left text-[10.5px] leading-snug text-text"
+                className="mt-4 rounded-xl border border-white/10 bg-white/[0.05] p-2.5 text-left text-[12px] leading-snug text-text"
                 style={{ opacity: textOpacity }}
               >
                 Frische Brötchen und ein richtig nettes Team!
               </motion.div>
               <div className="relative mt-auto h-10">
                 <motion.div
-                  className="absolute inset-0 grid place-items-center rounded-full bg-violet-glow/80 text-[12px] font-semibold text-white"
+                  className="absolute inset-0 grid place-items-center rounded-full bg-violet-glow/80 text-[13px] font-semibold text-white"
                   style={{ opacity: sendOpacity }}
                 >
                   Senden
                 </motion.div>
                 <motion.div
-                  className="absolute inset-0 grid place-items-center rounded-full bg-mint text-[12px] font-semibold text-ink-950"
+                  className="absolute inset-0 grid place-items-center whitespace-nowrap rounded-full bg-mint text-[11.5px] font-semibold tracking-tight text-ink-950"
                   style={{ opacity: sentOpacity, scale: sentScale }}
                 >
                   Bewertung gesendet ✓
