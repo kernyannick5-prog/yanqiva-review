@@ -183,8 +183,17 @@ export const barrierefreiheit: LegalDoc = {
       ],
     },
     {
+      id: 'marktueberwachung',
+      heading: '10. Marktüberwachungsbehörde',
+      blocks: [
+        {
+          p: 'Für die Barrierefreiheitsanforderungen an Produkte und Dienstleistungen nach dem BFSG ist in Deutschland die Marktüberwachungsstelle der Länder für die Barrierefreiheit von Produkten und Dienstleistungen (MLBF AöR), Carl-Miller-Straße 6, 39112 Magdeburg, zuständig. Kontakt und aktuelle Informationen: mlbf-barrierefrei.de.',
+        },
+      ],
+    },
+    {
       id: 'erstellung',
-      heading: '10. Erstellung dieser Erklärung',
+      heading: '11. Erstellung dieser Erklärung',
       blocks: [
         {
           p: 'Diese Erklärung wurde am 9. Oktober 2026 erstellt. Grundlage ist die oben beschriebene Selbstbewertung vom selben Tag. Wir überprüfen die Erklärung, wenn sich die Website wesentlich ändert, und erneuern dann das Datum.',
