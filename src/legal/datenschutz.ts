@@ -18,7 +18,7 @@ export const datenschutz: LegalDoc = {
     {
       tone: 'info',
       title: 'Was diese Demo tatsächlich verarbeitet',
-      text: 'Diese Demo-Website setzt kein Tracking, keine Analyse-Tools, keine Cookies und keine externen Schriften oder Google-Dienste ein und versendet keine Formulardaten. Beim Aufruf verarbeitet der Hosting-Anbieter (GitHub Pages) für Auslieferung und Sicherheit zwangsläufig Ihre IP-Adresse; der Betreiber selbst speichert keine IP-Adressen. Nur wenn Sie in der Dashboard-Demo selbst eine Demo-Karte anlegen, werden diese Eingaben im lokalen Speicher Ihres Browsers abgelegt und nicht übertragen. Weiterleitungen und Statistiken in der Demo sind simuliert; es wird nichts gezählt oder gespeichert.',
+      text: 'Diese Demo-Website setzt kein Tracking, keine Analyse-Tools, keine Cookies und keine externen Schriften oder Google-Dienste ein und versendet keine Formulardaten. Beim Aufruf verarbeiten die Dienstleister für Auslieferung und Sicherheit (Cloudflare und GitHub Pages) zwangsläufig Ihre IP-Adresse; der Betreiber selbst speichert keine IP-Adressen. Nur wenn Sie in der Dashboard-Demo selbst eine Demo-Karte anlegen, werden diese Eingaben im lokalen Speicher Ihres Browsers abgelegt und nicht übertragen. Weiterleitungen und Statistiken in der Demo sind simuliert; es wird nichts gezählt oder gespeichert.',
     },
   ],
   sections: [
@@ -63,7 +63,7 @@ export const datenschutz: LegalDoc = {
             head: ['Daten und Zweck', 'Rechtsgrundlage'],
             rows: [
               [
-                'IP-Adresse, Zeitpunkt, aufgerufene URL, Browser-Kennung (User-Agent) und ähnliche technische Verbindungsdaten – verarbeitet durch den Hosting-Anbieter zur Auslieferung der Website, zur Abwehr von Angriffen (z. B. DDoS) und zur Gewährleistung der Betriebssicherheit (Server- und Sicherheitsprotokolle).',
+                'IP-Adresse, Zeitpunkt, aufgerufene URL, Browser-Kennung (User-Agent) und ähnliche technische Verbindungsdaten – verarbeitet durch die Dienstleister für Auslieferung und Hosting (Cloudflare, GitHub Pages; siehe Abschnitt 5) zur Auslieferung der Website, zur Abwehr von Angriffen (z. B. DDoS) und zur Gewährleistung der Betriebssicherheit (Server- und Sicherheitsprotokolle).',
                 'Art. 6 Abs. 1 lit. f DSGVO; berechtigtes Interesse an einer sicheren, stabilen und schnellen Bereitstellung der Website.',
               ],
               [
@@ -89,7 +89,7 @@ export const datenschutz: LegalDoc = {
         {
           list: [
             'kein Tracking und keine Reichweitenanalyse (keine Analytics-Dienste)',
-            'keine Cookies',
+            'keine Cookies (Ausnahme: ein mögliches Sicherheits-Cookie von Cloudflare bei verdächtigem Datenverkehr, siehe Ziffer 5)',
             'keine Werbe- oder Tracking-IDs, keine Besucher-IDs',
             'kein Browser- oder Geräte-Fingerprinting',
             'keine Standortdaten',
@@ -107,22 +107,23 @@ export const datenschutz: LegalDoc = {
       heading: '5. Hosting und Domain',
       blocks: [
         {
-          p: 'Diese Website ist eine statische Website. Für ihre Bereitstellung werden folgende Dienstleister eingesetzt: [Hosting-Anbieter].',
+          p: 'Diese Website ist eine statische Website. Für ihre Bereitstellung werden folgende Dienstleister eingesetzt:',
         },
         {
           list: [
-            'Hosting: GitHub Pages, ein Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. St, San Francisco, CA 94107, USA. GitHub stellt die Dateien der Website bereit und verarbeitet dabei technisch Verbindungsdaten einschließlich der IP-Adresse, u. a. in Server- und Sicherheitsprotokollen.',
-            'Domain-Registrierung: IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Deutschland. IONOS ist Registrar der Domain yanqiva-bewertung.de und betreibt die DNS-Server (Namensauflösung). Die Website selbst wird nicht über IONOS ausgeliefert; bei der Namensauflösung kann IONOS technisch die IP-Adresse des anfragenden DNS-Resolvers verarbeiten (in der Regel der Ihres Internetanbieters, nicht Ihre eigene).',
+            'Hosting: GitHub Pages, ein Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. St, San Francisco, CA 94107, USA. GitHub stellt die Dateien der Website bereit, erhält die Anfragen über Cloudflare und verarbeitet dabei technisch Verbindungsdaten, u. a. in Server- und Sicherheitsprotokollen, einschließlich Ihrer IP-Adresse, soweit Cloudflare sie in der Anfrage weitergibt.',
+            'Auslieferung, Schutz und Namensauflösung: Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA. Alle Aufrufe der Domain yanqiva-bewertung.de laufen über das Netzwerk von Cloudflare (Reverse-Proxy und Content Delivery Network); Cloudflare betreibt außerdem die DNS-Server der Domain. Cloudflare nimmt Ihre Anfrage entgegen, leitet sie an GitHub Pages weiter, liefert die Seiten aus und schützt die Website vor Überlastung und Angriffen. Dabei verarbeitet Cloudflare technisch notwendige Verbindungsdaten, insbesondere IP-Adresse, Zeitpunkt, aufgerufene URL, Browser-Kennung (User-Agent) und Referrer-URL. Erkennt Cloudflare verdächtigen Datenverkehr, kann im Einzelfall eine automatische Sicherheitsabfrage erscheinen; dabei kann ein technisch notwendiges Cookie (z. B. cf_clearance) gesetzt werden (§ 25 Abs. 2 Nr. 2 TDDDG).',
+            'Domain-Registrierung und E-Mail: IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Deutschland. IONOS ist Registrar der Domain yanqiva-bewertung.de und Anbieter des zugehörigen E-Mail-Postfachs. Die Website selbst wird nicht über IONOS ausgeliefert.',
           ],
         },
         {
           p: 'Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse liegt in einer sicheren, zuverlässigen und performanten Bereitstellung der Website. Soweit die Anbieter als Auftragsverarbeiter tätig werden, erfolgt die Verarbeitung auf Grundlage eines Vertrags nach Art. 28 DSGVO [Bestehen der Auftragsverarbeitungsverträge prüfen und ergänzen].',
         },
         {
-          p: 'Drittlandübermittlung: GitHub hat seinen Sitz in den USA; eine Übermittlung personenbezogener Daten in die USA ist daher nicht auszuschließen. Nach Angaben von GitHub ist das Unternehmen unter dem EU-US Data Privacy Framework zertifiziert. Für zertifizierte Unternehmen besteht ein Angemessenheitsbeschluss der EU-Kommission (Art. 45 DSGVO). Ergänzend können Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO) Anwendung finden. [Aktuellen Zertifizierungsstatus unter dataprivacyframework.gov prüfen und Angaben bestätigen.]',
+          p: 'Drittlandübermittlung: Cloudflare und GitHub haben ihren Sitz in den USA; eine Übermittlung personenbezogener Daten in die USA ist daher nicht auszuschließen. Nach Angaben der Anbieter sind beide Unternehmen unter dem EU-US Data Privacy Framework zertifiziert. Für zertifizierte Unternehmen besteht ein Angemessenheitsbeschluss der EU-Kommission (Art. 45 DSGVO). Ergänzend können Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO) Anwendung finden. [Aktuellen Zertifizierungsstatus unter dataprivacyframework.gov prüfen und Angaben bestätigen.]',
         },
         {
-          p: 'Ein vorgeschaltetes Content Delivery Network (CDN) oder ein Proxy-Dienst wird derzeit nicht eingesetzt. Wird künftig ein solcher Dienst (z. B. Cloudflare) genutzt, wird dieser Abschnitt vorher ergänzt. Weitere Informationen: Datenschutzhinweise von GitHub (docs.github.com, „GitHub General Privacy Statement“) und IONOS (ionos.de/terms-gtc/datenschutzerklaerung).',
+          p: 'Wechseln wir einen dieser Dienstleister, wird dieser Abschnitt vorher angepasst. Weitere Informationen: Datenschutzhinweise von Cloudflare (cloudflare.com/privacypolicy), GitHub (docs.github.com, „GitHub General Privacy Statement“) und IONOS (ionos.de/terms-gtc/datenschutzerklaerung).',
         },
       ],
     },
@@ -185,7 +186,7 @@ export const datenschutz: LegalDoc = {
       heading: '10. Cookies und Einwilligung',
       blocks: [
         {
-          p: 'Diese Website setzt keine Cookies und greift – abgesehen von dem unter Ziffer 9 beschriebenen lokalen Speicher – nicht auf Informationen in Ihrem Endgerät zu. Ein Cookie-Banner ist daher derzeit nicht erforderlich.',
+          p: 'Diese Website setzt keine Cookies und greift – abgesehen von dem unter Ziffer 9 beschriebenen lokalen Speicher – nicht auf Informationen in Ihrem Endgerät zu. Ausnahme: Erkennt Cloudflare verdächtigen Datenverkehr, kann im Einzelfall ein technisch notwendiges Sicherheits-Cookie gesetzt werden (siehe Ziffer 5, § 25 Abs. 2 Nr. 2 TDDDG). Ein Cookie-Banner ist daher derzeit nicht erforderlich.',
         },
         {
           p: 'Sollten künftig optionale Analyse- oder andere nicht unbedingt erforderliche Funktionen eingesetzt werden, geschieht dies nur nach Ihrer vorherigen Einwilligung (§ 25 Abs. 1 TDDDG, Art. 6 Abs. 1 lit. a DSGVO) über eine gesonderte Einwilligungslösung. Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3 DSGVO).',
