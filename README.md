@@ -18,7 +18,7 @@ Marketing-Website mit interaktiver SaaS-Dashboard-Demo für YANQIVA REVIEW: ein 
   - Karten-Management: Link bearbeiten, Statistik, QR-Code, **neue Karte anlegen** (Validierung, wird im Browser gespeichert)
 - **QR-Code-Demo** mit echtem, scanbarem QR-Code auf eine funktionierende Redirect-URL
 - **Redirect-Demo** `/r/demo-baeckerei` und `/r/demo-barbershop` → simulierte Bewertungsseite
-- Vorteile, Preise (Klassik 60 €, Dashboard 90 €, einmalig), Call-to-Action, Footer
+- Vorteile, Preise (Klassik 60 €, Dashboard 99 € einmalig inkl. 12 Monate Dashboard, danach optional 15 €/Monat), Call-to-Action, Footer
 - Responsive (360 px bis Desktop), Tastatur- und Screenreader-freundlich, `prefers-reduced-motion`
 
 ## Tech Stack
@@ -74,4 +74,4 @@ Auf der physischen Karte steht **nur die Redirect-URL**, nie der Google-Link. Da
 | Dashboard-Daten, Statistiken, Bewertungen | Demo-Daten |
 | Neue Karten / Link-Änderungen | nur im Browser (localStorage bzw. Sitzung) |
 | Login, Zahlung, echte NFC-Zählung | nicht enthalten |
-| Preise | Klassik 60 € / Dashboard 90 € (einmalig); Bestellung nicht angebunden |
+| Preise | Klassik 60 € einmalig / Dashboard 99 € einmalig inkl. 12 Monate Dashboard, danach optional 15 €/Monat, monatlich kündbar (Karte/QR funktioniert auch ohne Dashboard weiter); Bestellung nicht angebunden |

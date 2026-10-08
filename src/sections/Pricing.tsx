@@ -8,19 +8,21 @@ const plans = [
     name: 'Klassik',
     tagline: 'Der klassische Google-NFC-Tag',
     price: 60,
+    note: 'Kein Dashboard, keine Folgekosten.',
     features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'Direkter Google-Bewertungslink', 'Einrichtung inklusive'],
     popular: false,
   },
   {
     name: 'Dashboard',
     tagline: 'Alles aus Klassik, plus Kontrolle',
-    price: 90,
-    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'YANQIVA Dashboard', 'Statistiken zu Taps und Scans', 'Ziel-Link jederzeit änderbar', 'Einrichtung inklusive'],
+    price: 99,
+    note: 'inkl. 12 Monate Dashboard, danach 15 €/Monat (monatlich kündbar). Ohne Dashboard funktioniert die Karte weiter wie Klassik.',
+    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', '12 Monate Dashboard inklusive', 'YANQIVA Dashboard', 'Statistiken zu Taps und Scans', 'Ziel-Link jederzeit änderbar', 'Einrichtung inklusive'],
     popular: true,
   },
 ]
 
-/** Preise (einmalig, Endpreise). */
+/** Preise (Endpreise, Kleinunternehmer; Dashboard 12 Monate inklusive, danach optional). */
 export function Pricing() {
   return (
     <section id="pricing" className="section-y section-sep section-tint relative overflow-hidden" aria-labelledby="pricing-title">
@@ -29,7 +31,7 @@ export function Pricing() {
           <SectionHead
             eyebrow="Preise"
             id="pricing-title"
-            lead="Einmalpreise, keine Abo-Pflicht. Mehrere Karten oder Filialen auf Anfrage."
+            lead="Einmal zahlen, sofort loslegen. Das Dashboard ist 12 Monate inklusive, danach optional für 15 €/Monat. Die Karte funktioniert auch ohne. Mehrere Karten oder Filialen auf Anfrage."
           >
             Einmal zahlen. Sofort loslegen.
           </SectionHead>
@@ -53,6 +55,7 @@ export function Pricing() {
                     <CountUp to={p.price} suffix=" €" />
                   </p>
                   <p className="mt-1 text-sm text-faint">einmalig · Endpreis</p>
+                  <p className="mt-2 text-sm text-muted">{p.note}</p>
 
                   <ul className="mt-6 flex-1 space-y-3 border-t border-line pt-6">
                     {p.features.map((f) => (
