@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* YANQIVA REVIEW – Design-Tokens */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink-950: #05071a;   /* Seitenhintergrund */
+  --color-ink-900: #070a1f;   /* Dark Navy */
+  --color-ink-800: #0d1233;
+  --color-ink-700: #151b47;
+  --color-indigo-deep: #1e1b4b; /* Deep Indigo */
+  --color-violet-dark: #2e1065; /* Dark Violet */
+  --color-violet-glow: #8b5cf6;
+  --color-mint: #5eead4;      /* Akzent */
+  --color-mint-strong: #2dd4bf;
+  --color-text: #e6e9ff;
+  --color-muted: #9aa3cc;
+  --color-faint: #6b7399;
+  --color-line: rgb(148 163 255 / 0.12);
+
+  --shadow-glow: 0 0 0 1px rgb(94 234 212 / 0.25), 0 10px 40px -10px rgb(94 234 212 / 0.45);
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 30px 60px -30px rgb(0 0 0 / 0.6);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--color-ink-950);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: rgb(94 234 212 / 0.3); }
+
+/* Glas-Oberfläche */
+@utility glass {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02));
+  border: 1px solid var(--color-line);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: var(--shadow-card);
+}
+
+/* Verlaufstext Mint -> Violett */
+@utility text-gradient {
+  background: linear-gradient(100deg, #5eead4 0%, #a5b4fc 50%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Dezentes digitales Grid */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(148 163 255 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(148 163 255 / 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-mint);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
