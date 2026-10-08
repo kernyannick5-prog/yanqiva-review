@@ -4,12 +4,23 @@ import { Reveal } from '../components/Reveal'
 import { Container, Eyebrow, sectionTitle } from './ui'
 
 const plans = [
-  { name: 'Starter', price: 29.9, features: ['1 NFC-Karte', 'QR-Code', 'Einrichtung', 'Google Review Link'], popular: false },
-  { name: 'Business', price: 49.9, features: ['2 NFC-Karten', 'QR-Code', 'Einrichtung', 'Branding', 'Dashboard'], popular: true },
-  { name: 'Pro', price: 79.9, features: ['5 NFC-Karten', 'Individuelles Design', 'Dashboard', 'Statistiken', 'Einrichtung'], popular: false },
+  {
+    name: 'Klassik',
+    tagline: 'Der klassische Google-NFC-Tag',
+    price: 60,
+    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'Direkter Google-Bewertungslink', 'Einrichtung inklusive'],
+    popular: false,
+  },
+  {
+    name: 'Dashboard',
+    tagline: 'Alles aus Klassik, plus Kontrolle',
+    price: 90,
+    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'YANQIVA Dashboard', 'Statistiken zu Taps und Scans', 'Ziel-Link jederzeit änderbar', 'Einrichtung inklusive'],
+    popular: true,
+  },
 ]
 
-/** Beispielpreise (Demo). */
+/** Preise (einmalig, Endpreise). */
 export function Pricing() {
   return (
     <section id="pricing" className="relative overflow-hidden py-20 sm:py-28" aria-labelledby="pricing-title">
@@ -17,15 +28,12 @@ export function Pricing() {
         <Reveal className="max-w-2xl">
           <Eyebrow>Preise</Eyebrow>
           <h2 id="pricing-title" className={`${sectionTitle} mt-4`}>Einmal zahlen. Sofort loslegen.</h2>
-          <p className="mt-4 inline-flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted">
-            <span className="rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-amber-200">
-              Beispielpreise · Demo
-            </span>
-            Monatliches SaaS-Modell folgt.
+          <p className="mt-4 text-muted">
+            Einmalpreise, keine Abo-Pflicht. Mehrere Karten oder Filialen auf Anfrage.
           </p>
         </Reveal>
 
-        <ul className="mt-12 grid items-stretch gap-5 md:grid-cols-3">
+        <ul className="mx-auto mt-12 grid max-w-4xl items-stretch gap-5 md:grid-cols-2">
           {plans.map((p, i) => (
             <li key={p.name} className={p.popular ? 'md:-my-3' : ''}>
               <Reveal delay={i * 0.1} className="h-full">
@@ -40,10 +48,11 @@ export function Pricing() {
                     </span>
                   )}
                   <h3 className="font-display text-lg font-semibold uppercase tracking-[0.16em] text-muted">{p.name}</h3>
+                  <p className="mt-1 text-sm text-faint">{p.tagline}</p>
                   <p className="mt-4 font-display text-5xl font-semibold tracking-tight">
-                    <CountUp to={p.price} decimals={2} suffix=" €" />
+                    <CountUp to={p.price} suffix=" €" />
                   </p>
-                  <p className="mt-1 text-sm text-faint">einmalig</p>
+                  <p className="mt-1 text-sm text-faint">einmalig · Endpreis</p>
 
                   <ul className="mt-6 flex-1 space-y-3 border-t border-line pt-6">
                     {p.features.map((f) => (

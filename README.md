@@ -4,7 +4,7 @@
 
 Marketing-Website mit interaktiver SaaS-Dashboard-Demo für YANQIVA REVIEW: ein NFC- und QR-System, das Kunden mit einem Tap direkt zur Google-Bewertungsseite eines Unternehmens bringt.
 
-> **Demo / Prototyp.** Alle Firmen, Zahlen, Bewertungen und Preise sind erfunden. Es werden keine echten Google-Profile verlinkt.
+> **Demo / Prototyp.** Alle Firmen, Zahlen und Bewertungen sind erfunden. Es werden keine echten Google-Profile verlinkt.
 
 **Live:** https://kernyannick5-prog.github.io/yanqiva-review/
 
@@ -18,7 +18,7 @@ Marketing-Website mit interaktiver SaaS-Dashboard-Demo für YANQIVA REVIEW: ein 
   - Karten-Management: Link bearbeiten, Statistik, QR-Code, **neue Karte anlegen** (Validierung, wird im Browser gespeichert)
 - **QR-Code-Demo** mit echtem, scanbarem QR-Code auf eine funktionierende Redirect-URL
 - **Redirect-Demo** `/r/demo-baeckerei` und `/r/demo-barbershop` → simulierte Bewertungsseite
-- Vorteile, Beispielpreise, Call-to-Action, Footer
+- Vorteile, Preise (Klassik 60 €, Dashboard 90 €, einmalig), Call-to-Action, Footer
 - Responsive (360 px bis Desktop), Tastatur- und Screenreader-freundlich, `prefers-reduced-motion`
 
 ## Tech Stack
@@ -74,4 +74,4 @@ Auf der physischen Karte steht **nur die Redirect-URL**, nie der Google-Link. Da
 | Dashboard-Daten, Statistiken, Bewertungen | Demo-Daten |
 | Neue Karten / Link-Änderungen | nur im Browser (localStorage bzw. Sitzung) |
 | Login, Zahlung, echte NFC-Zählung | nicht enthalten |
-| Preise | Beispielpreise |
+| Preise | Klassik 60 € / Dashboard 90 € (einmalig); Bestellung nicht angebunden |
