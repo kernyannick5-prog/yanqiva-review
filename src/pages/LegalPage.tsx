@@ -64,7 +64,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
             className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm text-muted transition-colors hover:border-mint/40 hover:text-text active:bg-white/[0.08]"
           >
             <span aria-hidden className="mr-1.5">←</span>
-            Zurück zur Demo
+            Zurück zur Startseite
           </a>
         </div>
       </header>

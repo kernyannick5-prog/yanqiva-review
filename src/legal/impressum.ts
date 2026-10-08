@@ -66,7 +66,7 @@ export const impressum: LegalDoc = {
       heading: 'Hinweis zu dieser Website',
       blocks: [
         {
-          p: 'Auf dieser Website stellen wir das Produkt „YANQIVA REVIEW“ (NFC-Karten und QR-Codes für Google-Bewertungen) als Demo bzw. Prototyp vor. Das Dashboard, Statistiken, Unternehmensnamen und Bewertungen in der Demo sind erfundene Beispieldaten; es werden keine echten Kundendaten angezeigt. Weitere Informationen zu Yanqiva finden Sie unter yanqiva.de.',
+          p: 'Auf dieser Website stellen wir das Produkt „YANQIVA REVIEW“ (NFC-Karten und QR-Codes für Google-Bewertungen) vor und bieten es Unternehmern über das Bestellformular zum Kauf an. Das Dashboard, Statistiken, Unternehmensnamen und Bewertungen in der Dashboard-Demo sind erfundene Beispieldaten; es werden keine echten Kundendaten angezeigt. Weitere Informationen zu Yanqiva finden Sie unter yanqiva.de.',
         },
       ],
     },

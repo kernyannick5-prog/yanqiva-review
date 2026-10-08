@@ -1,12 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import '../index.css'
+import { agb } from '../legal/agb'
 import { barrierefreiheit } from '../legal/barrierefreiheit'
 import { datenschutz } from '../legal/datenschutz'
 import { impressum } from '../legal/impressum'
 import { LegalPage } from './LegalPage'
 
-const DOCS = { datenschutz, impressum, barrierefreiheit } as const
+const DOCS = { datenschutz, impressum, barrierefreiheit, agb } as const
 type DocKey = keyof typeof DOCS
 
 // Eintrittspunkt der Rechtsseiten: data-doc am #root wählt den Text.

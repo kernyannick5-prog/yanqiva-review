@@ -5,6 +5,7 @@ import { Container, SectionHead } from './ui'
 
 const plans = [
   {
+    id: 'klassik',
     name: 'Klassik',
     tagline: 'Der klassische Google-NFC-Tag',
     price: 60,
@@ -13,6 +14,7 @@ const plans = [
     popular: false,
   },
   {
+    id: 'dashboard',
     name: 'Dashboard',
     tagline: 'Alles aus Klassik, plus Kontrolle',
     price: 99,
@@ -68,15 +70,15 @@ export function Pricing() {
                     ))}
                   </ul>
 
-                  <LinkButton href="#cta" variant={p.popular ? 'primary' : 'ghost'} className="mt-8 w-full">
-                    Paket wählen<span className="sr-only"> ({p.name})</span>
+                  <LinkButton href={`${import.meta.env.BASE_URL}bestellen/?paket=${p.id}`} variant={p.popular ? 'primary' : 'ghost'} className="mt-8 w-full">
+                    {p.name} bestellen
                   </LinkButton>
                 </div>
               </Reveal>
             </li>
           ))}
         </ul>
-        <p className="mt-8 text-center text-[13px] text-faint">Demo: Es erfolgt keine echte Bestellung.</p>
+        <p className="mt-8 text-center text-[13px] text-faint">Endpreise inkl. Versand innerhalb Deutschlands. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Nur für Unternehmer.</p>
       </Container>
     </section>
   )

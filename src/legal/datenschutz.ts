@@ -13,7 +13,7 @@ export const datenschutz: LegalDoc = {
     {
       tone: 'info',
       title: 'Kurz zusammengefasst',
-      text: 'Diese Website setzt keine Cookies, kein Tracking, keine Analyse-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein und hat keine Formulare, die Daten versenden. Beim Aufruf verarbeiten unsere Dienstleister für Auslieferung und Hosting (Cloudflare, GitHub Pages) technisch notwendige Verbindungsdaten wie Ihre IP-Adresse. Wir selbst speichern keine Zugriffsprotokolle. Das vorgestellte Produkt und das Dashboard sind eine Demo mit erfundenen Beispieldaten; Weiterleitungen und Statistiken der Demo werden nicht gezählt oder gespeichert.',
+      text: 'Diese Website setzt keine Cookies, kein Tracking, keine Analyse-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein. Das einzige Formular, das Daten versendet, ist das Bestellformular (Abschnitt 5). Beim Aufruf verarbeiten unsere Dienstleister für Auslieferung und Hosting (Cloudflare, GitHub Pages) technisch notwendige Verbindungsdaten wie Ihre IP-Adresse. Wir selbst speichern keine Zugriffsprotokolle. Das Dashboard auf dieser Website ist eine Demo mit erfundenen Beispieldaten; Weiterleitungen und Statistiken der Demo werden nicht gezählt oder gespeichert.',
     },
   ],
   sections: [
@@ -37,10 +37,10 @@ export const datenschutz: LegalDoc = {
       heading: '2. Überblick',
       blocks: [
         {
-          p: 'Auf dieser Website stellen wir das Produkt „YANQIVA REVIEW“ (NFC-Karten und QR-Codes, die zur Google-Bewertungsseite eines Unternehmens führen) als Demo bzw. Prototyp vor. Das Dashboard, die Statistiken, Unternehmensnamen und Bewertungstexte in der Demo sind erfundene Beispieldaten. Die Bewertungstexte enthalten keine Namen. Es werden keine echten Kundendaten angezeigt oder verarbeitet.',
+          p: 'Auf dieser Website stellen wir das Produkt „YANQIVA REVIEW“ (NFC-Karten und QR-Codes, die zur Google-Bewertungsseite eines Unternehmens führen) vor und bieten es Unternehmern über ein Bestellformular zum Kauf an (Abschnitt 5). Das Dashboard auf dieser Website ist eine Demo: Die Statistiken, Unternehmensnamen und Bewertungstexte darin sind erfundene Beispieldaten. Die Bewertungstexte enthalten keine Namen. In der Demo werden keine echten Kundendaten angezeigt oder verarbeitet.',
         },
         {
-          p: 'Wir setzen keine Cookies, keine Analyse- oder Tracking-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein; alle Schriften werden von dieser Website selbst ausgeliefert. Es gibt keine Formulare, die Daten an uns oder Dritte senden, kein Login und keinen Newsletter. Zur Auslieferung und zum Schutz der Website nutzen wir Dienstleister (siehe Abschnitt 3); zu einer möglichen Sicherheitsabfrage durch Cloudflare siehe ebenfalls Abschnitt 3. Personenbezogene Daten verarbeiten wir nur in den unten beschriebenen Fällen.',
+          p: 'Wir setzen keine Cookies, keine Analyse- oder Tracking-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein; alle Schriften werden von dieser Website selbst ausgeliefert. Außer dem Bestellformular (Abschnitt 5) gibt es keine Formulare, die Daten an uns oder Dritte senden; es gibt kein Login und keinen Newsletter. Zur Auslieferung und zum Schutz der Website nutzen wir Dienstleister (siehe Abschnitt 3); zu einer möglichen Sicherheitsabfrage durch Cloudflare siehe ebenfalls Abschnitt 3. Personenbezogene Daten verarbeiten wir nur in den unten beschriebenen Fällen.',
         },
         {
           p: 'Website und Produkt sind nach den Grundsätzen der Datenminimierung (Art. 5 Abs. 1 lit. c DSGVO) und des Datenschutzes durch Technikgestaltung (Art. 25 DSGVO) konzipiert: Personen, die eine Karte antippen oder einen QR-Code scannen, sollen nicht identifiziert, nicht wiedererkannt und nicht über Websites hinweg verfolgt werden. Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne von Art. 22 DSGVO findet nicht statt.',
@@ -90,8 +90,69 @@ export const datenschutz: LegalDoc = {
       ],
     },
     {
+      id: 'bestellung',
+      heading: '5. Bestellungen über das Bestellformular',
+      blocks: [
+        {
+          p: 'Über das Bestellformular unter yanqiva-bewertung.de/bestellen/ können Unternehmer YANQIVA REVIEW bestellen. Dabei verarbeiten wir folgende Angaben:',
+        },
+        {
+          table: {
+            head: ['Daten', 'Zweck'],
+            rows: [
+              ['Gewählte Variante (Klassik oder Dashboard), Ausführung (Karte oder Aufsteller), Menge', 'Bestellung, Preisberechnung, Herstellung'],
+              ['Anzeigename für den Aufdruck, Google-Bewertungslink oder Name und Ort des Unternehmens laut Google, freiwillige Hinweise (zum Beispiel Gestaltungswunsch)', 'Einrichtung und Gestaltung der Karten bzw. Aufsteller'],
+              ['Firma, Vor- und Nachname der Ansprechperson, E-Mail-Adresse', 'Vertragsabwicklung, Eingangs- und Auftragsbestätigung, Rechnung, Rückfragen'],
+              ['Telefonnummer (freiwillig)', 'Rückfragen zur Lieferung'],
+              ['Rechnungsadresse, gegebenenfalls abweichende Lieferadresse mit Empfänger', 'Rechnung und Versand'],
+              ['Bestellnummer, Zeitpunkt des Eingangs, Kennung Ihres Browsers (User-Agent), aus der Verbindung abgeleitetes Land, Ergebnis der automatischen Spam-Prüfung', 'Zuordnung der Bestellung, Erkennung von Missbrauch und Fehlern'],
+            ],
+          },
+        },
+        {
+          p: 'Die Pflichtfelder sind im Formular gekennzeichnet. Ohne diese Angaben können wir die Bestellung nicht annehmen und ausführen; Telefonnummer und Hinweise sind freiwillig. Die Angaben betreffen in der Regel Ihr Unternehmen; personenbezogen sind sie, soweit sie sich auf eine Person beziehen, etwa Name und E-Mail-Adresse der Ansprechperson oder eine Firma, die einen Personennamen enthält.',
+        },
+        {
+          p: 'Übermittlung und Speicherung (Cloudflare): Beim Absenden übermittelt Ihr Browser die Angaben verschlüsselt an unsere Schnittstelle (API) unter yanqiva-api.yanqiva-api.workers.dev, die auf Cloudflare Workers läuft. Die Bestellung speichern wir im Speicherdienst Cloudflare Workers KV. Anbieter ist Cloudflare, Inc. (siehe Abschnitt 3). Cloudflare verarbeitet die Daten in unserem Auftrag (Art. 28 DSGVO) und beim Aufruf der API technisch notwendige Verbindungsdaten wie Ihre IP-Adresse. Eine Übermittlung in die USA kann stattfinden. Sie stützt sich auf den Angemessenheitsbeschluss zum EU-US Data Privacy Framework (Art. 45 DSGVO), nach dem Cloudflare zertifiziert ist, und ergänzend auf Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO). Dieselbe Schnittstelle nutzen wir auch für yanqiva.de.',
+        },
+        {
+          p: 'Eingangsbestätigung und interne Benachrichtigung (Resend): Nach dem Absenden senden wir Ihnen automatisch eine Eingangsbestätigung an die angegebene E-Mail-Adresse. Sie gibt Ihre Bestellung wieder (Variante, Ausführung, Menge, Preise, Angaben zur Einrichtung sowie Kontakt- und Adressdaten), nennt die Bestellnummer und den Zeitpunkt des Eingangs und verlinkt unsere AGB und diese Datenschutzerklärung. Zusätzlich benachrichtigt uns das System per E-Mail an support@yanqiva.de mit allen Angaben der Bestellung, damit keine Bestellung unbemerkt bleibt. Den Versand beider E-Mails übernimmt Resend als Auftragsverarbeiter (Art. 28 DSGVO). Anbieter ist Plus Five Five, Inc. (Resend), 2261 Market Street #5039, San Francisco, CA 94114, USA. Resend verarbeitet dabei Empfängeradresse, Betreff, Inhalt und Zustelldaten (Zeitpunkt, Zustellstatus) und speichert diese Daten in den USA. Die Übermittlung stützt sich auf den Angemessenheitsbeschluss zum EU-US Data Privacy Framework, nach dem Resend zertifiziert ist, und ergänzend auf die Standardvertragsklauseln im Auftragsverarbeitungsvertrag von Resend. Rechtsgrundlage für die Eingangsbestätigung ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) in Verbindung mit unserer gesetzlichen Pflicht aus § 312i BGB (Art. 6 Abs. 1 lit. c DSGVO); für die interne Benachrichtigung unser berechtigtes Interesse an der zeitnahen Bearbeitung von Bestellungen (Art. 6 Abs. 1 lit. f DSGVO). Zum Schutz vor Missbrauch begrenzen wir den Versand an dieselbe Adresse auf wenige E-Mails pro Tag; dafür speichern wir höchstens 24 Stunden lang einen Zähler zu einem Hash der Adresse (nicht die Adresse selbst). Weitere Informationen: Datenschutzerklärung von Resend (https://resend.com/legal/privacy-policy).',
+        },
+        {
+          p: 'Auftragsbestätigung, Rechnung und Zahlung: Auftragsbestätigung, Rechnung, gegebenenfalls die Zugangsdaten zum Dashboard und Rückfragen senden wir von support@yanqiva.de über den E-Mail-Dienst der IONOS SE (siehe Abschnitt 4). Ihre Zahlung per Überweisung wickeln die beteiligten Kreditinstitute ab; wir erhalten dabei die Angaben der Überweisung (Name des Kontoinhabers, IBAN, Betrag, Verwendungszweck).',
+        },
+        {
+          p: 'Versand: Für die Lieferung übermitteln wir Firma bzw. Name des Empfängers und die Lieferadresse an das von uns beauftragte Versandunternehmen. E-Mail-Adresse und Telefonnummer geben wir dafür nicht weiter.',
+        },
+        {
+          p: 'Missbrauchs- und Spamschutz: Zum Schutz vor automatisierten Einsendungen setzen wir keine Dienste von Drittanbietern und keine Cookies ein, sondern folgende Maßnahmen:',
+        },
+        {
+          list: [
+            'Rechenaufgabe im Browser: Ihr Browser ruft von unserer Schnittstelle eine kleine Rechenaufgabe ab und löst sie ohne Ihr Zutun. Die Aufgabe enthält nur einen Zufallswert und keine Angaben zu Ihrer Person; der Zufallswert wird höchstens 10 Minuten gespeichert, damit jede Lösung nur einmal gilt.',
+            'Unsichtbares Prüffeld und Zeitstempel: Das Formular enthält ein für Menschen nicht sichtbares Feld, das automatisierte Programme häufig ausfüllen, und übermittelt den Zeitpunkt, zu dem Sie mit dem Ausfüllen begonnen haben. Beides dient nur der Erkennung automatisierter Einsendungen.',
+            'Inhaltsprüfung: Wir prüfen Eingaben automatisch auf typische Spam-Merkmale und speichern das Ergebnis (Punktzahl und Gründe) zur Bestellung. Auffällige Einsendungen erhalten keine automatische Eingangsbestätigung; offensichtlicher Spam wird nach 30 Tagen gelöscht. Über die Annahme einer Bestellung entscheiden wir selbst; die automatische Prüfung entscheidet nur über den automatischen Versand der Eingangsbestätigung. Erhalten Sie keine Eingangsbestätigung, schreiben Sie uns bitte an support@yanqiva.de.',
+            'Zähler mit Prüfwerten: Zur Begrenzung von Einsendungen bilden wir aus Ihrer IP-Adresse (bei IPv6 aus dem Netzpräfix), einem täglich wechselnden Wert und einem geheimen Schlüssel einen nicht umkehrbaren Prüfwert (gesalzener Hash) und zählen damit die Einsendungen; ebenso zählen wir Einsendungen je Hash der E-Mail-Adresse und wiederholte identische Einsendungen. Ihre IP-Adresse speichern wir nicht. Die Zähler werden nach spätestens 24 Stunden automatisch gelöscht.',
+            'Prüfung der E-Mail-Domain: Vor dem Versand der Eingangsbestätigung fragen wir bei Cloudflare (DNS-over-HTTPS) ab, ob die Domain Ihrer E-Mail-Adresse E-Mails annehmen kann. Übermittelt wird nur der Teil nach dem @, nicht Ihre vollständige Adresse. Das Ergebnis speichern wir je Domain als Hash für 24 Stunden.',
+          ],
+        },
+        {
+          p: 'Rechtsgrundlage für diese Schutzmaßnahmen sowie für Browserkennung und Land ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt im Schutz vor Missbrauch, Spam und Überlastung des Formulars und des E-Mail-Versands sowie in der Erkennung technischer Fehler.',
+        },
+        {
+          p: 'Zwischenstand im Browser (sessionStorage): Damit Ihre Eingaben beim Wechsel zwischen den Schritten, beim Neuladen der Seite oder beim Zurückgehen im Browser nicht verloren gehen, speichert das Formular den Zwischenstand Ihrer Eingaben im Sitzungsspeicher (sessionStorage) Ihres Browsers. Das ist kein Cookie; dabei werden keine Daten an uns übertragen. Nach erfolgreichem Absenden löscht das Formular den Zwischenstand; im Übrigen löscht ihn Ihr Browser, wenn Sie den Tab oder das Fenster schließen. Rechtsgrundlage für den Zugriff auf Ihr Endgerät ist § 25 Abs. 2 Nr. 2 TDDDG, weil die Speicherung unbedingt erforderlich ist, um das von Ihnen gewünschte mehrstufige Bestellformular bereitzustellen; für die Verarbeitung der Daten Art. 6 Abs. 1 lit. b DSGVO.',
+        },
+        {
+          p: 'Bestellung per E-Mail: Erreicht das Formular unsere Schnittstelle nicht, bietet es an, die Bestellung als vorbereitete E-Mail über Ihr E-Mail-Programm an support@yanqiva.de zu senden. Für diese E-Mail gilt Abschnitt 4; eine automatische Eingangsbestätigung über Resend erfolgt dann nicht.',
+        },
+        {
+          p: 'Rechtsgrundlage und Speicherdauer: Rechtsgrundlage für die Verarbeitung der Bestelldaten ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung und -erfüllung). Den Eintrag der Bestellung im Cloudflare-KV-Speicher löscht der Speicher nach 12 Monaten automatisch. Daten, die wir für einen geschlossenen Vertrag weiter benötigen (zum Beispiel für Lieferung, Dashboard, Weiterleitung oder Mängelansprüche), übernehmen wir vorher in unsere Vertrags- und Buchhaltungsunterlagen. Danach bewahren wir nur noch die handels- und steuerrechtlich erforderlichen Unterlagen auf: Handels- und Geschäftsbriefe (zum Beispiel Bestellung und Auftragsbestätigung) sechs Jahre, Rechnungen und Buchungsbelege acht Jahre, Bücher und Aufzeichnungen zehn Jahre (§ 147 AO, § 14b UStG und, soweit anwendbar, § 257 HGB; Art. 6 Abs. 1 lit. c DSGVO). Die Fristen beginnen mit dem Ende des Kalenderjahres, in dem die Unterlage entstanden ist. Bestellungen, die nicht zu einem Vertrag führen, löschen wir spätestens nach 12 Monaten.',
+        },
+      ],
+    },
+    {
       id: 'lokaler-speicher',
-      heading: '5. Speicher im Browser (localStorage) in der Dashboard-Demo',
+      heading: '6. Speicher im Browser (localStorage) in der Dashboard-Demo',
       blocks: [
         {
           p: 'Nur wenn Sie in der Dashboard-Demo selbst eine Demo-Karte anlegen, legen wir Ihre Eingaben (Unternehmensname, Link, Kartennummer) im lokalen Speicher (localStorage) Ihres Browsers unter dem Schlüssel yanqiva-demo-cards-v1 ab. Das ist kein Cookie. Die Daten verlassen Ihr Gerät nicht; sie werden weder an uns noch an Dritte übertragen, und wir haben keinen Zugriff darauf. Die Daten bleiben gespeichert, bis Sie in der Demo „Demo zurücksetzen“ wählen oder die Website-Daten in Ihrem Browser löschen.',
@@ -106,7 +167,7 @@ export const datenschutz: LegalDoc = {
     },
     {
       id: 'weiterleitung',
-      heading: '6. NFC- und QR-Weiterleitungen',
+      heading: '7. NFC- und QR-Weiterleitungen',
       blocks: [
         {
           p: 'Beim Antippen einer Karte oder beim Scannen eines QR-Codes wird zunächst eine Weiterleitungsadresse dieser Website aufgerufen (/r/ gefolgt von einer Kartenkennung). Diese Seiten sind statische Seiten ohne Skripte von Drittanbietern; sie weisen Ihren Browser an, keine Referrer-Angabe weiterzugeben (no-referrer).',
@@ -121,19 +182,19 @@ export const datenschutz: LegalDoc = {
     },
     {
       id: 'google',
-      heading: '7. Google-Bewertungslink und Weiterleitung zu Google',
+      heading: '8. Google-Bewertungslink und Weiterleitung zu Google',
       blocks: [
         {
           p: 'Im Echtbetrieb hinterlegt ein Unternehmen als Ziel seiner Karten den Link zu seiner Google-Bewertungsseite. Dieser Link ist eine geschäftliche Ziel-URL des Unternehmens. Nach der Weiterleitung verlassen Sie unsere Website. Für die Verarbeitung auf den Seiten von Google ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, verantwortlich; es gelten deren Datenschutzbestimmungen (https://policies.google.com/privacy). Wir erhalten von Google keine Daten über Personen, die die Bewertungsseite aufrufen oder eine Bewertung abgeben.',
         },
         {
-          p: 'In der Demo findet keine Weiterleitung zu Google statt; Ziel ist die simulierte Bewertungsseite dieser Website (siehe Abschnitt 6).',
+          p: 'In der Demo findet keine Weiterleitung zu Google statt; Ziel ist die simulierte Bewertungsseite dieser Website (siehe Abschnitt 7).',
         },
       ],
     },
     {
       id: 'links',
-      heading: '8. Externe Links',
+      heading: '9. Externe Links',
       blocks: [
         {
           p: 'Unsere Seiten enthalten Links zu anderen Websites, zum Beispiel zu yanqiva.de. Beim Anklicken gilt die Datenschutzerklärung des jeweiligen Anbieters. Wir binden keine Inhalte von Dritten ein.',
@@ -142,7 +203,7 @@ export const datenschutz: LegalDoc = {
     },
     {
       id: 'rechte',
-      heading: '9. Ihre Rechte',
+      heading: '10. Ihre Rechte',
       blocks: [
         {
           p: 'Sie haben gegenüber uns folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:',
@@ -167,7 +228,7 @@ export const datenschutz: LegalDoc = {
     },
     {
       id: 'beschwerde',
-      heading: '10. Beschwerderecht',
+      heading: '11. Beschwerderecht',
       blocks: [
         {
           p: 'Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77 DSGVO). Zuständig ist die Aufsichtsbehörde Ihres Wohnorts oder die für uns zuständige Behörde: Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz, Hintere Bleiche 34, 55116 Mainz.',
@@ -176,7 +237,7 @@ export const datenschutz: LegalDoc = {
     },
     {
       id: 'aenderungen',
-      heading: '11. Datensicherheit und Änderungen',
+      heading: '12. Datensicherheit und Änderungen',
       blocks: [
         {
           p: 'Die Übertragung erfolgt verschlüsselt über HTTPS. Wir passen diese Erklärung an, wenn sich unsere Verarbeitung ändert, insbesondere vor dem Start des Echtbetriebs. Es gilt die jeweils aktuelle Fassung.',

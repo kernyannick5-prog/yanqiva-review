@@ -9,9 +9,11 @@ const internal = [
   { hash: '#demo', label: 'Dashboard' },
 ]
 const external = [
+  { href: `${BASE}bestellen/`, label: 'Bestellen' },
   { href: 'mailto:support@yanqiva.de', label: 'Kontakt' },
   { href: `${BASE}impressum/`, label: 'Impressum' },
   { href: `${BASE}datenschutz/`, label: 'Datenschutz' },
+  { href: `${BASE}agb/`, label: 'AGB' },
   { href: `${BASE}barrierefreiheit/`, label: 'Barrierefreiheit' },
 ]
 
@@ -51,7 +53,7 @@ export function Footer({ onLegalPage = false }: { onLegalPage?: boolean }) {
         </div>
         <div className="mt-10 flex flex-col gap-1.5 border-t border-line pt-6 text-[13px] text-faint sm:flex-row sm:justify-between">
           <p>© 2026 YANQIVA. Alle Rechte vorbehalten.</p>
-          <p>Demo / Prototyp – alle Daten sind fiktiv.</p>
+          <p>Endpreise, gemäß § 19 UStG keine Umsatzsteuer. Daten in der Dashboard-Demo sind fiktiv.</p>
         </div>
       </Container>
     </footer>
