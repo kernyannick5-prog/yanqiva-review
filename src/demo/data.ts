@@ -86,18 +86,18 @@ export const KPI_TRENDS = {
 export const CONVERSION_RATE = 19.2
 
 export const REVIEWS: Review[] = [
-  { id: 'r1', author: 'Lena K.', businessSlug: 'demo-baeckerei', stars: 5, createdAt: daysAgoIso(0), text: 'Die Brötchen sind jeden Morgen frisch und das Team ist immer freundlich. Mein Lieblingsladen im Viertel!' },
-  { id: 'r2', author: 'Marco T.', businessSlug: 'demo-barbershop', stars: 5, createdAt: daysAgoIso(1), text: 'Sauberer Fade, ehrliche Beratung und null Wartezeit mit Termin. Komme gerne wieder.' },
-  { id: 'r3', author: 'Sabine W.', businessSlug: 'demo-baeckerei', stars: 5, createdAt: daysAgoIso(2), text: 'Der Butterkuchen am Samstag ist ein Traum. Hat uns beim Familienfrühstück alle begeistert.' },
-  { id: 'r4', author: 'Jonas R.', businessSlug: 'demo-barbershop', stars: 4, createdAt: daysAgoIso(3), text: 'Sehr guter Haarschnitt und entspannte Atmosphäre. Einen Stern Abzug, weil der Termin zehn Minuten später startete.' },
-  { id: 'r5', author: 'Elif Y.', businessSlug: 'demo-baeckerei', stars: 5, createdAt: daysAgoIso(4), text: 'Tolle Auswahl an Vollkornbrot, und der Kaffee dazu ist richtig gut. Schnell und unkompliziert bedient.' },
-  { id: 'r6', author: 'Tim H.', businessSlug: 'demo-barbershop', stars: 5, createdAt: daysAgoIso(6), text: 'Bartpflege vom Feinsten. Man merkt, dass hier mit Leidenschaft gearbeitet wird.' },
-  { id: 'r7', author: 'Petra S.', businessSlug: 'demo-baeckerei', stars: 3, createdAt: daysAgoIso(8), text: 'Geschmacklich top, aber nachmittags waren die Croissants schon ausverkauft. Gerne etwas mehr backen!' },
-  { id: 'r8', author: 'Nico B.', businessSlug: 'demo-barbershop', stars: 4, createdAt: daysAgoIso(9), text: 'Faire Preise und freundliches Team. Der Laden ist modern eingerichtet.' },
-  { id: 'r9', author: 'Hannah M.', businessSlug: 'demo-baeckerei', stars: 5, createdAt: daysAgoIso(11), text: 'Die Torte zum Geburtstag war wunderschön und hat fantastisch geschmeckt. Danke für die liebevolle Beratung!' },
-  { id: 'r10', author: 'David L.', businessSlug: 'demo-barbershop', stars: 2, createdAt: daysAgoIso(13), text: 'Der Schnitt war okay, aber ich hatte etwas anderes besprochen. Beim nächsten Mal bitte genauer nachfragen.' },
-  { id: 'r11', author: 'Mara F.', businessSlug: 'demo-baeckerei', stars: 4, createdAt: daysAgoIso(16), text: 'Leckere Laugenstangen und nette Bedienung. Parken ist in der Umgebung allerdings schwierig.' },
-  { id: 'r12', author: 'Kevin P.', businessSlug: 'demo-barbershop', stars: 5, createdAt: daysAgoIso(20), text: 'Bester Barbershop der Gegend. Ich komme seit Monaten alle drei Wochen vorbei.' },
+  { id: 'r1', businessSlug: 'demo-baeckerei', stars: 5, createdAt: daysAgoIso(0), text: 'Die Brötchen sind jeden Morgen frisch und das Team ist immer freundlich. Mein Lieblingsladen im Viertel!' },
+  { id: 'r2', businessSlug: 'demo-barbershop', stars: 5, createdAt: daysAgoIso(1), text: 'Sauberer Fade, ehrliche Beratung und null Wartezeit mit Termin. Komme gerne wieder.' },
+  { id: 'r3', businessSlug: 'demo-baeckerei', stars: 5, createdAt: daysAgoIso(2), text: 'Der Butterkuchen am Samstag ist ein Traum. Hat uns beim Familienfrühstück alle begeistert.' },
+  { id: 'r4', businessSlug: 'demo-barbershop', stars: 4, createdAt: daysAgoIso(3), text: 'Sehr guter Haarschnitt und entspannte Atmosphäre. Einen Stern Abzug, weil der Termin zehn Minuten später startete.' },
+  { id: 'r5', businessSlug: 'demo-baeckerei', stars: 5, createdAt: daysAgoIso(4), text: 'Tolle Auswahl an Vollkornbrot, und der Kaffee dazu ist richtig gut. Schnell und unkompliziert bedient.' },
+  { id: 'r6', businessSlug: 'demo-barbershop', stars: 5, createdAt: daysAgoIso(6), text: 'Bartpflege vom Feinsten. Man merkt, dass hier mit Leidenschaft gearbeitet wird.' },
+  { id: 'r7', businessSlug: 'demo-baeckerei', stars: 3, createdAt: daysAgoIso(8), text: 'Geschmacklich top, aber nachmittags waren die Croissants schon ausverkauft. Gerne etwas mehr backen!' },
+  { id: 'r8', businessSlug: 'demo-barbershop', stars: 4, createdAt: daysAgoIso(9), text: 'Faire Preise und freundliches Team. Der Laden ist modern eingerichtet.' },
+  { id: 'r9', businessSlug: 'demo-baeckerei', stars: 5, createdAt: daysAgoIso(11), text: 'Die Torte zum Geburtstag war wunderschön und hat fantastisch geschmeckt. Danke für die liebevolle Beratung!' },
+  { id: 'r10', businessSlug: 'demo-barbershop', stars: 2, createdAt: daysAgoIso(13), text: 'Der Schnitt war okay, aber ich hatte etwas anderes besprochen. Beim nächsten Mal bitte genauer nachfragen.' },
+  { id: 'r11', businessSlug: 'demo-baeckerei', stars: 4, createdAt: daysAgoIso(16), text: 'Leckere Laugenstangen und nette Bedienung. Parken ist in der Umgebung allerdings schwierig.' },
+  { id: 'r12', businessSlug: 'demo-barbershop', stars: 5, createdAt: daysAgoIso(20), text: 'Bester Barbershop der Gegend. Ich komme seit Monaten alle drei Wochen vorbei.' },
 ]
 
 /* ---------- Statistik ---------- */

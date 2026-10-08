@@ -5,7 +5,7 @@ import { StaggerItem } from '../components/Stagger'
 import { StarRating } from '../components/StarRating'
 import { REVIEWS, REVIEW_TOTAL } from '../data'
 import type { Card, Stars } from '../types'
-import { formatRelativeDate, initials } from '../utils'
+import { formatRelativeDate } from '../utils'
 
 type Filter = 'all' | Stars
 const STAR_FILTERS: Stars[] = [5, 4, 3, 2, 1]
@@ -41,7 +41,7 @@ export function Reviews({ cards }: { cards: Card[] }) {
       </StaggerItem>
 
       <StaggerItem index={1}>
-        <Panel title="Neueste Bewertungen" description={`Zeigt die letzten ${REVIEWS.length} von ${REVIEW_TOTAL} Bewertungen`}>
+        <Panel title="Neueste Bewertungen" description={`Zeigt die letzten ${REVIEWS.length} von ${REVIEW_TOTAL} Bewertungen. Erfundene Beispieltexte – YANQIVA speichert keine Namen oder Daten von Bewertenden.`}>
           {shown.length === 0 ? (
             <p className="py-8 text-center text-sm text-faint">Keine Bewertungen mit {filter} Sternen im aktuellen Ausschnitt.</p>
           ) : (
@@ -61,11 +61,11 @@ export function Reviews({ cards }: { cards: Card[] }) {
                       aria-hidden
                       className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-dark to-indigo-deep text-sm font-semibold text-text ring-1 ring-white/10"
                     >
-                      {initials(r.author.replace('.', ''))}
+                      G
                     </span>
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5">
-                        <p className="text-sm font-medium text-text">{r.author}</p>
+                        <p className="text-sm font-medium text-text">Google-Bewertung</p>
                         <StarRating value={r.stars} className="text-sm" />
                         <span className="text-xs text-faint">{formatRelativeDate(r.createdAt)}</span>
                       </div>

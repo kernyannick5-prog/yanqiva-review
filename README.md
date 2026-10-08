@@ -100,9 +100,10 @@ Datenbankschema für später (nur Geschäftsdaten + Tageszähler) und Redirect-W
 
 ## Eigene Domain
 
-Live unter **https://yanqiva-bewertung.de/** (Domain und DNS bei IONOS, A/AAAA-Einträge direkt auf GitHub Pages, kein Proxy/CDN dazwischen).
+Live unter **https://yanqiva-bewertung.de/** (Domain bei IONOS registriert; Nameserver bei Cloudflare, Cloudflare als Proxy/CDN vor GitHub Pages).
 
 - `public/CNAME` enthält `yanqiva-bewertung.de`; der Workflow baut mit `BASE: /`. Lokal ohne `BASE` gilt der Unterpfad `/yanqiva-review/`.
-- GitHub Pages: Custom Domain gesetzt, **Enforce HTTPS** aktiv.
+- GitHub Pages: Custom Domain gesetzt, **Enforce HTTPS** aktiv; `www` leitet auf die Apex-Domain um.
 - Redirect-Basis der Karten: `https://yanqiva-bewertung.de/r/` (`VITE_REDIRECT_BASE`).
-- Security-Header (HSTS, CSP, Referrer-Policy …) kann GitHub Pages nicht setzen. Dafür bräuchte es einen vorgeschalteten Proxy (z. B. Cloudflare). **Vorher** die Rechtstexte in `src/legal/` um diesen Dienst ergänzen und dort *Web Analytics* sowie *Bot Fight Mode* ausgeschaltet lassen (sonst Cookies/Skripte).
+- Cloudflare: *Web Analytics* und *Bot Fight Mode* **aus** lassen (sonst Cookies/Skripte, Datenschutzerklärung müsste angepasst werden). Cloudflare ist in `src/legal/datenschutz.ts` als Dienstleister genannt.
+- Offen: Security-Header (HSTS, CSP, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) per Cloudflare Response Header Rule setzen, da GitHub Pages keine eigenen Header unterstützt.
