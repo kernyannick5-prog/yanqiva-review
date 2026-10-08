@@ -21,9 +21,9 @@ const TOGGLES: { key: keyof DemoSettings; label: string; description: string }[]
 /** Feste Systemeigenschaften – bewusst nicht umschaltbar. */
 const PRIVACY_ROWS: { label: string; state: 'Aktiv' | 'Deaktiviert'; text: string }[] = [
   { label: 'Datensparsamkeit', state: 'Aktiv', text: 'Es werden nur Firmendaten und je Karte und Tag zwei Zähler (NFC, QR) gespeichert.' },
-  { label: 'IP-Speicherung', state: 'Deaktiviert', text: 'YANQIVA speichert und protokolliert keine IP-Adressen (technische Server-Logs des Hosters ausgenommen, siehe Datenschutzerklärung).' },
+  { label: 'IP-Speicherung', state: 'Deaktiviert', text: 'YANQIVA speichert und protokolliert keine IP-Adressen (technische Logs der Hosting- und CDN-Dienstleister ausgenommen, siehe Datenschutzerklärung).' },
   { label: 'Personenbezogenes Tracking', state: 'Deaktiviert', text: 'Kein Geräte-Fingerprint, keine Standortdaten, keine Besucher-IDs.' },
-  { label: 'Marketing-Tracking', state: 'Deaktiviert', text: 'Keine Werbe-Pixel, keine Cookies, keine Drittanbieter-Skripte.' },
+  { label: 'Marketing-Tracking', state: 'Deaktiviert', text: 'Keine Werbe-Pixel, keine Tracking-Cookies, keine Drittanbieter-Skripte.' },
   { label: 'Besucherprofile', state: 'Deaktiviert', text: 'Bewertende werden nicht wiedererkannt oder zu Profilen verknüpft.' },
 ]
 

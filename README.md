@@ -87,7 +87,7 @@ Die Demo erhebt **keine Besucherdaten**: kein Tracking, keine Analytics, keine C
 - Neue Demo-Karten erhalten einen **zufälligen Slug** (`card_xxxxxx`), nie einen aus dem Firmennamen abgeleiteten; Kartennummern sind auf `A–Z 0–9 - _` (max. 24 Zeichen) beschränkt, Hinweis: keine Personennamen oder Geburtsdaten.
 - Statistiken sind **aggregierte Zähler** (NFC/QR pro Karte und Tag); der Live-Feed ist eine Simulation ohne Personen- oder Gerätedaten.
 - Dashboard → Einstellungen → „Datenschutz“ (Privacy-Center) zeigt die festen, nicht umschaltbaren Systemeigenschaften.
-- Eigene Seiten `/datenschutz/` und `/impressum/` (Inhalte in `src/legal/`, Renderer `src/pages/LegalPage.tsx`). Die Texte sind Demo-Mustertexte mit `[Platzhaltern]` und vor Produktivbetrieb zu ergänzen und rechtlich zu prüfen.
+- Eigene Seiten `/datenschutz/` und `/impressum/` (Inhalte in `src/legal/`, Renderer `src/pages/LegalPage.tsx`). Die Texte enthalten die echten Anbieterangaben (deckungsgleich mit yanqiva.de/impressum und yanqiva.de/datenschutz, bei Änderungen dort mitziehen); vor Echtbetrieb (Zähler, Kundenkonten, Zahlung) zu erweitern.
 - Einziger lokaler Speicher: `localStorage` (`yanqiva-demo-cards-v1`) mit den selbst angelegten Demo-Karten, erst nach dem Anlegen einer Karte, wird nie übertragen.
 
 **Wird nie erhoben/gespeichert:** IP-Adressen, User-Agent, Fingerprints, Standort, Besucher-IDs, Cookies, Google-Konten, Daten Bewertender.

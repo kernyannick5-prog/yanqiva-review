@@ -1,24 +1,19 @@
 import type { LegalDoc } from './types'
 
 /**
- * DEMO-Datenschutzerklärung für den Prototypen „YANQIVA REVIEW“.
- * Mustertext mit Platzhaltern in [eckigen Klammern]. Keine Rechtsberatung.
- * Vor Produktivbetrieb an die tatsächlichen Verarbeitungen anpassen und rechtlich prüfen lassen.
+ * Datenschutzerklärung von yanqiva-bewertung.de.
+ * Anbieterdaten, Formulierungen und Aufsichtsbehörde deckungsgleich mit https://yanqiva.de/datenschutz halten.
+ * Bei jeder Änderung der Verarbeitung (z. B. Start des Echtbetriebs mit Zählung) vorher anpassen.
  */
 export const datenschutz: LegalDoc = {
   title: 'Datenschutzerklärung',
-  badge: 'Demo / Mustertext',
-  updated: 'Stand: [Datum] (Demo-Fassung vom 08.10.2026)',
+  badge: 'Rechtliches',
+  updated: 'Stand: 8. Oktober 2026',
   callouts: [
     {
-      tone: 'warning',
-      title: 'Hinweis',
-      text: 'Hinweis: Diese Datenschutzerklärung dient ausschließlich als Demo-/Mustertext für den Prototypen und stellt keine Rechtsberatung dar. Vor dem produktiven Einsatz müssen die tatsächlichen Datenverarbeitungen, eingesetzten Dienste und Verantwortlichen geprüft und die Datenschutzhinweise entsprechend angepasst werden.',
-    },
-    {
       tone: 'info',
-      title: 'Was diese Demo tatsächlich verarbeitet',
-      text: 'Diese Demo-Website setzt kein Tracking, keine Analyse-Tools, keine Cookies und keine externen Schriften oder Google-Dienste ein und versendet keine Formulardaten. Beim Aufruf verarbeiten die Dienstleister für Auslieferung und Sicherheit (Cloudflare und GitHub Pages) zwangsläufig Ihre IP-Adresse; der Betreiber selbst speichert keine IP-Adressen. Nur wenn Sie in der Dashboard-Demo selbst eine Demo-Karte anlegen, werden diese Eingaben im lokalen Speicher Ihres Browsers abgelegt und nicht übertragen. Weiterleitungen und Statistiken in der Demo sind simuliert; es wird nichts gezählt oder gespeichert.',
+      title: 'Kurz zusammengefasst',
+      text: 'Diese Website setzt keine Cookies, kein Tracking, keine Analyse-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein und hat keine Formulare, die Daten versenden. Beim Aufruf verarbeiten unsere Dienstleister für Auslieferung und Hosting (Cloudflare, GitHub Pages) technisch notwendige Verbindungsdaten wie Ihre IP-Adresse. Wir selbst speichern keine Zugriffsprotokolle. Das vorgestellte Produkt und das Dashboard sind eine Demo mit erfundenen Beispieldaten; Weiterleitungen und Statistiken der Demo werden nicht gezählt oder gespeichert.',
     },
   ],
   sections: [
@@ -27,234 +22,164 @@ export const datenschutz: LegalDoc = {
       heading: '1. Verantwortlicher',
       blocks: [
         {
-          p: 'Verantwortlicher im Sinne von Art. 4 Nr. 7 DSGVO für die Datenverarbeitung auf dieser Website ist:',
+          p: 'Verantwortlich für die Datenverarbeitung auf dieser Website (yanqiva-bewertung.de) ist:',
         },
         {
-          list: [
-            '[Name des Unternehmens]',
-            '[Verantwortlicher]',
-            '[Anschrift]',
-            'E-Mail: [E-Mail-Adresse]',
-          ],
+          list: ['Yannick Kern, Yanqiva, Waldstr. 3, 67361 Freisbach', 'E-Mail: support@yanqiva.de'],
         },
         {
-          p: 'Ein Datenschutzbeauftragter ist [benannt: Kontaktdaten des Datenschutzbeauftragten / nicht benannt, da keine Benennungspflicht nach Art. 37 DSGVO und § 38 BDSG besteht].',
+          p: 'Einen Datenschutzbeauftragten haben wir nicht benannt, weil die gesetzlichen Voraussetzungen dafür nicht vorliegen.',
         },
       ],
     },
     {
-      id: 'grundsatz',
-      heading: '2. Grundsatz: Datensparsamkeit und Privacy by Design',
+      id: 'ueberblick',
+      heading: '2. Überblick',
       blocks: [
         {
-          p: 'Diese Website und das zugrunde liegende Produkt sind nach dem Grundsatz der Datenminimierung (Art. 5 Abs. 1 lit. c DSGVO) und des Datenschutzes durch Technikgestaltung und datenschutzfreundliche Voreinstellungen (Art. 25 DSGVO) konzipiert. Es werden nur die Daten verarbeitet, die für die Bereitstellung der Website technisch erforderlich sind. Personen, die eine NFC-Karte antippen oder einen QR-Code scannen, sollen nicht identifiziert, nicht wiedererkannt und nicht über Websites hinweg verfolgt werden.',
-        },
-      ],
-    },
-    {
-      id: 'verarbeitete-daten',
-      heading: '3. Verarbeitete Daten, Zwecke und Rechtsgrundlagen',
-      blocks: [
-        {
-          p: 'Im Demo-Betrieb finden ausschließlich die folgenden Verarbeitungen statt:',
+          p: 'Auf dieser Website stellen wir das Produkt „YANQIVA REVIEW“ (NFC-Karten und QR-Codes, die zur Google-Bewertungsseite eines Unternehmens führen) als Demo bzw. Prototyp vor. Das Dashboard, die Statistiken, Unternehmensnamen und Bewertungstexte in der Demo sind erfundene Beispieldaten. Die Bewertungstexte enthalten keine Namen. Es werden keine echten Kundendaten angezeigt oder verarbeitet.',
         },
         {
-          table: {
-            head: ['Daten und Zweck', 'Rechtsgrundlage'],
-            rows: [
-              [
-                'IP-Adresse, Zeitpunkt, aufgerufene URL, Browser-Kennung (User-Agent) und ähnliche technische Verbindungsdaten – verarbeitet durch die Dienstleister für Auslieferung und Hosting (Cloudflare, GitHub Pages; siehe Abschnitt 5) zur Auslieferung der Website, zur Abwehr von Angriffen (z. B. DDoS) und zur Gewährleistung der Betriebssicherheit (Server- und Sicherheitsprotokolle).',
-                'Art. 6 Abs. 1 lit. f DSGVO; berechtigtes Interesse an einer sicheren, stabilen und schnellen Bereitstellung der Website.',
-              ],
-              [
-                'Selbst eingegebene Demo-Daten in der Dashboard-Demo (Unternehmensname, Link, Kartennummer) – Speicherung ausschließlich lokal im Browser (localStorage), damit die Demo zwischen Seitenaufrufen funktioniert.',
-                'Speichern und Auslesen im Endgerät: § 25 Abs. 2 Nr. 2 TDDDG (unbedingt erforderlich für den ausdrücklich gewünschten Dienst); im Übrigen Art. 6 Abs. 1 lit. f DSGVO. Eine Übertragung an den Betreiber findet nicht statt.',
-              ],
-              [
-                'Kontaktaufnahme per E-Mail (falls Sie uns schreiben): E-Mail-Adresse, Name und Inhalt der Nachricht zur Bearbeitung Ihres Anliegens.',
-                'Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Anfragen) bzw. Art. 6 Abs. 1 lit. f DSGVO (sonstige Anfragen).',
-              ],
-            ],
-          },
-        },
-      ],
-    },
-    {
-      id: 'nicht-erhoben',
-      heading: '4. Daten, die nicht erhoben werden',
-      blocks: [
-        {
-          p: 'Auf dieser Demo-Website findet insbesondere Folgendes nicht statt:',
+          p: 'Wir setzen keine Cookies, keine Analyse- oder Tracking-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein; alle Schriften werden von dieser Website selbst ausgeliefert. Es gibt keine Formulare, die Daten an uns oder Dritte senden, kein Login und keinen Newsletter. Zur Auslieferung und zum Schutz der Website nutzen wir Dienstleister (siehe Abschnitt 3); zu einer möglichen Sicherheitsabfrage durch Cloudflare siehe ebenfalls Abschnitt 3. Personenbezogene Daten verarbeiten wir nur in den unten beschriebenen Fällen.',
         },
         {
-          list: [
-            'kein Tracking und keine Reichweitenanalyse (keine Analytics-Dienste)',
-            'keine Cookies (Ausnahme: ein mögliches Sicherheits-Cookie von Cloudflare bei verdächtigem Datenverkehr, siehe Ziffer 5)',
-            'keine Werbe- oder Tracking-IDs, keine Besucher-IDs',
-            'kein Browser- oder Geräte-Fingerprinting',
-            'keine Standortdaten',
-            'keine Speicherung von IP-Adressen durch den Betreiber selbst',
-            'keine externen Schriftarten (alle Schriften werden lokal von dieser Website ausgeliefert)',
-            'keine eingebundenen Google-Dienste (z. B. keine Google Fonts, Maps oder Analytics)',
-            'keine Formulare, die Daten an den Betreiber oder Dritte versenden',
-            'keine Daten über Personen, die über die Weiterleitung eine Bewertung abgeben',
-          ],
+          p: 'Website und Produkt sind nach den Grundsätzen der Datenminimierung (Art. 5 Abs. 1 lit. c DSGVO) und des Datenschutzes durch Technikgestaltung (Art. 25 DSGVO) konzipiert: Personen, die eine Karte antippen oder einen QR-Code scannen, sollen nicht identifiziert, nicht wiedererkannt und nicht über Websites hinweg verfolgt werden. Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne von Art. 22 DSGVO findet nicht statt.',
         },
       ],
     },
     {
       id: 'hosting',
-      heading: '5. Hosting und Domain',
+      heading: '3. Hosting und Auslieferung (GitHub Pages, Cloudflare)',
       blocks: [
         {
-          p: 'Diese Website ist eine statische Website. Für ihre Bereitstellung werden folgende Dienstleister eingesetzt:',
+          p: 'Cloudflare (Auslieferung und Schutz): Alle Aufrufe der Domain yanqiva-bewertung.de laufen über das Netzwerk von Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA (Reverse-Proxy und Content Delivery Network); Cloudflare betreibt auch die Nameserver der Domain. Cloudflare nimmt Ihre Anfrage entgegen, leitet sie an unseren Hoster weiter, liefert die Seiten aus und schützt die Website vor Überlastung und Angriffen. Dabei verarbeitet Cloudflare technisch notwendige Verbindungs- und Anfragedaten, insbesondere Ihre IP-Adresse, Datum und Uhrzeit, die aufgerufene Adresse, Browserkennung (User-Agent) und Referrer-URL. Cloudflare verarbeitet diese Daten in unserem Auftrag auf Grundlage seines Vertrags zur Auftragsverarbeitung (Art. 28 DSGVO), der Bestandteil der Cloudflare-Vertragsbedingungen ist. Einzelne Zugriffe werten wir nicht aus; Cloudflare Web Analytics nutzen wir nicht.',
         },
         {
-          list: [
-            'Hosting: GitHub Pages, ein Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. St, San Francisco, CA 94107, USA. GitHub stellt die Dateien der Website bereit, erhält die Anfragen über Cloudflare und verarbeitet dabei technisch Verbindungsdaten, u. a. in Server- und Sicherheitsprotokollen, einschließlich Ihrer IP-Adresse, soweit Cloudflare sie in der Anfrage weitergibt.',
-            'Auslieferung, Schutz und Namensauflösung: Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA. Alle Aufrufe der Domain yanqiva-bewertung.de laufen über das Netzwerk von Cloudflare (Reverse-Proxy und Content Delivery Network); Cloudflare betreibt außerdem die DNS-Server der Domain. Cloudflare nimmt Ihre Anfrage entgegen, leitet sie an GitHub Pages weiter, liefert die Seiten aus und schützt die Website vor Überlastung und Angriffen. Dabei verarbeitet Cloudflare technisch notwendige Verbindungsdaten, insbesondere IP-Adresse, Zeitpunkt, aufgerufene URL, Browser-Kennung (User-Agent) und Referrer-URL. Erkennt Cloudflare verdächtigen Datenverkehr, kann im Einzelfall eine automatische Sicherheitsabfrage erscheinen; dabei kann ein technisch notwendiges Cookie (z. B. cf_clearance) gesetzt werden (§ 25 Abs. 2 Nr. 2 TDDDG).',
-            'Domain-Registrierung: IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Deutschland. IONOS ist Registrar der Domain yanqiva-bewertung.de. Die Website selbst wird nicht über IONOS ausgeliefert.',
-          ],
+          p: 'Erkennt Cloudflare verdächtigen Datenverkehr, kann im Einzelfall eine automatische Sicherheitsabfrage erscheinen. Dabei kann Cloudflare ein technisch notwendiges Cookie setzen (zum Beispiel cf_clearance), damit die Abfrage nicht bei jedem Aufruf wiederholt wird. Dieser Zugriff auf Ihr Endgerät ist für den sicheren Betrieb der Website unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Außerdem kann Ihr Browser auf Anweisung von Cloudflare Fehlerberichte über fehlgeschlagene Verbindungen an Cloudflare senden (Network Error Logging). Nach Angaben von Cloudflare wird die IP-Adresse dabei nur kurzzeitig zur Verarbeitung des Berichts genutzt und nicht gespeichert.',
         },
         {
-          p: 'Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse liegt in einer sicheren, zuverlässigen und performanten Bereitstellung der Website. Soweit die Anbieter als Auftragsverarbeiter tätig werden, erfolgt die Verarbeitung auf Grundlage eines Vertrags nach Art. 28 DSGVO [Bestehen der Auftragsverarbeitungsverträge prüfen und ergänzen].',
+          p: 'GitHub Pages (Hosting): Die Dateien dieser Website liegen bei GitHub Pages. Anbieter ist GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. GitHub erhält die Anfragen über Cloudflare und verarbeitet dabei technisch notwendige Daten in Server-Logfiles, insbesondere die aufgerufene Seite, Datum und Uhrzeit, Browsertyp und Referrer-URL sowie Ihre IP-Adresse, soweit Cloudflare sie in der Anfrage weitergibt. Soweit GitHub dabei in unserem Auftrag tätig wird, gilt dessen Vereinbarung zur Auftragsverarbeitung (Art. 28 DSGVO), die Bestandteil der GitHub-Vertragsbedingungen ist. Wir haben keinen Zugriff auf diese Logs.',
         },
         {
-          p: 'Drittlandübermittlung: Cloudflare und GitHub haben ihren Sitz in den USA; eine Übermittlung personenbezogener Daten in die USA ist daher nicht auszuschließen. Nach Angaben der Anbieter sind beide Unternehmen unter dem EU-US Data Privacy Framework zertifiziert. Für zertifizierte Unternehmen besteht ein Angemessenheitsbeschluss der EU-Kommission (Art. 45 DSGVO). Ergänzend können Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO) Anwendung finden. [Aktuellen Zertifizierungsstatus unter dataprivacyframework.gov prüfen und Angaben bestätigen.]',
+          p: 'Speicherdauer: Wie lange Cloudflare und GitHub diese technischen Zugriffsdaten aufbewahren, richtet sich nach deren Datenschutzhinweisen. Wir selbst speichern keine Zugriffsprotokolle der Website und werten keine aus.',
         },
         {
-          p: 'Wechseln wir einen dieser Dienstleister, wird dieser Abschnitt vorher angepasst. Weitere Informationen: Datenschutzhinweise von Cloudflare (cloudflare.com/privacypolicy), GitHub (docs.github.com, „GitHub General Privacy Statement“) und IONOS (ionos.de/terms-gtc/datenschutzerklaerung).',
+          p: 'Rechtsgrundlage ist jeweils Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der sicheren, schnellen und stabilen Bereitstellung der Website. Eine Übermittlung in die USA kann stattfinden. Sie stützt sich auf den Angemessenheitsbeschluss der EU-Kommission zum EU-US Data Privacy Framework (Art. 45 DSGVO), nach dem Cloudflare und GitHub zertifiziert sind, und ergänzend auf Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO).',
+        },
+        {
+          p: 'Weitere Informationen: Datenschutzerklärung von Cloudflare (https://www.cloudflare.com/de-de/privacypolicy/) und GitHub-Datenschutzerklärung (https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement). Wechseln wir den Hoster oder einen dieser Dienstleister, passen wir diesen Abschnitt vorher an.',
+        },
+        {
+          p: 'Domain: Die Domain yanqiva-bewertung.de ist bei der IONOS SE, Elgendorfer Straße 57, 56410 Montabaur, Deutschland, registriert. IONOS ist nur Registrar; die Website wird nicht über IONOS ausgeliefert, und beim Aufruf der Website erhält IONOS keine Daten von Ihnen.',
         },
       ],
     },
     {
-      id: 'weiterleitung',
-      heading: '6. NFC- und QR-Weiterleitung',
+      id: 'kontakt',
+      heading: '4. Kontakt per E-Mail',
       blocks: [
         {
-          p: 'Beim Antippen einer NFC-Karte oder beim Scannen eines QR-Codes wird zunächst eine Weiterleitungsadresse dieser Website (/r/<Kennung>) aufgerufen, die anschließend auf den vom jeweiligen Unternehmen hinterlegten Bewertungslink weiterleitet.',
+          p: 'Wenn Sie uns per E-Mail an support@yanqiva.de schreiben, verarbeiten wir Ihre E-Mail-Adresse, Ihren Namen (falls angegeben) und den Inhalt Ihrer Nachricht, um Ihr Anliegen zu bearbeiten. Dafür nutzen wir den E-Mail-Dienst der IONOS SE, Elgendorfer Straße 57, 56410 Montabaur, Deutschland. IONOS verarbeitet dabei die Inhalte und Metadaten der E-Mails (Absender, Empfänger, Zeitpunkt) in unserem Auftrag auf Grundlage einer Vereinbarung zur Auftragsverarbeitung (Art. 28 DSGVO), die Bestandteil der IONOS-AGB ist; die Verarbeitung erfolgt nach Angaben von IONOS in Rechenzentren in der EU.',
         },
         {
-          p: 'Demo-Betrieb (aktueller Stand): Die Weiterleitungsseiten der Demo sind statische Seiten und leiten auf eine simulierte Bewertungsseite dieser Demo (/review-demo/) weiter. Es wird dabei nichts gezählt, protokolliert oder gespeichert. Die simulierte Bewertungsseite sendet keine Daten. Alle im Dashboard angezeigten Statistiken sind simulierte Beispieldaten. Es findet lediglich die unter Ziffer 5 beschriebene technische Verarbeitung durch Proxy-/CDN- und Hosting-Anbieter statt.',
+          p: 'Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit Ihre Anfrage auf einen Vertragsschluss gerichtet ist, im Übrigen Art. 6 Abs. 1 lit. f DSGVO (unser berechtigtes Interesse an der Beantwortung von Anfragen). Wir löschen Ihre Nachricht, sobald Ihr Anliegen abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten (zum Beispiel für Geschäftsbriefe) entgegenstehen (dann Art. 6 Abs. 1 lit. c DSGVO); Anfragen ohne Vertragsschluss spätestens nach 12 Monaten. Weitere Informationen: Datenschutzerklärung von IONOS (https://www.ionos.de/terms-gtc/datenschutzerklaerung/).',
         },
         {
-          p: 'Geplanter Produktivbetrieb (noch nicht umgesetzt): Es ist vorgesehen, Aufrufe der Weiterleitung ausschließlich aggregiert pro Karte zu zählen (Zählerstand +1, gegebenenfalls je Kalendertag). Dabei sollen keine IP-Adressen, keine Browser-Kennungen (User-Agent), keine Besucher-IDs und keine Standortdaten gespeichert werden. Vor Aufnahme des Produktivbetriebs wird diese Datenschutzerklärung entsprechend ergänzt [Rechtsgrundlage und technische Umsetzung der Zählung prüfen].',
-        },
-      ],
-    },
-    {
-      id: 'bewertungslink',
-      heading: '7. Google-Bewertungslink als geschäftliche Ziel-URL',
-      blocks: [
-        {
-          p: 'Im geplanten Produktivbetrieb hinterlegen Unternehmenskunden im Dashboard den Link zu ihrer Google-Bewertungsseite. Dieser Link ist eine geschäftliche Ziel-URL des Unternehmens. Zusammen mit Firmenname, Kartendaten und den Zugangsdaten des Kundenkontos wird er zur Erfüllung des Vertrags mit dem Unternehmenskunden verarbeitet (Art. 6 Abs. 1 lit. b DSGVO). Soweit dabei Daten natürlicher Personen betroffen sind (z. B. Ansprechpartner, Einzelunternehmer), gilt dies entsprechend.',
-        },
-        {
-          p: 'In der Demo werden keine Kundendaten an den Betreiber übertragen; selbst eingegebene Demo-Daten verbleiben im Browser (siehe Ziffer 9).',
-        },
-      ],
-    },
-    {
-      id: 'google',
-      heading: '8. Weiterleitung zu Google',
-      blocks: [
-        {
-          p: 'Nach der Weiterleitung auf eine Bewertungsseite von Google verlassen Sie diese Website. Für die Verarbeitung auf den Seiten von Google ist Google (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland) verantwortlich; es gelten deren Datenschutzbestimmungen (policies.google.com/privacy). Der Betreiber dieser Website erhält von Google keine Daten über Personen, die eine Bewertung abgeben oder die Bewertungsseite aufrufen.',
-        },
-        {
-          p: 'In der Demo erfolgt keine Weiterleitung zu Google; Ziel ist die simulierte Bewertungsseite dieser Demo.',
+          p: 'Für das Kontaktformular auf yanqiva.de gilt die Datenschutzerklärung unter yanqiva.de/datenschutz.',
         },
       ],
     },
     {
       id: 'lokaler-speicher',
-      heading: '9. Lokaler Speicher (localStorage) in der Dashboard-Demo',
+      heading: '5. Speicher im Browser (localStorage) in der Dashboard-Demo',
       blocks: [
         {
-          p: 'Nur wenn Sie in der Dashboard-Demo selbst eine Demo-Karte anlegen, werden die von Ihnen eingegebenen Angaben (Unternehmensname, Link, Kartennummer) im lokalen Speicher (localStorage) Ihres Browsers abgelegt. Die Daten verbleiben auf Ihrem Gerät und werden nicht an den Betreiber oder Dritte übertragen.',
+          p: 'Nur wenn Sie in der Dashboard-Demo selbst eine Demo-Karte anlegen, legen wir Ihre Eingaben (Unternehmensname, Link, Kartennummer) im lokalen Speicher (localStorage) Ihres Browsers unter dem Schlüssel yanqiva-demo-cards-v1 ab. Das ist kein Cookie. Die Daten verlassen Ihr Gerät nicht; sie werden weder an uns noch an Dritte übertragen, und wir haben keinen Zugriff darauf. Die Daten bleiben gespeichert, bis Sie in der Demo „Demo zurücksetzen“ wählen oder die Website-Daten in Ihrem Browser löschen.',
         },
         {
-          p: 'Die Speicherung ist unbedingt erforderlich, damit die von Ihnen ausdrücklich genutzte Demo-Funktion zwischen Seitenaufrufen erhalten bleibt (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können die Daten jederzeit über die Funktion „Demo zurücksetzen“ oder durch Löschen der Website-Daten in Ihrem Browser entfernen.',
+          p: 'Rechtsgrundlage für den Zugriff auf Ihr Endgerät ist § 25 Abs. 2 Nr. 2 TDDDG: Die Speicherung erfolgt nur, wenn Sie die Funktion selbst nutzen, und ist unbedingt erforderlich, damit die von Ihnen ausdrücklich gewünschte Funktion (Ihre angelegte Demo-Karte bleibt beim Neuladen und Seitenwechsel erhalten) bereitgestellt werden kann. Eine Einwilligung ist dafür nicht erforderlich. Soweit dabei überhaupt personenbezogene Daten verarbeitet werden, ist Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse liegt in einer funktionsfähigen Demo.',
         },
         {
-          p: 'Bitte geben Sie in der Demo keine echten personenbezogenen oder vertraulichen Daten ein.',
+          p: 'Bitte geben Sie in der Demo keine vertraulichen oder personenbezogenen Daten ein.',
         },
       ],
     },
     {
-      id: 'cookies',
-      heading: '10. Cookies und Einwilligung',
+      id: 'weiterleitung',
+      heading: '6. NFC- und QR-Weiterleitungen',
       blocks: [
         {
-          p: 'Diese Website setzt keine Cookies und greift – abgesehen von dem unter Ziffer 9 beschriebenen lokalen Speicher – nicht auf Informationen in Ihrem Endgerät zu. Ausnahme: Erkennt Cloudflare verdächtigen Datenverkehr, kann im Einzelfall ein technisch notwendiges Sicherheits-Cookie gesetzt werden (siehe Ziffer 5, § 25 Abs. 2 Nr. 2 TDDDG). Ein Cookie-Banner ist daher derzeit nicht erforderlich.',
+          p: 'Beim Antippen einer Karte oder beim Scannen eines QR-Codes wird zunächst eine Weiterleitungsadresse dieser Website aufgerufen (/r/ gefolgt von einer Kartenkennung). Diese Seiten sind statische Seiten ohne Skripte von Drittanbietern; sie weisen Ihren Browser an, keine Referrer-Angabe weiterzugeben (no-referrer).',
         },
         {
-          p: 'Sollten künftig optionale Analyse- oder andere nicht unbedingt erforderliche Funktionen eingesetzt werden, geschieht dies nur nach Ihrer vorherigen Einwilligung (§ 25 Abs. 1 TDDDG, Art. 6 Abs. 1 lit. a DSGVO) über eine gesonderte Einwilligungslösung. Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3 DSGVO).',
+          p: 'Heute (Demo): Die Weiterleitungsseiten leiten auf eine simulierte Bewertungsseite dieser Website (/review-demo/) weiter. Dabei wird nichts gezählt, protokolliert oder gespeichert; es findet nur die in Abschnitt 3 beschriebene technische Verarbeitung durch Cloudflare und GitHub statt. Die simulierte Bewertungsseite zeigt den Namen des Demo-Unternehmens aus der aufgerufenen Adresse an und sendet keine Daten: Sternebewertung und Text bleiben in Ihrem Browser und werden beim Verlassen der Seite verworfen. Alle Statistiken im Dashboard sind erfundene Beispieldaten.',
         },
-      ],
-    },
-    {
-      id: 'externe-dienste',
-      heading: '11. Externe Dienste',
-      blocks: [
         {
-          p: 'Über die unter Ziffer 5 genannten Dienstleister hinaus werden auf dieser Demo-Website keine externen Dienste eingebunden. Weitere eingesetzte Dienste: [weitere eingesetzte Dienste – im Produktivbetrieb z. B. Server/Datenbank für Dashboard und Zähler, Authentifizierung, E-Mail-Versand, Zahlungsabwicklung; jeweils mit Anbieter, Zweck, Rechtsgrundlage und ggf. Drittlandübermittlung ergänzen].',
+          p: 'Späterer Echtbetrieb: Im Echtbetrieb sollen Aufrufe der Weiterleitung ausschließlich als aggregierte Tageszähler je Karte gezählt werden, getrennt nach NFC und QR-Code. Gespeichert würde nur die Zahl der Aufrufe; keine IP-Adressen, keine Browserkennungen, keine Besucher-IDs, keine Standortdaten. Diese Zählung findet derzeit nicht statt. Vor dem Start des Echtbetriebs aktualisieren wir diese Datenschutzerklärung.',
         },
       ],
     },
     {
-      id: 'speicherdauer',
-      heading: '12. Speicherdauer',
+      id: 'google',
+      heading: '7. Google-Bewertungslink und Weiterleitung zu Google',
       blocks: [
         {
-          list: [
-            'Technische Verbindungsdaten beim Hosting-Anbieter: nach den Vorgaben der jeweiligen Anbieter, in der Regel nur kurzfristig für Auslieferung und Sicherheitszwecke [Speicherdauer laut Anbieterdokumentation ergänzen].',
-            'Lokaler Speicher der Dashboard-Demo: bis Sie die Demo zurücksetzen oder die Website-Daten in Ihrem Browser löschen.',
-            'E-Mail-Anfragen: bis zur abschließenden Bearbeitung; darüber hinaus nur, soweit gesetzliche Aufbewahrungspflichten (z. B. § 257 HGB, § 147 AO) bestehen.',
-            'Geplanter Produktivbetrieb – Kundendaten im Dashboard: für die Dauer des Vertragsverhältnisses und danach, soweit gesetzliche Aufbewahrungspflichten bestehen [konkrete Fristen ergänzen].',
-          ],
+          p: 'Im Echtbetrieb hinterlegt ein Unternehmen als Ziel seiner Karten den Link zu seiner Google-Bewertungsseite. Dieser Link ist eine geschäftliche Ziel-URL des Unternehmens. Nach der Weiterleitung verlassen Sie unsere Website. Für die Verarbeitung auf den Seiten von Google ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, verantwortlich; es gelten deren Datenschutzbestimmungen (https://policies.google.com/privacy). Wir erhalten von Google keine Daten über Personen, die die Bewertungsseite aufrufen oder eine Bewertung abgeben.',
+        },
+        {
+          p: 'In der Demo findet keine Weiterleitung zu Google statt; Ziel ist die simulierte Bewertungsseite dieser Website (siehe Abschnitt 6).',
+        },
+      ],
+    },
+    {
+      id: 'links',
+      heading: '8. Externe Links',
+      blocks: [
+        {
+          p: 'Unsere Seiten enthalten Links zu anderen Websites, zum Beispiel zu yanqiva.de. Beim Anklicken gilt die Datenschutzerklärung des jeweiligen Anbieters. Wir binden keine Inhalte von Dritten ein.',
         },
       ],
     },
     {
       id: 'rechte',
-      heading: '13. Ihre Rechte',
+      heading: '9. Ihre Rechte',
       blocks: [
         {
-          p: 'Ihnen stehen nach Maßgabe der gesetzlichen Voraussetzungen folgende Rechte zu:',
+          p: 'Sie haben gegenüber uns folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:',
         },
         {
           list: [
-            'Auskunft über die verarbeiteten Daten (Art. 15 DSGVO)',
-            'Berichtigung unrichtiger Daten (Art. 16 DSGVO)',
-            'Löschung (Art. 17 DSGVO)',
-            'Einschränkung der Verarbeitung (Art. 18 DSGVO)',
-            'Datenübertragbarkeit (Art. 20 DSGVO)',
-            'Widerspruch gegen Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO aus Gründen, die sich aus Ihrer besonderen Situation ergeben (Art. 21 DSGVO)',
-            'Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)',
-            'Beschwerde bei einer Datenschutz-Aufsichtsbehörde (Art. 77 DSGVO), insbesondere in dem Mitgliedstaat Ihres Aufenthaltsorts, Ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes. Zuständig für den Betreiber ist: [zuständige Aufsichtsbehörde]',
+            'Auskunft (Art. 15 DSGVO),',
+            'Berichtigung (Art. 16 DSGVO),',
+            'Löschung (Art. 17 DSGVO),',
+            'Einschränkung der Verarbeitung (Art. 18 DSGVO),',
+            'Datenübertragbarkeit (Art. 20 DSGVO),',
+            'Widerruf erteilter Einwilligungen mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO).',
           ],
         },
         {
-          p: 'Zur Ausübung Ihrer Rechte genügt eine Nachricht an [E-Mail-Adresse]. Da der Betreiber selbst keine IP-Adressen oder Besucher-IDs speichert, können Aufrufe der Website in der Regel keiner Person zugeordnet werden (vgl. Art. 11 DSGVO).',
+          p: 'Widerspruchsrecht (Art. 21 DSGVO): Verarbeiten wir Ihre Daten auf Grundlage berechtigter Interessen (Art. 6 Abs. 1 lit. f DSGVO), können Sie aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit widersprechen.',
+        },
+        {
+          p: 'Schreiben Sie dazu an support@yanqiva.de. Da wir selbst keine IP-Adressen, Zugriffsprotokolle oder Besucher-IDs speichern, können wir Aufrufe dieser Website in der Regel keiner Person zuordnen (vgl. Art. 11 DSGVO).',
         },
       ],
     },
     {
-      id: 'profiling',
-      heading: '14. Keine automatisierte Entscheidungsfindung',
+      id: 'beschwerde',
+      heading: '10. Beschwerderecht',
       blocks: [
         {
-          p: 'Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne von Art. 22 DSGVO findet nicht statt.',
+          p: 'Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77 DSGVO). Zuständig ist die Aufsichtsbehörde Ihres Wohnorts oder die für uns zuständige Behörde: Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz, Hintere Bleiche 34, 55116 Mainz.',
         },
       ],
     },
     {
       id: 'aenderungen',
-      heading: '15. Änderungen dieser Datenschutzerklärung',
+      heading: '11. Datensicherheit und Änderungen',
       blocks: [
         {
-          p: 'Diese Datenschutzerklärung wird angepasst, sobald sich die Website, die eingesetzten Dienste oder die rechtlichen Anforderungen ändern – insbesondere vor Aufnahme des Produktivbetriebs. Es gilt die jeweils auf dieser Seite veröffentlichte Fassung.',
+          p: 'Die Übertragung erfolgt verschlüsselt über HTTPS. Wir passen diese Erklärung an, wenn sich unsere Verarbeitung ändert, insbesondere vor dem Start des Echtbetriebs. Es gilt die jeweils aktuelle Fassung.',
         },
       ],
     },
