@@ -41,7 +41,8 @@ export const barrierefreiheit: LegalDoc = {
         {
           list: [
             'die Startseite mit allen Abschnitten, einschließlich der interaktiven Dashboard-Demo (Übersicht, Karten, Statistiken, Bewertungen, Unternehmen, Einstellungen) und dem Formular „Neue Karte hinzufügen“',
-            'die Seiten Impressum, Datenschutz und diese Erklärung',
+            'die Seiten Impressum, Datenschutz, AGB und diese Erklärung',
+            'den Bestellprozess unter /bestellen/ (siehe Abschnitt 8)',
             'die Demo-Weiterleitungen unter /r/… und die simulierte Bewertungsseite (/review-demo/), zu der sie führen',
             'die Fehlerseite „Seite nicht gefunden“',
           ],
@@ -130,10 +131,13 @@ export const barrierefreiheit: LegalDoc = {
     },
     {
       id: 'bestellung',
-      heading: '8. Bestellprozess und Video',
+      heading: '8. Bestellprozess',
       blocks: [
         {
-          p: 'Ein Online-Bestellprozess ist derzeit noch nicht verfügbar. Die Preiskarten verweisen nur auf den Abschnitt „Los geht’s“, es erfolgt keine echte Bestellung. Außerdem gibt es keine Anmeldung (Login) und kein Video auf dieser Website. Sobald wir einen Bestellprozess oder ein Video ergänzen, aktualisieren wir diese Erklärung.',
+          p: 'Seit dem 9. Oktober 2026 können Sie YANQIVA REVIEW über den Bestellprozess unter /bestellen/ bestellen. Er besteht aus vier Schritten (Produkt, Einrichtung, Ihre Daten, Prüfen) und einer Bestätigung. Wir haben ihn mit Beschriftungen, Pflichtfeld-Hinweisen, Fehlermeldungen und einer Bedienung per Tastatur gebaut. Die ausführliche Prüfung auf Barrierefreiheit läuft noch; das Ergebnis tragen wir hier nach. Bis dahin gilt: Wenn Sie beim Bestellen auf eine Barriere stoßen, schreiben Sie uns an support@yanqiva.de – wir nehmen Ihre Bestellung dann auch gern per E-Mail entgegen.',
+        },
+        {
+          p: 'Eine Anmeldung (Login) und ein Video gibt es auf dieser Website nicht.',
         },
       ],
     },
