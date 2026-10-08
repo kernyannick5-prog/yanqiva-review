@@ -33,7 +33,7 @@ export function Toggle({ id, checked, onChange, label, description }: ToggleProp
         <span
           aria-hidden
           className={`relative h-7 w-12 rounded-full border transition-[color,background-color,border-color,transform] duration-200 group-active:scale-95 ${
-            checked ? 'border-mint/60 bg-mint/30' : 'border-line bg-white/[0.06]'
+            checked ? 'border-mint/60 bg-mint/30' : 'border-faint bg-white/[0.06]'
           }`}
         >
           <motion.span

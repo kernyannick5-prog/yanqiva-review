@@ -19,10 +19,12 @@ function redirectPage(base: string, target: string, business: string): string {
 <!-- Datenschutz: Diese Seite erhebt, speichert und übermittelt keine Besucherdaten (kein Tracking, keine Cookies, keine externen Ressourcen). -->
 <title>Weiterleitung – ${escapeHtml(business)}</title>
 <meta http-equiv="refresh" content="0; url=${safe}">
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#070a1f;color:#cbd5f5;font:16px system-ui,sans-serif}a{color:#5eead4}</style>
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#070a1f;color:#cbd5f5;font:16px system-ui,sans-serif}a{color:#5eead4}a:focus-visible{outline:2px solid #5eead4;outline-offset:3px}</style>
 </head>
 <body>
-<p>Weiterleitung zur Bewertung von ${escapeHtml(business)} … <a href="${safe}">Weiter</a></p>
+<main>
+<p>Weiterleitung zur Bewertung von ${escapeHtml(business)} … <a href="${safe}">Weiter zur Bewertungsseite</a></p>
+</main>
 <script>location.replace(${JSON.stringify(url)})</script>
 </body>
 </html>

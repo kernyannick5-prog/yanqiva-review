@@ -5,11 +5,13 @@ interface FieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'id' | 
   label: string
   error?: string
   hint?: string
+  /** Pflichtfeld: aria-required (Validierung läuft per JS, nicht nativ) */
+  required?: boolean
   ref?: Ref<HTMLInputElement>
 }
 
 /** Beschriftetes Eingabefeld mit Inline-Fehlermeldung (aria-invalid / aria-describedby). */
-export function Field({ id, label, error, hint, className = '', ref, ...rest }: FieldProps) {
+export function Field({ id, label, error, hint, required, className = '', ref, ...rest }: FieldProps) {
   const errorId = `${id}-error`
   const hintId = `${id}-hint`
   const describedBy = [error ? errorId : null, hint ? hintId : null].filter(Boolean).join(' ') || undefined
@@ -21,10 +23,11 @@ export function Field({ id, label, error, hint, className = '', ref, ...rest }: 
       <input
         id={id}
         ref={ref}
+        aria-required={required ? true : undefined}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy}
         className={`min-h-11 w-full rounded-xl border bg-ink-950/60 px-3.5 text-[16px] text-text placeholder:text-faint transition-colors focus:border-mint/60 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 sm:text-sm ${
-          error ? 'border-rose-400/70' : 'border-line hover:border-mint/30'
+          error ? 'border-rose-400/70' : 'border-faint/70 hover:border-mint/60'
         } ${className}`}
         {...rest}
       />

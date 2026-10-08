@@ -41,6 +41,7 @@ export function EditLinkModal({ card, onSave, onClose }: EditLinkModalProps) {
         <Field
           id="edit-target-url"
           label="Ziel-URL"
+          required
           type="url"
           inputMode="url"
           autoComplete="off"

@@ -145,6 +145,8 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-mint);
   outline-offset: 3px;
+  /* WCAG 2.4.11: fokussierte Elemente nicht unter der fixierten Navigationsleiste verstecken */
+  scroll-margin-block: 5.5rem 2rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -199,6 +201,11 @@ body {
 html[data-lowpower] .yq-card-float, html[data-lowpower] .yq-sweep, html[data-lowpower] .yq-wave,
 html[data-lowpower] .yq-breathe, html[data-lowpower] .yq-scan, html[data-lowpower] .yq-dot,
 html[data-lowpower] .animate-ping { animation: none !important; }
+/* Nutzerschalter „Animationen anhalten“ (WCAG 2.2.2): alle Endlos-Animationen aus, statischer Endzustand */
+html[data-motion='paused'] .yq-card-float, html[data-motion='paused'] .yq-sweep, html[data-motion='paused'] .yq-wave,
+html[data-motion='paused'] .yq-breathe, html[data-motion='paused'] .yq-scan, html[data-motion='paused'] .yq-dot,
+html[data-motion='paused'] .animate-ping, html[data-motion='paused'] .yq-stand, html[data-motion='paused'] .yq-phone,
+html[data-motion='paused'] .yq-ripple, html[data-motion='paused'] .yq-star { animation: none !important; }
 
 /* HowItWorks-Illustrationen (CSS statt JS-Loops). Basis-Stil = fertiger, statischer Zustand. */
 @keyframes yq-stand {

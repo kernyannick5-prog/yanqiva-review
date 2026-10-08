@@ -161,8 +161,8 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
                         <td
                           key={WEEKDAYS[col]}
                           title={`${WEEKDAYS[col]}, ${part.range}: ${count} Scans`}
-                          className={`h-10 rounded-md text-center text-xs tabular-nums transition-transform duration-200 hover:scale-110 ${intensity > 0.55 ? 'font-semibold text-ink-950' : 'text-text'}`}
-                          style={{ backgroundColor: `rgb(94 234 212 / ${(0.06 + intensity * 0.8).toFixed(2)})` }}
+                          className={`h-10 rounded-md text-center text-xs tabular-nums transition-transform duration-200 hover:scale-110 text-text`}
+                          style={{ backgroundColor: `rgb(94 234 212 / ${(0.06 + intensity * 0.3).toFixed(2)})` }}
                         >
                           {count}
                         </td>

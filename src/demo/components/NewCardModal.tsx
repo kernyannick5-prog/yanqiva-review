@@ -64,9 +64,11 @@ export function NewCardModal({ cards, onCreate, onClose }: NewCardModalProps) {
   return (
     <Modal titleId="new-card-title" title="Neue Karte hinzufügen" onClose={onClose}>
       <form onSubmit={submit} noValidate className="space-y-4">
+        <p className="text-xs text-muted">Alle Felder sind Pflichtfelder.</p>
         <Field
           id={FIELD_IDS.businessName}
           label="Unternehmensname"
+          required
           placeholder="z. B. Café Sonnenschein"
           autoComplete="off"
           value={values.businessName}
@@ -77,6 +79,7 @@ export function NewCardModal({ cards, onCreate, onClose }: NewCardModalProps) {
         <Field
           id={FIELD_IDS.targetUrl}
           label="Google-Bewertungslink"
+          required
           type="url"
           inputMode="url"
           placeholder="https://…"
@@ -89,6 +92,7 @@ export function NewCardModal({ cards, onCreate, onClose }: NewCardModalProps) {
         <Field
           id={FIELD_IDS.cardNumber}
           label="Kartennummer"
+          required
           autoComplete="off"
           spellCheck={false}
           value={values.cardNumber}

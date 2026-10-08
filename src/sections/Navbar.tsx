@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../components/Button'
 
 const links = [
@@ -17,6 +17,7 @@ export function Navbar({ anchorBase = '' }: { anchorBase?: string }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const reduce = useReducedMotion()
+  const toggleRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -27,7 +28,11 @@ export function Navbar({ anchorBase = '' }: { anchorBase?: string }) {
 
   useEffect(() => {
     if (!open) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      setOpen(false)
+      toggleRef.current?.focus()
+    }
     window.addEventListener('keydown', onKey)
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
@@ -38,7 +43,13 @@ export function Navbar({ anchorBase = '' }: { anchorBase?: string }) {
   }, [open])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6">
+    <header
+      className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6"
+      onBlur={(e) => {
+        // Menü schließen, sobald der Tastaturfokus den Kopfbereich verlässt (kein Fokus hinter dem Overlay)
+        if (open && !e.currentTarget.contains(e.relatedTarget as Node | null)) setOpen(false)
+      }}
+    >
       <nav
         aria-label="Hauptnavigation"
         className={`relative z-10 mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 transition-[background-color,border-color,box-shadow,height] duration-300 sm:px-6 ${
@@ -69,6 +80,7 @@ export function Navbar({ anchorBase = '' }: { anchorBase?: string }) {
 
         <button
           type="button"
+          ref={toggleRef}
           className="relative flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] transition-[transform,background-color] active:scale-95 active:bg-white/[0.12] md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"

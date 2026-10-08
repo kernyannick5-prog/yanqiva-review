@@ -102,6 +102,14 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
   }
 
   const current = active !== null ? points[active] : undefined
+  // Textalternative zum Diagramm (WCAG 1.1.1): Kernaussage als Text
+  const summaryId = `${gradientId}-sum`
+  const sum = points.reduce((s, p) => s + p.value, 0)
+  const hi = points.reduce((b, p) => (p.value > b.value ? p : b), points[0])
+  const lo = points.reduce((b, p) => (p.value < b.value ? p : b), points[0])
+  const summary = n
+    ? `${n} Tage von ${points[0].tooltipLabel} bis ${points[n - 1].tooltipLabel}. Insgesamt ${formatInt(sum)} ${valueLabel}, im Schnitt ${formatInt(Math.round(sum / n))} pro Tag. Höchster Wert: ${formatInt(hi.value)} am ${hi.tooltipLabel}. Niedrigster Wert: ${formatInt(lo.value)} am ${lo.tooltipLabel}.`
+    : 'Keine Daten.'
   const duration = reduce ? 0 : 1.4
 
   return (
@@ -110,6 +118,7 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
       role="group"
       tabIndex={0}
       aria-label={`${ariaLabel}. Mit den Pfeiltasten einzelne Tage auswählen.`}
+      aria-describedby={summaryId}
       onKeyDown={onKeyDown}
       onBlur={() => setActive(null)}
       className="relative w-full select-none rounded-xl"
@@ -209,6 +218,9 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
         </div>
       )}
 
+      <p id={summaryId} className="sr-only">
+        {summary}
+      </p>
       <p className="sr-only" aria-live="polite">
         {current ? `${current.tooltipLabel}: ${formatInt(current.value)} ${valueLabel}` : ''}
       </p>

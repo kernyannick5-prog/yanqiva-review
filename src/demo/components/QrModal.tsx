@@ -59,12 +59,16 @@ export function QrModal({ card, onClose }: QrModalProps) {
             <ActionLink href={demoRedirectUrl(card.slug)} target="_blank" rel="noopener noreferrer" variant="primary" className="flex-1">
               Weiterleitung testen
               <ExternalIcon className="h-4 w-4" />
+              <span className="sr-only">(öffnet in neuem Tab)</span>
             </ActionLink>
           )}
           <ActionButton onClick={copy} className="flex-1">
             <CopyIcon className="h-4 w-4" />
             {copied ? 'Kopiert' : 'Link kopieren'}
           </ActionButton>
+          <span role="status" className="sr-only">
+            {copied ? 'Link kopiert' : ''}
+          </span>
         </div>
       </div>
     </Modal>

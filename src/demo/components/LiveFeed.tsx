@@ -2,6 +2,7 @@ import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-mot
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Card } from '../types'
 import { totalScans } from '../utils'
+import { useMotionPaused } from '../../lib/motionPause'
 import { NfcIcon, QrIcon } from './Icons'
 
 interface FeedEvent {
@@ -29,6 +30,7 @@ export function LiveFeed({ cards }: { cards: Card[] }) {
   const nextId = useRef(100)
   const inView = useInView(ref, { amount: 0.2 })
   const reduce = useReducedMotion()
+  const paused = useMotionPaused()
   const active = useMemo(() => cards.filter((c) => c.status === 'active' && totalScans(c) > 0), [cards])
   const [now, setNow] = useState(() => Date.now())
   const [events, setEvents] = useState<FeedEvent[]>(() =>
@@ -39,7 +41,7 @@ export function LiveFeed({ cards }: { cards: Card[] }) {
   )
 
   useEffect(() => {
-    if (!inView || reduce || active.length === 0) return
+    if (!inView || reduce || paused || active.length === 0) return
     let timer = 0
     const schedule = () => {
       timer = window.setTimeout(() => {
@@ -56,7 +58,7 @@ export function LiveFeed({ cards }: { cards: Card[] }) {
     }
     schedule()
     return () => window.clearTimeout(timer)
-  }, [inView, reduce, active])
+  }, [inView, reduce, paused, active])
 
   return (
     <div ref={ref}>

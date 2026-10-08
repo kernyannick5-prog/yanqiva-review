@@ -1,3 +1,4 @@
+import { MotionToggle } from '../components/MotionToggle'
 import { Container } from './ui'
 
 const BASE = import.meta.env.BASE_URL
@@ -11,6 +12,7 @@ const external = [
   { href: 'mailto:support@yanqiva.de', label: 'Kontakt' },
   { href: `${BASE}impressum/`, label: 'Impressum' },
   { href: `${BASE}datenschutz/`, label: 'Datenschutz' },
+  { href: `${BASE}barrierefreiheit/`, label: 'Barrierefreiheit' },
 ]
 
 const linkClass =
@@ -39,6 +41,11 @@ export function Footer({ onLegalPage = false }: { onLegalPage?: boolean }) {
                   <a href={l.href} className={linkClass}>{l.label}</a>
                 </li>
               ))}
+              {!onLegalPage && (
+                <li>
+                  <MotionToggle className={`${linkClass} underline-offset-2 hover:underline aria-pressed:text-mint`} />
+                </li>
+              )}
             </ul>
           </nav>
         </div>

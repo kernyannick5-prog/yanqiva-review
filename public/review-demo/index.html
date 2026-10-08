@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="de">
 <head>
-<link rel="icon" href="data:,">
 <meta charset="utf-8">
+<link rel="icon" href="data:,">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#070a1f">
@@ -20,12 +20,12 @@
   fieldset{border:0;margin:24px 0 0;padding:0}
   legend{padding:0;font-size:14px;color:#9aa3cc}
   .stars{display:flex;gap:2px;margin-top:6px}
-  .star{width:48px;height:48px;padding:0;border:0;background:none;cursor:pointer;color:#3a4172;font-size:36px;line-height:1;border-radius:12px;transition:transform .15s,color .15s}
+  .star{width:48px;height:48px;padding:0;border:0;background:none;cursor:pointer;color:#6f78ab;font-size:36px;line-height:1;border-radius:12px;transition:transform .15s,color .15s}
   .star.on{color:#fcd34d}
   .star:hover{transform:scale(1.1)}
   label.t{display:block;margin-top:20px;font-size:14px;color:#9aa3cc}
-  textarea{display:block;width:100%;min-height:130px;margin-top:6px;padding:12px 14px;resize:vertical;border:1px solid rgba(148,163,255,.25);border-radius:14px;background:rgba(5,7,26,.6);color:#e6e9ff;font:inherit}
-  textarea::placeholder{color:#6b7399}
+  textarea{display:block;width:100%;min-height:130px;margin-top:6px;padding:12px 14px;resize:vertical;border:1px solid #7b84b8;border-radius:14px;background:rgba(5,7,26,.6);color:#e6e9ff;font:inherit}
+  textarea::placeholder{color:#9aa3cc}
   :focus-visible{outline:2px solid #5eead4;outline-offset:3px}
   .send{width:100%;min-height:52px;margin-top:20px;border:0;border-radius:999px;background:#5eead4;color:#05071a;font:600 16px inherit;font-family:inherit;cursor:pointer}
   .send:hover{background:#2dd4bf}
@@ -33,14 +33,14 @@
   .done{display:none;text-align:center;padding:24px 0}
   .done .ok{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 16px;border-radius:50%;background:#5eead4;color:#05071a;font-size:32px;font-weight:700}
   .done p{margin:8px 0 0;color:#9aa3cc}
-  .done h2{margin:0;font-size:22px}
+  .done h1{margin:0;font-size:22px}.done h1:focus{outline:none}
   .sent .form{display:none}
   .sent .done{display:block}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<div class="banner" role="note">Demo: In Produktion leitet YANQIVA hier direkt auf die Google-Bewertungsseite weiter.</div>
+<div class="banner" role="region" aria-label="Demo-Hinweis">Demo: In Produktion leitet YANQIVA hier direkt auf die Google-Bewertungsseite weiter.</div>
 <main>
   <a class="back" href="../">← Zurück zur Demo-Site</a>
   <div class="card" id="card">
@@ -50,7 +50,7 @@
       <form id="form" novalidate>
         <fieldset>
           <legend>Deine Sternebewertung</legend>
-          <div class="stars" id="stars" role="radiogroup" aria-label="Sterne"></div>
+          <div class="stars" id="stars" role="radiogroup" aria-label="Sterne" aria-describedby="msg"></div>
         </fieldset>
         <label class="t" for="text">Deine Erfahrung (optional)</label>
         <textarea id="text" maxlength="500" placeholder="Was hat dir gefallen?"></textarea>
@@ -58,9 +58,9 @@
         <button class="send" type="submit">Bewertung senden</button>
       </form>
     </div>
-    <div class="done" role="status">
+    <div class="done">
       <div class="ok" aria-hidden="true">✓</div>
-      <h2>Danke! (Demo – es wurde nichts gesendet)</h2>
+      <h1 id="done-h" tabindex="-1">Danke! (Demo – es wurde nichts gesendet)</h1>
       <p>Diese Seite ist eine Simulation. Es wurden keine Daten übertragen.</p>
     </div>
   </div>
@@ -88,12 +88,13 @@
       b.setAttribute('role', 'radio');
       b.setAttribute('aria-label', n + (n === 1 ? ' Stern' : ' Sterne'));
       b.textContent = '★';
-      b.addEventListener('click', function () { rating = n; document.getElementById('msg').textContent = ''; paint(); });
+      b.addEventListener('click', function () { rating = n; document.getElementById('msg').textContent = ''; box.removeAttribute('aria-invalid'); paint(); });
       b.addEventListener('keydown', function (e) {
         var d = e.key === 'ArrowRight' || e.key === 'ArrowUp' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowDown' ? -1 : 0;
         if (!d) return;
         e.preventDefault();
         rating = Math.min(5, Math.max(1, (rating || n) + d));
+        document.getElementById('msg').textContent = ''; box.removeAttribute('aria-invalid');
         paint();
         stars[rating - 1].focus();
       });
@@ -107,9 +108,12 @@
     e.preventDefault();
     if (!rating) {
       document.getElementById('msg').textContent = 'Bitte wähle zuerst eine Sternebewertung.';
+      box.setAttribute('aria-invalid', 'true');
+      stars[0].focus();
       return;
     }
     document.getElementById('card').classList.add('sent');
+    document.getElementById('done-h').focus();
   });
 })();
 </script>

@@ -33,7 +33,15 @@ function DemoWhenNear() {
       { rootMargin: '1200px 0px' },
     )
     io.observe(el)
-    return () => io.disconnect()
+    // Tastaturnutzer: Demo beim ersten Tab-Druck laden, damit sie nicht aus der Tab-Reihenfolge fällt (WCAG 2.1.1/2.4.3)
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Tab') setNear(true)
+    }
+    window.addEventListener('keydown', onKey, { once: false })
+    return () => {
+      io.disconnect()
+      window.removeEventListener('keydown', onKey)
+    }
   }, [])
   if (near) return <Suspense fallback={demoFallback}><DashboardDemo /></Suspense>
   return <div ref={ref}>{demoFallback}</div>
@@ -42,9 +50,10 @@ function DemoWhenNear() {
 export default function App() {
   return (
     <>
+      <a href="#main" className="fixed left-3 top-3 z-[200] inline-flex min-h-11 -translate-y-[200%] items-center rounded-full bg-mint px-5 text-sm font-semibold text-ink-950 focus:translate-y-0">Zum Inhalt springen</a>
       <Background />
       <Navbar />
-      <main className="relative">
+      <main id="main" tabIndex={-1} className="relative outline-none">
         <Hero />
         <ProductShowcase />
         <ProblemSolution />

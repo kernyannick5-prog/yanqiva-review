@@ -51,10 +51,12 @@ function Callout({ c }: { c: LegalCallout }) {
 export function LegalPage({ doc }: { doc: LegalDoc }) {
   return (
     <>
+      <a href="#main" className="fixed left-3 top-3 z-[200] inline-flex min-h-11 -translate-y-[200%] items-center rounded-full bg-mint px-5 text-sm font-semibold text-ink-950 focus:translate-y-0">Zum Inhalt springen</a>
       <header className="border-b border-line bg-ink-900/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
-          <a href={BASE} className="flex min-h-11 items-center gap-2.5 active:opacity-70" aria-label="YANQIVA REVIEW – zur Startseite">
+          <a href={BASE} className="flex min-h-11 items-center gap-2.5 active:opacity-70" aria-label="YANQIVA Review – zur Startseite">
             <span className="font-display text-lg font-bold tracking-[0.12em] text-text">YANQIVA</span>
+            {' '}
             <span className="rounded-full border border-mint/40 bg-mint/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-widest text-mint">Review</span>
           </a>
           <a
@@ -67,10 +69,10 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 sm:py-14">
+      <main id="main" tabIndex={-1} className="mx-auto w-full max-w-6xl px-5 py-10 outline-none sm:px-8 sm:py-14">
         <article className="mx-auto max-w-[70ch]">
           <p className="inline-flex rounded-full border border-mint/30 bg-mint/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-mint">{doc.badge}</p>
-          <h1 className="mt-4 font-display text-[clamp(1.9rem,1.3rem+2.6vw,3rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-balance">{doc.title}</h1>
+          <h1 className="mt-4 hyphens-auto break-words font-display text-[clamp(1.9rem,1.3rem+2.6vw,3rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-balance">{doc.title}</h1>
           <p className="mt-3 text-sm text-faint">{renderText(doc.updated)}</p>
 
           {doc.callouts.length > 0 && (

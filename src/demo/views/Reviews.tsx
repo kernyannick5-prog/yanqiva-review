@@ -33,7 +33,7 @@ export function Reviews({ cards }: { cards: Card[] }) {
                     : 'border-line bg-white/[0.03] text-muted hover:border-mint/30 hover:text-text'
                 }`}
               >
-                {f === 'all' ? 'Alle' : `${f} ★`} <span className="tabular-nums text-faint">({count})</span>
+                {f === 'all' ? 'Alle' : `${f} ★`} <span className={`tabular-nums ${filter === f ? 'text-muted' : 'text-faint'}`}>({count})</span>
               </button>
             )
           })}

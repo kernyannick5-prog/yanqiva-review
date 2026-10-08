@@ -88,7 +88,8 @@ export function Settings({ settings, onToggle, onReset }: SettingsProps) {
       <StaggerItem index={1}>
         <Panel title="Redirect-Domain" description="Auf jeder Karte steht ausschließlich diese Adresse.">
           <div className="flex flex-wrap items-center gap-3">
-            <p className="min-w-0 flex-1 truncate rounded-xl border border-line bg-ink-950/50 px-3.5 py-2.5 font-mono text-sm text-mint" aria-label="Redirect-Domain">
+            <p className="min-w-0 flex-1 truncate rounded-xl border border-line bg-ink-950/50 px-3.5 py-2.5 font-mono text-sm text-mint">
+              <span className="sr-only">Redirect-Domain: </span>
               {PRODUCTION_REDIRECT_BASE}&lt;slug&gt;
             </p>
             <span className="rounded-full border border-mint/30 bg-mint/10 px-3 py-1 text-xs font-medium text-mint">Von YANQIVA verwaltet</span>
