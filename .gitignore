@@ -2,3 +2,8 @@ node_modules
 dist
 *.local
 .DS_Store
+
+# Umgebungsvariablen (nur .env.example gehört ins Repo)
+.env
+.env.*
+!.env.example

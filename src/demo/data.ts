@@ -14,7 +14,11 @@ import type { Card, CompanyMeta, DemoSettings, Review, Stars } from './types'
 
 /**
  * Die Demo-Redirects (config/redirects.ts) führen auf eine simulierte Bewertungsseite.
- * Als Ziel-URL zeigt das Dashboard hier den Link, der in Produktion hinterlegt wäre.
+ * Als Ziel-URL zeigt das Dashboard hier den Link, der in Produktion hinterlegt wäre
+ * (identisch mit `googleReviewUrl` in config/redirects.ts; fiktiv, wird nie aufgerufen).
+ *
+ * Abbildung auf das DB-Schema (src/model/schema.ts): siehe src/demo/schemaMapping.ts.
+ * Gespeichert werden nur Geschäftsdaten und aggregierte Zähler, keine Besucherdaten.
  */
 export const SEED_CARDS: Card[] = [
   {
@@ -22,7 +26,7 @@ export const SEED_CARDS: Card[] = [
     cardNumber: 'YANQIVA-001',
     slug: 'demo-baeckerei',
     businessName: 'Bäckerei Müller',
-    targetUrl: 'https://search.google.com/local/writereview?placeid=DEMO_PLACE_BAECKEREI',
+    targetUrl: 'https://g.page/r/DEMO-BAECKEREI/review',
     status: 'active',
     scans: { nfc: 782, qr: 262 },
     lastScanAt: todayAt(14, 32),
@@ -32,7 +36,7 @@ export const SEED_CARDS: Card[] = [
     cardNumber: 'YANQIVA-002',
     slug: 'demo-barbershop',
     businessName: 'Barbershop Karlsruhe',
-    targetUrl: 'https://search.google.com/local/writereview?placeid=DEMO_PLACE_BARBERSHOP',
+    targetUrl: 'https://g.page/r/DEMO-BARBERSHOP/review',
     status: 'active',
     scans: { nfc: 502, qr: 164 },
     lastScanAt: todayAt(11, 8),

@@ -32,6 +32,7 @@ export function Company({ cards }: { cards: Card[] }) {
             { label: 'Adresse', value: meta?.address ?? 'Noch nicht hinterlegt' },
             { label: 'Karte', value: card.cardNumber },
             { label: 'Redirect', value: redirectDisplay(card.slug) },
+            { label: 'Ziel-URL', value: card.targetUrl },
           ]
           return (
             <StaggerItem index={i + 1} key={card.id} className="min-w-0">

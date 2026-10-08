@@ -45,7 +45,7 @@ Jeder Push auf `main` baut die Seite über GitHub Actions (`.github/workflows/de
 ```
 NFC-Karte / QR-Code
         ↓
-YANQIVA Redirect-URL   https://yanqiva.de/r/<slug>
+YANQIVA Redirect-URL   https://yanqiva-bewertung.de/r/<slug>
         ↓
 Google-Bewertungsseite des Unternehmens
 ```
@@ -62,7 +62,7 @@ Auf der physischen Karte steht **nur die Redirect-URL**, nie der Google-Link. Da
 | `src/demo/types.ts`, `src/demo/data.ts` | Datenmodell des Dashboards (`Card` mit `slug`, `targetUrl`, Scans …) |
 | `public/review-demo/` | simulierte Bewertungsseite als Demo-Ziel |
 
-**Weg zur Produktion:** Die statischen Redirect-Seiten werden durch einen Edge-Worker (z. B. Cloudflare Worker unter `yanqiva.de/r/*`) ersetzt, der den Slug in einer Datenbank nachschlägt, den Scan zählt und per HTTP 302 auf die gespeicherte Google-URL (`https://search.google.com/local/writereview?placeid=…`) weiterleitet. Das Dashboard schreibt `targetUrl` dann über eine API statt in den Browser-Speicher.
+**Weg zur Produktion:** Die statischen Redirect-Seiten werden durch einen Edge-Worker (z. B. Cloudflare Worker unter `yanqiva-bewertung.de/r/*`) ersetzt, der den Slug in einer Datenbank nachschlägt, den Scan zählt und per HTTP 302 auf die gespeicherte Google-URL (`https://search.google.com/local/writereview?placeid=…`) weiterleitet. Das Dashboard schreibt `targetUrl` dann über eine API statt in den Browser-Speicher.
 
 ## Was ist Demo, was ist vorbereitet?
 
@@ -100,20 +100,9 @@ Datenbankschema für später (nur Geschäftsdaten + Tageszähler) und Redirect-W
 
 ## Eigene Domain
 
-Die Seite ist domainfähig: Mit `BASE=/` baut sie für eine Root-Domain, ohne `BASE` für den GitHub-Pages-Unterpfad `/yanqiva-review/`. Schritte für eine eigene Domain (z. B. `yanqiva-review.de` bei IONOS, mit Cloudflare davor):
+Live unter **https://yanqiva-bewertung.de/** (Domain und DNS bei IONOS, A/AAAA-Einträge direkt auf GitHub Pages, kein Proxy/CDN dazwischen).
 
-1. **`public/CNAME`** mit genau einer Zeile anlegen, z. B. `yanqiva-review.de`. Ab dann ist die `github.io`-URL nicht mehr nutzbar; die Datei erst anlegen, wenn die Domain tatsächlich umgestellt wird.
-2. **Workflow** `.github/workflows/deploy.yml`: Build mit `BASE=/`:
-   ```yaml
-   - run: npm run build
-     env:
-       BASE: /
-   ```
-3. **GitHub Pages:** Settings → Pages → Custom domain setzen und **Enforce HTTPS** aktivieren.
-4. **DNS:** Bei IONOS die Nameserver auf Cloudflare stellen (oder A/AAAA-Einträge auf die GitHub-Pages-IPs bzw. CNAME `<user>.github.io`).
-5. **Cloudflare:** *Web Analytics* und *Bot Fight Mode* **AUS** lassen (sie setzen Cookies bzw. injizieren Skripte); SSL/TLS „Full (strict)“, „Always Use HTTPS“.
-6. **Security-Header** (GitHub Pages kann keine eigenen Header setzen, daher per Cloudflare Transform/Response Header Rules):
-   `Strict-Transport-Security: max-age=31536000; includeSubDomains`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, `Permissions-Policy: camera=(), microphone=(), geolocation=()`, `Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'`.
-7. Rechtstexte (`src/legal/`) um Proxy/CDN (Cloudflare) und Hosting (GitHub) als Auftragsverarbeiter/Empfänger prüfen.
-
-> Stand im Repo: `public/CNAME` und `BASE: /` im Workflow sind bereits gesetzt (Domain `yanqiva-bewertung.de`, nicht von diesem Abschnitt angelegt). Lokal ohne `BASE` bleibt der Unterpfad `/yanqiva-review/` aktiv.
+- `public/CNAME` enthält `yanqiva-bewertung.de`; der Workflow baut mit `BASE: /`. Lokal ohne `BASE` gilt der Unterpfad `/yanqiva-review/`.
+- GitHub Pages: Custom Domain gesetzt, **Enforce HTTPS** aktiv.
+- Redirect-Basis der Karten: `https://yanqiva-bewertung.de/r/` (`VITE_REDIRECT_BASE`).
+- Security-Header (HSTS, CSP, Referrer-Policy …) kann GitHub Pages nicht setzen. Dafür bräuchte es einen vorgeschalteten Proxy (z. B. Cloudflare). **Vorher** die Rechtstexte in `src/legal/` um diesen Dienst ergänzen und dort *Web Analytics* sowie *Bot Fight Mode* ausgeschaltet lassen (sonst Cookies/Skripte).

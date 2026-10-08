@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from 'react'
 import type { Card, NewCardInput } from '../types'
-import { isHttpsUrl, nextCardNumber } from '../utils'
+import { CARD_NUMBER_MAX, CARD_NUMBER_PATTERN, isHttpsUrl, nextCardNumber } from '../utils'
 import { ActionButton } from './ActionButton'
+import { ShieldIcon } from './Icons'
 import { Field } from './Field'
 import { Modal } from './Modal'
 
@@ -36,6 +37,9 @@ export function NewCardModal({ cards, onCreate, onClose }: NewCardModalProps) {
     else if (!isHttpsUrl(url)) errors.targetUrl = 'Der Link muss gültig sein und mit https:// beginnen.'
     const number = v.cardNumber.trim()
     if (!number) errors.cardNumber = 'Bitte gib eine Kartennummer ein.'
+    else if (number.length > CARD_NUMBER_MAX) errors.cardNumber = `Maximal ${CARD_NUMBER_MAX} Zeichen.`
+    else if (!CARD_NUMBER_PATTERN.test(number))
+      errors.cardNumber = 'Nur Großbuchstaben A–Z, Ziffern, „-“ und „_“ erlaubt – keine Leerzeichen.'
     else if (cards.some((c) => c.cardNumber.toLowerCase() === number.toLowerCase()))
       errors.cardNumber = 'Diese Kartennummer ist bereits vergeben.'
     return errors
@@ -89,9 +93,14 @@ export function NewCardModal({ cards, onCreate, onClose }: NewCardModalProps) {
           spellCheck={false}
           value={values.cardNumber}
           error={errors.cardNumber}
-          hint="Steht auf der Karte. Muss eindeutig sein."
-          onChange={set('cardNumber')}
+          maxLength={CARD_NUMBER_MAX}
+          hint="Steht auf der Karte, z. B. YANQIVA-003. Muss eindeutig sein."
+          onChange={(e) => setValues((prev) => ({ ...prev, cardNumber: e.target.value.toUpperCase() }))}
         />
+        <p className="-mt-2 flex items-start gap-2 text-xs leading-relaxed text-faint">
+          <ShieldIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-mint" />
+          Keine Personennamen oder Geburtsdaten in Kartennummern verwenden.
+        </p>
         <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:justify-end">
           <ActionButton onClick={onClose}>Abbrechen</ActionButton>
           <ActionButton type="submit" variant="primary">

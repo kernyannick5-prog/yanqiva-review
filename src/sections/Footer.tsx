@@ -1,21 +1,23 @@
 import { Container } from './ui'
 
+const BASE = import.meta.env.BASE_URL
+
 const internal = [
-  { href: '#how', label: 'Produkt' },
-  { href: '#pricing', label: 'Preise' },
-  { href: '#demo', label: 'Dashboard' },
+  { hash: '#how', label: 'Produkt' },
+  { hash: '#pricing', label: 'Preise' },
+  { hash: '#demo', label: 'Dashboard' },
 ]
 const external = [
-  { href: 'mailto:support@yanqiva.de', label: 'Kontakt', ext: false },
-  { href: 'https://yanqiva.de/impressum', label: 'Impressum', ext: true },
-  { href: 'https://yanqiva.de/datenschutz', label: 'Datenschutz', ext: true },
+  { href: 'mailto:support@yanqiva.de', label: 'Kontakt' },
+  { href: `${BASE}impressum/`, label: 'Impressum' },
+  { href: `${BASE}datenschutz/`, label: 'Datenschutz' },
 ]
 
 const linkClass =
   '-mx-2 inline-flex min-h-11 items-center rounded-lg px-2 text-[15px] text-muted transition-colors hover:text-text active:text-mint'
 
-/** Seitenfuß. */
-export function Footer() {
+/** Seitenfuß. Auf Rechtsseiten zeigen die Anker auf die Startseite. */
+export function Footer({ onLegalPage = false }: { onLegalPage?: boolean }) {
   return (
     <footer className="section-sep relative overflow-hidden bg-gradient-to-b from-transparent to-ink-950/80 pb-8 pt-12 sm:pt-16">
       <Container>
@@ -28,15 +30,13 @@ export function Footer() {
           <nav aria-label="Footer">
             <ul className="grid grid-cols-2 gap-x-8 sm:flex sm:flex-wrap sm:gap-x-6 md:max-w-md md:justify-end">
               {internal.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} className={linkClass}>{l.label}</a>
+                <li key={l.hash}>
+                  <a href={onLegalPage ? `${BASE}${l.hash}` : l.hash} className={linkClass}>{l.label}</a>
                 </li>
               ))}
               {external.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className={linkClass} {...(l.ext ? { rel: 'noopener', target: '_blank' } : {})}>
-                    {l.label}
-                  </a>
+                  <a href={l.href} className={linkClass}>{l.label}</a>
                 </li>
               ))}
             </ul>

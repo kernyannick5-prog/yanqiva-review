@@ -14,6 +14,9 @@ function redirectPage(base: string, target: string, business: string): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:,">
+<!-- Datenschutz: Diese Seite erhebt, speichert und übermittelt keine Besucherdaten (kein Tracking, keine Cookies, keine externen Ressourcen). -->
 <title>Weiterleitung – ${escapeHtml(business)}</title>
 <meta http-equiv="refresh" content="0; url=${safe}">
 <style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#070a1f;color:#cbd5f5;font:16px system-ui,sans-serif}a{color:#5eead4}</style>

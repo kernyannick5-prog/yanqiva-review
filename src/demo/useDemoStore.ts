@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { DEFAULT_SETTINGS, SEED_CARDS, SEED_CARD_IDS } from './data'
 import type { Card, DemoSettings, NewCardInput } from './types'
-import { uniqueSlug } from './utils'
+import { randomSlug } from './utils'
 
 const STORAGE_KEY = 'yanqiva-demo-cards-v1'
 
@@ -34,7 +34,9 @@ function loadCreatedCards(): Card[] {
 
 function saveCreatedCards(cards: Card[]) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cards))
+    // Nichts schreiben, solange keine Karte angelegt wurde (kein leerer Eintrag, kein Speicher ohne Nutzeraktion).
+    if (cards.length === 0) localStorage.removeItem(STORAGE_KEY)
+    else localStorage.setItem(STORAGE_KEY, JSON.stringify(cards))
   } catch {
     /* Speicher nicht verfügbar (z. B. privater Modus) – Demo läuft ohne Persistenz weiter. */
   }
@@ -54,7 +56,7 @@ export function useDemoStore() {
       const card: Card = {
         id: `card-${Date.now().toString(36)}`,
         cardNumber: input.cardNumber.trim(),
-        slug: uniqueSlug(input.businessName, cards),
+        slug: randomSlug(cards),
         businessName: input.businessName.trim(),
         targetUrl: input.targetUrl.trim(),
         status: 'active',

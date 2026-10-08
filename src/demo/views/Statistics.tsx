@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useMemo } from 'react'
+import { ShieldIcon } from '../components/Icons'
 import { CountUp } from '../../components/CountUp'
 import { LineChart, type ChartPoint } from '../components/LineChart'
 import { Panel } from '../components/Panel'
@@ -174,6 +175,13 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
           </Panel>
         </StaggerItem>
       </div>
+
+      <StaggerItem index={5}>
+        <p className="flex items-start gap-2 text-xs leading-relaxed text-faint">
+          <ShieldIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-mint" />
+          Alle Werte sind aggregierte Zähler pro Karte und Tag – es werden keine Besucherdaten (IP, Gerät, Standort, Profile) erhoben.
+        </p>
+      </StaggerItem>
     </div>
   )
 }

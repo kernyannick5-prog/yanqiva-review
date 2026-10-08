@@ -36,29 +36,25 @@ export function isHttpsUrl(value: string) {
   }
 }
 
-/** ä->ae, ö->oe, ü->ue, ß->ss, danach kebab-case. */
-function slugify(name: string) {
-  const slug = name
-    .toLowerCase()
-    .replace(/ä/g, 'ae')
-    .replace(/ö/g, 'oe')
-    .replace(/ü/g, 'ue')
-    .replace(/ß/g, 'ss')
-    .normalize('NFD')
-    .replace(/\p{M}/gu, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-  return slug || 'karte'
+const SLUG_ALPHABET = '23456789abcdefghjkmnpqrstuvwxyz' // base32 ohne 0/1/i/l/o
+const SLUG_LENGTH = 6
+
+/**
+ * Zufälliger Slug im Stil `card_7f82k4` – bewusst NICHT aus dem Firmennamen abgeleitet
+ * (kein Personenbezug in URLs, nicht erratbar). Kollisionsfrei gegenüber vorhandenen Slugs.
+ */
+export function randomSlug(cards: Card[]) {
+  const taken = new Set([...cards.map((c) => c.slug), ...redirects.map((r) => r.slug)])
+  for (;;) {
+    const bytes = crypto.getRandomValues(new Uint8Array(SLUG_LENGTH))
+    const slug = `card_${Array.from(bytes, (b) => SLUG_ALPHABET[b % 32]).join('')}`
+    if (!taken.has(slug)) return slug
+  }
 }
 
-/** Hängt bei Kollisionen -2, -3 … an. */
-export function uniqueSlug(name: string, cards: Card[]) {
-  const taken = new Set([...cards.map((c) => c.slug), ...redirects.map((r) => r.slug)])
-  const base = slugify(name)
-  let slug = base
-  for (let n = 2; taken.has(slug); n++) slug = `${base}-${n}`
-  return slug
-}
+/** Kartennummer: nur A–Z, 0–9, „-“ und „_“, max. 24 Zeichen (keine Leer- oder Namensmuster). */
+export const CARD_NUMBER_MAX = 24
+export const CARD_NUMBER_PATTERN = /^[A-Z0-9_-]+$/
 
 /** Nächste freie Kartennummer, z. B. YANQIVA-003. */
 export function nextCardNumber(cards: Card[]) {
@@ -160,6 +156,15 @@ export function distribute(total: number, weights: number[]) {
 /** Wochentagsfaktor (So … Sa): Freitag/Samstag sind am stärksten. */
 const WEEKDAY_FACTOR = [0.85, 0.9, 0.95, 1, 1.05, 1.3, 1.4]
 
+/**
+ * Feste Tageswerte „heute“ je Demo-Karte, damit „Aufrufe heute“ (Übersicht) exakt zur
+ * Zeitreihe passt: 14 + 5 + 12 + 6 = 37. Neue Karten starten bei 0.
+ */
+const DEMO_TODAY: Record<string, { nfc: number; qr: number }> = {
+  'demo-baeckerei': { nfc: 14, qr: 5 },
+  'demo-barbershop': { nfc: 12, qr: 6 },
+}
+
 /** 30 Tageswerte pro Karte; die Summen entsprechen exakt card.scans.nfc / .qr. */
 export function dailySeries(card: Card, days = SERIES_DAYS): DailyPoint[] {
   const rnd = mulberry32(hashString(card.slug))
@@ -170,9 +175,25 @@ export function dailySeries(card: Card, days = SERIES_DAYS): DailyPoint[] {
   })
   const weights = () =>
     dates.map((d, i) => WEEKDAY_FACTOR[d.getDay()] * (0.8 + (0.4 * i) / (days - 1)) * (0.55 + 0.9 * rnd()))
-  const nfc = distribute(card.scans.nfc, weights())
-  const qr = distribute(card.scans.qr, weights())
+  const today = DEMO_TODAY[card.slug]
+  const fixed = today && today.nfc <= card.scans.nfc && today.qr <= card.scans.qr ? today : { nfc: 0, qr: 0 }
+  // Verteilung auf die Vortage; der letzte Tag erhält den festen Wert (Gewicht 0 für heute).
+  const spread = (total: number, today: number) => {
+    const w = weights()
+    w[days - 1] = 0
+    const out = distribute(total - today, w)
+    out[days - 1] = today
+    return out
+  }
+  const nfc = today ? spread(card.scans.nfc, fixed.nfc) : distribute(card.scans.nfc, weights())
+  const qr = today ? spread(card.scans.qr, fixed.qr) : distribute(card.scans.qr, weights())
   return dates.map((d, i) => ({ date: isoDay(d), nfc: nfc[i], qr: qr[i] }))
+}
+
+/** Summe NFC + QR des letzten Tages („heute“) über alle Karten. */
+export const scansToday = (series: DailyPoint[]) => {
+  const last = series[series.length - 1]
+  return last ? last.nfc + last.qr : 0
 }
 
 export function mergeSeries(all: DailyPoint[][]): DailyPoint[] {

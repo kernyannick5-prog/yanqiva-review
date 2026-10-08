@@ -1,9 +1,10 @@
 @import "tailwindcss";
+@import "./fonts.css";
 
 /* YANQIVA REVIEW – Design-Tokens */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 
   --color-ink-950: #05071a;   /* Seitenhintergrund */
   --color-ink-900: #070a1f;   /* Dark Navy */

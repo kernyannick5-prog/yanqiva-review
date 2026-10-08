@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useMemo, useState } from 'react'
 import { ActionButton } from '../components/ActionButton'
-import { CheckIcon } from '../components/Icons'
+import { CheckIcon, ShieldIcon } from '../components/Icons'
 import { LineChart, type ChartPoint } from '../components/LineChart'
 import { LiveFeed } from '../components/LiveFeed'
 import { Panel } from '../components/Panel'
@@ -11,7 +11,7 @@ import { StatCard } from '../components/StatCard'
 import { StatusBadge } from '../components/StatusBadge'
 import { CONVERSION_RATE, KPI_TRENDS, RATING_AVERAGE, RATING_DISTRIBUTION, REVIEWS_THIS_MONTH, REVIEW_TOTAL } from '../data'
 import type { Card, Stars, ViewId } from '../types'
-import { dailySeries, dayLabelLong, dayLabelShort, formatDecimal, formatInt, formatLastScan, mergeSeries, sumScans, totalScans } from '../utils'
+import { dailySeries, dayLabelLong, dayLabelShort, formatDecimal, formatInt, formatLastScan, mergeSeries, scansToday, sumScans, totalScans } from '../utils'
 
 interface OverviewProps {
   cards: Card[]
@@ -36,6 +36,7 @@ export function Overview({ cards, onNavigate }: OverviewProps) {
     tooltipLabel: dayLabelLong(p.date),
     value: p.nfc,
   }))
+  const today = series[series.length - 1] ?? { nfc: 0, qr: 0 }
   const rangeTotal = visible.reduce((sum, p) => sum + p.nfc, 0)
   const maxStarCount = Math.max(...Object.values(RATING_DISTRIBUTION))
 
@@ -54,7 +55,22 @@ export function Overview({ cards, onNavigate }: OverviewProps) {
         <StatCard label="Conversion" value={CONVERSION_RATE} decimals={1} suffix={' %'} delta="+2,1 Pp." hint="Bewertungsklicks je Scan" trend={KPI_TRENDS.conversion} />
       </StaggerItem>
 
-      <StaggerItem index={4} className="col-span-2 min-w-0 md:col-span-12 lg:col-span-8">
+      <StaggerItem index={4} className="col-span-2 min-w-0 md:col-span-12">
+        <div className="flex flex-col gap-2 rounded-2xl border border-line bg-white/[0.03] px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          <p className="text-sm text-muted">
+            Aufrufe heute: <span className="font-display text-lg font-semibold tabular-nums text-text">{formatInt(scansToday(series))}</span>
+            <span className="ml-2 text-xs text-faint">
+              {formatInt(today.nfc)} NFC · {formatInt(today.qr)} QR
+            </span>
+          </p>
+          <p className="flex items-center gap-1.5 text-xs text-faint">
+            <ShieldIcon className="h-3.5 w-3.5 shrink-0 text-mint" />
+            Aggregierte Zähler, keine Besucherdaten.
+          </p>
+        </div>
+      </StaggerItem>
+
+      <StaggerItem index={5} className="col-span-2 min-w-0 md:col-span-12 lg:col-span-8">
         <Panel
           title={`NFC-Taps der letzten ${range} Tage`}
           description={`${formatInt(rangeTotal)} Taps · alle Karten`}
@@ -81,7 +97,7 @@ export function Overview({ cards, onNavigate }: OverviewProps) {
         </Panel>
       </StaggerItem>
 
-      <StaggerItem index={5} className="col-span-2 min-w-0 md:col-span-6 lg:col-span-4">
+      <StaggerItem index={6} className="col-span-2 min-w-0 md:col-span-6 lg:col-span-4">
         <Panel title="Google-Bewertungen" className="h-full">
           <div className="flex items-end gap-3">
             <span className="font-display text-5xl font-semibold leading-none tabular-nums text-text">{formatDecimal(RATING_AVERAGE)}</span>
@@ -114,7 +130,7 @@ export function Overview({ cards, onNavigate }: OverviewProps) {
         </Panel>
       </StaggerItem>
 
-      <StaggerItem index={6} className="col-span-2 min-w-0 md:order-1 md:col-span-12 lg:order-none lg:col-span-8">
+      <StaggerItem index={7} className="col-span-2 min-w-0 md:order-1 md:col-span-12 lg:order-none lg:col-span-8">
         <Panel
           title="Meine Karten"
           className="h-full"
@@ -163,7 +179,7 @@ export function Overview({ cards, onNavigate }: OverviewProps) {
         </Panel>
       </StaggerItem>
 
-      <StaggerItem index={7} className="col-span-2 min-w-0 md:col-span-6 lg:col-span-4">
+      <StaggerItem index={8} className="col-span-2 min-w-0 md:col-span-6 lg:col-span-4">
         <Panel
           title="Live-Aktivität"
           className="h-full"

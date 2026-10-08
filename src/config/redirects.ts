@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 /**
  * YANQIVA Redirect-Tabelle.
  *
@@ -20,11 +21,23 @@ export interface RedirectEntry {
   business: string
   /** Ziel der Weiterleitung. Relativ = innerhalb dieser Demo-Site. */
   target: string
+  /**
+   * Beispiel der echten Geschäfts-Ziel-URL (Google-Bewertungslink), wie sie in
+   * Produktion hinterlegt wäre. NUR Anzeige im Dashboard – wird in der Demo weder
+   * verlinkt noch aufgerufen. Fiktiv (DEMO-…), verweist auf kein echtes Profil.
+   */
+  googleReviewUrl: string
   active: boolean
 }
 
-/** Öffentliche Basis der Redirect-URLs in Produktion. */
-export const PRODUCTION_REDIRECT_BASE = 'https://yanqiva.de/r/'
+/**
+ * Öffentliche Basis der Redirect-URLs in Produktion.
+ * Konfigurierbar über VITE_REDIRECT_BASE (siehe .env.example). Diese Datei wird auch
+ * im Node-Kontext der Vite-Config geladen, dort ist import.meta.env nicht gesetzt –
+ * daher optional chaining und Fallback auf process.env.
+ */
+export const PRODUCTION_REDIRECT_BASE: string =
+  import.meta.env?.VITE_REDIRECT_BASE || (typeof process !== 'undefined' ? process.env.VITE_REDIRECT_BASE : undefined) || 'https://yanqiva-bewertung.de/r/'
 
 /**
  * Demo-Ziele zeigen auf eine simulierte Bewertungsseite innerhalb dieser Site,
@@ -37,6 +50,7 @@ export const redirects: RedirectEntry[] = [
     cardId: 'YANQIVA-001',
     business: 'Bäckerei Müller',
     target: 'review-demo/?b=B%C3%A4ckerei%20M%C3%BCller',
+    googleReviewUrl: 'https://g.page/r/DEMO-BAECKEREI/review',
     active: true,
   },
   {
@@ -44,6 +58,7 @@ export const redirects: RedirectEntry[] = [
     cardId: 'YANQIVA-002',
     business: 'Barbershop Karlsruhe',
     target: 'review-demo/?b=Barbershop%20Karlsruhe',
+    googleReviewUrl: 'https://g.page/r/DEMO-BARBERSHOP/review',
     active: true,
   },
 ]
