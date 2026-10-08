@@ -17,7 +17,7 @@ const plans = [
     tagline: 'Alles aus Klassik, plus Kontrolle',
     price: 99,
     note: 'inkl. 12 Monate Dashboard, danach 15 €/Monat (monatlich kündbar). Ohne Dashboard funktioniert die Karte weiter wie Klassik.',
-    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', '12 Monate Dashboard inklusive', 'YANQIVA Dashboard', 'Statistiken zu Taps und Scans', 'Ziel-Link jederzeit änderbar', 'Einrichtung inklusive'],
+    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'YANQIVA Dashboard, 12 Monate inklusive', 'Statistiken zu Taps und Scans', 'Ziel-Link jederzeit änderbar', 'Einrichtung inklusive'],
     popular: true,
   },
 ]
