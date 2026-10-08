@@ -53,7 +53,9 @@ function StepItem({ p, index, active, layout, onSelect }: StepItemProps) {
         <span className={`mt-2 block h-0.5 w-full overflow-hidden rounded-full bg-white/10 ${column ? 'lg:ml-11 lg:w-[calc(100%-2.75rem)]' : ''}`}>
           <motion.span className="block h-full origin-left bg-mint" style={{ scaleX: bar }} />
         </span>
-        {column && <span className="mt-2 block pl-11 text-[15px] leading-relaxed text-muted">{step.text}</span>}
+        {column && (
+          <span className="mt-2 block pl-11 text-[15px] leading-relaxed text-muted [@media(max-height:800px)]:hidden">{step.text}</span>
+        )}
       </button>
     </motion.li>
   )

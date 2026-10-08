@@ -14,11 +14,14 @@ import { useActiveStep, usePlayback, type PlayStatus } from './showcase/usePlayb
 const titleClass =
   'font-display text-[clamp(1.75rem,1.1rem+3vw,3.4rem)] font-semibold leading-[1.06] tracking-[-0.03em] text-balance'
 
-function Heading() {
+/** Auf niedrigen Desktop-Fenstern: Titel zusätzlich an die Höhe koppeln, damit die Spalte in den Sticky-Bereich passt. */
+const shortTitle = '[@media(max-height:860px)]:text-[clamp(1.75rem,6.2svh,3.4rem)] [@media(max-height:860px)]:lg:mt-3'
+
+function Heading({ fitHeight = false }: { fitHeight?: boolean }) {
   return (
     <>
       <Eyebrow>Das Produkt</Eyebrow>
-      <h2 id="produkt-title" className={`mt-2.5 lg:mt-5 ${titleClass}`}>
+      <h2 id="produkt-title" className={`mt-2.5 lg:mt-5 ${titleClass} ${fitHeight ? shortTitle : ''}`}>
         <span className="block">Ein Aufsteller.</span>
         <span className="text-gradient block">Unzählige Bewertungen.</span>
       </h2>
@@ -64,10 +67,10 @@ function FullShowcase() {
     <section id="produkt" ref={sectionRef} aria-labelledby="produkt-title" className="relative h-[260vh]">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <StageBackdrop />
-        <Container className="relative grid h-full grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-center gap-10 py-24">
-          <div className="flex flex-col gap-8">
+        <Container className="relative grid h-full grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-center gap-10 pb-8 pt-24">
+          <div className="flex flex-col gap-8 [@media(max-height:860px)]:gap-5">
             <div>
-              <Heading />
+              <Heading fitHeight />
             </div>
             <StepList p={p} active={active} onSelect={scrollToStep} layout="column" />
             <Captions p={p} className="lg:min-h-[4.5rem]" />
