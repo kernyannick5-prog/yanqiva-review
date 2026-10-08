@@ -1,5 +1,4 @@
 import {
-  animate,
   motion,
   useMotionValue,
   useReducedMotion,
@@ -7,8 +6,10 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { LinkButton } from '../components/Button'
+import { lowPower } from '../lib/lowPower'
+import { useLoopVisible } from '../lib/useLoopVisible'
 import { Container } from './ui'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -49,16 +50,16 @@ function Headline({ reduce }: { reduce: boolean }) {
 }
 
 /** NFC-Wellen-Symbol mit pulsierenden Bögen. */
-function NfcWaves({ reduce, className = '' }: { reduce: boolean; className?: string }) {
+function NfcWaves({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className={className} aria-hidden>
       <circle cx="5" cy="12" r="1.4" fill="currentColor" stroke="none" />
       {[5, 9, 13].map((r, i) => (
-        <motion.path
+        <path
           key={r}
           d={`M${5 + r * 0.45} ${12 - r * 0.8}a${r} ${r} 0 0 1 0 ${r * 1.6}`}
-          animate={reduce ? undefined : { opacity: [0.25, 1, 0.25] }}
-          transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.35, ease: 'easeInOut' }}
+          className="yq-wave"
+          style={{ animationDelay: `${i * 0.35}s` }}
         />
       ))}
     </svg>
@@ -77,17 +78,9 @@ function Stars({ className = '' }: { className?: string }) {
 function NfcCard({ reduce }: { reduce: boolean }) {
   const mx = useMotionValue(0)
   const my = useMotionValue(0)
-  const idle = useMotionValue(-7)
   const sx = useSpring(mx, { stiffness: 90, damping: 18 })
   const sy = useSpring(my, { stiffness: 90, damping: 18 })
-  const rotateY = useTransform([sx, idle], ([a, b]: number[]) => a + b)
   const rotateX = useTransform(sy, (v) => 6 - v)
-
-  useEffect(() => {
-    if (reduce) return
-    const controls = animate(idle, 7, { duration: 6, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' })
-    return () => controls.stop()
-  }, [idle, reduce])
 
   useEffect(() => {
     if (reduce || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
@@ -101,12 +94,9 @@ function NfcCard({ reduce }: { reduce: boolean }) {
 
   return (
     <div className="[perspective:1200px]">
-      <motion.div
-        animate={reduce ? undefined : { y: [0, -14, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-      >
+      <div className={reduce ? '' : 'yq-card-float'} style={{ transformStyle: 'preserve-3d' }}>
         <motion.div
-          style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+          style={{ rotateX, rotateY: sx, transformStyle: 'preserve-3d' }}
           className="relative mx-auto aspect-[1.586/1] w-full max-w-[420px] overflow-hidden rounded-[22px] border border-white/15 bg-[linear-gradient(135deg,#1e1b4b_0%,#2e1065_55%,#0d1233_100%)] p-4 shadow-[0_40px_80px_-30px_rgb(139_92_246/0.6),0_0_0_1px_rgb(94_234_212/0.12)] sm:p-6"
         >
           <div aria-hidden className="absolute -right-10 -top-16 size-56 rounded-full bg-[radial-gradient(closest-side,rgb(94_234_212/0.35),transparent)]" />
@@ -118,7 +108,7 @@ function NfcCard({ reduce }: { reduce: boolean }) {
                 <span className="font-display text-sm font-bold tracking-[0.18em] sm:text-base">YANQIVA</span>
                 <span className="rounded-full border border-mint/40 px-1.5 py-px text-[8px] font-semibold uppercase tracking-widest text-mint sm:text-[9px]">Review</span>
               </div>
-              <NfcWaves reduce={reduce} className="size-7 text-mint sm:size-8" />
+              <NfcWaves className="size-7 text-mint sm:size-8" />
             </div>
 
             <div>
@@ -137,16 +127,13 @@ function NfcCard({ reduce }: { reduce: boolean }) {
           </div>
 
           {!reduce && (
-            <motion.span
+            <span
               aria-hidden
-              className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent"
-              initial={{ x: '-150%' }}
-              animate={{ x: '400%' }}
-              transition={{ duration: 2.2, ease: 'easeInOut', repeat: Infinity, repeatDelay: 3.5 }}
+              className="yq-sweep pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent"
             />
           )}
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   )
 }
@@ -154,14 +141,15 @@ function NfcCard({ reduce }: { reduce: boolean }) {
 /** Hero-Abschnitt mit Headline, CTAs und virtueller NFC-Karte. */
 export function Hero() {
   const reduce = useReducedMotion() ?? false
-  const ref = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const cardY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -50])
-  const chipA = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -110])
-  const chipB = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 70])
+  const loop = useLoopVisible<HTMLElement>()
+  const parallax = !reduce && !lowPower
+  const { scrollYProgress } = useScroll({ target: loop, offset: ['start start', 'end start'] })
+  const cardY = useTransform(scrollYProgress, [0, 1], [0, parallax ? -50 : 0])
+  const chipA = useTransform(scrollYProgress, [0, 1], [0, parallax ? -110 : 0])
+  const chipB = useTransform(scrollYProgress, [0, 1], [0, parallax ? 70 : 0])
 
   return (
-    <section id="top" ref={ref} className="relative overflow-x-clip pb-20 pt-32 sm:pt-40 lg:pb-32">
+    <section id="top" ref={loop} className="relative overflow-x-clip pb-20 pt-32 sm:pt-40 lg:pb-32">
       <Container className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
         <div>
           <motion.p

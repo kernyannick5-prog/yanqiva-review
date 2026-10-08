@@ -1,6 +1,7 @@
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
 import { useCallback, useState } from 'react'
 import { Reveal } from '../components/Reveal'
+import { useLoopVisible } from '../lib/useLoopVisible'
 import { AccountChip } from './components/AccountChip'
 import { LockIcon } from './components/Icons'
 import { Toast, type ToastMessage } from './components/Toast'
@@ -21,6 +22,7 @@ export function DashboardDemo() {
   const [view, setView] = useState<ViewId>('overview')
   const [statsCard, setStatsCard] = useState('all')
   const [toast, setToast] = useState<ToastMessage | null>(null)
+  const loop = useLoopVisible<HTMLElement>()
 
   const notify = useCallback((text: string) => setToast({ id: Date.now(), text }), [])
   const dismissToast = useCallback(() => setToast(null), [])
@@ -45,7 +47,7 @@ export function DashboardDemo() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <section id="demo" className="relative py-20 sm:py-28">
+      <section id="demo" ref={loop} className="relative overflow-x-clip py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mint">Interaktive Demo</p>
@@ -63,12 +65,12 @@ export function DashboardDemo() {
 
           <motion.div
             className="relative mt-10 sm:mt-14"
-            initial={{ opacity: 0, y: 80, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.08 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div aria-hidden className="pointer-events-none absolute -inset-x-3 -inset-y-10 sm:-inset-x-6 -z-10 rounded-[3rem] bg-violet-glow/15 blur-3xl" />
+            <div aria-hidden className="pointer-events-none absolute -inset-x-10 -inset-y-24 sm:-inset-x-16 -z-10 bg-[radial-gradient(closest-side,rgb(139_92_246/0.17),transparent)]" />
             <div className="glass relative overflow-hidden rounded-2xl sm:rounded-3xl">
               <div className="flex items-center gap-3 border-b border-line bg-ink-950/40 px-4 py-3">
                 <div aria-hidden className="flex shrink-0 gap-1.5">

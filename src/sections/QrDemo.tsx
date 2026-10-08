@@ -1,7 +1,8 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { useReducedMotion } from 'framer-motion'
 import { LinkButton } from '../components/Button'
 import { QrCode } from '../components/QrCode'
 import { Reveal } from '../components/Reveal'
+import { useLoopVisible } from '../lib/useLoopVisible'
 import { demoRedirectUrl, productionRedirectUrl } from '../lib/redirectUrl'
 import { Container, Eyebrow, sectionTitle } from './ui'
 
@@ -12,11 +13,7 @@ function Connector({ reduce }: { reduce: boolean }) {
   return (
     <div aria-hidden className="relative mx-auto h-9 w-px bg-gradient-to-b from-mint/60 to-violet-glow/60">
       {!reduce && (
-        <motion.span
-          className="absolute -left-[3px] top-0 size-[7px] rounded-full bg-mint shadow-[0_0_10px_var(--color-mint)]"
-          animate={{ y: [0, 29], opacity: [0, 1, 1, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
-        />
+        <span className="yq-dot absolute -left-[3px] top-0 size-[7px] rounded-full bg-mint shadow-[0_0_10px_var(--color-mint)]" />
       )}
     </div>
   )
@@ -49,9 +46,10 @@ function RedirectDiagram({ reduce }: { reduce: boolean }) {
 /** Abschnitt mit echtem QR-Code und Redirect-Erklärung. */
 export function QrDemo() {
   const reduce = useReducedMotion() ?? false
+  const loop = useLoopVisible<HTMLElement>()
 
   return (
-    <section id="qr" className="relative overflow-hidden py-20 sm:py-28" aria-labelledby="qr-title">
+    <section id="qr" ref={loop} className="relative overflow-hidden py-20 sm:py-28" aria-labelledby="qr-title">
       <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <Reveal className="mx-auto w-full max-w-[340px] lg:mx-0">
           <div className="relative rounded-[2rem] p-3 shadow-[0_0_80px_-10px_rgb(94_234_212/0.35)]">
@@ -61,12 +59,7 @@ export function QrDemo() {
                 <QrCode value={demoRedirectUrl(SLUG)} size={300} className="!h-auto !w-full aspect-square" />
                 {!reduce && (
                   <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
-                    <motion.div
-                      className="h-full w-full border-b-2 border-mint bg-gradient-to-b from-transparent to-mint/30 shadow-[0_8px_20px_rgb(94_234_212/0.5)]"
-                      initial={{ y: '-100%' }}
-                      animate={{ y: ['-100%', '0%', '-100%'] }}
-                      transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-                    />
+                    <div className="yq-scan h-full w-full border-b-2 border-mint bg-gradient-to-b from-transparent to-mint/30 shadow-[0_8px_20px_rgb(94_234_212/0.5)]" />
                   </div>
                 )}
               </div>

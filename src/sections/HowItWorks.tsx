@@ -1,26 +1,23 @@
-import { motion, useInView, useReducedMotion, useScroll, useSpring } from 'framer-motion'
-import { useRef, type ReactNode } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
+import { useRef, type CSSProperties, type ReactNode } from 'react'
+import { useLoopVisible } from '../lib/useLoopVisible'
 import { Reveal } from '../components/Reveal'
 import { Container, Eyebrow, sectionTitle } from './ui'
 
-/** Rahmen für eine Mini-Illustration; startet Animationen nur im Sichtbereich. */
-function Stage({ children }: { children: (active: boolean, reduce: boolean) => ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { margin: '-40px' })
-  const reduce = useReducedMotion() ?? false
+/** Rahmen für eine Mini-Illustration; die CSS-Loops pausieren, solange sie offscreen ist. */
+function Stage({ children }: { children: ReactNode }) {
+  const loop = useLoopVisible()
   return (
     <div
-      ref={ref}
+      ref={loop}
       aria-hidden
       className="relative grid h-44 place-items-center overflow-hidden rounded-2xl border border-line bg-ink-900/60"
     >
       <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_100%,rgb(139_92_246/0.22),transparent)]" />
-      {children(inView && !reduce, reduce)}
+      {children}
     </div>
   )
 }
-
-const loop = { repeat: Infinity, ease: 'easeInOut' as const }
 
 function MiniCard({ className = '' }: { className?: string }) {
   return (
@@ -35,20 +32,13 @@ function MiniCard({ className = '' }: { className?: string }) {
 function IllustrationStand() {
   return (
     <Stage>
-      {(active, reduce) => (
-        <div className="relative flex h-32 w-28 items-end justify-center">
-          <motion.div
-            className="absolute bottom-3"
-            animate={active ? { y: [40, 0, 0, 40], opacity: [0, 1, 1, 0] } : reduce ? { y: 0, opacity: 1 } : undefined}
-            initial={{ y: reduce ? 0 : 40, opacity: reduce ? 1 : 0 }}
-            transition={{ ...loop, duration: 4.5, times: [0, 0.3, 0.85, 1] }}
-          >
-            <MiniCard className="origin-bottom -rotate-6" />
-          </motion.div>
-          <div className="relative z-10 h-5 w-28 rounded-md border border-white/15 bg-ink-700" />
-          <div aria-hidden className="absolute -bottom-1 h-4 w-24 rounded-full bg-violet-glow/40 blur-md" />
+      <div className="relative flex h-32 w-28 items-end justify-center">
+        <div className="yq-stand absolute bottom-3">
+          <MiniCard className="origin-bottom -rotate-6" />
         </div>
-      )}
+        <div className="relative z-10 h-5 w-28 rounded-md border border-white/15 bg-ink-700" />
+        <div aria-hidden className="absolute -bottom-1 h-8 w-32 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.45),transparent)]" />
+      </div>
     </Stage>
   )
 }
@@ -57,29 +47,20 @@ function IllustrationStand() {
 function IllustrationTap() {
   return (
     <Stage>
-      {(active, reduce) => (
-        <div className="relative flex w-full max-w-[220px] items-center justify-between px-4">
-          <motion.div
-            className="relative z-10 h-24 w-12 rounded-xl border border-white/20 bg-ink-800 p-1"
-            initial={{ x: reduce ? 50 : 0 }}
-            animate={active ? { x: [0, 56, 56, 0] } : undefined}
-            transition={{ ...loop, duration: 4.5, times: [0, 0.35, 0.8, 1] }}
-          >
-            <div className="h-full w-full rounded-lg bg-gradient-to-b from-indigo-deep to-violet-dark" />
-            <span className="absolute left-1/2 top-1.5 h-1 w-4 -translate-x-1/2 rounded-full bg-ink-950" />
-          </motion.div>
-          {[0, 1].map((i) => (
-            <motion.span
-              key={i}
-              className="absolute right-[74px] top-1/2 size-14 -translate-y-1/2 rounded-full border border-mint"
-              initial={{ opacity: 0, scale: 0.4 }}
-              animate={active ? { opacity: [0, 0.9, 0], scale: [0.4, 1.6, 1.9] } : undefined}
-              transition={{ duration: 1.8, repeat: Infinity, delay: 1.2 + i * 0.6, repeatDelay: 1.2 }}
-            />
-          ))}
-          <MiniCard className="rotate-3" />
+      <div className="relative flex w-full max-w-[220px] items-center justify-between px-4">
+        <div className="yq-phone relative z-10 h-24 w-12 rounded-xl border border-white/20 bg-ink-800 p-1">
+          <div className="h-full w-full rounded-lg bg-gradient-to-b from-indigo-deep to-violet-dark" />
+          <span className="absolute left-1/2 top-1.5 h-1 w-4 -translate-x-1/2 rounded-full bg-ink-950" />
         </div>
-      )}
+        {[0, 1].map((i) => (
+          <span
+            key={i}
+            className="yq-ripple absolute right-[74px] top-1/2 size-14 -translate-y-1/2 rounded-full border border-mint"
+            style={{ animationDelay: `${1.2 + i * 0.6}s` }}
+          />
+        ))}
+        <MiniCard className="rotate-3" />
+      </div>
     </Stage>
   )
 }
@@ -88,25 +69,19 @@ function IllustrationTap() {
 function IllustrationStars() {
   return (
     <Stage>
-      {(active, reduce) => (
-        <div className="flex gap-1.5">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <span key={i} className="relative block size-8">
-              <svg viewBox="0 0 24 24" className="absolute inset-0 text-white/15" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
-              <motion.svg
-                viewBox="0 0 24 24"
-                className="absolute inset-0 text-amber-300 drop-shadow-[0_0_8px_rgb(252_211_77/0.6)]"
-                fill="currentColor"
-                initial={{ opacity: reduce ? 1 : 0, scale: reduce ? 1 : 0.5 }}
-                animate={active ? { opacity: [0, 0, 1, 1, 0], scale: [0.5, 0.5, 1.15, 1, 0.5] } : undefined}
-                transition={{ duration: 4.5, repeat: Infinity, times: [0, 0.08 + i * 0.1, 0.18 + i * 0.1, 0.9, 1] }}
-              >
+      <div className="flex gap-1.5">
+        {[0, 1, 2, 3, 4].map((i) => (
+          <span key={i} className="relative block size-8">
+            <svg viewBox="0 0 24 24" className="absolute inset-0 text-white/15" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
+            <span className="yq-star absolute inset-0" style={{ '--yq-star': `yq-star-${i}` } as CSSProperties}>
+              <span aria-hidden className="absolute -inset-2 rounded-full bg-[radial-gradient(closest-side,rgb(252_211_77/0.45),transparent)]" />
+              <svg viewBox="0 0 24 24" className="relative size-full text-amber-300" fill="currentColor">
                 <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" />
-              </motion.svg>
+              </svg>
             </span>
-          ))}
-        </div>
-      )}
+          </span>
+        ))}
+      </div>
     </Stage>
   )
 }

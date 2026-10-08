@@ -1,18 +1,16 @@
-import { motion, useReducedMotion } from 'framer-motion'
 import { LinkButton } from '../components/Button'
 import { Reveal } from '../components/Reveal'
+import { useLoopVisible } from '../lib/useLoopVisible'
 import { Container, Eyebrow } from './ui'
 
 /** Abschluss-CTA mit starkem Glow. */
 export function FinalCta() {
-  const reduce = useReducedMotion()
+  const loop = useLoopVisible<HTMLElement>()
   return (
-    <section id="cta" className="relative overflow-hidden py-24 sm:py-32" aria-labelledby="cta-title">
+    <section id="cta" ref={loop} className="relative overflow-hidden py-24 sm:py-32" aria-labelledby="cta-title">
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <motion.div
-          className="absolute left-1/2 top-1/2 h-[60vmax] w-[60vmax] max-w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.45),rgb(46_16_101/0.2)_55%,transparent)]"
-          animate={reduce ? undefined : { scale: [1, 1.08, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        <div
+          className="yq-breathe absolute left-1/2 top-1/2 h-[60vmax] w-[60vmax] max-w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.45),rgb(46_16_101/0.2)_55%,transparent)]"
         />
         <div className="absolute left-1/2 top-1/2 h-[30vmax] w-[40vmax] max-w-[600px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(closest-side,rgb(94_234_212/0.22),transparent)]" />
       </div>

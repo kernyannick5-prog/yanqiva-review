@@ -1,22 +1,10 @@
 import { useRef, useState } from 'react'
 import { useInView, useMotionValue, useScroll, useSpring } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
+import { lowPower } from '../lib/lowPower'
 import { Container, Eyebrow } from './ui'
 import { Scene } from './showcase/Scene'
 import { Captions, StepList } from './showcase/Steps'
-
-/**
- * Schwache Geräte / Nutzerpräferenz -> Lite-Modus (keine Scroll-Choreografie).
- * Einmalig beim Start ermittelt (reine Client-App).
- */
-function detectLite(): boolean {
-  if (typeof window === 'undefined') return false
-  const nav = navigator as Navigator & { deviceMemory?: number }
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  const cores = nav.hardwareConcurrency
-  const memory = nav.deviceMemory
-  return reduced || (typeof cores === 'number' && cores > 0 && cores <= 2) || (typeof memory === 'number' && memory <= 2)
-}
 
 const titleClass =
   'font-display text-[clamp(1.6rem,6.6vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-balance'
@@ -111,6 +99,6 @@ function LiteShowcase() {
 }
 
 export function ProductShowcase() {
-  const [lite] = useState(detectLite)
+  const [lite] = useState(lowPower)
   return lite ? <LiteShowcase /> : <FullShowcase />
 }

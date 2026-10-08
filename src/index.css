@@ -40,10 +40,8 @@ body {
 
 /* Glas-Oberfläche */
 @utility glass {
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02));
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.025)), rgb(13 18 51 / 0.55);
   border: 1px solid var(--color-line);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
   box-shadow: var(--shadow-card);
 }
 
@@ -77,3 +75,75 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Endlos-Animationen (Compositor: nur transform/opacity). Pausiert, solange der Container
+   offscreen ist (data-loop="off", siehe useLoopVisible) bzw. im Low-Power-Modus abgeschaltet. */
+@keyframes yq-card-float {
+  0%   { transform: translateY(0) rotateY(-7deg); }
+  25%  { transform: translateY(-14px) rotateY(0deg); }
+  50%  { transform: translateY(0) rotateY(7deg); }
+  75%  { transform: translateY(-14px) rotateY(0deg); }
+  100% { transform: translateY(0) rotateY(-7deg); }
+}
+@keyframes yq-sweep {
+  0%   { translate: -150% 0; }
+  38%  { translate: 400% 0; }
+  100% { translate: 400% 0; }
+}
+@keyframes yq-wave {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 1; }
+}
+@keyframes yq-breathe {
+  0%, 100% { scale: 1; }
+  50%      { scale: 1.08; }
+}
+@keyframes yq-scan {
+  0%, 100% { transform: translateY(-100%); }
+  50%      { transform: translateY(0); }
+}
+@keyframes yq-dot {
+  0%   { transform: translateY(0); opacity: 0; }
+  30%  { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { transform: translateY(29px); opacity: 0; }
+}
+.yq-card-float { animation: yq-card-float 12s ease-in-out infinite; }
+.yq-sweep      { translate: -150% 0; animation: yq-sweep 5.7s ease-in-out infinite; }
+.yq-wave       { animation: yq-wave 2.4s ease-in-out infinite; }
+.yq-breathe    { animation: yq-breathe 8s ease-in-out infinite; }
+.yq-scan       { transform: translateY(-100%); animation: yq-scan 3.2s ease-in-out infinite; }
+.yq-dot        { opacity: 0; animation: yq-dot 1.6s linear infinite; }
+
+[data-loop='off'], [data-loop='off'] * { animation-play-state: paused !important; }
+html[data-lowpower] .yq-card-float, html[data-lowpower] .yq-sweep, html[data-lowpower] .yq-wave,
+html[data-lowpower] .yq-breathe, html[data-lowpower] .yq-scan, html[data-lowpower] .yq-dot,
+html[data-lowpower] .animate-ping { animation: none !important; }
+
+/* HowItWorks-Illustrationen (CSS statt JS-Loops). Basis-Stil = fertiger, statischer Zustand. */
+@keyframes yq-stand {
+  0%   { translate: 0 40px; opacity: 0; }
+  30%, 85% { translate: 0 0; opacity: 1; }
+  100% { translate: 0 40px; opacity: 0; }
+}
+@keyframes yq-phone {
+  0%   { translate: 0 0; }
+  35%, 80% { translate: 56px 0; }
+  100% { translate: 0 0; }
+}
+@keyframes yq-ripple {
+  0%   { opacity: 0; scale: 0.4; }
+  30%  { opacity: 0.9; scale: 1.6; }
+  60%, 100% { opacity: 0; scale: 1.9; }
+}
+.yq-stand  { animation: yq-stand 4.5s ease-in-out infinite both; }
+.yq-phone  { translate: 50px 0; animation: yq-phone 4.5s ease-in-out infinite both; }
+.yq-ripple { opacity: 0; animation: yq-ripple 3s ease-out infinite backwards; }
+.yq-star   { animation: var(--yq-star) 4.5s linear infinite both; }
+@keyframes yq-star-0 { 0%, 8% { opacity: 0; scale: 0.5; } 18% { opacity: 1; scale: 1.15; } 90% { opacity: 1; scale: 1; } 100% { opacity: 0; scale: 0.5; } }
+@keyframes yq-star-1 { 0%, 18% { opacity: 0; scale: 0.5; } 28% { opacity: 1; scale: 1.15; } 90% { opacity: 1; scale: 1; } 100% { opacity: 0; scale: 0.5; } }
+@keyframes yq-star-2 { 0%, 28% { opacity: 0; scale: 0.5; } 38% { opacity: 1; scale: 1.15; } 90% { opacity: 1; scale: 1; } 100% { opacity: 0; scale: 0.5; } }
+@keyframes yq-star-3 { 0%, 38% { opacity: 0; scale: 0.5; } 48% { opacity: 1; scale: 1.15; } 90% { opacity: 1; scale: 1; } 100% { opacity: 0; scale: 0.5; } }
+@keyframes yq-star-4 { 0%, 48% { opacity: 0; scale: 0.5; } 58% { opacity: 1; scale: 1.15; } 90% { opacity: 1; scale: 1; } 100% { opacity: 0; scale: 0.5; } }
+html[data-lowpower] .yq-stand, html[data-lowpower] .yq-phone, html[data-lowpower] .yq-ripple,
+html[data-lowpower] .yq-star { animation: none !important; }
