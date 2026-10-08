@@ -28,11 +28,11 @@ export function Toggle({ id, checked, onChange, label, description }: ToggleProp
         aria-labelledby={`${id}-label`}
         aria-describedby={`${id}-desc`}
         onClick={onChange}
-        className={`relative flex h-11 w-[60px] shrink-0 items-center justify-center`}
+        className="group relative flex h-11 w-[60px] shrink-0 items-center justify-center"
       >
         <span
           aria-hidden
-          className={`relative h-7 w-12 rounded-full border transition-colors duration-200 ${
+          className={`relative h-7 w-12 rounded-full border transition-[color,background-color,border-color,transform] duration-200 group-active:scale-95 ${
             checked ? 'border-mint/60 bg-mint/30' : 'border-line bg-white/[0.06]'
           }`}
         >

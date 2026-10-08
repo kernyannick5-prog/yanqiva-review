@@ -12,7 +12,7 @@ const external = [
 ]
 
 const linkClass =
-  '-mx-2 inline-flex min-h-11 items-center rounded-lg px-2 text-[15px] text-muted transition-colors hover:text-text'
+  '-mx-2 inline-flex min-h-11 items-center rounded-lg px-2 text-[15px] text-muted transition-colors hover:text-text active:text-mint'
 
 /** Seitenfuß. */
 export function Footer() {

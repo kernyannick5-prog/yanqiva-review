@@ -57,8 +57,8 @@ export function Sidebar({ view, onChange, cardCount }: SidebarProps) {
               type="button"
               onClick={() => onChange(id)}
               aria-current={active ? 'page' : undefined}
-              className={`relative flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-xl px-3.5 text-sm font-medium transition-colors duration-200 focus-visible:outline-offset-[-2px] lg:w-full ${
-                active ? 'text-text' : 'text-muted hover:bg-white/[0.04] hover:text-text'
+              className={`relative flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-xl px-3.5 text-sm font-medium transition-[color,background-color,transform] duration-200 active:scale-[0.97] focus-visible:outline-offset-[-2px] lg:w-full ${
+                active ? 'text-text' : 'text-muted hover:bg-white/[0.04] hover:text-text active:bg-white/[0.08]'
               }`}
             >
               {active && (

@@ -31,7 +31,7 @@ export function Pricing() {
           <SectionHead
             eyebrow="Preise"
             id="pricing-title"
-            lead="Einmal zahlen, sofort loslegen. Das Dashboard ist 12 Monate inklusive, danach optional für 15 €/Monat. Die Karte funktioniert auch ohne. Mehrere Karten oder Filialen auf Anfrage."
+            lead="Das Dashboard ist 12 Monate inklusive, danach optional für 15 €/Monat. Die Karte funktioniert auch ohne. Mehrere Karten oder Filialen auf Anfrage."
           >
             Einmal zahlen. Sofort loslegen.
           </SectionHead>

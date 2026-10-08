@@ -76,14 +76,14 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
             </motion.div>
 
             {/* Bewertungsmaske */}
-            <motion.div className="absolute inset-0 flex flex-col px-3.5 pb-4 pt-9" style={{ opacity: formOpacity }}>
+            <motion.div className="absolute inset-0 flex flex-col px-3 pb-4 pt-9" style={{ opacity: formOpacity }}>
               <div className="flex items-center gap-2">
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-mint to-violet-glow font-display text-[14px] font-bold text-ink-950">
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gradient-to-br from-mint to-violet-glow font-display text-[14px] font-bold text-ink-950">
                   B
                 </span>
                 <span className="min-w-0 text-left">
-                  <span className="block truncate font-display text-[12.5px] font-semibold leading-tight text-text">Bäckerei Müller</span>
-                  <span className="block text-[11px] leading-tight text-muted">Google Bewertung</span>
+                  <span className="block truncate font-display text-[11px] font-semibold leading-tight tracking-tight text-text">Bäckerei Müller</span>
+                  <span className="block whitespace-nowrap text-[10.5px] leading-tight text-muted">Google Bewertung</span>
                 </span>
               </div>
               <p className="mt-4 text-center font-display text-[14.5px] font-semibold text-text">Wie war dein Besuch?</p>
@@ -106,7 +106,7 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
                   Senden
                 </motion.div>
                 <motion.div
-                  className="absolute inset-0 grid place-items-center whitespace-nowrap rounded-full bg-mint text-[11.5px] font-semibold tracking-tight text-ink-950"
+                  className="absolute inset-0 grid place-items-center whitespace-nowrap rounded-full bg-mint text-[10.5px] font-semibold tracking-tight text-ink-950"
                   style={{ opacity: sentOpacity, scale: sentScale }}
                 >
                   Bewertung gesendet ✓

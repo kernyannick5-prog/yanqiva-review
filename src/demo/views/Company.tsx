@@ -5,6 +5,19 @@ import { COMPANY_META } from '../data'
 import type { Card } from '../types'
 import { formatDecimal, formatInt, initials, redirectDisplay } from '../utils'
 
+/** Redirect-URLs nur vor „/r/…“ umbrechen, nie am Bindestrich im Slug. */
+function renderValue(value: string) {
+  const i = value.indexOf('/r/')
+  if (i < 0) return value
+  return (
+    <>
+      {value.slice(0, i)}
+      <wbr />
+      <span className="whitespace-nowrap">{value.slice(i)}</span>
+    </>
+  )
+}
+
 export function Company({ cards }: { cards: Card[] }) {
   return (
     <div className="space-y-4">
@@ -43,7 +56,7 @@ export function Company({ cards }: { cards: Card[] }) {
                   {rows.map((row) => (
                     <div key={row.label} className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-3">
                       <dt className="text-faint">{row.label}</dt>
-                      <dd className="break-words text-text">{row.value}</dd>
+                      <dd className="break-words text-text">{renderValue(row.value)}</dd>
                     </div>
                   ))}
                 </dl>

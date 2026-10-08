@@ -44,7 +44,7 @@ export function Navbar() {
             : 'h-16 border-transparent bg-transparent'
         }`}
       >
-        <a href="#top" onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-2.5" aria-label="YANQIVA REVIEW – zum Seitenanfang">
+        <a href="#top" onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-2.5 transition-opacity active:opacity-70" aria-label="YANQIVA REVIEW – zum Seitenanfang">
           <span className="font-display text-lg font-bold tracking-[0.12em] text-text">YANQIVA</span>
           <span className="rounded-full border border-mint/40 bg-mint/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-widest text-mint">Review</span>
         </a>
@@ -52,7 +52,7 @@ export function Navbar() {
         <ul className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="inline-flex min-h-11 items-center rounded-full px-4 text-sm text-muted transition-colors hover:text-text">
+              <a href={l.href} className="inline-flex min-h-11 items-center rounded-full px-4 text-sm text-muted transition-colors hover:text-text active:bg-white/[0.08] active:text-text">
                 {l.label}
               </a>
             </li>
@@ -65,7 +65,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="relative flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] md:hidden"
+          className="relative flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] transition-[transform,background-color] active:scale-95 active:bg-white/[0.12] md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
@@ -98,7 +98,7 @@ export function Navbar() {
                   transition={{ delay: reduce ? 0 : 0.06 * i + 0.05, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   className="border-b border-line"
                 >
-                  <a href={l.href} onClick={() => setOpen(false)} className="flex min-h-14 items-center font-display text-3xl font-semibold tracking-tight">
+                  <a href={l.href} onClick={() => setOpen(false)} className="flex min-h-14 items-center font-display text-3xl font-semibold tracking-tight transition-colors active:text-mint">
                     {l.label}
                   </a>
                 </motion.li>

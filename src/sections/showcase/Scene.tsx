@@ -13,6 +13,7 @@ import { Phone } from './Phone'
 import {
   NFC_CENTER_Y,
   SCENE_H,
+  SCENE_H_USED,
   SCENE_W_NARROW,
   SCENE_W_WIDE,
   WIDE_BREAKPOINT,
@@ -53,7 +54,7 @@ export function Scene({ p, lite = false }: SceneProps) {
       if (!w || !h) return
       const wide = w >= WIDE_BREAKPOINT ? 1 : 0
       k.set(wide)
-      scale.set(Math.min(1.3, w / (wide ? SCENE_W_WIDE : SCENE_W_NARROW), h / SCENE_H))
+      scale.set(Math.min(1.3, w / (wide ? SCENE_W_WIDE : SCENE_W_NARROW), h / SCENE_H_USED))
     }
     measure()
     const ro = new ResizeObserver(measure)
@@ -83,7 +84,7 @@ export function Scene({ p, lite = false }: SceneProps) {
   const standRotX = useCombine(baseRotX, my, (a, b) => a - b * 6)
   const glareX = useTransform(standRotY, [-45, 0, 14], [-110, 70, 200], { clamp: true })
 
-  const standX = useCombine(p, k, (pv, kv) => map(pv, [0, 0.3, 0.6, 1], [0, 0, -(60 + 60 * kv), -(60 + 60 * kv)]))
+  const standX = useCombine(p, k, (pv, kv) => map(pv, [0, 0.3, 0.6, 1], [0, 0, -(78 + 42 * kv), -(78 + 42 * kv)]))
 
   // Boden: weicher Schatten, scale/opacity folgen der Rotation
   const shadowScale = useTransform(standRotY, [-40, 0, 40], [1.14, 1, 1.14], { clamp: true })
@@ -105,9 +106,9 @@ export function Scene({ p, lite = false }: SceneProps) {
   ]
 
   // Smartphone fährt von rechts/unten heran (35–60 %)
-  const phoneEndX = useTransform(k, (kv) => 108 + 22 * kv)
+  const phoneEndX = useTransform(k, (kv) => 123 + 7 * kv + 4 + 6 * kv)
   const phoneWrapX = useCombine(p, k, (pv, kv) =>
-    map(pv, [0, 0.33, 0.6, 1], [330 + 250 * kv, 330 + 250 * kv, 108 + 22 * kv, 108 + 22 * kv]),
+    map(pv, [0, 0.33, 0.6, 1], [330 + 250 * kv, 330 + 250 * kv, 123 + 7 * kv, 127 + 13 * kv]),
   )
   const phoneWrapY = useTransform(p, (v) => map(v, [0, 0.33, 0.6], [240, 240, -10]))
   const phoneOpacity = useTransform(p, [0.33, 0.42], [0, 1])

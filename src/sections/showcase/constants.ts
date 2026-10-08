@@ -4,7 +4,9 @@ export const P3D = '[transform-style:preserve-3d] [-webkit-transform-style:prese
 /** Logische Szenengröße (px); wird per Skalierung an die Bühne angepasst. */
 export const SCENE_H = 500
 export const SCENE_W_WIDE = 700
-export const SCENE_W_NARROW = 392
+export const SCENE_W_NARROW = 450
+/** Tatsächlich genutzte Höhe (Chip bis Bodenschatten), für die Skalierung. */
+export const SCENE_H_USED = 430
 
 /** Breite der Szenenfläche, ab der das breite Layout gilt. */
 export const WIDE_BREAKPOINT = 560
@@ -21,9 +23,29 @@ export const STEPS = [
   { title: 'Bewerten', text: 'Die Google-Bewertungsseite öffnet sich direkt, in unter 10 Sekunden.' },
 ] as const
 
-/** Scroll-Fenster (0..1) der drei Schritte. */
+/** Fortschrittsfenster (0..1) der drei Schritte. */
 export const STEP_WINDOWS: ReadonlyArray<readonly [number, number]> = [
   [0, 0.35],
-  [0.35, 0.62],
-  [0.62, 1],
+  [0.35, 0.68],
+  [0.68, 1],
 ]
+
+/** Schlüsselmomente je Schritt: Frontansicht, Tap (Wellen), Ergebnis. */
+export const STEP_TARGETS: readonly number[] = [0.33, 0.64, 1]
+
+/** Zeitplan der Abspiel-Animation (Touch): [Fortschritt, Sekunde]. Gleiche Werte = Haltepunkt. */
+export const TIMELINE: ReadonlyArray<readonly [number, number]> = [
+  [0, 0],
+  [0.33, 1.5], // Frontansicht
+  [0.33, 2.0],
+  [0.64, 3.3], // Tap
+  [0.64, 3.9],
+  [0.76, 4.9], // Sterne
+  [0.76, 5.4],
+  [1, 6.6], // Ergebnis
+]
+
+/** Aktiver Schritt (0..2) zu einem Fortschrittswert. */
+export function stepAt(v: number): number {
+  return v < STEP_WINDOWS[1][0] ? 0 : v < STEP_WINDOWS[2][0] ? 1 : 2
+}

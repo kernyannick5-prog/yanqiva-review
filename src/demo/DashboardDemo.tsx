@@ -92,7 +92,7 @@ export function DashboardDemo() {
               <div className="grid grid-cols-1 lg:grid-cols-[14.5rem_minmax(0,1fr)]">
                 <Sidebar view={view} onChange={navigate} cardCount={cards.length} />
 
-                <div className="min-h-[34rem] min-w-0 p-4 sm:p-6 lg:min-h-[40rem] lg:p-7">
+                <div className="min-w-0 p-4 sm:min-h-[34rem] sm:p-6 lg:min-h-[40rem] lg:p-7">
                   <div className="mb-5 flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <h3 className="font-display text-xl font-semibold text-text sm:text-2xl">{meta.title}</h3>

@@ -98,7 +98,7 @@ export function Modal({ titleId, title, onClose, children }: ModalProps) {
             type="button"
             onClick={onClose}
             aria-label="Schließen"
-            className="-mr-2 -mt-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-white/[0.08] hover:text-text"
+            className="-mr-2 -mt-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted transition-[color,background-color,transform] hover:bg-white/[0.08] hover:text-text active:scale-90 active:bg-white/[0.14]"
           >
             <CloseIcon className="h-5 w-5" />
           </button>

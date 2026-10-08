@@ -39,18 +39,17 @@ export function ProblemSolution() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: '-80px' }}
-              className="mt-6 space-y-3"
+              className="mt-6 space-y-2"
             >
               {before.map((s, i) => (
                 <motion.li
                   key={s}
                   variants={itemVariants}
-                  className="flex min-h-12 items-center gap-3 rounded-xl border border-dashed border-white/10 px-4 text-[15px] text-faint"
-                  style={{ marginLeft: i % 2 ? 10 : 0 }}
+                  className="flex min-h-11 items-center gap-3 border-l-2 border-dashed border-white/15 pl-4 text-[15px] text-faint"
+
                 >
                   <span aria-hidden className="grid size-6 shrink-0 place-items-center rounded-full border border-white/10 text-xs">{i + 1}</span>
                   {s}
-                  {i < before.length - 1 && <span aria-hidden className="ml-auto text-white/20">↓</span>}
                 </motion.li>
               ))}
             </motion.ol>
@@ -69,22 +68,21 @@ export function ProblemSolution() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: '-80px' }}
-              className="relative mt-6 space-y-3"
+              className="relative mt-6 space-y-2"
             >
               {after.map((s, i) => (
                 <motion.li
                   key={s}
                   variants={itemVariants}
-                  className="flex min-h-12 items-center gap-3 rounded-xl border border-mint/30 bg-mint/[0.07] px-4 text-[15px] font-medium text-text"
+                  className="flex min-h-11 items-center gap-3 border-l-2 border-mint/60 pl-4 text-[15px] font-medium text-text"
                 >
                   <span aria-hidden className="grid size-6 shrink-0 place-items-center rounded-full bg-mint text-xs font-bold text-ink-950">{i + 1}</span>
                   {s}
-                  <span aria-hidden className="ml-auto text-mint">↓</span>
                 </motion.li>
               ))}
               <motion.li
                 variants={itemVariants}
-                className="flex min-h-12 items-center gap-3 rounded-xl bg-mint px-4 text-[15px] font-semibold text-ink-950 shadow-[0_0_30px_-4px_rgb(94_234_212/0.7)]"
+                className="flex min-h-11 items-center gap-3 rounded-xl border border-mint/40 bg-mint/[0.12] px-4 text-[15px] font-semibold text-mint"
               >
                 <svg viewBox="0 0 24 24" className="size-6 shrink-0" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <motion.path

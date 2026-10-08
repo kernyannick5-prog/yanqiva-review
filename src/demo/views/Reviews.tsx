@@ -27,7 +27,7 @@ export function Reviews({ cards }: { cards: Card[] }) {
                 type="button"
                 aria-pressed={filter === f}
                 onClick={() => setFilter(f)}
-                className={`min-h-11 rounded-full border px-4 text-sm font-medium transition-colors ${
+                className={`min-h-11 rounded-full border px-4 text-sm font-medium transition-[color,background-color,border-color,transform] active:scale-[0.96] ${
                   filter === f
                     ? 'border-mint/50 bg-mint/15 text-mint'
                     : 'border-line bg-white/[0.03] text-muted hover:border-mint/30 hover:text-text'

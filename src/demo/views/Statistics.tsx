@@ -48,7 +48,7 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
               type="button"
               aria-pressed={current === opt.id}
               onClick={() => onSelect(opt.id)}
-              className={`min-h-11 max-w-full truncate rounded-full border px-4 text-sm font-medium transition-colors ${
+              className={`min-h-11 max-w-full truncate rounded-full border px-4 text-sm font-medium transition-[color,background-color,border-color,transform] active:scale-[0.96] ${
                 current === opt.id
                   ? 'border-mint/50 bg-mint/15 text-mint'
                   : 'border-line bg-white/[0.03] text-muted hover:border-mint/30 hover:text-text'
@@ -62,7 +62,7 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
 
       <StaggerItem index={1} className="grid grid-cols-3 gap-3">
         {[
-          { label: 'Scans gesamt', value: total, suffix: '' },
+          { label: 'Gesamt', value: total, suffix: '' },
           { label: 'NFC-Taps', value: totals.nfc, suffix: '' },
           { label: 'QR-Scans', value: totals.qr, suffix: '' },
         ].map((k) => (

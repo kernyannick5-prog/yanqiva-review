@@ -2,51 +2,78 @@ import type { ReactNode } from 'react'
 import { motion, useTransform, type MotionValue } from 'framer-motion'
 import { STEPS, STEP_WINDOWS } from './constants'
 
+export type StepLayout = 'row' | 'column'
+
 interface StepItemProps {
   p: MotionValue<number>
   index: number
-  /** Lite: alle Schritte dauerhaft hervorgehoben. */
-  allActive: boolean
+  active: boolean
+  layout: StepLayout
+  onSelect: (index: number) => void
 }
 
-function StepItem({ p, index, from, to, allActive }: StepItemProps & { from: number; to: number }) {
+function StepItem({ p, index, active, layout, onSelect }: StepItemProps) {
+  const [from, to] = STEP_WINDOWS[index]
+  const column = layout === 'column'
   const first = index === 0
   const last = index === STEPS.length - 1
   const opacity = useTransform(
     p,
     [first ? 0 : from - 0.04, from, to, last ? to : to + 0.03],
-    [first ? 1 : 0.6, 1, 1, last ? 1 : 0.6],
+    [first ? 1 : 0.72, 1, 1, last ? 1 : 0.72],
   )
   const bar = useTransform(p, [from, to], [0, 1], { clamp: true })
   const step = STEPS[index]
   return (
-    <motion.li
-      className="min-w-0 flex-1 lg:flex-none"
-      style={allActive ? undefined : { opacity }}
-    >
-      <div className="flex items-center gap-1.5 min-[400px]:gap-2 lg:gap-3">
-        <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-mint/50 bg-mint/10 font-display text-xs min-[400px]:h-7 min-[400px]:w-7 min-[400px]:text-[13px] font-semibold text-mint lg:h-8 lg:w-8 lg:text-sm">
-          {index + 1}
+    <motion.li className={column ? '' : 'min-w-0 flex-1'} style={{ opacity }}>
+      <button
+        type="button"
+        onClick={() => onSelect(index)}
+        aria-current={active ? 'step' : undefined}
+        className={`group/step block w-full rounded-xl border text-left transition-[transform,background-color,border-color] duration-200 active:scale-[0.98] active:bg-white/[0.08] ${
+          active ? 'border-mint/35 bg-mint/[0.06]' : 'border-transparent hover:bg-white/[0.04]'
+        } ${column ? 'px-3 py-3' : 'min-h-14 px-1.5 py-2 min-[400px]:px-2.5'}`}
+      >
+        <span className={`flex items-center ${column ? 'gap-3' : 'gap-1.5 min-[400px]:gap-2'}`}>
+          <span
+            className={`grid shrink-0 place-items-center rounded-full border border-mint/50 bg-mint/10 font-display font-semibold text-mint ${
+              column ? 'h-8 w-8 text-sm' : 'h-6 w-6 text-xs max-[399px]:hidden min-[400px]:h-7 min-[400px]:w-7 min-[400px]:text-[13px]'
+            }`}
+          >
+            {index + 1}
+          </span>
+          <span
+            className={`truncate font-display font-semibold text-text ${
+              column ? 'text-lg' : 'text-[13px] min-[400px]:text-sm sm:text-base'
+            }`}
+          >
+            {step.title}
+          </span>
         </span>
-        <span className="truncate font-display text-[13px] font-semibold text-text min-[400px]:text-sm sm:text-base lg:text-lg">{step.title}</span>
-      </div>
-      <div className="mt-2.5 h-0.5 w-full overflow-hidden rounded-full bg-white/10 lg:ml-11 lg:mt-3 lg:h-px lg:w-[calc(100%-2.75rem)]">
-        <motion.div
-          className="h-full origin-left bg-mint"
-          style={allActive ? { transform: 'scaleX(1)' } : { scaleX: bar }}
-        />
-      </div>
-      <p className="mt-2 hidden text-[15px] leading-relaxed text-muted lg:ml-11 lg:block">{step.text}</p>
+        <span className={`mt-2 block h-0.5 w-full overflow-hidden rounded-full bg-white/10 ${column ? 'lg:ml-11 lg:w-[calc(100%-2.75rem)]' : ''}`}>
+          <motion.span className="block h-full origin-left bg-mint" style={{ scaleX: bar }} />
+        </span>
+        {column && <span className="mt-2 block pl-11 text-[15px] leading-relaxed text-muted">{step.text}</span>}
+      </button>
     </motion.li>
   )
 }
 
-/** Die drei Schritte mit synchroner Hervorhebung (Fortschrittsanzeige). */
-export function StepList({ p, allActive = false }: { p: MotionValue<number>; allActive?: boolean }) {
+interface StepListProps {
+  p: MotionValue<number>
+  /** Aktiver Schritt (React-State, wechselt nur bei Schrittwechsel). */
+  active: number
+  onSelect: (index: number) => void
+  /** row: drei Spalten (Touch/Tablet), column: untereinander mit Text (Desktop). */
+  layout?: StepLayout
+}
+
+/** Die drei Schritte als Buttons mit synchroner Hervorhebung und Fortschrittsbalken. */
+export function StepList({ p, active, onSelect, layout = 'row' }: StepListProps) {
   return (
-    <ol aria-label="So funktioniert es in drei Schritten" className="flex gap-3 sm:gap-4 lg:flex-col lg:gap-5">
+    <ol aria-label="So funktioniert es in drei Schritten" className={layout === 'column' ? 'flex flex-col gap-1' : 'flex gap-2 sm:gap-3'}>
       {STEPS.map((s, i) => (
-        <StepItem key={s.title} p={p} index={i} from={STEP_WINDOWS[i][0]} to={STEP_WINDOWS[i][1]} allActive={allActive} />
+        <StepItem key={s.title} p={p} index={i} active={active === i} layout={layout} onSelect={onSelect} />
       ))}
     </ol>
   )
@@ -72,19 +99,19 @@ function Fade({ p, win, children }: FadeProps) {
 }
 
 /** Gestapelte Kurztexte (alle echter Text; sichtbar ist jeweils einer). */
-export function Captions({ p }: { p: MotionValue<number> }) {
+export function Captions({ p, className = "" }: { p: MotionValue<number>; className?: string }) {
   return (
-    <div className="grid min-h-[3.1rem] font-display text-[1.0625rem] font-medium leading-snug text-text sm:min-h-[3.6rem] sm:text-xl lg:min-h-[4.5rem]">
+    <div className={`grid min-h-[3.1rem] font-display text-[1.0625rem] font-medium leading-snug text-text sm:min-h-[3.6rem] sm:text-xl ${className}`}>
       <Fade p={p} win={[0, 0.1, 0.14, 0.18]}>
         Glas, NFC-Chip und QR-Code in einem Aufsteller.
       </Fade>
-      <Fade p={p} win={[0.14, 0.2, 0.31, 0.36]}>
+      <Fade p={p} win={[0.14, 0.2, 0.34, 0.38]}>
         Dein Branding, dein Google-Link, sofort einsatzbereit.
       </Fade>
-      <Fade p={p} win={[0.36, 0.42, 0.57, 0.62]}>
+      <Fade p={p} win={[0.38, 0.42, 0.66, 0.7]}>
         Ein Tipp mit dem Smartphone genügt.
       </Fade>
-      <Fade p={p} win={[0.62, 0.68, 0.82, 0.87]}>
+      <Fade p={p} win={[0.66, 0.72, 0.82, 0.87]}>
         Die Bewertungsseite öffnet sich sofort. Ohne App, ohne Suchen.
       </Fade>
       <Fade p={p} win={[0.85, 0.9, 1, 1]}>
