@@ -52,7 +52,7 @@ export interface NfcCard {
   cardCode: string
   customerId: Customer['id']
   /**
-   * Teil der Redirect-URL (https://yanqiva.de/r/<redirectSlug>).
+   * Teil der Redirect-URL (https://yanqiva-bewertung.de/r/<redirectSlug>).
    * Neue Slugs sind zufällig (z. B. card_7f82k), nie aus Namen abgeleitet.
    */
   redirectSlug: string

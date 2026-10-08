@@ -12,7 +12,7 @@ export const formatDecimal = (n: number, digits = 1) =>
 /** "YANQIVA-001" -> "YANQIVA CARD #001" */
 export const cardLabel = (cardNumber: string) => `YANQIVA CARD #${cardNumber.replace(/^YANQIVA-/i, '')}`
 
-/** Gekürzte Redirect-URL für die Anzeige: yanqiva.de/r/<slug> */
+/** Gekürzte Redirect-URL für die Anzeige: yanqiva-bewertung.de/r/<slug> */
 export const redirectDisplay = (slug: string) => productionRedirectUrl(slug).replace(/^https:\/\//, '')
 
 /** Nur Karten aus redirects.ts besitzen eine live erreichbare Demo-Weiterleitung. */

@@ -52,7 +52,7 @@ Es gibt bewusst keine Tabelle für Einzelaufrufe, Sitzungen oder Besucher.
 
 ## Redirect-Worker (Pseudocode)
 
-Läuft am Rand (z. B. Cloudflare Worker unter `https://yanqiva.de/r/*`). Der Kanal (NFC oder QR) steckt in der Karten-URL (z. B. `?c=n` bzw. `?c=q`) und nicht in Besucherdaten.
+Läuft am Rand (z. B. Cloudflare Worker unter `https://yanqiva-bewertung.de/r/*`). Der Kanal (NFC oder QR) steckt in der Karten-URL (z. B. `?c=n` bzw. `?c=q`) und nicht in Besucherdaten.
 
 ```text
 handle(request):

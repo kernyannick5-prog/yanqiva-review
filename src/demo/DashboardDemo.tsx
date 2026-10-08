@@ -82,7 +82,7 @@ export function DashboardDemo() {
                 </div>
                 <div className="mx-auto flex min-w-0 max-w-xs flex-1 items-center justify-center gap-1.5 rounded-full border border-line bg-ink-950/60 px-3 py-1 text-xs text-muted">
                   <LockIcon className="h-3 w-3 shrink-0 text-faint" />
-                  <span className="truncate">app.yanqiva.de/dashboard</span>
+                  <span className="truncate">yanqiva-bewertung.de/dashboard</span>
                 </div>
                 <span className="shrink-0 rounded-md border border-mint/40 bg-mint/10 px-2 py-0.5 text-[11px] font-semibold tracking-wider text-mint">
                   DEMO

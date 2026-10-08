@@ -8,7 +8,7 @@ export interface Card {
   id: string
   /** Aufgedruckte Kartennummer, z. B. YANQIVA-001 */
   cardNumber: string
-  /** Teil der Redirect-URL: https://yanqiva.de/r/<slug> */
+  /** Teil der Redirect-URL: https://yanqiva-bewertung.de/r/<slug> */
   slug: string
   businessName: string
   /** Genau das, was der Redirect-Worker unter /r/<slug> auflöst (z. B. Google-Bewertungslink). */
