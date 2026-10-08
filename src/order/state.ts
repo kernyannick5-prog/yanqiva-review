@@ -10,7 +10,8 @@ export const STEPS: readonly { id: StepId; label: string; title: string }[] = [
 
 /** Alle Eingaben als Strings (Menge als Text, damit Tippen frei möglich bleibt). */
 export interface OrderForm {
-  product: ProductId
+  /** Leer, bis die Kundin oder der Kunde aktiv eine Variante wählt (oder ?paket= gesetzt ist). */
+  product: ProductId | ''
   format: FormatId
   quantity: string
   displayName: string
@@ -68,7 +69,7 @@ export function newOrderKey(): string {
 }
 
 export const initialForm = (): OrderForm => ({
-  product: 'review-dashboard',
+  product: '',
   format: 'karte',
   quantity: '1',
   displayName: '',
@@ -149,6 +150,7 @@ export function emailProblem(email: string): string | null {
 const v = (s: string) => s.trim()
 
 function validateStep1(f: OrderForm, e: Errors) {
+  if (!f.product) e.product = 'Bitte wählen Sie eine Variante (Klassik oder Dashboard).'
   if (v(f.quantity) === '') e.quantity = `Bitte geben Sie die Stückzahl an (${QTY_MIN} bis ${QTY_MAX}).`
   else if (parseQuantity(f.quantity) === null) {
     e.quantity = `Bitte geben Sie eine ganze Zahl von ${QTY_MIN} bis ${QTY_MAX} ein. Für mehr Stück schreiben Sie uns bitte an support@yanqiva.de.`
@@ -219,13 +221,14 @@ export function firstIncompleteStep(f: OrderForm): StepId {
 
 /** Reihenfolge der Felder auf der Seite (für Fehlerzusammenfassung und Fokus). */
 export const FIELD_ORDER: readonly FieldKey[] = [
-  'quantity', 'displayName', 'reviewLink', 'profileQuery', 'notes',
+  'product', 'quantity', 'displayName', 'reviewLink', 'profileQuery', 'notes',
   'company', 'firstName', 'lastName', 'email', 'phone',
   'billingStreet', 'billingZip', 'billingCity', 'shipName', 'shipStreet', 'shipZip', 'shipCity',
   'confirmB2B', 'acceptAgb',
 ]
 
 export const FIELD_LABELS: Partial<Record<FieldKey, string>> = {
+  product: 'Variante',
   quantity: 'Stückzahl',
   displayName: 'Name auf der Karte',
   reviewLink: 'Google-Bewertungslink',
@@ -297,7 +300,7 @@ export function loadDraft(): { form: OrderForm; step: StepId } | null {
       if (typeof src[key] === typeof base[key]) merged[key] = src[key]
     }
     const form = merged as unknown as OrderForm
-    if (!isProductId(form.product)) form.product = base.product
+    if (form.product !== '' && !isProductId(form.product)) form.product = base.product
     if (!isFormatId(form.format)) form.format = base.format
     form.confirmB2B = false
     form.acceptAgb = false
@@ -308,12 +311,16 @@ export function loadDraft(): { form: OrderForm; step: StepId } | null {
   }
 }
 
+/** Gewählte Variante; nur nach erfolgreicher Prüfung von Schritt 1 aufrufen (Rückfall nur für die Typen). */
+export const productOf = (f: OrderForm): ProductId => (f.product === '' ? 'review-klassik' : f.product)
+
 export const stepFromUrl = (): StepId | null => toStep(new URLSearchParams(window.location.search).get('schritt'))
 export const stepUrl = (step: StepId): string => `${window.location.pathname}?schritt=${step}`
 
 // ---- Fehlercodes des Servers (400) einem Schritt und Feld zuordnen ----
 
 const FIELD_STEP: Partial<Record<FieldKey, StepId>> = {
+  product: 1,
   quantity: 1,
   displayName: 2, reviewLink: 2, profileQuery: 2, notes: 2,
   company: 3, firstName: 3, lastName: 3, email: 3, phone: 3,
@@ -327,7 +334,7 @@ const CODE_FIELD: Record<string, FieldKey> = {
   invalid_billing_zip: 'billingZip',
   invalid_ship_zip: 'shipZip',
   invalid_quantity: 'quantity',
-  invalid_product: 'quantity',
+  invalid_product: 'product',
   invalid_format: 'quantity',
 }
 

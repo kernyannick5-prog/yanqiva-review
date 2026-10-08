@@ -1,10 +1,10 @@
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import {
   DASHBOARD_RENEWAL_EUR, FORMAT_LIST, FORMATS, formatEuro, PRODUCT_LIST, PRODUCTS, QTY_MAX, QTY_MIN, SHIPPING_EUR, subtotal, total, VAT_NOTE,
 } from './catalog'
 import { CheckboxField, ErrorSummary, FieldError, Fieldset, RequiredLegend, TextField, type FormCtx } from './fields'
 import { errId, fieldId } from './ids'
-import { effectiveQuantity, MAX, parseQuantity, trimmed, type FieldKey, type StepId } from './state'
+import { effectiveQuantity, MAX, parseQuantity, productOf, trimmed, type FieldKey, type StepId } from './state'
 
 const BASE = import.meta.env.BASE_URL
 
@@ -35,28 +35,47 @@ function RadioDot() {
   )
 }
 
+/** Verzögert einen Wert, damit Live-Regionen nicht bei jedem Tastendruck ansagen. */
+function useDebounced<T>(value: T, ms: number): T {
+  const [v, setV] = useState(value)
+  useEffect(() => {
+    const t = setTimeout(() => setV(value), ms)
+    return () => clearTimeout(t)
+  }, [value, ms])
+  return v
+}
+
 export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
   const { form, errors } = ctx
   const qty = parseQuantity(form.quantity)
   const qtyEff = effectiveQuantity(form.quantity)
   const bump = (d: number) => ctx.set('quantity', String(Math.min(QTY_MAX, Math.max(QTY_MIN, (qty ?? qtyEff) + d))))
   const qtyError = errors.quantity
+  const prodError = errors.product
+  const pid = form.product || null
+  const sumText = pid
+    ? `${qtyEff} × ${PRODUCTS[pid].shortName} (${FORMATS[form.format].name}), Zwischensumme ${formatEuro(subtotal(pid, qtyEff))}`
+    : 'Bitte wählen Sie eine Variante, um den Preis zu sehen.'
+  const announced = useDebounced(sumText, 600)
   return (
     <div className="space-y-9">
       <Summary ctx={ctx} summaryKeys={summaryKeys} onJump={onJump} />
       <RequiredLegend />
-      <Fieldset legend="Variante">
+      <Fieldset legend={<>Variante<span aria-hidden className="ml-0.5 text-mint"> *</span></>}>
         <div className="grid gap-3.5">
-          {PRODUCT_LIST.map((p) => (
+          {PRODUCT_LIST.map((p, i) => (
             <label key={p.id} className={cardBase}>
               <input
                 type="radio"
+                id={i === 0 ? fieldId('product') : undefined}
                 name="product"
+                required
                 value={p.id}
                 checked={form.product === p.id}
                 onChange={() => ctx.set('product', p.id)}
                 aria-labelledby={`prod-${p.id}-n`}
-                aria-describedby={`prod-${p.id}-d prod-${p.id}-t prod-${p.id}-f prod-${p.id}-r`}
+                aria-invalid={prodError ? true : undefined}
+                aria-describedby={`prod-${p.id}-d prod-${p.id}-r${prodError ? ` ${errId('product')}` : ''}`}
                 className="peer sr-only"
               />
               <RadioDot />
@@ -85,6 +104,7 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
             </label>
           ))}
         </div>
+        <FieldError id={errId('product')} message={prodError} />
       </Fieldset>
 
       <Fieldset legend="Ausführung">
@@ -155,15 +175,17 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
           </button>
         </div>
         <FieldError id="f-quantity-err" message={qtyError} />
-        <div className="glass mt-5 rounded-2xl p-4 sm:p-5" role="status" aria-live="polite" aria-atomic="true">
+        <div className="glass mt-5 rounded-2xl p-4 sm:p-5">
           <p className="flex items-baseline justify-between gap-3 text-[15px] text-muted">
-            <span>
-              {qtyEff} × {PRODUCTS[form.product].shortName} ({FORMATS[form.format].name}) à {formatEuro(PRODUCTS[form.product].unitPrice)}
-            </span>
-            <span className="shrink-0 font-display text-xl font-semibold text-text">{formatEuro(subtotal(form.product, qtyEff))}</span>
+            <span>{pid ? `${qtyEff} × ${PRODUCTS[pid].shortName} (${FORMATS[form.format].name}) à ${formatEuro(PRODUCTS[pid].unitPrice)}` : 'Noch keine Variante gewählt'}</span>
+            <span className="shrink-0 font-display text-xl font-semibold text-text">{pid ? formatEuro(subtotal(pid, qtyEff)) : '–'}</span>
           </p>
           <p className="mt-1.5 text-[13px] text-muted">Versand innerhalb Deutschlands inklusive. {VAT_NOTE}</p>
         </div>
+        {/* Verzögerte Ansage der Zwischensumme (nicht bei jedem Tastendruck) */}
+        <p role="status" aria-live="polite" className="sr-only">
+          {announced}
+        </p>
       </div>
 
       <NextSteps dashboard={form.product === 'review-dashboard'} />
@@ -346,7 +368,8 @@ const Row = ({ k, children }: { k: string; children: ReactNode }) => (
 export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { onEdit: (s: StepId) => void }) {
   const f = trimmed(ctx.form)
   const qty = effectiveQuantity(f.quantity)
-  const p = PRODUCTS[f.product]
+  const pid = productOf(f)
+  const p = PRODUCTS[pid]
   return (
     <div className="space-y-6">
       <Summary ctx={ctx} summaryKeys={summaryKeys} onJump={onJump} />
@@ -381,7 +404,7 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Zwischensumme</dt>
-            <dd className="text-right text-text">{formatEuro(subtotal(f.product, qty))}</dd>
+            <dd className="text-right text-text">{formatEuro(subtotal(pid, qty))}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Versand (Deutschland)</dt>
@@ -389,7 +412,7 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
           </div>
           <div className="flex items-baseline justify-between gap-4 border-t border-line pt-3">
             <dt className="font-display text-base font-semibold text-text">Gesamtbetrag einmalig</dt>
-            <dd className="font-display text-2xl font-semibold text-mint">{formatEuro(total(f.product, qty))}</dd>
+            <dd className="font-display text-2xl font-semibold text-mint">{formatEuro(total(pid, qty))}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Laufende Kosten</dt>

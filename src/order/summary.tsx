@@ -5,37 +5,32 @@ import { effectiveQuantity, type OrderForm } from './state'
 /** Sticky Bestellübersicht (Desktop-Seitenleiste). */
 export function OrderSidebar({ form }: { form: OrderForm }) {
   const qty = effectiveQuantity(form.quantity)
-  const p = PRODUCTS[form.product]
+  const pid = form.product || null
+  const p = pid ? PRODUCTS[pid] : null
   return (
     <aside aria-labelledby="sidebar-h" className="glass-accent rounded-3xl p-6">
       <h2 id="sidebar-h" className="font-display text-sm font-semibold uppercase tracking-[0.16em] text-muted">
         Ihre Bestellung
       </h2>
-      <p className="mt-3 font-display text-lg font-semibold text-text">{p.name}</p>
+      <p className="mt-3 font-display text-lg font-semibold text-text">{p ? p.name : 'Noch keine Variante gewählt'}</p>
       <p className="text-sm text-muted">{FORMATS[form.format].name}</p>
       <dl className="mt-4 space-y-2 border-t border-line pt-4 text-[15px]">
-        <Line k={`${qty} × ${formatEuro(p.unitPrice)}`} v={formatEuro(subtotal(form.product, qty))} />
+        <Line k={p ? `${qty} × ${formatEuro(p.unitPrice)}` : `${qty} ×`} v={pid ? formatEuro(subtotal(pid, qty)) : '–'} />
         <Line k="Versand (Deutschland)" v={`${formatEuro(SHIPPING_EUR)} (inklusive)`} />
         <div className="flex items-baseline justify-between gap-3 border-t border-line pt-3">
           <dt className="font-display font-semibold text-text">Gesamt einmalig</dt>
           <dd className="font-display text-3xl font-semibold text-mint">
-            {formatEuro(total(form.product, qty))}
+            {pid ? formatEuro(total(pid, qty)) : '–'}
           </dd>
         </div>
       </dl>
       <p className="mt-3 text-[13px] leading-snug text-muted">{VAT_NOTE}</p>
-      <p className="mt-4 rounded-xl bg-white/[0.04] px-3 py-2.5 text-[13px] leading-snug text-muted">
-        {form.product === 'review-dashboard' ? (
-          <>
-            <span className="font-semibold text-text">Laufende Kosten: </span>
-            Dashboard 12 Monate inklusive, danach optional {DASHBOARD_RENEWAL_EUR} € pro Monat je Standort. Kein automatisches Abo.
-          </>
-        ) : (
-          <>
-            <span className="font-semibold text-text">Laufende Kosten: </span>keine.
-          </>
-        )}
-      </p>
+      {pid && (
+        <p className="mt-4 rounded-xl bg-white/[0.04] px-3 py-2.5 text-[13px] leading-snug text-muted">
+          <span className="font-semibold text-text">Laufende Kosten: </span>
+          {pid === 'review-dashboard' ? `Dashboard 12 Monate inklusive, danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort. Kein automatisches Abo.` : 'keine.'}
+        </p>
+      )}
       <p className="mt-3 text-[13px] text-muted">Zahlung per Rechnung (Überweisung), nur für Unternehmer.</p>
     </aside>
   )
@@ -78,7 +73,7 @@ export function MobileBar({ form, children }: { form: OrderForm; children: React
         <div className="min-w-0 shrink-0">
           <p className="text-[13px] leading-tight text-muted">Gesamt einmalig</p>
           <p className="font-display text-xl font-semibold leading-tight text-text">
-            {formatEuro(total(form.product, qty))}
+            {form.product ? formatEuro(total(form.product, qty)) : '–'}
           </p>
           <p className="text-[13px] leading-tight text-muted">Endpreis, keine USt.</p>
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { LinkButton } from '../components/Button'
 import { CONTACT_EMAIL, FORMATS, formatEuro, PRODUCTS, total, VAT_NOTE } from './catalog'
-import { effectiveQuantity, trimmed, type OrderForm } from './state'
+import { effectiveQuantity, productOf, trimmed, type OrderForm } from './state'
 import { NextSteps } from './steps'
 
 const BASE = import.meta.env.BASE_URL
@@ -20,7 +20,8 @@ export function Confirmation({ orderId, form }: Props) {
   }, [])
   const f = trimmed(form)
   const qty = effectiveQuantity(f.quantity)
-  const p = PRODUCTS[f.product]
+  const pid = productOf(f)
+  const p = PRODUCTS[pid]
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="glass-accent rounded-3xl p-6 sm:p-8">
@@ -48,7 +49,7 @@ export function Confirmation({ orderId, form }: Props) {
           </div>
           <div className="flex items-baseline justify-between gap-4">
             <dt className="text-muted">Gesamtbetrag einmalig</dt>
-            <dd className="font-display text-2xl font-semibold text-mint">{formatEuro(total(f.product, qty))}</dd>
+            <dd className="font-display text-2xl font-semibold text-mint">{formatEuro(total(pid, qty))}</dd>
           </div>
         </dl>
         <p className="mt-2 text-[13px] text-muted">{VAT_NOTE}</p>

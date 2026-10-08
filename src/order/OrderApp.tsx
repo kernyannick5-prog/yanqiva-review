@@ -104,6 +104,13 @@ export function OrderApp() {
     if (!done) saveDraft(form, step)
   }, [form, step, done])
 
+  // Dokumenttitel je Zustand (WCAG 2.4.2)
+  useEffect(() => {
+    document.title = done
+      ? 'Bestellung eingegangen – YANQIVA REVIEW'
+      : `Schritt ${step} von ${STEPS.length}: ${STEPS[step - 1].label} – Bestellen – YANQIVA REVIEW`
+  }, [step, done])
+
   // Fokus auf die Schritt-Überschrift bei jedem Schrittwechsel
   useEffect(() => {
     if (firstRender.current) {
@@ -237,7 +244,7 @@ export function OrderApp() {
           <Confirmation orderId={done.id} form={done.form} />
         ) : (
           <>
-            <nav aria-label="Fortschritt" className="mb-6">
+            <div role="group" aria-label="Fortschritt" className="mb-6">
               <ol className="grid grid-cols-4 gap-2 sm:gap-3">
                 {STEPS.map((s) => {
                   const state = s.id < step ? 'done' : s.id === step ? 'current' : 'todo'
@@ -263,9 +270,9 @@ export function OrderApp() {
                   )
                 })}
               </ol>
-            </nav>
+            </div>
 
-            <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_21rem] lg:items-start lg:gap-10">
+            <div className={step === 4 ? 'lg:mx-auto lg:max-w-3xl' : 'lg:grid lg:grid-cols-[minmax(0,1fr)_21rem] lg:items-start lg:gap-10'}>
               <div className="glass min-w-0 rounded-3xl p-5 sm:p-8">
                 <h2 ref={headingRef} tabIndex={-1} className="mb-6 font-display text-2xl font-semibold tracking-tight text-text outline-none sm:text-[1.75rem]">
                   <span className="sr-only">
@@ -353,9 +360,11 @@ export function OrderApp() {
                 </form>
               </div>
 
-              <div className="hidden lg:sticky lg:top-24 lg:block">
-                <OrderSidebar form={form} />
-              </div>
+              {step !== 4 && (
+                <div className="hidden lg:sticky lg:top-24 lg:block">
+                  <OrderSidebar form={form} />
+                </div>
+              )}
             </div>
           </>
         )}

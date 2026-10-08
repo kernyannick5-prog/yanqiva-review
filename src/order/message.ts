@@ -1,5 +1,5 @@
 import { FORMATS, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, VAT_NOTE } from './catalog'
-import { effectiveQuantity, trimmed, type OrderForm } from './state'
+import { effectiveQuantity, productOf, trimmed, type OrderForm } from './state'
 
 export const MESSAGE_MAX = 3500
 
@@ -13,7 +13,8 @@ export function truncateCodePoints(text: string, max: number): string {
 export function buildMessage(input: OrderForm): string {
   const f = trimmed(input)
   const qty = effectiveQuantity(f.quantity)
-  const p = PRODUCTS[f.product]
+  const pid = productOf(f)
+  const p = PRODUCTS[pid]
   const lines: string[] = [
     'Verbindliche Bestellung YANQIVA REVIEW',
     '',
@@ -22,9 +23,9 @@ export function buildMessage(input: OrderForm): string {
     `Ausführung: ${FORMATS[f.format].name}`,
     `Menge: ${qty}`,
     `Einzelpreis: ${formatEuro(p.unitPrice)}`,
-    `Zwischensumme: ${formatEuro(subtotal(f.product, qty))}`,
+    `Zwischensumme: ${formatEuro(subtotal(pid, qty))}`,
     `Versand (Deutschland): ${formatEuro(SHIPPING_EUR)} (inklusive)`,
-    `Gesamtbetrag einmalig: ${formatEuro(total(f.product, qty))}`,
+    `Gesamtbetrag einmalig: ${formatEuro(total(pid, qty))}`,
     `Laufende Kosten: ${p.running}`,
     `Zahlungsart: Rechnung (Überweisung). ${VAT_NOTE}`,
     '',
@@ -90,9 +91,10 @@ const MAIL_BUDGET = 1200
 export function buildMailBody(input: OrderForm): string {
   const f = trimmed(input)
   const qty = effectiveQuantity(f.quantity)
-  const p = PRODUCTS[f.product]
+  const pid = productOf(f)
+  const p = PRODUCTS[pid]
   const lines = [
-    `Bestellung: ${qty} x ${p.shortName}, ${FORMATS[f.format].name}, gesamt ${formatEuro(total(f.product, qty))}`,
+    `Bestellung: ${qty} x ${p.shortName}, ${FORMATS[f.format].name}, gesamt ${formatEuro(total(pid, qty))}`,
     `Firma: ${f.company}`,
     `Kontakt: ${f.firstName} ${f.lastName}, ${f.email}${f.phone ? `, ${f.phone}` : ''}`,
     `Rechnung: ${f.billingStreet}, ${f.billingZip} ${f.billingCity}`,
