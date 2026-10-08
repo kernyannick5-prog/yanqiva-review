@@ -47,8 +47,9 @@ export function Navbar({ anchorBase = '' }: { anchorBase?: string }) {
             : 'h-16 border-transparent bg-transparent'
         }`}
       >
-        <a href={`${anchorBase}#top`} onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-2.5 transition-opacity active:opacity-70" aria-label="YANQIVA REVIEW – zum Seitenanfang">
+        <a href={`${anchorBase}#top`} onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-2.5 transition-opacity active:opacity-70" aria-label="YANQIVA Review – zum Seitenanfang">
           <span className="font-display text-lg font-bold tracking-[0.12em] text-text">YANQIVA</span>
+          {' '}
           <span className="rounded-full border border-mint/40 bg-mint/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-widest text-mint">Review</span>
         </a>
 

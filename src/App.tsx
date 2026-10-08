@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Navbar } from './sections/Navbar'
 import { Hero } from './sections/Hero'
 import { ProductShowcase } from './sections/ProductShowcase'
@@ -14,6 +14,31 @@ import { Background } from './sections/Background'
 // Dashboard-Demo als eigener Chunk, damit der Hero schneller lädt.
 const DashboardDemo = lazy(() => import('./demo/DashboardDemo').then((m) => ({ default: m.DashboardDemo })))
 
+const demoFallback = <section id="demo" className="min-h-[900px]" aria-busy="true" />
+
+/** Mountet die (schwere) Demo erst, wenn sie nahe am Viewport ist; bis dahin Platzhalter gleicher Höhe. */
+function DemoWhenNear() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [near, setNear] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true)
+          io.disconnect()
+        }
+      },
+      { rootMargin: '1200px 0px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  if (near) return <Suspense fallback={demoFallback}><DashboardDemo /></Suspense>
+  return <div ref={ref}>{demoFallback}</div>
+}
+
 export default function App() {
   return (
     <>
@@ -24,9 +49,7 @@ export default function App() {
         <ProductShowcase />
         <ProblemSolution />
         <HowItWorks />
-        <Suspense fallback={<section id="demo" className="min-h-[900px]" aria-busy="true" />}>
-          <DashboardDemo />
-        </Suspense>
+        <DemoWhenNear />
         <QrDemo />
         <Benefits />
         <Pricing />

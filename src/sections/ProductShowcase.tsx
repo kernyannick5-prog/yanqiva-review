@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useInView, useMotionValue, useScroll, useSpring } from 'framer-motion'
 import { Button } from '../components/Button'
 import { Reveal } from '../components/Reveal'
@@ -149,13 +149,6 @@ function TouchShowcase() {
     }
   }, [visible, pause, resume])
 
-  const onKey = (e: KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      pb.restart()
-    }
-  }
-
   return (
     <section id="produkt" ref={sectionRef} aria-labelledby="produkt-title" className="relative overflow-hidden py-10 sm:py-14">
       <StageBackdrop />
@@ -165,11 +158,7 @@ function TouchShowcase() {
         </div>
         <div
           ref={sceneRef}
-          role="button"
-          tabIndex={0}
-          aria-label="Animation von vorn abspielen"
           onClick={pb.restart}
-          onKeyDown={onKey}
           className="relative -mx-5 h-[min(400px,47svh)] cursor-pointer select-none rounded-3xl focus-visible:outline-offset-[-3px] sm:-mx-8 sm:h-[min(520px,50svh)] lg:mx-auto lg:w-full lg:max-w-3xl"
         >
           {near && <Scene p={pb.p} />}
