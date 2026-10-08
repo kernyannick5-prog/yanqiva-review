@@ -38,7 +38,7 @@ Für eine eigene Domain ohne Unterpfad: `BASE=/ npm run build`.
 
 ## Deployment
 
-`npm run deploy` baut die Seite und veröffentlicht `dist/` auf dem Branch `gh-pages` (GitHub Pages, Quelle: `gh-pages` / root).
+Jeder Push auf `main` baut die Seite über GitHub Actions (`.github/workflows/deploy.yml`) und veröffentlicht sie automatisch auf GitHub Pages.
 
 ## NFC/QR-Konzept
 
