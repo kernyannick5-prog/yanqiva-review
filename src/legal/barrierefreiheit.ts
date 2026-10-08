@@ -138,24 +138,16 @@ export const barrierefreiheit: LegalDoc = {
         },
         {
           list: [
-            'Jedes Feld hat eine sichtbare Beschriftung. Pflichtfelder sind mit * und im Quelltext als Pflichtfeld gekennzeichnet, freiwillige Angaben mit „(freiwillig)“. Zusammengehörende Auswahlmöglichkeiten (Variante, Ausführung, Adressen) sind als Gruppe mit Überschrift ausgezeichnet. Ihr Browser kann Name, E-Mail, Telefon und Adresse automatisch ausfüllen.',
-            'Eine Fortschrittsanzeige nennt den aktuellen Schritt auch als Text („Schritt 2 von 4“). Bei jedem Schrittwechsel setzt die Seite den Tastaturfokus auf die Überschrift des neuen Schritts.',
+            'Jedes Feld hat eine sichtbare Beschriftung. Pflichtfelder sind mit * und im Quelltext als Pflichtfeld gekennzeichnet, freiwillige Angaben mit „(freiwillig)“. Zusammengehörende Auswahlmöglichkeiten (Variante, Ausführung, Adressen) sind als Gruppe mit Überschrift ausgezeichnet. Ihr Browser kann Name, E-Mail, Telefon und Adresse automatisch ausfüllen. Die Produktvariante ist nicht vorausgewählt, Sie wählen sie selbst.',
+            'Eine Fortschrittsanzeige nennt den aktuellen Schritt auch als Text („Schritt 2 von 4“). Bei jedem Schrittwechsel setzt die Seite den Tastaturfokus auf die Überschrift des neuen Schritts. Der Seitentitel nennt den Schritt.',
             'Wenn Angaben fehlen oder nicht stimmen, nennt eine Zusammenfassung oben alle Fehler mit Links zu den Feldern. Der Fokus springt zum ersten fehlerhaften Feld, und jede Fehlermeldung steht als Text direkt am Feld und ist nicht nur durch Farbe erkennbar.',
-            'Vor dem verbindlichen Absenden sehen Sie eine Übersicht aller Angaben mit „Ändern“-Links. Ihre Eingaben bleiben beim Zurückgehen und beim Neuladen der Seite in dieser Sitzung erhalten.',
+            'Vor dem verbindlichen Absenden sehen Sie eine Übersicht aller Angaben mit „Ändern“-Links. Ihre Eingaben bleiben beim Zurückgehen und beim Neuladen der Seite in dieser Sitzung erhalten. Mit der Zurück-Taste des Browsers kommen Sie zum vorigen Schritt.',
             'Das Absenden wird als Status mitgeteilt („Bestellung wird gesendet …“). Die Bestätigung nimmt den Fokus auf. Wenn die Übermittlung nicht klappt, erhalten Sie eine Meldung mit den Möglichkeiten „Erneut senden“, „Bestellung per E-Mail senden“ und „Bestelltext kopieren“.',
             'Es gibt keine Zeitlimits. Der Bestellprozess ist bis 320 Pixel Breite ohne waagerechtes Scrollen bedienbar, Bedienelemente sind mindestens 24 × 24 Pixel groß, und eine fixierte Leiste am unteren Rand verdeckt auf dem Smartphone nicht das Feld, in dem Sie gerade sind.',
           ],
         },
         {
-          p: 'Bekannte Einschränkungen:',
-        },
-        {
-          list: [
-            'Der Seitentitel bleibt in allen Schritten gleich („Bestellen – YANQIVA REVIEW“). Welcher Schritt aktiv ist, erfahren Sie aus der Überschrift und der Fortschrittsanzeige.',
-            'Bei der Produktauswahl liest ein Screenreader zu jeder Variante Preis, Kurzbeschreibung, alle Leistungen und die laufenden Kosten vor. Das ist ausführlich.',
-            'Beim Ändern der Stückzahl wird der Zwischenpreis bei jeder Eingabe vorgelesen. Die Fortschrittsanzeige ist als Navigationsbereich ausgezeichnet, obwohl sie keine Links enthält. Auf dem Desktop erscheint die Bestellübersicht in Schritt 4 doppelt (Seitenleiste und Prüfblock).',
-            'Die Ansagen für Screenreader (zum Beispiel bei Fehlern und beim Absenden) haben wir nicht mit echten Screenreadern geprüft (siehe Abschnitt 6). Ob Fehlermeldungen dort nicht doppelt vorgelesen werden, wissen wir nicht sicher.',
-          ],
+          p: 'Bekannte Einschränkungen: Die Ansagen für Screenreader (zum Beispiel bei Fehlern, beim Absenden und beim Zwischenpreis, der nach einer kurzen Pause angesagt wird) haben wir nicht mit echten Screenreadern geprüft (siehe Abschnitt 6). Ob Meldungen dort nicht doppelt vorgelesen werden, wissen wir deshalb nicht sicher.',
         },
         {
           p: 'Wenn Sie beim Bestellen auf eine Barriere stoßen, schreiben Sie uns an support@yanqiva.de. Wir nehmen Ihre Bestellung dann auch gern per E-Mail entgegen.',
