@@ -6,7 +6,7 @@ Marketing-Website mit interaktiver SaaS-Dashboard-Demo für YANQIVA REVIEW: ein 
 
 > **Demo / Prototyp.** Alle Firmen, Zahlen und Bewertungen sind erfunden. Es werden keine echten Google-Profile verlinkt.
 
-**Live:** https://kernyannick5-prog.github.io/yanqiva-review/
+**Live:** https://yanqiva-bewertung.de/
 
 ## Features
 
@@ -75,3 +75,45 @@ Auf der physischen Karte steht **nur die Redirect-URL**, nie der Google-Link. Da
 | Neue Karten / Link-Änderungen | nur im Browser (localStorage bzw. Sitzung) |
 | Login, Zahlung, echte NFC-Zählung | nicht enthalten |
 | Preise | Klassik 60 € einmalig / Dashboard 99 € einmalig inkl. 12 Monate Dashboard, danach optional 15 €/Monat, monatlich kündbar (Karte/QR funktioniert auch ohne Dashboard weiter); Bestellung nicht angebunden |
+
+## Datenschutz (Privacy by Design)
+
+Die Demo erhebt **keine Besucherdaten**: kein Tracking, keine Analytics, keine Cookies, keine externen Ressourcen.
+
+**Umgesetzt**
+
+- Schriften (Inter, Space Grotesk) selbst gehostet über `@fontsource-variable/*` (nur Subsets latin und latin-ext); keine Anfragen an Google Fonts oder ein CDN.
+- Redirect-Seiten (`/r/<slug>/`) mit `<meta name="referrer" content="no-referrer">`, ohne Skripte Dritter und ohne Datenerhebung.
+- Neue Demo-Karten erhalten einen **zufälligen Slug** (`card_xxxxxx`), nie einen aus dem Firmennamen abgeleiteten; Kartennummern sind auf `A–Z 0–9 - _` (max. 24 Zeichen) beschränkt, Hinweis: keine Personennamen oder Geburtsdaten.
+- Statistiken sind **aggregierte Zähler** (NFC/QR pro Karte und Tag); der Live-Feed ist eine Simulation ohne Personen- oder Gerätedaten.
+- Dashboard → Einstellungen → „Datenschutz“ (Privacy-Center) zeigt die festen, nicht umschaltbaren Systemeigenschaften.
+- Eigene Seiten `/datenschutz/` und `/impressum/` (Inhalte in `src/legal/`, Renderer `src/pages/LegalPage.tsx`). Die Texte sind Demo-Mustertexte mit `[Platzhaltern]` und vor Produktivbetrieb zu ergänzen und rechtlich zu prüfen.
+- Einziger lokaler Speicher: `localStorage` (`yanqiva-demo-cards-v1`) mit den selbst angelegten Demo-Karten, erst nach dem Anlegen einer Karte, wird nie übertragen.
+
+**Wird nie erhoben/gespeichert:** IP-Adressen, User-Agent, Fingerprints, Standort, Besucher-IDs, Cookies, Google-Konten, Daten Bewertender.
+
+**Consent-Architektur (vorbereitet, nicht aktiv):** `src/lib/privacy/consent.ts` (`hasConsent()` liefert außer für `necessary` immer `false`) und `src/lib/privacy/analytics.ts` (`track()` ist ein No-op; delegiert nur bei Einwilligung **und** `VITE_ANALYTICS_ENABLED=true` an einen Adapter; es existiert keine Implementierung). Es gibt kein Cookie-Banner. Vor jeder Aktivierung: Consent-Banner einbauen und Datenschutzerklärung sowie Privacy-Center anpassen.
+
+**Konfiguration:** `.env.example` (`VITE_REDIRECT_BASE`, `VITE_ANALYTICS_ENABLED`). `.env*` ist git-ignoriert. In `VITE_*`-Variablen niemals Secrets ablegen, sie landen im Bundle.
+
+Datenbankschema für später (nur Geschäftsdaten + Tageszähler) und Redirect-Worker-Ablauf: [docs/DATENMODELL.md](docs/DATENMODELL.md), Typen in `src/model/schema.ts`.
+
+## Eigene Domain
+
+Die Seite ist domainfähig: Mit `BASE=/` baut sie für eine Root-Domain, ohne `BASE` für den GitHub-Pages-Unterpfad `/yanqiva-review/`. Schritte für eine eigene Domain (z. B. `yanqiva-review.de` bei IONOS, mit Cloudflare davor):
+
+1. **`public/CNAME`** mit genau einer Zeile anlegen, z. B. `yanqiva-review.de`. Ab dann ist die `github.io`-URL nicht mehr nutzbar; die Datei erst anlegen, wenn die Domain tatsächlich umgestellt wird.
+2. **Workflow** `.github/workflows/deploy.yml`: Build mit `BASE=/`:
+   ```yaml
+   - run: npm run build
+     env:
+       BASE: /
+   ```
+3. **GitHub Pages:** Settings → Pages → Custom domain setzen und **Enforce HTTPS** aktivieren.
+4. **DNS:** Bei IONOS die Nameserver auf Cloudflare stellen (oder A/AAAA-Einträge auf die GitHub-Pages-IPs bzw. CNAME `<user>.github.io`).
+5. **Cloudflare:** *Web Analytics* und *Bot Fight Mode* **AUS** lassen (sie setzen Cookies bzw. injizieren Skripte); SSL/TLS „Full (strict)“, „Always Use HTTPS“.
+6. **Security-Header** (GitHub Pages kann keine eigenen Header setzen, daher per Cloudflare Transform/Response Header Rules):
+   `Strict-Transport-Security: max-age=31536000; includeSubDomains`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, `Permissions-Policy: camera=(), microphone=(), geolocation=()`, `Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'`.
+7. Rechtstexte (`src/legal/`) um Proxy/CDN (Cloudflare) und Hosting (GitHub) als Auftragsverarbeiter/Empfänger prüfen.
+
+> Stand im Repo: `public/CNAME` und `BASE: /` im Workflow sind bereits gesetzt (Domain `yanqiva-bewertung.de`, nicht von diesem Abschnitt angelegt). Lokal ohne `BASE` bleibt der Unterpfad `/yanqiva-review/` aktiv.
