@@ -1,4 +1,4 @@
-import { motion, type MotionValue } from 'framer-motion'
+import { motion, useTransform, type MotionValue } from 'framer-motion'
 import { Box } from './primitives'
 import { P3D, STAR_GOLD } from './constants'
 
@@ -52,7 +52,54 @@ export function NfcIcon({ className = '' }: { className?: string }) {
   )
 }
 
+/** Dezente Hervorhebung von NFC (Puls) und QR-Code (Rahmen + Scanlinie) in der Frontansicht. */
+function NfcBadge({ p }: { p: MotionValue<number> }) {
+  const glow = useTransform(p, [0.1, 0.16, 0.26, 0.32], [0, 1, 1, 0])
+  const r0Scale = useTransform(p, [0.12, 0.22], [1, 1.7])
+  const r0Opacity = useTransform(p, [0.12, 0.14, 0.22], [0, 0.7, 0])
+  const r1Scale = useTransform(p, [0.17, 0.27], [1, 1.7])
+  const r1Opacity = useTransform(p, [0.17, 0.19, 0.27], [0, 0.6, 0])
+  return (
+    <div className="relative mt-2.5 h-14 w-14">
+      <motion.div
+        className="absolute -inset-4 rounded-full"
+        style={{ opacity: glow, background: 'radial-gradient(closest-side, rgb(94 234 212 / 0.35), rgb(94 234 212 / 0))' }}
+      />
+      <div className="absolute inset-0 grid place-items-center rounded-full border border-mint/50 bg-mint/10">
+        <NfcIcon className="h-8 w-8" />
+      </div>
+      <motion.div className="absolute inset-0 rounded-full border border-mint" style={{ scale: r0Scale, opacity: r0Opacity }} />
+      <motion.div className="absolute inset-0 rounded-full border border-mint" style={{ scale: r1Scale, opacity: r1Opacity }} />
+    </div>
+  )
+}
+
+const CORNERS = ['left-0 top-0 border-l-2 border-t-2 rounded-tl-[4px]', 'right-0 top-0 border-r-2 border-t-2 rounded-tr-[4px]', 'left-0 bottom-0 border-l-2 border-b-2 rounded-bl-[4px]', 'right-0 bottom-0 border-r-2 border-b-2 rounded-br-[4px]']
+
+function QrBadge({ p }: { p: MotionValue<number> }) {
+  const frame = useTransform(p, [0.2, 0.25, 0.36, 0.42], [0, 1, 1, 0])
+  const frameScale = useTransform(p, [0.2, 0.25], [1.18, 1])
+  const scanY = useTransform(p, [0.22, 0.32], [0, 46])
+  const scanOpacity = useTransform(p, [0.22, 0.24, 0.3, 0.32], [0, 1, 1, 0])
+  return (
+    <span className="relative block">
+      <DecorativeQr />
+      <motion.span className="absolute -inset-[5px]" style={{ opacity: frame, scale: frameScale }}>
+        {CORNERS.map((c) => (
+          <span key={c} className={`absolute h-3 w-3 border-mint ${c}`} />
+        ))}
+      </motion.span>
+      <motion.span
+        className="absolute left-[-3px] right-[-3px] top-0 h-[2px] rounded-full bg-mint"
+        style={{ y: scanY, opacity: scanOpacity, boxShadow: '0 0 8px 1px rgb(94 234 212 / 0.7)' }}
+      />
+    </span>
+  )
+}
+
 interface StandProps {
+  /** Szenenfortschritt 0..1 (für die NFC-/QR-Hervorhebung). */
+  p: MotionValue<number>
   rotX: MotionValue<number>
   rotY: MotionValue<number>
   /** Horizontale Verschiebung des Lichtreflexes (px). */
@@ -62,7 +109,7 @@ interface StandProps {
 const sideDark = { style: { background: 'linear-gradient(180deg, var(--color-ink-800), var(--color-ink-900))' } }
 
 /** 3D-NFC-Aufsteller: Sockel (5 Flächen) + leicht nach hinten geneigte Glasplatte (5 Flächen). */
-export function Stand({ rotX, rotY, glareX }: StandProps) {
+export function Stand({ p, rotX, rotY, glareX }: StandProps) {
   return (
     <div className="absolute left-0 top-[130px] h-0 w-0" style={{ perspective: 1100, perspectiveOrigin: '0px -150px' }}>
       <motion.div className={`absolute left-0 top-0 h-0 w-0 ${P3D}`} style={{ rotateX: rotX, rotateY: rotY }}>
@@ -118,12 +165,10 @@ export function Stand({ rotX, rotY, glareX }: StandProps) {
                       <p className="mt-1.5 font-display text-[15px] font-semibold leading-snug text-text">
                         Wir freuen uns über Ihre Bewertung
                       </p>
-                      <div className="mt-2.5 grid h-14 w-14 place-items-center rounded-full border border-mint/50 bg-mint/10">
-                        <NfcIcon className="h-8 w-8" />
-                      </div>
+                      <NfcBadge p={p} />
                       <p className="mt-2 text-[12.5px] font-medium tracking-wide text-mint">Hier kontaktlos bewerten</p>
                       <div className="mt-auto flex items-center gap-2.5">
-                        <DecorativeQr />
+                        <QrBadge p={p} />
                         <span className="text-left text-[11px] leading-tight text-muted">
                           Oder QR-Code
                           <br />

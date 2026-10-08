@@ -11,7 +11,7 @@ export const SCENE_H_USED = 430
 /** Breite der Szenenfläche, ab der das breite Layout gilt. */
 export const WIDE_BREAKPOINT = 560
 
-/** Gold für Sterne (Google-Bewertungssterne). */
+/** Gold für Bewertungssterne. */
 export const STAR_GOLD = '#fbbf24'
 
 /** Mittelpunkt des NFC-Symbols auf der Platte, relativ zur Szenenmitte (px). */
@@ -30,19 +30,19 @@ export const STEP_WINDOWS: ReadonlyArray<readonly [number, number]> = [
   [0.68, 1],
 ]
 
-/** Schlüsselmomente je Schritt: Frontansicht, Tap (Wellen), Ergebnis. */
-export const STEP_TARGETS: readonly number[] = [0.33, 0.64, 1]
+/** Schlüsselmomente je Schritt: Frontansicht (QR/NFC markiert), Tap (Wellen), Ergebnis. */
+export const STEP_TARGETS: readonly number[] = [0.33, 0.62, 1]
 
 /** Zeitplan der Abspiel-Animation (Touch): [Fortschritt, Sekunde]. Gleiche Werte = Haltepunkt. */
 export const TIMELINE: ReadonlyArray<readonly [number, number]> = [
   [0, 0],
-  [0.33, 1.5], // Frontansicht
-  [0.33, 2.0],
-  [0.64, 3.3], // Tap
-  [0.64, 3.9],
-  [0.76, 4.9], // Sterne
-  [0.76, 5.4],
-  [1, 6.6], // Ergebnis
+  [0.33, 2.0], // Frontansicht, NFC + QR werden hervorgehoben
+  [0.33, 2.6],
+  [0.62, 4.0], // Tap
+  [0.62, 4.6],
+  [0.79, 6.0], // Sterne
+  [0.79, 6.4],
+  [1, 8.0], // Bestätigung, ruhige Produktansicht
 ]
 
 /** Aktiver Schritt (0..2) zu einem Fortschrittswert. */

@@ -82,7 +82,9 @@ export function Scene({ p, lite = false }: SceneProps) {
   const baseRotX = useTransform(p, (v) => map(v, [0, 0.35, 1], [8, 4, 4]))
   const standRotY = useCombine(baseRotY, mx, (a, b) => a + b * 6)
   const standRotX = useCombine(baseRotX, my, (a, b) => a - b * 6)
-  const glareX = useTransform(standRotY, [-45, 0, 14], [-110, 70, 200], { clamp: true })
+  const rotGlareX = useTransform(standRotY, [-45, 0, 14], [-110, 70, 200], { clamp: true })
+  // Zum Schluss ein ruhiger Lichtreflex über die Platte (nicht im Lite-Modus, dort statisch).
+  const glareX = useCombine(rotGlareX, p, (g, pv) => (lite ? g : map(pv, [0.88, 1], [g, 260])))
 
   const standX = useCombine(p, k, (pv, kv) => map(pv, [0, 0.3, 0.6, 1], [0, 0, -(78 + 42 * kv), -(78 + 42 * kv)]))
 
@@ -116,12 +118,16 @@ export function Scene({ p, lite = false }: SceneProps) {
   const phoneBaseRotX = useTransform(p, (v) => map(v, [0.33, 0.6], [14, 6]))
   const phoneRotY = useCombine(phoneBaseRotY, mx, (a, b) => a + b * 6)
   const phoneRotX = useCombine(phoneBaseRotX, my, (a, b) => a - b * 6)
-  const phoneZ = useTransform(p, [0.33, 0.6], [0, 40])
+  // Nach der Bestätigung tritt das Smartphone leicht zurück, der Aufsteller bleibt im Fokus.
+  const phoneZ = useTransform(p, (v) => map(v, [0.33, 0.6, 0.88, 1], [0, 40, 40, lite ? 40 : 8]))
 
-  // Ergebnis-Chip (85–100 %)
-  const chipOpacity = useTransform(p, [0.85, 0.92], [0, 1])
-  const chipY = useTransform(p, [0.85, 0.93], [12, 0])
-  const chipScale = useTransform(p, [0.85, 0.93], [0.9, 1])
+  // Ergebnis-Chip (86–100 %)
+  const chipOpacity = useTransform(p, [0.86, 0.92], [0, 1])
+  const chipY = useTransform(p, [0.86, 0.93], [12, 0])
+  const chipScale = useTransform(p, [0.86, 0.93], [0.9, 1])
+
+  // Ruhige Schluss-Produktansicht: weicher Schein hinter dem Aufsteller
+  const heroGlow = useTransform(p, [0.86, 1], [0, 1])
 
   return (
     <div ref={areaRef} aria-hidden className="absolute inset-0">
@@ -140,6 +146,16 @@ export function Scene({ p, lite = false }: SceneProps) {
               opacity: glowOpacity,
               scale: glowScale,
               background: 'radial-gradient(circle, rgb(94 234 212 / 0.5), rgb(94 234 212 / 0) 65%)',
+            }}
+          />
+          {/* Schluss-Schein hinter dem Aufsteller */}
+          <motion.div
+            className="absolute h-[380px] w-[340px] rounded-full"
+            style={{
+              left: -170,
+              top: -220,
+              opacity: heroGlow,
+              background: 'radial-gradient(closest-side, rgb(139 92 246 / 0.32), rgb(94 234 212 / 0.06) 60%, rgb(94 234 212 / 0))',
             }}
           />
           {/* Bodenschatten + dezenter Violett-Schimmer */}
@@ -161,7 +177,7 @@ export function Scene({ p, lite = false }: SceneProps) {
               background: 'radial-gradient(closest-side, rgb(139 92 246 / 0.22), rgb(139 92 246 / 0))',
             }}
           />
-          <Stand rotX={standRotX} rotY={standRotY} glareX={glareX} />
+          <Stand p={p} rotX={standRotX} rotY={standRotY} glareX={glareX} />
           {/* NFC-Wellen */}
           {rings.map((r, i) => (
             <motion.div

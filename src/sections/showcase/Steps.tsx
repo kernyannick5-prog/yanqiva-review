@@ -102,19 +102,19 @@ function Fade({ p, win, children }: FadeProps) {
 export function Captions({ p, className = "" }: { p: MotionValue<number>; className?: string }) {
   return (
     <div className={`grid min-h-[3.1rem] font-display text-[1.0625rem] font-medium leading-snug text-text sm:min-h-[3.6rem] sm:text-xl ${className}`}>
-      <Fade p={p} win={[0, 0.1, 0.14, 0.18]}>
-        Glas, NFC-Chip und QR-Code in einem Aufsteller.
+      <Fade p={p} win={[0, 0.08, 0.1, 0.13]}>
+        Ein Aufsteller aus Glas, mit deinem Branding.
       </Fade>
-      <Fade p={p} win={[0.14, 0.2, 0.34, 0.38]}>
-        Dein Branding, dein Google-Link, sofort einsatzbereit.
+      <Fade p={p} win={[0.1, 0.15, 0.34, 0.38]}>
+        NFC-Chip zum Antippen, QR-Code zum Scannen.
       </Fade>
-      <Fade p={p} win={[0.38, 0.42, 0.66, 0.7]}>
+      <Fade p={p} win={[0.38, 0.42, 0.64, 0.68]}>
         Ein Tipp mit dem Smartphone genügt.
       </Fade>
-      <Fade p={p} win={[0.66, 0.72, 0.82, 0.87]}>
+      <Fade p={p} win={[0.64, 0.7, 0.82, 0.86]}>
         Die Bewertungsseite öffnet sich sofort. Ohne App, ohne Suchen.
       </Fade>
-      <Fade p={p} win={[0.85, 0.9, 1, 1]}>
+      <Fade p={p} win={[0.84, 0.9, 1, 1]}>
         <span className="text-gradient">Fertig. In unter 10 Sekunden.</span>
       </Fade>
     </div>
