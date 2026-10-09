@@ -201,7 +201,7 @@ export const datenschutz: LegalDoc = {
             'Nutzer (nur Variante Dashboard): E-Mail-Adresse und, falls angegeben, Name,',
             'Anmeldelinks und Sitzungen: nur als nicht umkehrbarer Hashwert mit Ablaufzeitpunkt,',
             'Tageszähler: je Karte und Tag die Zahl der Aufrufe über NFC und über QR-Code, ohne Bezug zu den aufrufenden Personen (Abschnitt 7),',
-            'Änderungsprotokoll: Zeitpunkt, Aktion, Kennung des handelnden Nutzers sowie bisheriges und neues Ziel; bei der Einrichtung des Zugangs auch die angelegten E-Mail-Adressen. IP-Adressen speichern wir dabei nicht,',
+            'Änderungsprotokoll: Zeitpunkt, Aktion, Kennung des handelnden Nutzers sowie bisheriges und neues Ziel, aber keine E-Mail-Adressen. IP-Adressen speichern wir dabei nicht,',
             'Vermerke, welche Erinnerungs-E-Mails versendet wurden.',
           ],
         },
