@@ -35,7 +35,7 @@ function StageBackdrop() {
     <div aria-hidden className="pointer-events-none absolute inset-0">
       <div
         className="absolute left-1/2 top-[55%] h-[90vmin] w-[90vmin] -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{ background: 'radial-gradient(closest-side, rgb(46 16 101 / 0.55), rgb(46 16 101 / 0))' }}
+        style={{ background: 'radial-gradient(closest-side, rgb(12 82 66 / 0.55), rgb(12 82 66 / 0))' }}
       />
       <div
         className="absolute right-[8%] top-[30%] h-[50vmin] w-[50vmin] rounded-full"

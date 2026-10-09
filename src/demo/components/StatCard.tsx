@@ -18,7 +18,7 @@ export function StatCard({ label, value, decimals = 0, suffix = '', delta, hint,
     <div className="group relative h-full min-w-0 overflow-hidden rounded-2xl border border-line bg-white/[0.03] p-3.5 shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] transition-[border-color,background-color,transform] duration-300 hover:-translate-y-0.5 hover:border-mint/30 hover:bg-white/[0.05]">
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-14 -top-16 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.2),transparent)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute -right-14 -top-16 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,rgb(52_211_153/0.16),transparent)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
       />
       <p className="text-[13px] font-medium leading-snug text-muted">{label}</p>
       <p className="mt-2 font-display text-[28px] font-semibold leading-none tabular-nums text-text sm:text-3xl">

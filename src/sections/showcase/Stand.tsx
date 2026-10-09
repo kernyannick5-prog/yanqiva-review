@@ -150,7 +150,7 @@ export function Stand({ p, rotX, rotY, glareX }: StandProps) {
                 className: 'overflow-hidden rounded-[10px] border border-white/30',
                 style: {
                   background:
-                    'linear-gradient(180deg, rgb(255 255 255 / 0.12), transparent 30%), linear-gradient(155deg, rgb(139 92 246 / 0.34) 0%, rgb(30 27 75 / 0.8) 42%, rgb(7 10 31 / 0.88) 100%)',
+                    'linear-gradient(180deg, rgb(255 255 255 / 0.12), transparent 30%), linear-gradient(155deg, rgb(52 211 153 / 0.30) 0%, rgb(18 64 52 / 0.8) 42%, rgb(7 32 26 / 0.88) 100%)',
                 },
                 children: (
                   <>
@@ -190,7 +190,7 @@ export function Stand({ p, rotX, rotY, glareX }: StandProps) {
               }}
               back={{
                 className: 'flex flex-col items-center justify-center gap-3 rounded-[10px] border border-white/15',
-                style: { background: 'linear-gradient(200deg, rgb(46 16 101 / 0.75), rgb(7 10 31 / 0.94))' },
+                style: { background: 'linear-gradient(200deg, rgb(12 82 66 / 0.75), rgb(7 32 26 / 0.94))' },
                 children: (
                   <>
                     <NfcIcon className="h-9 w-9 opacity-60" />
@@ -198,8 +198,8 @@ export function Stand({ p, rotX, rotY, glareX }: StandProps) {
                   </>
                 ),
               }}
-              left={{ style: { background: 'linear-gradient(180deg, rgb(255 255 255 / 0.55), rgb(165 180 255 / 0.25))' } }}
-              right={{ style: { background: 'linear-gradient(180deg, rgb(255 255 255 / 0.4), rgb(165 180 255 / 0.18))' } }}
+              left={{ style: { background: 'linear-gradient(180deg, rgb(255 255 255 / 0.55), rgb(165 235 205 / 0.25))' } }}
+              right={{ style: { background: 'linear-gradient(180deg, rgb(255 255 255 / 0.4), rgb(165 235 205 / 0.18))' } }}
               top={{ style: { background: 'rgb(255 255 255 / 0.6)' } }}
             />
           </div>

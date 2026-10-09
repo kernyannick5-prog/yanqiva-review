@@ -97,7 +97,7 @@ function NfcCard({ reduce }: { reduce: boolean }) {
       <div className={reduce ? '' : 'yq-card-float'} style={{ transformStyle: 'preserve-3d' }}>
         <motion.div
           style={{ rotateX, rotateY: sx, transformStyle: 'preserve-3d' }}
-          className="relative mx-auto aspect-[1.586/1] w-full max-w-[420px] overflow-hidden rounded-[22px] border border-white/15 bg-[linear-gradient(135deg,#1e1b4b_0%,#2e1065_55%,#0d1233_100%)] p-4 shadow-[0_40px_80px_-30px_rgb(139_92_246/0.6),0_0_0_1px_rgb(94_234_212/0.12)] sm:p-6"
+          className="relative mx-auto aspect-[1.586/1] w-full max-w-[420px] overflow-hidden rounded-[22px] border border-white/15 bg-[linear-gradient(135deg,#124034_0%,#0a4538_55%,#0f352a_100%)] p-4 shadow-[0_40px_80px_-30px_rgb(52_211_153/0.5),0_0_0_1px_rgb(94_234_212/0.12)] sm:p-6"
         >
           <div aria-hidden className="absolute -right-10 -top-16 size-56 rounded-full bg-[radial-gradient(closest-side,rgb(94_234_212/0.35),transparent)]" />
           <div aria-hidden className="absolute inset-0 bg-grid opacity-40" />
@@ -191,7 +191,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.4, ease }}
           className="relative mx-auto w-full max-w-[440px] px-1 py-2 sm:py-8 lg:mx-0 lg:ml-auto"
         >
-          <div aria-hidden className="absolute inset-x-6 bottom-0 h-24 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.55),transparent)] opacity-80" />
+          <div aria-hidden className="absolute inset-x-6 bottom-0 h-24 rounded-full bg-[radial-gradient(closest-side,rgb(52_211_153/0.45),transparent)] opacity-80" />
           <NfcCard reduce={reduce} />
 
           {/* Mobil: Chips in einer Zeile unter der Karte (nichts überdeckt die Karte); ab sm als schwebende Chips */}

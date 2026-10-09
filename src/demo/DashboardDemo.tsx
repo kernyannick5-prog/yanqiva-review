@@ -72,7 +72,7 @@ export function DashboardDemo() {
             viewport={{ once: true, amount: 0.08 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div aria-hidden className="pointer-events-none absolute -inset-x-10 -inset-y-24 sm:-inset-x-16 -z-10 bg-[radial-gradient(closest-side,rgb(139_92_246/0.17),transparent)]" />
+            <div aria-hidden className="pointer-events-none absolute -inset-x-10 -inset-y-24 sm:-inset-x-16 -z-10 bg-[radial-gradient(closest-side,rgb(52_211_153/0.13),transparent)]" />
             <div className="glass relative overflow-hidden rounded-2xl sm:rounded-3xl">
               <div className="flex items-center gap-3 border-b border-line bg-ink-950/40 px-4 py-3">
                 <div aria-hidden className="flex shrink-0 gap-1.5">

@@ -155,7 +155,7 @@ export function Scene({ p, lite = false }: SceneProps) {
               left: -170,
               top: -220,
               opacity: heroGlow,
-              background: 'radial-gradient(closest-side, rgb(139 92 246 / 0.32), rgb(94 234 212 / 0.06) 60%, rgb(94 234 212 / 0))',
+              background: 'radial-gradient(closest-side, rgb(52 211 153 / 0.28), rgb(94 234 212 / 0.06) 60%, rgb(94 234 212 / 0))',
             }}
           />
           {/* Bodenschatten + dezenter Violett-Schimmer */}
@@ -174,7 +174,7 @@ export function Scene({ p, lite = false }: SceneProps) {
             style={{
               left: -210,
               top: 130 + 4,
-              background: 'radial-gradient(closest-side, rgb(139 92 246 / 0.22), rgb(139 92 246 / 0))',
+              background: 'radial-gradient(closest-side, rgb(52 211 153 / 0.2), rgb(52 211 153 / 0))',
             }}
           />
           <Stand p={p} rotX={standRotX} rotY={standRotY} glareX={glareX} />

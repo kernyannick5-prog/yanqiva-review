@@ -27,9 +27,9 @@ export function CardTile({ card, index, onEdit, onStats, onQr }: CardTileProps) 
       <motion.div
         whileHover={{ y: -4, rotate: -0.6 }}
         transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-        className="relative aspect-[1.586/1] w-full max-w-[340px] self-start overflow-hidden rounded-2xl bg-gradient-to-br from-violet-dark via-indigo-deep to-ink-800 p-4 shadow-[0_20px_40px_-20px_rgb(139_92_246/0.6)] ring-1 ring-white/15 md:max-w-none"
+        className="relative aspect-[1.586/1] w-full max-w-[340px] self-start overflow-hidden rounded-2xl bg-gradient-to-br from-violet-dark via-indigo-deep to-ink-800 p-4 shadow-[0_20px_40px_-20px_rgb(52_211_153/0.5)] ring-1 ring-white/15 md:max-w-none"
       >
-        <div aria-hidden className="pointer-events-none absolute -right-[4.5rem] -top-24 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.4),transparent)]" />
+        <div aria-hidden className="pointer-events-none absolute -right-[4.5rem] -top-24 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,rgb(52_211_153/0.3),transparent)]" />
         <div aria-hidden className="pointer-events-none absolute -bottom-28 -left-20 h-52 w-52 rounded-full bg-[radial-gradient(closest-side,rgb(94_234_212/0.2),transparent)]" />
         <div className="relative flex h-full flex-col justify-between">
           <div className="flex items-start justify-between">

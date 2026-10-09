@@ -139,7 +139,7 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#5eead4" stopOpacity="0.38" />
-            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+            <stop offset="100%" stopColor="#34d399" stopOpacity="0" />
           </linearGradient>
         </defs>
 
@@ -152,11 +152,11 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
                 x2={width - PAD.right}
                 y1={y(value)}
                 y2={y(value)}
-                stroke="rgb(148 163 255)"
+                stroke="rgb(150 235 200)"
                 strokeOpacity={i === 0 ? 0.3 : 0.15}
                 strokeDasharray={i === 0 ? undefined : '3 5'}
               />
-              <text x={PAD.left - 9} y={y(value) + 4} textAnchor="end" fontSize="12" fill="#a4acd2" className="tabular-nums">
+              <text x={PAD.left - 9} y={y(value) + 4} textAnchor="end" fontSize="12" fill="#a8c9ba" className="tabular-nums">
                 {formatInt(value)}
               </text>
             </g>
@@ -165,7 +165,7 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
 
         {points.map((p, i) =>
           i % labelEvery === 0 ? (
-            <text key={p.key} x={x(i)} y={height - 9} textAnchor="middle" fontSize="12" fill="#a4acd2">
+            <text key={p.key} x={x(i)} y={height - 9} textAnchor="middle" fontSize="12" fill="#a8c9ba">
               {p.axisLabel}
             </text>
           ) : null,
@@ -196,7 +196,7 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
           <g>
             <line x1={x(active)} x2={x(active)} y1={PAD.top} y2={baseline} stroke="#5eead4" strokeOpacity={0.45} strokeDasharray="3 4" />
             <circle cx={x(active)} cy={y(current.value)} r={9} fill="#5eead4" fillOpacity={0.2} />
-            <circle cx={x(active)} cy={y(current.value)} r={4.5} fill="#5eead4" stroke="#05071a" strokeWidth={2} />
+            <circle cx={x(active)} cy={y(current.value)} r={4.5} fill="#5eead4" stroke="#07201a" strokeWidth={2} />
           </g>
         )}
       </svg>

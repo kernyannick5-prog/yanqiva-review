@@ -14,7 +14,7 @@ function Star({ p, from, to }: { p: MotionValue<number>; from: number; to: numbe
   const pop = useTransform(p, [from, (from + to) / 2, to], [0.85, 1.25, 1])
   return (
     <span className="relative block h-[26px] w-[26px]">
-      <svg viewBox="0 0 24 24" className="absolute inset-0" fill="rgb(148 163 255 / 0.14)" stroke="rgb(148 163 255 / 0.35)" strokeWidth={1}>
+      <svg viewBox="0 0 24 24" className="absolute inset-0" fill="rgb(150 235 200 / 0.14)" stroke="rgb(150 235 200 / 0.35)" strokeWidth={1}>
         <path d={STAR_PATH} />
       </svg>
       <motion.svg viewBox="0 0 24 24" className="absolute inset-0" style={{ opacity: fill, scale: pop }} fill={STAR_GOLD}>
@@ -53,7 +53,7 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
   const checkDraw = useTransform(p, [0.84, 0.89], [0, 1])
   const doneStars = useTransform(p, [0.87, 0.91], [0, 1])
 
-  const edge = { style: { background: 'linear-gradient(90deg, rgb(120 130 200 / 0.6), rgb(30 27 75 / 0.9))' } }
+  const edge = { style: { background: 'linear-gradient(90deg, rgb(120 200 170 / 0.6), rgb(18 64 52 / 0.9))' } }
 
   return (
     <div className="relative" style={{ width: PW, height: PH, perspective: 900 }}>
@@ -67,7 +67,7 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
           <div className="absolute inset-[6px] overflow-hidden rounded-[22px] bg-ink-900">
             <div
               className="absolute inset-0"
-              style={{ background: 'radial-gradient(120% 70% at 50% 0%, rgb(139 92 246 / 0.35), transparent 60%)' }}
+              style={{ background: 'radial-gradient(120% 70% at 50% 0%, rgb(52 211 153 / 0.3), transparent 60%)' }}
             />
             <div className="absolute left-1/2 top-[9px] z-10 h-[9px] w-[9px] -translate-x-1/2 rounded-full bg-black ring-1 ring-white/10" />
 
