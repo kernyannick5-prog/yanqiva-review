@@ -7,9 +7,9 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-gradient-to-b from-[#7ff0dc] to-mint text-ink-950 shadow-[inset_0_1px_0_rgb(255_255_255/0.55),0_0_0_1px_rgb(94_234_212/0.4),0_8px_30px_-8px_rgb(94_234_212/0.6)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgb(255_255_255/0.55),0_0_0_1px_rgb(94_234_212/0.6),0_14px_40px_-8px_rgb(94_234_212/0.75)]',
+    'bg-gradient-to-r from-[#7ff0dc] via-mint to-[#b9a8fb] text-ink-950 shadow-[inset_0_1px_0_rgb(255_255_255/0.55),0_0_0_1px_rgb(167_139_250/0.45),0_8px_30px_-8px_rgb(139_92_246/0.55)] hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgb(255_255_255/0.55),0_0_0_1px_rgb(167_139_250/0.65),0_14px_40px_-8px_rgb(139_92_246/0.7)]',
   ghost:
-    'border border-white/15 bg-white/[0.04] text-text shadow-[inset_0_1px_0_rgb(255_255_255/0.08)] hover:-translate-y-0.5 hover:border-mint/40 hover:bg-white/[0.07]',
+    'border border-white/15 bg-white/[0.04] text-text shadow-[inset_0_1px_0_rgb(255_255_255/0.08)] hover:-translate-y-0.5 hover:border-violet-glow/60 hover:bg-white/[0.07]',
 }
 
 /** Glanz-Sweep, der beim Hover über den Button läuft. */
