@@ -13,7 +13,7 @@ function Stage({ children }: { children: ReactNode }) {
       aria-hidden
       className="relative grid h-40 place-items-center overflow-hidden rounded-2xl border border-line bg-ink-900/60 shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] sm:h-44 lg:h-48"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_100%,rgb(52_211_153/0.22),transparent)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_100%,rgb(139_92_246/0.22),transparent)]" />
       {/* Statisch skaliert (kein Animations-Einfluss): Illustration fuellt den Rahmen auch auf kleinen Displays */}
       <div className="relative grid w-full origin-center scale-[1.25] place-items-center sm:scale-[1.2] lg:scale-[1.1]">{children}</div>
     </div>
@@ -22,7 +22,7 @@ function Stage({ children }: { children: ReactNode }) {
 
 function MiniCard({ className = '' }: { className?: string }) {
   return (
-    <div className={`relative flex h-[68px] w-24 flex-col justify-between rounded-lg border border-white/15 bg-[linear-gradient(135deg,#124034,#0a4538)] p-2 ${className}`}>
+    <div className={`relative flex h-[68px] w-24 flex-col justify-between rounded-lg border border-white/15 bg-[linear-gradient(135deg,#1e1b4b,#2e1065)] p-2 ${className}`}>
       <span className="font-display text-[9px] font-bold tracking-[0.16em]">YANQIVA</span>
       <span className="text-[10px] leading-none tracking-wider text-amber-300">★★★★★</span>
     </div>
@@ -38,7 +38,7 @@ function IllustrationStand() {
           <MiniCard className="origin-bottom -rotate-6" />
         </div>
         <div className="relative z-10 h-5 w-28 rounded-md border border-white/15 bg-ink-700" />
-        <div aria-hidden className="absolute -bottom-1 h-8 w-32 rounded-full bg-[radial-gradient(closest-side,rgb(52_211_153/0.4),transparent)]" />
+        <div aria-hidden className="absolute -bottom-1 h-8 w-32 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.45),transparent)]" />
       </div>
     </Stage>
   )

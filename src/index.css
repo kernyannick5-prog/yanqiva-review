@@ -7,10 +7,10 @@
   --font-display: "Space Grotesk Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 
   /* Gruen-Palette (Hue ~160-165, tiefes Smaragd-/Tannengruen, leicht tuerkis) */
-  --color-ink-950: #07201a;   /* Seitenhintergrund */
-  --color-ink-900: #0a281f;   /* Flaechen/Navbar */
-  --color-ink-800: #0f352a;
-  --color-ink-700: #174536;
+  --color-ink-950: #0b2c23;   /* Seitenhintergrund */
+  --color-ink-900: #0e342a;   /* Flaechen/Navbar */
+  --color-ink-800: #134235;
+  --color-ink-700: #1b5240;
   --color-indigo-deep: #124034; /* Karten-/Verlaufston (frueher Indigo) */
   --color-violet-dark: #0a4538; /* Karten-/Verlaufston (frueher Violett) */
   --color-violet-glow: #8b5cf6;
@@ -63,7 +63,7 @@ body {
 }
 
 @utility glass {
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.075), rgb(255 255 255 / 0.02) 55%), rgb(15 53 42 / 0.62);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.075), rgb(255 255 255 / 0.02) 55%), rgb(19 66 53 / 0.62);
   border: 1px solid var(--color-line);
   box-shadow: var(--shadow-card);
 }
@@ -73,7 +73,7 @@ body {
   border: 1px solid transparent;
   background:
     linear-gradient(180deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.02) 55%) padding-box,
-    linear-gradient(rgb(15 53 42 / 0.92), rgb(15 53 42 / 0.92)) padding-box,
+    linear-gradient(rgb(19 66 53 / 0.92), rgb(19 66 53 / 0.92)) padding-box,
     linear-gradient(140deg, rgb(94 234 212 / 0.65), rgb(52 211 153 / 0.4) 55%, rgb(94 234 212 / 0.12)) border-box;
   box-shadow: var(--shadow-glow);
 }
@@ -113,7 +113,7 @@ body {
     width: min(calc(100% - 2.5rem), 72rem);
     height: 1px;
     transform: translateX(-50%);
-    background: linear-gradient(90deg, transparent, rgb(52 211 153 / 0.5) 25%, rgb(94 234 212 / 0.6) 50%, rgb(52 211 153 / 0.5) 75%, transparent);
+    background: linear-gradient(90deg, transparent, rgb(139 92 246 / 0.5) 25%, rgb(94 234 212 / 0.6) 50%, rgb(139 92 246 / 0.5) 75%, transparent);
     pointer-events: none;
   }
   &::after {

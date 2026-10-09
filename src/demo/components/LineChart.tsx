@@ -196,7 +196,7 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
           <g>
             <line x1={x(active)} x2={x(active)} y1={PAD.top} y2={baseline} stroke="#5eead4" strokeOpacity={0.45} strokeDasharray="3 4" />
             <circle cx={x(active)} cy={y(current.value)} r={9} fill="#5eead4" fillOpacity={0.2} />
-            <circle cx={x(active)} cy={y(current.value)} r={4.5} fill="#5eead4" stroke="#07201a" strokeWidth={2} />
+            <circle cx={x(active)} cy={y(current.value)} r={4.5} fill="#5eead4" stroke="#0b2c23" strokeWidth={2} />
           </g>
         )}
       </svg>

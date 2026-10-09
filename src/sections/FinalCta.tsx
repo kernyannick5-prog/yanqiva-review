@@ -10,7 +10,7 @@ export function FinalCta() {
     <section id="cta" ref={loop} className="section-y section-sep relative overflow-hidden" aria-labelledby="cta-title">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div
-          className="yq-breathe absolute left-1/2 top-1/2 h-[60vmax] w-[60vmax] max-w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(52_211_153/0.3),rgb(12_82_66/0.3)_55%,transparent)]"
+          className="yq-breathe absolute left-1/2 top-1/2 h-[60vmax] w-[60vmax] max-w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.32),rgb(12_82_66/0.3)_55%,transparent)]"
         />
         <div className="absolute left-1/2 top-1/2 h-[30vmax] w-[40vmax] max-w-[600px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(closest-side,rgb(94_234_212/0.22),transparent)]" />
       </div>

@@ -3,9 +3,10 @@ const gridMask = 'radial-gradient(ellipse 80% 60% at 50% 30%, #000 20%, transpar
 /** Weiche Glow-Flächen als Radial-Gradients (kreisförmig, entsprechen den früheren Blobs). */
 const glows = [
   'radial-gradient(circle 35vmax at 15% 25%, rgb(12 82 66 / 0.55), transparent)',
+  'radial-gradient(circle 22vmax at 88% 85%, rgb(46 16 101 / 0.28), transparent)',
   'radial-gradient(circle 30vmax at 80% 45%, rgb(18 64 52 / 0.9), transparent)',
   'radial-gradient(circle 27.5vmax at 40% 95%, rgb(94 234 212 / 0.10), transparent)',
-  'linear-gradient(180deg, #0a281f 0%, #0b2c22 55%, #07201a 100%)',
+  'linear-gradient(180deg, #0e342a 0%, #0f3a2e 55%, #0b2c23 100%)',
 ].join(',')
 
 /**
