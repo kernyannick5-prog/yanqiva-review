@@ -3,7 +3,8 @@ import type { LegalDoc } from './types'
 /**
  * Datenschutzerklärung von yanqiva-bewertung.de.
  * Anbieterdaten, Formulierungen und Aufsichtsbehörde deckungsgleich mit https://yanqiva.de/datenschutz halten.
- * Bei jeder Änderung der Verarbeitung vorher anpassen. Abschnitte 7 und 8 beschreiben den geplanten Stand mit Zählung und Dashboard-Login: vor der ersten Lieferung gegen die tatsächliche Umsetzung prüfen.
+ * Bei jeder Änderung der Verarbeitung vorher anpassen. Abschnitte 3, 7 und 8 entsprechen dem Backend-Stand M2 (zugangsklar/worker: redirect/src/index.js,
+ * src/reviewcustomer.js, reviewcron.js, reviewmail.js, migrations/*.sql) und dem Frontend /dashboard/ (session.ts: localStorage yq-dash-session).
  */
 export const datenschutz: LegalDoc = {
   title: 'Datenschutzerklärung',
@@ -13,7 +14,7 @@ export const datenschutz: LegalDoc = {
     {
       tone: 'info',
       title: 'Kurz zusammengefasst',
-      text: 'Diese Website setzt keine Tracking- oder Analyse-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein. Das einzige Formular für Besucher, das Daten versendet, ist das Bestellformular (Abschnitt 5); Kunden mit der Variante Dashboard melden sich zusätzlich im Dashboard an (Abschnitt 8). Beim Aufruf verarbeiten unsere Dienstleister für Auslieferung und Hosting (Cloudflare, GitHub Pages) technisch notwendige Verbindungsdaten wie Ihre IP-Adresse. Wir selbst speichern keine Zugriffsprotokolle. Das Dashboard auf der Startseite ist eine Demo mit erfundenen Beispieldaten; Weiterleitungen der Demo-Karten werden nicht gezählt oder gespeichert. Beim Antippen einer echten Karte zählen wir nur die Zahl der Aufrufe, ohne Personenbezug (Abschnitt 7).',
+      text: 'Diese Website setzt keine Tracking- oder Analyse-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein. Das einzige Formular für Besucher, das Daten versendet, ist das Bestellformular (Abschnitt 5); Kunden mit der Variante Dashboard melden sich zusätzlich im Dashboard an (Abschnitt 8). Beim Aufruf verarbeiten unsere Dienstleister für Auslieferung und Hosting (Cloudflare, GitHub Pages) technisch notwendige Verbindungsdaten wie Ihre IP-Adresse. Wir selbst speichern keine Zugriffsprotokolle. Das Dashboard auf der Startseite ist eine Demo mit erfundenen Beispieldaten; Weiterleitungen der Demo-Karten werden nicht gezählt oder gespeichert. Bei Karten mit aktivem Dashboard zählen wir beim Antippen nur die Zahl der Aufrufe je Tag, ohne Personenbezug (Abschnitt 7).',
     },
   ],
   sections: [
@@ -55,10 +56,13 @@ export const datenschutz: LegalDoc = {
           p: 'Cloudflare (Auslieferung und Schutz): Alle Aufrufe der Domain yanqiva-bewertung.de laufen über das Netzwerk von Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA (Reverse-Proxy und Content Delivery Network); Cloudflare betreibt auch die Nameserver der Domain. Cloudflare nimmt Ihre Anfrage entgegen, leitet sie an unseren Hoster weiter, liefert die Seiten aus und schützt die Website vor Überlastung und Angriffen. Dabei verarbeitet Cloudflare technisch notwendige Verbindungs- und Anfragedaten, insbesondere Ihre IP-Adresse, Datum und Uhrzeit, die aufgerufene Adresse, Browserkennung (User-Agent) und Referrer-URL. Cloudflare verarbeitet diese Daten in unserem Auftrag auf Grundlage seines Vertrags zur Auftragsverarbeitung (Art. 28 DSGVO), der Bestandteil der Cloudflare-Vertragsbedingungen ist. Einzelne Zugriffe werten wir nicht aus; Cloudflare Web Analytics nutzen wir nicht.',
         },
         {
+          p: 'Außerdem betreiben wir bei Cloudflare die Weiterleitung der Karten (Cloudflare Workers, Abschnitt 7) und die Schnittstelle des Kunden-Dashboards; dessen Daten speichert Cloudflare in der Datenbank Cloudflare D1 mit Speicherort in der EU (Abschnitt 8). Die Aufrufprotokolle dieser Programme haben wir abgeschaltet.',
+        },
+        {
           p: 'Erkennt Cloudflare verdächtigen Datenverkehr, kann im Einzelfall eine automatische Sicherheitsabfrage erscheinen. Dabei kann Cloudflare ein technisch notwendiges Cookie setzen (zum Beispiel cf_clearance), damit die Abfrage nicht bei jedem Aufruf wiederholt wird. Dieser Zugriff auf Ihr Endgerät ist für den sicheren Betrieb der Website unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Außerdem kann Ihr Browser auf Anweisung von Cloudflare Fehlerberichte über fehlgeschlagene Verbindungen an Cloudflare senden (Network Error Logging). Nach Angaben von Cloudflare wird die IP-Adresse dabei nur kurzzeitig zur Verarbeitung des Berichts genutzt und nicht gespeichert.',
         },
         {
-          p: 'GitHub Pages (Hosting): Die Dateien dieser Website liegen bei GitHub Pages. Anbieter ist GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. GitHub erhält die Anfragen über Cloudflare und verarbeitet dabei technisch notwendige Daten in Server-Logfiles, insbesondere die aufgerufene Seite, Datum und Uhrzeit, Browsertyp und Referrer-URL sowie Ihre IP-Adresse, soweit Cloudflare sie in der Anfrage weitergibt. Soweit GitHub dabei in unserem Auftrag tätig wird, gilt dessen Vereinbarung zur Auftragsverarbeitung (Art. 28 DSGVO), die Bestandteil der GitHub-Vertragsbedingungen ist. Wir haben keinen Zugriff auf diese Logs.',
+          p: 'GitHub Pages (Hosting): Die Dateien dieser Website, einschließlich der Seiten des Kunden-Dashboards unter /dashboard/ und der Ersatzseiten für die Weiterleitung (Abschnitt 7), liegen bei GitHub Pages. Anbieter ist GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. GitHub erhält die Anfragen über Cloudflare und verarbeitet dabei technisch notwendige Daten in Server-Logfiles, insbesondere die aufgerufene Seite, Datum und Uhrzeit, Browsertyp und Referrer-URL sowie Ihre IP-Adresse, soweit Cloudflare sie in der Anfrage weitergibt. Soweit GitHub dabei in unserem Auftrag tätig wird, gilt dessen Vereinbarung zur Auftragsverarbeitung (Art. 28 DSGVO), die Bestandteil der GitHub-Vertragsbedingungen ist. Wir haben keinen Zugriff auf diese Logs.',
         },
         {
           p: 'Speicherdauer: Wie lange Cloudflare und GitHub diese technischen Zugriffsdaten aufbewahren, richtet sich nach deren Datenschutzhinweisen. Wir selbst speichern keine Zugriffsprotokolle der Website und werten keine aus.',
@@ -119,7 +123,7 @@ export const datenschutz: LegalDoc = {
           p: 'Eingangsbestätigung und interne Benachrichtigung (Resend): Nach dem Absenden senden wir Ihnen automatisch eine Eingangsbestätigung an die angegebene E-Mail-Adresse. Sie gibt Ihre Bestellung wieder (Variante, Ausführung, Menge, Preise, Angaben zur Einrichtung sowie Kontakt- und Adressdaten), nennt die Bestellnummer und den Zeitpunkt des Eingangs und verlinkt unsere AGB und diese Datenschutzerklärung. Zusätzlich benachrichtigt uns das System per E-Mail an support@yanqiva.de mit allen Angaben der Bestellung, damit keine Bestellung unbemerkt bleibt. Den Versand beider E-Mails übernimmt Resend als Auftragsverarbeiter (Art. 28 DSGVO). Anbieter ist Plus Five Five, Inc. (Resend), 2261 Market Street #5039, San Francisco, CA 94114, USA. Resend verarbeitet dabei Empfängeradresse, Betreff, Inhalt und Zustelldaten (Zeitpunkt, Zustellstatus) und speichert diese Daten in den USA. Die Übermittlung stützt sich auf den Angemessenheitsbeschluss zum EU-US Data Privacy Framework, nach dem Resend zertifiziert ist, und ergänzend auf die Standardvertragsklauseln im Auftragsverarbeitungsvertrag von Resend. Rechtsgrundlage für die Eingangsbestätigung ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) in Verbindung mit unserer gesetzlichen Pflicht aus § 312i BGB (Art. 6 Abs. 1 lit. c DSGVO); für die interne Benachrichtigung unser berechtigtes Interesse an der zeitnahen Bearbeitung von Bestellungen (Art. 6 Abs. 1 lit. f DSGVO). Zum Schutz vor Missbrauch begrenzen wir den Versand an dieselbe Adresse auf wenige E-Mails pro Tag; dafür speichern wir höchstens 24 Stunden lang einen Zähler zu einem Hash der Adresse (nicht die Adresse selbst). Weitere Informationen: Datenschutzerklärung von Resend (https://resend.com/legal/privacy-policy).',
         },
         {
-          p: 'Auftragsbestätigung, Rechnung und Zahlung: Auftragsbestätigung, Rechnung, gegebenenfalls die Zugangsdaten zum Dashboard und Rückfragen senden wir von support@yanqiva.de über den E-Mail-Dienst der IONOS SE (siehe Abschnitt 4). Ihre Zahlung per Überweisung wickeln die beteiligten Kreditinstitute ab; wir erhalten dabei die Angaben der Überweisung (Name des Kontoinhabers, IBAN, Betrag, Verwendungszweck).',
+          p: 'Auftragsbestätigung, Rechnung und Zahlung: Auftragsbestätigung, Rechnung, gegebenenfalls die Mitteilung über die Freischaltung des Dashboards und Rückfragen senden wir von support@yanqiva.de über den E-Mail-Dienst der IONOS SE (siehe Abschnitt 4). Ihre Zahlung per Überweisung wickeln die beteiligten Kreditinstitute ab; wir erhalten dabei die Angaben der Überweisung (Name des Kontoinhabers, IBAN, Betrag, Verwendungszweck).',
         },
         {
           p: 'Lieferung: Wir liefern nur lokal und übergeben die Produkte persönlich. Einen Versanddienstleister setzen wir nicht ein; Lieferadresse, E-Mail-Adresse und Telefonnummer geben wir dafür an niemanden weiter. Die Postleitzahl der Lieferadresse wird im Formular und auf unserer Schnittstelle mit der Liste der Postleitzahlen unseres Liefergebiets abgeglichen; dabei wird nichts zusätzlich gespeichert.',
@@ -146,7 +150,7 @@ export const datenschutz: LegalDoc = {
           p: 'Bestellung per E-Mail: Erreicht das Formular unsere Schnittstelle nicht, bietet es an, die Bestellung als vorbereitete E-Mail über Ihr E-Mail-Programm an support@yanqiva.de zu senden. Für diese E-Mail gilt Abschnitt 4; eine automatische Eingangsbestätigung über Resend erfolgt dann nicht.',
         },
         {
-          p: 'Rechtsgrundlage und Speicherdauer: Rechtsgrundlage für die Verarbeitung der Bestelldaten ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung und -erfüllung). Den Eintrag der Bestellung im Cloudflare-KV-Speicher löscht der Speicher nach 12 Monaten automatisch. Daten, die wir für einen geschlossenen Vertrag weiter benötigen (zum Beispiel für Lieferung, Dashboard, Weiterleitung oder Mängelansprüche), übernehmen wir vorher in unsere Vertrags- und Buchhaltungsunterlagen. Danach bewahren wir nur noch die handels- und steuerrechtlich erforderlichen Unterlagen auf: Handels- und Geschäftsbriefe (zum Beispiel Bestellung und Auftragsbestätigung) sechs Jahre, Rechnungen und Buchungsbelege acht Jahre, Bücher und Aufzeichnungen zehn Jahre (§ 147 AO, § 14b UStG und, soweit anwendbar, § 257 HGB; Art. 6 Abs. 1 lit. c DSGVO). Die Fristen beginnen mit dem Ende des Kalenderjahres, in dem die Unterlage entstanden ist. Bestellungen, die nicht zu einem Vertrag führen, löschen wir spätestens nach 12 Monaten.',
+          p: 'Rechtsgrundlage und Speicherdauer: Rechtsgrundlage für die Verarbeitung der Bestelldaten ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung und -erfüllung). Den Eintrag der Bestellung im Cloudflare-KV-Speicher löscht der Speicher nach 12 Monaten automatisch. Daten, die wir für einen geschlossenen Vertrag weiter benötigen (zum Beispiel für Lieferung, Dashboard, Weiterleitung oder Mängelansprüche), übernehmen wir vorher in unsere Vertrags- und Buchhaltungsunterlagen bzw. in die Datenbank für Weiterleitung und Dashboard (Abschnitt 8). Danach bewahren wir nur noch die handels- und steuerrechtlich erforderlichen Unterlagen auf: Handels- und Geschäftsbriefe (zum Beispiel Bestellung und Auftragsbestätigung) sechs Jahre, Rechnungen und Buchungsbelege acht Jahre, Bücher und Aufzeichnungen zehn Jahre (§ 147 AO, § 14b UStG und, soweit anwendbar, § 257 HGB; Art. 6 Abs. 1 lit. c DSGVO). Die Fristen beginnen mit dem Ende des Kalenderjahres, in dem die Unterlage entstanden ist. Bestellungen, die nicht zu einem Vertrag führen, löschen wir spätestens nach 12 Monaten.',
         },
       ],
     },
@@ -170,10 +174,13 @@ export const datenschutz: LegalDoc = {
       heading: '7. NFC- und QR-Weiterleitungen',
       blocks: [
         {
-          p: 'Beim Antippen einer Karte oder beim Scannen eines QR-Codes wird zunächst eine Weiterleitungsadresse dieser Website aufgerufen (/r/ gefolgt von einer Kartenkennung). Diese Seiten sind statische Seiten ohne Skripte von Drittanbietern; sie weisen Ihren Browser an, keine Referrer-Angabe weiterzugeben (no-referrer).',
+          p: 'Beim Antippen einer Karte oder beim Scannen eines QR-Codes ruft Ihr Browser zunächst eine Weiterleitungsadresse dieser Website auf (/r/ gefolgt von einer Kartenkennung, beim QR-Code mit dem Zusatz ?c=q). Ein Programm bei Cloudflare (Cloudflare Workers, Abschnitt 3) schlägt das hinterlegte Ziel nach und leitet Ihren Browser sofort weiter, ohne Cookies und ohne Referrer-Angabe (no-referrer).',
         },
         {
-          p: 'Karten und QR-Codes unserer Kunden: Die Weiterleitungsadresse führt Ihren Browser zum Google-Bewertungsformular des jeweiligen Unternehmens (siehe Abschnitt 9). Dabei zählen wir den Aufruf: Gezählt werden ausschließlich aggregierte Tageszähler je Karte, getrennt nach NFC und QR-Code. Gespeichert wird nur die Zahl der Aufrufe; wir speichern keine IP-Adressen, Browserkennungen, Besucher-IDs oder Standortdaten und erkennen Personen nicht wieder. Die Zähler stehen Kunden der Variante Dashboard im Dashboard zur Verfügung (Abschnitt 8). Bei dieser Verarbeitung werden technisch bedingt die in Abschnitt 3 beschriebenen Verbindungsdaten durch Cloudflare verarbeitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse liegt darin, unseren Kunden die vertraglich zugesagten Zahlen bereitzustellen und die Weiterleitung sicher zu betreiben.',
+          p: 'Karten und QR-Codes unserer Kunden: Ziel ist das Google-Bewertungsformular des Unternehmens (Abschnitt 9) oder eine von uns freigegebene Seite des Unternehmens. Dabei werden nur kurzzeitig im Arbeitsspeicher die aufgerufene Adresse und die Browserkennung (User-Agent) verarbeitet; die Browserkennung nur, um automatische Link-Vorschauen (zum Beispiel von Messenger-Apps) nicht mitzuzählen. Beides wird nicht gespeichert. Nur bei Karten, für die das Unternehmen ein aktives Dashboard hat, erhöhen wir einen Tageszähler je Karte, getrennt nach NFC und QR-Code. Gespeichert wird nur die Zahl der Aufrufe je Tag; wir speichern keine IP-Adressen, Uhrzeiten, Browserkennungen, Besucher-IDs oder Standortdaten und erkennen Personen nicht wieder. Ihre IP-Adresse verarbeitet Cloudflare technisch bedingt (Abschnitt 3). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse liegt im sicheren Betrieb der Weiterleitung und darin, unseren Kunden die vertraglich zugesagten Zahlen bereitzustellen. Zur Speicherdauer der Tageszähler siehe Abschnitt 8.',
+        },
+        {
+          p: 'Störungen: Ist der Weiterleitungsdienst nicht erreichbar, liefert GitHub Pages (Abschnitt 3) eine statische Ersatzseite aus, die zum zuletzt bekannten Google-Bewertungslink des Unternehmens weiterleitet. Dabei wird nichts gezählt.',
         },
         {
           p: 'Demo-Adressen: Die Demo-Weiterleitungen (zum Beispiel /r/demo-baeckerei) führen auf eine simulierte Bewertungsseite dieser Website (/review-demo/). Dabei wird nichts gezählt oder gespeichert. Die simulierte Bewertungsseite zeigt den Namen des Demo-Unternehmens aus der aufgerufenen Adresse an und sendet keine Daten: Sternebewertung und Text bleiben in Ihrem Browser und werden beim Verlassen der Seite verworfen. Alle Statistiken in der Dashboard-Demo sind erfundene Beispieldaten.',
@@ -182,23 +189,48 @@ export const datenschutz: LegalDoc = {
     },
     {
       id: 'dashboard',
-      heading: '8. Dashboard für Kunden (Variante Dashboard)',
+      heading: '8. Kundendaten und Dashboard für Kunden (Variante Dashboard)',
       blocks: [
         {
-          p: 'Kunden der Variante Dashboard erhalten Zugangsdaten für einen geschützten Bereich, in dem sie ihre Karten verwalten, die Zahl der Aufrufe je Karte ansehen und den Ziel-Link ändern können. Dabei verarbeiten wir:',
+          p: 'Für die Weiterleitung (Abschnitt 7) speichern wir bei beiden Varianten Angaben zum Kunden und zu seinen Karten. Kunden der Variante Dashboard erhalten zusätzlich Zugang zu einem geschützten Bereich unter yanqiva-bewertung.de/dashboard/, in dem sie die Aufrufe je Karte sehen und das Ziel der Weiterleitung ändern können. Betroffen sind die Ansprechpersonen und weitere Nutzer, die der Kunde für den Zugang benennt. Wir verarbeiten:',
         },
         {
           list: [
-            'Anmeldedaten: die E-Mail-Adresse der Ansprechperson. Die Anmeldung erfolgt ohne Passwort per Magic-Link: Wir senden einen einmalig nutzbaren, zeitlich begrenzten Anmeldelink per E-Mail (Versand über Resend, siehe Abschnitt 5),',
-            'Karten: Kartennummer, Anzeigename, die vom Kunden hinterlegte Ziel-URL (in der Regel der Google-Bewertungslink des Unternehmens) und den Zeitpunkt der letzten Änderung,',
-            'aggregierte Zähler: je Karte und Tag zwei Zahlen (Aufrufe über NFC und über QR-Code). Diese Zähler enthalten keine personenbezogenen Daten über Personen, die eine Karte antippen oder einen QR-Code scannen (Abschnitt 7).',
+            'Kunde: Firma, Bestellnummer und eine interne Notiz zur Vertragsabwicklung,',
+            'Karten: Kennung, Bezeichnung, Google-Bewertungslink, gegebenenfalls ein eigenes Ziel mit Freigabestatus, Variante und Ende des Dashboard-Zugangs,',
+            'Nutzer (nur Variante Dashboard): E-Mail-Adresse und, falls angegeben, Name,',
+            'Anmeldelinks und Sitzungen: nur als nicht umkehrbarer Hashwert mit Ablaufzeitpunkt,',
+            'Tageszähler: je Karte und Tag die Zahl der Aufrufe über NFC und über QR-Code, ohne Bezug zu den aufrufenden Personen (Abschnitt 7),',
+            'Änderungsprotokoll: Zeitpunkt, Aktion, Kennung des handelnden Nutzers sowie bisheriges und neues Ziel; bei der Einrichtung des Zugangs auch die angelegten E-Mail-Adressen. IP-Adressen speichern wir dabei nicht,',
+            'Vermerke, welche Erinnerungs-E-Mails versendet wurden.',
           ],
         },
         {
-          p: 'Zweck ist die Bereitstellung des Dashboards nach Ziffer 3 und 8 unserer AGB. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Nach der Anmeldung speichert Ihr Browser ein Sitzungs-Token im Browser-Speicher (kein Cookie); es dient nur der Anmeldung, nicht der Analyse (§ 25 Abs. 2 Nr. 2 TDDDG), und wird beim Abmelden gelöscht. Die Daten verarbeiten wir in unserem Auftrag bei Cloudflare (Workers und Datenbank Cloudflare D1 mit EU-Jurisdiktion, siehe Abschnitt 3). Die Zähler werden ohne IP-Adressen und ohne Cookies erfasst.',
+          p: 'Anmeldung: Die Anmeldung erfolgt ohne Passwort. Nach Eingabe der E-Mail-Adresse senden wir einen Anmeldelink, der 15 Minuten gültig und nur einmal nutzbar ist. Nach der Anmeldung legt Ihr Browser im lokalen Speicher (localStorage, Schlüssel yq-dash-session) ein Sitzungs-Token sowie zur Anzeige Ihre E-Mail-Adresse, Ihren Namen und die Firma ab. Das ist kein Cookie. Die Sitzung gilt 30 Tage; beim Abmelden wird sie im Browser und auf dem Server gelöscht. Dieser Zugriff auf Ihr Endgerät ist für die von Ihnen gewünschte Anmeldung unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG).',
         },
         {
-          p: 'Speicherdauer: Konto, Karten und Ziel-URLs speichern wir, solange der Dashboard-Zugang besteht (12 Monate ab Freischaltung; eine Verlängerung erfolgt nur auf Wunsch des Kunden). Tageszähler zeigen wir bis zu 25 Monate rückwirkend und löschen sie sowie das Konto 90 Tage nach dem Ende des Dashboard-Zugangs; die Ziel-URL je Karte speichern wir für die Weiterleitung weiter (Abschnitt 7), solange wir diese nach Ziffer 9 der AGB betreiben. Gesetzliche Aufbewahrungspflichten für Vertragsunterlagen (Abschnitt 5) bleiben unberührt.',
+          p: 'Missbrauchsschutz: Das Anmeldeformular schützen wir wie das Bestellformular (Abschnitt 5) mit einer Rechenaufgabe im Browser, einem unsichtbaren Prüffeld mit Zeitstempel und Zählern mit einem gesalzenen Hash Ihrer IP-Adresse (mit täglich wechselndem Wert, gespeichert in Cloudflare Workers KV, nach spätestens 24 Stunden gelöscht). Mit diesem Prüfwert begrenzen wir auch die übrigen Anfragen an das Dashboard. Je Nutzer versenden wir höchstens drei Anmeldelinks pro Stunde. Die Antwort auf eine Anmeldeanfrage verrät nicht, ob zu einer E-Mail-Adresse ein Zugang besteht.',
+        },
+        {
+          p: 'E-Mails (Resend, siehe Abschnitt 5): Wir versenden den Anmeldelink, bei jeder Änderung eines Ziels eine Benachrichtigung an alle Nutzer des Kunden (mit Karte, bisherigem und neuem Ziel, Zeitpunkt sowie Name und E-Mail-Adresse der Person, die die Änderung vorgenommen hat), Erinnerungen 30 und 7 Tage vor Ende des Zugangs sowie interne Benachrichtigungen an uns, wenn ein Kunde eine Verlängerung anfragt (mit Name, E-Mail-Adresse und optionaler Nachricht) oder ein Ziel freigegeben werden muss.',
+        },
+        {
+          p: 'Zweck und Rechtsgrundlage: Zweck ist die Erfüllung des Vertrags, insbesondere Weiterleitung und Dashboard nach Ziffer 3, 8 und 9 unserer AGB. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, für Daten von Mitarbeitenden und weiteren Nutzern des Kunden Art. 6 Abs. 1 lit. f DSGVO (Bereitstellung des vom Kunden gewünschten Zugangs). Für Missbrauchsschutz, Benachrichtigungen bei Zieländerungen und das Änderungsprotokoll ist Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse liegt darin, unbefugte Änderungen zu verhindern oder zu erkennen und nachweisen zu können, wer wann ein Ziel geändert hat. Die Daten speichert Cloudflare in unserem Auftrag in der Datenbank Cloudflare D1 mit Speicherort in der EU; zur möglichen Übermittlung in die USA siehe Abschnitt 3.',
+        },
+        {
+          p: 'Speicherdauer:',
+        },
+        {
+          list: [
+            'Tageszähler: höchstens 25 Monate rückwirkend,',
+            '90 Tage nach Ende des Dashboard-Zugangs löschen wir Nutzerkonten, Sitzungen, Anmeldelinks und Tageszähler; bis dahin kann sich der Kunde noch anmelden und eine Verlängerung anfragen. Ein eigenes Ziel löschen wir 90 Tage nach Ende des Zugangs der jeweiligen Karte. Abgelaufene Sitzungen und Anmeldelinks löschen wir innerhalb weniger Tage,',
+            'Kundenangaben und Karten mit Google-Bewertungslink: solange wir die Weiterleitung nach Ziffer 9 der AGB betreiben; danach löschen wir sie. Vertrags- und Buchhaltungsunterlagen bewahren wir nach Abschnitt 5 auf,',
+            'Änderungsprotokoll (entsprechend der regelmäßigen Verjährungsfrist, § 195 BGB): Einträge zu einem Kunden drei Jahre nach Ende seines Dashboard-Zugangs (maßgeblich ist das späteste Laufzeitende seiner Karten, eine Verlängerung verschiebt die Frist), bei Kunden ohne Dashboard drei Jahre nach Einrichtung der jüngsten Karte; Einträge ohne Kundenbezug drei Jahre nach ihrer Entstehung,',
+            'Erinnerungsvermerke: 90 Tage nach dem jeweiligen Laufzeitende.',
+          ],
+        },
+        {
+          p: 'Die Löschung läuft täglich automatisch.',
         },
       ],
     },
