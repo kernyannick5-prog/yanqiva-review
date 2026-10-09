@@ -8,8 +8,8 @@ import area from './deliveryArea.json'
 const ZIPS: Readonly<Record<string, string>> = area.zips
 
 /** Kurzbeschreibung des Gebiets für Texte. */
-export const DELIVERY_REGION = 'im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe'
-export const DELIVERY_SHORT = 'Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe inklusive'
+export const DELIVERY_REGION = 'im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße'
+export const DELIVERY_SHORT = 'Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße inklusive'
 
 /** true, wenn die fünfstellige PLZ zum Liefergebiet gehört. */
 export const inDeliveryArea = (zip: string): boolean => Object.prototype.hasOwnProperty.call(ZIPS, zip.trim())
@@ -18,4 +18,4 @@ export const inDeliveryArea = (zip: string): boolean => Object.prototype.hasOwnP
 export const deliveryPlace = (zip: string): string | null => (inDeliveryArea(zip) ? ZIPS[zip.trim()] : null)
 
 export const OUT_OF_AREA_MESSAGE =
-  'Wir liefern derzeit nur im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe persönlich aus. Für andere Orte schreiben Sie uns bitte an support@yanqiva.de, wir prüfen gern, ob eine Lieferung möglich ist.'
+  'Wir liefern derzeit nur im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße persönlich aus. Für andere Orte schreiben Sie uns bitte an support@yanqiva.de, wir prüfen gern, ob eine Lieferung möglich ist.'

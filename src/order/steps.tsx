@@ -189,7 +189,7 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
             <span>{pid ? `${qtyEff} × ${PRODUCTS[pid].shortName} (${FORMATS[form.format].name}) à ${formatEuro(PRODUCTS[pid].unitPrice)}` : 'Noch keine Variante gewählt'}</span>
             <span className="shrink-0 font-display text-xl font-semibold text-text">{pid ? formatEuro(subtotal(pid, qtyEff)) : '–'}</span>
           </p>
-          <p className="mt-1.5 text-[13px] text-muted">Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe inklusive. {VAT_NOTE}</p>
+          <p className="mt-1.5 text-[13px] text-muted">Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße inklusive. {VAT_NOTE}</p>
         </div>
         {/* Verzögerte Ansage der Zwischensumme (nicht bei jedem Tastendruck) */}
         <p role="status" aria-live="polite" className="sr-only">
@@ -333,12 +333,12 @@ export function StepData({ ctx, summaryKeys, onJump }: StepProps) {
           <TextField ctx={ctx} name="billingZip" required inputMode="numeric" maxLength={5} autoComplete="billing postal-code" className="sm:col-span-2" />
           <TextField ctx={ctx} name="billingCity" required maxLength={MAX.billingCity} autoComplete="billing address-level2" className="sm:col-span-4" />
         </div>
-        <p className="mt-3 text-sm text-muted">Land: Deutschland. Die Rechnungsadresse kann überall in Deutschland liegen. Geliefert wird nur im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe.</p>
+        <p className="mt-3 text-sm text-muted">Land: Deutschland. Die Rechnungsadresse kann überall in Deutschland liegen. Geliefert wird nur im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße.</p>
         {!form.shipDifferent && !ctx.errors.billingZip && <ZipAreaNote id="zip-area-billing" zip={form.billingZip} />}
       </Fieldset>
 
       <Fieldset legend="Lieferadresse">
-        <p className="mb-3 text-sm text-muted">Wir liefern persönlich im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe. Die Lieferadresse muss dort liegen.</p>
+        <p className="mb-3 text-sm text-muted">Wir liefern persönlich im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße. Die Lieferadresse muss dort liegen.</p>
         <CheckboxField ctx={ctx} name="shipDifferent">
           Die Lieferadresse weicht von der Rechnungsadresse ab
         </CheckboxField>

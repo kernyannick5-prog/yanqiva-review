@@ -4,8 +4,15 @@
     "Speyer",
     "Ludwigshafen am Rhein",
     "Mannheim",
-    "Karlsruhe"
+    "Karlsruhe",
+    "Kreis Germersheim (Mitte)"
   ],
+  "centerCoords": {
+    "Kreis Germersheim (Mitte)": [
+      49.2717,
+      8.2719
+    ]
+  },
   "radiusKm": 15,
   "zips": {
     "67055": "Ludwigshafen (Sonder-PLZ)",
@@ -34,6 +41,7 @@
     "67134": "Birkenheide",
     "67136": "Fußgönheim",
     "67141": "Neuhofen",
+    "67149": "Meckenheim",
     "67158": "Ellerstadt",
     "67165": "Waldsee",
     "67166": "Otterstadt",
@@ -50,7 +58,7 @@
     "67346": "Speyer",
     "67354": "Römerberg",
     "67360": "Lingenfeld",
-    "67361": "Freisbach",
+    "67361": "Landkreis Germersheim",
     "67363": "Lustadt",
     "67365": "Schwegenheim",
     "67366": "Weingarten (Pfalz)",
@@ -59,8 +67,18 @@
     "67374": "Hanhofen",
     "67376": "Harthausen",
     "67377": "Gommersheim",
+    "67378": "Zeiskam",
+    "67429": "Neustadt an der Weinstraße (Sonder-PLZ)",
+    "67433": "Neustadt an der Weinstraße",
+    "67434": "Neustadt an der Weinstraße",
+    "67435": "Neustadt an der Weinstraße",
     "67454": "Haßloch",
     "67459": "Böhl-Iggelheim",
+    "67480": "Edenkoben",
+    "67482": "Böbingen, Freimersheim, Venningen, Altdorf",
+    "67483": "Edesheim, Großfischlingen, Kleinfischlingen",
+    "67487": "Maikammer, Sankt Martin",
+    "67489": "Kirrweiler (Pfalz)",
     "68051": "Mannheim (Sonder-PLZ)",
     "68112": "Mannheim (Sonder-PLZ)",
     "68122": "Mannheim (Sonder-PLZ)",
@@ -211,9 +229,22 @@
     "76742": "Wörth am Rhein (Sonder-PLZ)",
     "76744": "Wörth am Rhein",
     "76751": "Jockgrim",
+    "76756": "Bellheim",
+    "76761": "Rülzheim",
     "76767": "Hagenbach",
+    "76771": "Hördt",
+    "76773": "Kuhardt",
     "76774": "Leimersheim",
     "76776": "Neuburg am Rhein",
-    "76777": "Neupotz"
+    "76777": "Neupotz",
+    "76825": "Landau in der Pfalz (Sonder-PLZ)",
+    "76826": "Landau in der Pfalz (Sonder-PLZ)",
+    "76828": "Landau in der Pfalz (Sonder-PLZ)",
+    "76833": "Siebeldingen, Böchingen, Knöringen, Frankweiler, Walsheim",
+    "76835": "Roschbach, Burrweiler, Rhodt unter Rietburg, Gleisweiler, Flemlingen, Hainfeld, Weyher in der Pfalz",
+    "76863": "Herxheimweyher, Herxheim bei Landau/Pfalz",
+    "76877": "Offenbach an der Queich",
+    "76878": "Offenbach an der Queich (Sonder-PLZ)",
+    "76879": "Ottersheim, Bornheim, Knittelsheim, Hochstadt, Essingen"
   }
 }

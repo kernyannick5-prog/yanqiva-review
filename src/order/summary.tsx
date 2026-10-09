@@ -32,7 +32,7 @@ export function OrderSidebar({ form }: { form: OrderForm }) {
         </p>
       )}
       {p && <p className="mt-3 text-[13px] text-muted">Lieferzeit: {shippingText(p)}.</p>}
-      <p className="mt-3 text-[13px] text-muted">Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe.</p>
+      <p className="mt-3 text-[13px] text-muted">Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße.</p>
       <p className="mt-3 text-[13px] text-muted">Zahlung per Rechnung (Überweisung), nur für Unternehmer.</p>
     </aside>
   )

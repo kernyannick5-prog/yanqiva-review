@@ -24,7 +24,7 @@ export function buildMessage(input: OrderForm): string {
     `Menge: ${qty}`,
     `Einzelpreis: ${formatEuro(p.unitPrice)}`,
     `Zwischensumme: ${formatEuro(subtotal(pid, qty))}`,
-    `Lieferung und Übergabe vor Ort (Raum Speyer, Ludwigshafen, Mannheim, Karlsruhe): ${formatEuro(SHIPPING_EUR)} (inklusive)`,
+    `Lieferung und Übergabe vor Ort (Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße): ${formatEuro(SHIPPING_EUR)} (inklusive)`,
     `Gesamtbetrag einmalig: ${formatEuro(total(pid, qty))}`,
     `Laufende Kosten: ${p.running}`,
     `Lieferzeit: ${shippingText(p)}`,
