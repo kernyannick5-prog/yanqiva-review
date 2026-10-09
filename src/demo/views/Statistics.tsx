@@ -94,7 +94,7 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
                   NFC
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-violet-glow" />
+                  <span className="h-2 w-2 rounded-full bg-[#a78bfa]" />
                   QR
                 </span>
               </div>
@@ -114,7 +114,7 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
                     <div className="flex h-3 w-full overflow-hidden rounded-full bg-white/[0.05]">
                       {[
                         { key: 'nfc', value: card.scans.nfc, color: 'bg-mint' },
-                        { key: 'qr', value: card.scans.qr, color: 'bg-violet-glow' },
+                        { key: 'qr', value: card.scans.qr, color: 'bg-[#a78bfa]' },
                       ].map((seg, j) => (
                         <motion.span
                           key={seg.key}
@@ -162,7 +162,7 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
                           key={WEEKDAYS[col]}
                           title={`${WEEKDAYS[col]}, ${part.range}: ${count} Scans`}
                           className={`h-10 rounded-md text-center text-xs tabular-nums transition-transform duration-200 hover:scale-110 text-text`}
-                          style={{ backgroundColor: `rgb(94 234 212 / ${(0.06 + intensity * 0.3).toFixed(2)})` }}
+                          style={{ backgroundColor: `rgb(94 234 212 / ${(0.06 + intensity * 0.2).toFixed(2)})` }}
                         >
                           {count}
                         </td>

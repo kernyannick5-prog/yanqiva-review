@@ -9,7 +9,7 @@ export function AccountChip({ cardCount, className = '' }: AccountChipProps) {
     <div className={`min-w-0 items-center gap-3 rounded-xl border border-line bg-white/[0.04] p-2.5 ${className}`}>
       <span
         aria-hidden
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-glow to-mint-strong font-display text-sm font-semibold text-ink-950"
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#a78bfa] to-mint-strong font-display text-sm font-semibold text-ink-950"
       >
         DK
       </span>

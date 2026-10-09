@@ -77,7 +77,7 @@ export function LiveFeed({ cards }: { cards: Card[] }) {
                 transition={{ duration: 0.3 }}
                 className="flex min-h-12 items-center gap-3 rounded-xl border border-line bg-ink-950/40 px-3 py-2.5"
               >
-                <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${e.channel === 'nfc' ? 'bg-mint/10 text-mint' : 'bg-violet-glow/15 text-violet-glow'}`}>
+                <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${e.channel === 'nfc' ? 'bg-mint/10 text-mint' : 'bg-violet-glow/15 text-[#c4b5fd]'}`}>
                   {e.channel === 'nfc' ? <NfcIcon className="h-4 w-4" /> : <QrIcon className="h-4 w-4" />}
                 </span>
                 <span className="min-w-0 flex-1">

@@ -322,7 +322,7 @@ export function OrderApp() {
                           type="button"
                           onClick={() => void send()}
                           aria-disabled={sending || undefined}
-                          className="inline-flex min-h-12 items-center justify-center rounded-full border border-mint/50 bg-mint/10 px-5 text-[15px] font-medium text-mint hover:bg-mint/20 aria-disabled:opacity-60"
+                          className="inline-flex min-h-12 items-center justify-center rounded-full border border-mint/50 bg-mint/10 px-5 text-[15px] font-medium text-mint hover:bg-mint/[0.14] aria-disabled:opacity-60"
                         >
                           Erneut senden
                         </button>

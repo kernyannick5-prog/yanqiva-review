@@ -12,7 +12,7 @@ export interface FormCtx {
 
 const inputBase =
   'block min-h-12 w-full rounded-xl border bg-white/[0.05] px-4 py-3 text-base leading-snug text-text placeholder:text-faint transition-colors focus-visible:border-mint'
-const inputOk = 'border-white/40'
+const inputOk = 'border-white/50'
 const inputBad = 'border-red-300'
 
 export function RequiredLegend() {
@@ -123,7 +123,7 @@ export function CheckboxField({ ctx, name, required, children, hint }: CheckboxP
     <div>
       <label
         className={`flex min-h-11 cursor-pointer items-start gap-3 rounded-xl border p-3.5 transition-colors has-[:checked]:border-mint/50 has-[:checked]:bg-mint/[0.07] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-mint ${
-          error ? 'border-red-300 bg-red-300/[0.06]' : 'border-white/40 bg-white/[0.03]'
+          error ? 'border-red-300 bg-red-300/[0.06]' : 'border-white/50 bg-white/[0.03]'
         }`}
       >
         <input

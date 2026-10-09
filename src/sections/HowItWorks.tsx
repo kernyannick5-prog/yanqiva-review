@@ -48,7 +48,8 @@ function IllustrationStand() {
 function IllustrationTap() {
   return (
     <Stage>
-      <div className="relative flex w-full max-w-[220px] items-center justify-between px-4">
+      {/* Handy-Mockup in alter Navy/Violett-Palette passend zur MiniCard und 3D-Szene */}
+      <div className="legacy-palette relative flex w-full max-w-[220px] items-center justify-between px-4">
         <div className="yq-phone relative z-10 h-24 w-12 rounded-xl border border-white/20 bg-ink-800 p-1">
           <div className="h-full w-full rounded-lg bg-gradient-to-b from-indigo-deep to-violet-dark" />
           <span className="absolute left-1/2 top-1.5 h-1 w-4 -translate-x-1/2 rounded-full bg-ink-950" />

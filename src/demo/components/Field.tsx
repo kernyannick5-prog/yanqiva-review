@@ -27,7 +27,7 @@ export function Field({ id, label, error, hint, required, className = '', ref, .
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy}
         className={`min-h-11 w-full rounded-xl border bg-ink-950/60 px-3.5 text-[16px] text-text placeholder:text-faint transition-colors focus:border-mint/60 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 sm:text-sm ${
-          error ? 'border-rose-400/70' : 'border-faint/70 hover:border-mint/60'
+          error ? 'border-rose-400' : 'border-faint/70 hover:border-mint/60'
         } ${className}`}
         {...rest}
       />

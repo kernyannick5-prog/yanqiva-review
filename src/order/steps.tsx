@@ -26,7 +26,7 @@ function Check() {
 }
 
 const cardBase =
-  'relative flex min-h-11 cursor-pointer gap-3.5 rounded-2xl border p-4 transition-colors has-[:checked]:border-mint/70 has-[:checked]:bg-mint/[0.07] has-[:checked]:shadow-[0_0_0_1px_rgb(94_234_212/0.45)] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-mint hover:border-mint/60 border-white/40 bg-white/[0.03] sm:p-5'
+  'relative flex min-h-11 cursor-pointer gap-3.5 rounded-2xl border p-4 transition-colors has-[:checked]:border-mint/70 has-[:checked]:bg-mint/[0.07] has-[:checked]:shadow-[0_0_0_1px_rgb(94_234_212/0.45)] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-mint hover:border-mint/60 border-white/50 bg-white/[0.03] sm:p-5'
 
 function RadioDot() {
   return (
@@ -151,7 +151,7 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
             aria-label="Eine Karte weniger"
             aria-disabled={qty !== null && qty <= QTY_MIN}
             onClick={() => bump(-1)}
-            className="grid size-12 shrink-0 place-items-center rounded-xl border border-white/40 bg-white/[0.05] text-2xl leading-none text-text transition-colors hover:border-mint/60 active:bg-white/[0.12] aria-disabled:cursor-not-allowed aria-disabled:opacity-40"
+            className="grid size-12 shrink-0 place-items-center rounded-xl border border-white/50 bg-white/[0.05] text-2xl leading-none text-text transition-colors hover:border-mint/60 active:bg-white/[0.12] aria-disabled:cursor-not-allowed aria-disabled:opacity-40"
           >
             <span aria-hidden>−</span>
           </button>
@@ -168,14 +168,14 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
             onChange={(e) => ctx.set('quantity', e.target.value)}
             aria-invalid={qtyError ? true : undefined}
             aria-describedby={`f-quantity-hint${qtyError ? ' f-quantity-err' : ''}`}
-            className={`block min-h-12 w-20 rounded-xl border bg-white/[0.05] px-2 text-center text-lg font-semibold text-text focus-visible:border-mint ${qtyError ? 'border-red-300' : 'border-white/40'}`}
+            className={`block min-h-12 w-20 rounded-xl border bg-white/[0.05] px-2 text-center text-lg font-semibold text-text focus-visible:border-mint ${qtyError ? 'border-red-300' : 'border-white/50'}`}
           />
           <button
             type="button"
             aria-label="Eine Karte mehr"
             aria-disabled={qty !== null && qty >= QTY_MAX}
             onClick={() => bump(1)}
-            className="grid size-12 shrink-0 place-items-center rounded-xl border border-white/40 bg-white/[0.05] text-2xl leading-none text-text transition-colors hover:border-mint/60 active:bg-white/[0.12] aria-disabled:cursor-not-allowed aria-disabled:opacity-40"
+            className="grid size-12 shrink-0 place-items-center rounded-xl border border-white/50 bg-white/[0.05] text-2xl leading-none text-text transition-colors hover:border-mint/60 active:bg-white/[0.12] aria-disabled:cursor-not-allowed aria-disabled:opacity-40"
           >
             <span aria-hidden>+</span>
           </button>
