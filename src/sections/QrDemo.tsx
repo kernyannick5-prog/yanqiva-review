@@ -52,12 +52,12 @@ export function QrDemo() {
   const loop = useLoopVisible<HTMLElement>()
 
   return (
-    <section id="qr" ref={loop} className="section-light section-y section-sep relative overflow-hidden" aria-labelledby="qr-title">
+    <section id="qr" ref={loop} className="section-y relative overflow-hidden" aria-labelledby="qr-title">
       <Container className="grid items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
         <Reveal className="mx-auto w-full max-w-[300px] sm:max-w-[340px] lg:mx-0">
           <div className="relative rounded-[2rem] p-3 shadow-[0_0_80px_-10px_var(--qr-glow)]">
             <div aria-hidden className="absolute -inset-px rounded-[2rem] bg-gradient-to-br from-mint via-violet-glow to-mint/20 opacity-70" />
-            <div className="relative rounded-[1.6rem] bg-ink-900 p-4 shadow-[inset_0_0_0_1px_var(--color-edge-weak)]">
+            <div className="relative rounded-[1.6rem] bg-ink-900 p-4">
               <div className="relative overflow-hidden rounded-2xl">
                 <QrCode value={demoRedirectUrl(SLUG)} size={300} className="!h-auto !w-full aspect-square" />
                 {!reduce && (

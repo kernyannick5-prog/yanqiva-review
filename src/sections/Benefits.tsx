@@ -71,7 +71,7 @@ function trackPointer(e: PointerEvent<HTMLElement>) {
 /** Vier Vorteile als Glas-Cards mit Hover-Spotlight. */
 export function Benefits() {
   return (
-    <section className="section-y section-sep relative overflow-hidden" aria-labelledby="benefits-title">
+    <section className="section-light section-y relative overflow-hidden" aria-labelledby="benefits-title">
       <Container>
         <Reveal>
           <SectionHead eyebrow="Vorteile" id="benefits-title">
@@ -92,13 +92,13 @@ export function Benefits() {
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    style={{ background: 'radial-gradient(320px circle at var(--x, 50%) var(--y, 50%), rgb(94 234 212 / 0.14), transparent 70%)' }}
+                    style={{ background: 'radial-gradient(320px circle at var(--x, 50%) var(--y, 50%), rgb(15 118 110 / 0.09), transparent 70%)' }}
                   />
                   <div className="relative">
                     <span className="grid size-11 place-items-center rounded-2xl border border-violet-glow/35 bg-[linear-gradient(135deg,rgb(94_234_212/0.14),rgb(139_92_246/0.2))] shadow-[inset_0_1px_0_rgb(255_255_255/0.12)] sm:size-12 text-mint transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
                       {it.icon}
                     </span>
-                    <p className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-[#d0c4fe] sm:mt-6">{it.tag}</p>
+                    <p className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-eyebrow sm:mt-6">{it.tag}</p>
                     <h3 className="mt-2 font-display text-[1.375rem] font-semibold leading-tight tracking-tight text-balance sm:text-2xl">{it.title}</h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-muted sm:text-base">{it.text}</p>
                   </div>

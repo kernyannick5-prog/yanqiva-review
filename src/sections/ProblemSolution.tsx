@@ -19,7 +19,7 @@ const after = ['NFC-Tap', 'Google-Bewertung']
 /** Vorher/Nachher-Vergleich. */
 export function ProblemSolution() {
   return (
-    <section className="section-light section-y section-sep relative overflow-hidden" aria-labelledby="ps-title">
+    <section className="section-y relative overflow-hidden" aria-labelledby="ps-title">
       <Container>
         <Reveal>
           <SectionHead eyebrow="Vorher · Nachher" id="ps-title">

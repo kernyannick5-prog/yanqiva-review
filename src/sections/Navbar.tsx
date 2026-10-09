@@ -12,8 +12,9 @@ const links = [
 /**
  * Sticky Glas-Navbar mit Scroll-Verdichtung und Mobile-Overlay.
  * `anchorBase`: auf Unterseiten import.meta.env.BASE_URL, damit die Anker zur Startseite führen.
+ * `onLight`: Startseite mit weissen Abschnitten: die dunkle Pille bleibt immer sichtbar (auch ganz oben).
  */
-export function Navbar({ anchorBase = '' }: { anchorBase?: string }) {
+export function Navbar({ anchorBase = '', onLight = false }: { anchorBase?: string; onLight?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const reduce = useReducedMotion()
@@ -53,8 +54,8 @@ export function Navbar({ anchorBase = '' }: { anchorBase?: string }) {
       <nav
         aria-label="Hauptnavigation"
         className={`relative z-10 mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 transition-[background-color,border-color,box-shadow,height] duration-300 sm:px-6 ${
-          scrolled || open
-            ? 'h-14 border-line bg-ink-900/85 shadow-[inset_0_1px_0_rgb(255_255_255/0.06),0_10px_40px_-15px_rgb(0_0_0/0.8)] backdrop-blur-xl'
+          scrolled || open || onLight
+            ? 'h-14 border-line bg-ink-900/95 shadow-[inset_0_1px_0_rgb(255_255_255/0.06),0_10px_40px_-15px_rgb(0_0_0/0.8)] backdrop-blur-xl'
             : 'h-16 border-transparent bg-transparent'
         }`}
       >

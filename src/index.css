@@ -57,6 +57,7 @@
   --btn-glow: rgb(139 92 246 / 0.55);
   --btn-glow-hover: rgb(139 92 246 / 0.7);
   --qr-glow: rgb(94 234 212 / 0.35);
+  --grid-line: rgb(150 235 200 / 0.06);
 }
 
 html {
@@ -76,6 +77,56 @@ body {
 }
 ::selection { background: rgb(94 234 212 / 0.3); }
 
+/* Dunkler Scope: setzt die dunklen Tokenwerte (Default-:root) wieder, auch innerhalb von .section-light
+   (App-Fenster der Demo, CTA-Karte, 3D-Szene, Hero-Karte). Gruen-Flaechen nur in .section-dark,
+   .legacy-palette ueberschreibt sie anschliessend mit der alten Navy/Violett-Palette. */
+.section-dark, .legacy-palette {
+  --color-violet-glow: #8b5cf6;
+  --color-mint: #5eead4;
+  --color-mint-strong: #2dd4bf;
+  --color-line: rgb(150 235 200 / 0.16);
+  --color-wash: rgb(255 255 255 / 0.06);
+  --color-wash-weak: rgb(255 255 255 / 0.04);
+  --color-edge: rgb(255 255 255 / 0.15);
+  --color-edge-weak: rgb(255 255 255 / 0.1);
+  --color-eyebrow: #d0c4fe;
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.1) inset, 0 -1px 0 0 rgb(0 0 0 / 0.25) inset, 0 2px 6px -2px rgb(0 0 0 / 0.35), 0 28px 56px -32px rgb(0 0 0 / 0.7);
+  --shadow-glow: 0 1px 0 0 rgb(255 255 255 / 0.12) inset, 0 0 0 1px rgb(94 234 212 / 0.28), 0 14px 44px -14px rgb(94 234 212 / 0.4);
+  --glass-fill: rgb(19 66 53 / 0.62);
+  --glass-sheen-1: rgb(255 255 255 / 0.075);
+  --glass-sheen-2: rgb(255 255 255 / 0.02);
+  --glass-solid: rgb(19 66 53 / 0.92);
+  --glass-border-1: rgb(94 234 212 / 0.65);
+  --glass-border-2: rgb(139 92 246 / 0.5);
+  --glass-border-3: rgb(94 234 212 / 0.12);
+  --grad-1: #5eead4;
+  --grad-2: #a5b4fc;
+  --grad-3: #c4b5fd;
+  --ghost-border: rgb(255 255 255 / 0.15);
+  --ghost-border-hover: rgb(139 92 246 / 0.6);
+  --ghost-bg: rgb(255 255 255 / 0.04);
+  --ghost-bg-hover: rgb(255 255 255 / 0.07);
+  --btn-ring: rgb(167 139 250 / 0.45);
+  --btn-ring-hover: rgb(167 139 250 / 0.65);
+  --btn-glow: rgb(139 92 246 / 0.55);
+  --btn-glow-hover: rgb(139 92 246 / 0.7);
+  --qr-glow: rgb(94 234 212 / 0.35);
+  --grid-line: rgb(150 235 200 / 0.06);
+  color: var(--color-text);
+}
+.section-dark {
+  --color-ink-950: #0b2c23;
+  --color-ink-900: #0e342a;
+  --color-ink-800: #134235;
+  --color-ink-700: #1b5240;
+  --color-indigo-deep: #124034;
+  --color-violet-dark: #0a4538;
+  --color-text: #e9f7f0;
+  --color-muted: #bcd9cc;
+  --color-faint: #abcdbc;
+}
+.section-dark ::selection { background: rgb(94 234 212 / 0.3); }
+
 /* Alte Navy/Violett-Palette nur für 3D-Aufsteller, Smartphone und Hero-Karte (Eigentümerwunsch) */
 .legacy-palette {
   --color-ink-950: #05071a;
@@ -89,8 +140,9 @@ body {
   --color-faint: #8f98c4;
   --color-line: rgb(148 163 255 / 0.14);
 }
+.legacy-palette ::selection { background: rgb(94 234 212 / 0.3); }
 
-/* Heller Abschnitt (Scope wie .legacy-palette): Token-Overrides, volle Breite weiss, dunkle Schrift.
+/* Heller Abschnitt (Scope wie .legacy-palette; Hell-Dunkel-Wechsel immer hart, ohne Glow-Trennlinie): Token-Overrides, volle Breite weiss, dunkle Schrift.
    Teal-/Violett-Toene sind auf Weiss >= 4.5:1; Fokusring (mint) wird dunkles Teal (>= 3:1). */
 .section-light {
   --color-ink-950: #ffffff;
@@ -132,14 +184,12 @@ body {
   --btn-glow: rgb(15 118 110 / 0.3);
   --btn-glow-hover: rgb(15 118 110 / 0.42);
   --qr-glow: rgb(15 118 110 / 0.22);
+  --grid-line: rgb(11 44 35 / 0.05);
   position: relative;
   background: #ffffff;
   color: var(--color-text);
 }
 .section-light ::selection { background: rgb(15 118 110 / 0.25); }
-/* Hell auf Dunkel: Glow-Trennlinie/-Schein am oberen Rand entfaellt (sauberer harter Wechsel) */
-.section-light.section-sep::before, .section-light.section-sep::after,
-.section-light + .section-sep::before, .section-light + .section-sep::after { display: none; }
 
 @utility glass {
   background: linear-gradient(180deg, var(--glass-sheen-1), var(--glass-sheen-2) 55%), var(--glass-fill);
@@ -231,8 +281,8 @@ body {
 /* Dezentes digitales Grid */
 @utility bg-grid {
   background-image:
-    linear-gradient(to right, rgb(150 235 200 / 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(150 235 200 / 0.06) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 

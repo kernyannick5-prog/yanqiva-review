@@ -48,7 +48,7 @@ export function DashboardDemo() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <section id="demo" ref={loop} aria-labelledby="demo-title" className="section-y section-sep relative overflow-x-clip">
+      <section id="demo" ref={loop} aria-labelledby="demo-title" className="section-light section-y relative overflow-x-clip">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal className="text-center">
             <SectionHead
@@ -59,7 +59,7 @@ export function DashboardDemo() {
             >
               Dein YANQIVA <span className="text-gradient">Dashboard</span>
             </SectionHead>
-            <p className="mt-5 inline-flex items-center gap-2 rounded-2xl border border-line bg-white/[0.04] px-3.5 py-2 text-left text-[13px] leading-snug text-muted">
+            <p className="mt-5 inline-flex items-center gap-2 rounded-2xl border border-line bg-wash-weak px-3.5 py-2 text-left text-[13px] leading-snug text-muted">
               <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-violet-glow" />
               Demo-Daten – alle Firmen und Zahlen sind erfunden
             </p>
@@ -72,7 +72,9 @@ export function DashboardDemo() {
             viewport={{ once: true, amount: 0.08 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div aria-hidden className="pointer-events-none absolute -inset-x-10 -inset-y-24 sm:-inset-x-16 -z-10 bg-[radial-gradient(closest-side,rgb(52_211_153/0.13),transparent)]" />
+            <div aria-hidden className="pointer-events-none absolute -inset-x-10 -inset-y-24 sm:-inset-x-16 -z-10 bg-[radial-gradient(closest-side,rgb(124_58_237/0.08),transparent)]" />
+            {/* App-Fenster bleibt dunkel (wie ein App-Screenshot auf weisser Seite): eigener dunkler Scope + deckender Grund */}
+            <div className="section-dark rounded-2xl bg-ink-950 shadow-[0_40px_80px_-40px_rgb(11_44_35/0.55)] sm:rounded-3xl">
             <div className="glass relative overflow-hidden rounded-2xl sm:rounded-3xl">
               <div className="flex items-center gap-3 border-b border-line bg-ink-950/40 px-4 py-3">
                 <div aria-hidden className="flex shrink-0 gap-1.5">
@@ -122,6 +124,7 @@ export function DashboardDemo() {
                   </AnimatePresence>
                 </div>
               </div>
+            </div>
             </div>
           </motion.div>
         </div>

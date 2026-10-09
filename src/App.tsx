@@ -14,7 +14,7 @@ import { Background } from './sections/Background'
 // Dashboard-Demo als eigener Chunk, damit der Hero schneller lädt.
 const DashboardDemo = lazy(() => import('./demo/DashboardDemo').then((m) => ({ default: m.DashboardDemo })))
 
-const demoFallback = <section id="demo" className="min-h-[900px]" aria-busy="true" />
+const demoFallback = <section id="demo" className="section-light min-h-[900px]" aria-busy="true" />
 
 /** Mountet die (schwere) Demo erst, wenn sie nahe am Viewport ist; bis dahin Platzhalter gleicher Höhe. */
 function DemoWhenNear() {
@@ -52,7 +52,7 @@ export default function App() {
     <>
       <a href="#main" className="fixed left-3 top-3 z-[200] inline-flex min-h-11 -translate-y-[200%] items-center rounded-full bg-mint px-5 text-sm font-semibold text-ink-950 focus:translate-y-0">Zum Inhalt springen</a>
       <Background />
-      <Navbar />
+      <Navbar onLight />
       <main id="main" tabIndex={-1} className="relative outline-none">
         <Hero />
         <ProductShowcase />

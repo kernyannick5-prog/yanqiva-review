@@ -20,7 +20,7 @@ function StepItem({ p, index, active, layout, onSelect }: StepItemProps) {
   const opacity = useTransform(
     p,
     [first ? 0 : from - 0.04, from, to, last ? to : to + 0.03],
-    [first ? 1 : 0.72, 1, 1, last ? 1 : 0.72],
+    [first ? 1 : 0.85, 1, 1, last ? 1 : 0.85],
   )
   const bar = useTransform(p, [from, to], [0, 1], { clamp: true })
   const step = STEPS[index]
@@ -30,8 +30,8 @@ function StepItem({ p, index, active, layout, onSelect }: StepItemProps) {
         type="button"
         onClick={() => onSelect(index)}
         aria-current={active ? 'step' : undefined}
-        className={`group/step block w-full rounded-xl border text-left transition-[transform,background-color,border-color] duration-200 active:scale-[0.98] active:bg-white/[0.08] ${
-          active ? 'border-mint/35 bg-mint/[0.06]' : 'border-transparent hover:bg-white/[0.04]'
+        className={`group/step block w-full rounded-xl border text-left transition-[transform,background-color,border-color] duration-200 active:scale-[0.98] active:bg-wash ${
+          active ? 'border-mint/35 bg-mint/[0.06]' : 'border-transparent hover:bg-wash-weak'
         } ${column ? 'px-3 py-3' : 'min-h-14 px-1.5 py-2 min-[400px]:px-2.5'}`}
       >
         <span className={`flex items-center ${column ? 'gap-3' : 'gap-1.5 min-[400px]:gap-2'}`}>
@@ -50,7 +50,7 @@ function StepItem({ p, index, active, layout, onSelect }: StepItemProps) {
             {step.title}
           </span>
         </span>
-        <span className={`mt-2 block h-0.5 w-full overflow-hidden rounded-full bg-white/10 ${column ? 'lg:ml-11 lg:w-[calc(100%-2.75rem)]' : ''}`}>
+        <span className={`mt-2 block h-0.5 w-full overflow-hidden rounded-full bg-edge-weak ${column ? 'lg:ml-11 lg:w-[calc(100%-2.75rem)]' : ''}`}>
           <motion.span className="block h-full origin-left bg-mint" style={{ scaleX: bar }} />
         </span>
         {column && (

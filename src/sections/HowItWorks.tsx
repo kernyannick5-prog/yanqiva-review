@@ -11,7 +11,7 @@ function Stage({ children }: { children: ReactNode }) {
     <div
       ref={loop}
       aria-hidden
-      className="relative grid h-40 place-items-center overflow-hidden rounded-2xl border border-line bg-ink-900/60 shadow-[inset_0_1px_0_rgb(255_255_255/0.06)] sm:h-44 lg:h-48"
+      className="relative grid h-40 place-items-center overflow-hidden rounded-2xl border border-line bg-ink-900 shadow-[inset_0_1px_0_rgb(255_255_255/0.6)] sm:h-44 lg:h-48"
     >
       <div className="absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_100%,rgb(139_92_246/0.22),transparent)]" />
       {/* Statisch skaliert (kein Animations-Einfluss): Illustration fuellt den Rahmen auch auf kleinen Displays */}
@@ -22,7 +22,7 @@ function Stage({ children }: { children: ReactNode }) {
 
 function MiniCard({ className = '' }: { className?: string }) {
   return (
-    <div className={`relative flex h-[68px] w-24 flex-col justify-between rounded-lg border border-white/15 bg-[linear-gradient(135deg,#1e1b4b,#2e1065)] p-2 ${className}`}>
+    <div className={`legacy-palette relative flex h-[68px] w-24 flex-col justify-between rounded-lg border border-white/15 bg-[linear-gradient(135deg,#1e1b4b,#2e1065)] p-2 ${className}`}>
       <span className="font-display text-[9px] font-bold tracking-[0.16em]">YANQIVA</span>
       <span className="text-[10px] leading-none tracking-wider text-amber-300">★★★★★</span>
     </div>
@@ -33,7 +33,7 @@ function MiniCard({ className = '' }: { className?: string }) {
 function IllustrationStand() {
   return (
     <Stage>
-      <div className="relative flex h-32 w-28 items-end justify-center">
+      <div className="legacy-palette relative flex h-32 w-28 items-end justify-center">
         <div className="yq-stand absolute bottom-3">
           <MiniCard className="origin-bottom -rotate-6" />
         </div>
@@ -74,10 +74,10 @@ function IllustrationStars() {
       <div className="flex gap-1.5">
         {[0, 1, 2, 3, 4].map((i) => (
           <span key={i} className="relative block size-8">
-            <svg viewBox="0 0 24 24" className="absolute inset-0 text-white/15" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
+            <svg viewBox="0 0 24 24" className="absolute inset-0 text-edge-weak" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
             <span className="yq-star absolute inset-0" style={{ '--yq-star': `yq-star-${i}` } as CSSProperties}>
               <span aria-hidden className="absolute -inset-2 rounded-full bg-[radial-gradient(closest-side,rgb(252_211_77/0.45),transparent)]" />
-              <svg viewBox="0 0 24 24" className="relative size-full text-amber-300" fill="currentColor">
+              <svg viewBox="0 0 24 24" className="relative size-full text-amber-500" fill="currentColor">
                 <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" />
               </svg>
             </span>
@@ -101,7 +101,7 @@ export function HowItWorks() {
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 })
 
   return (
-    <section id="how" className="section-y section-sep section-tint relative overflow-hidden" aria-labelledby="how-title">
+    <section id="how" className="section-light section-y relative overflow-hidden" aria-labelledby="how-title">
       <Container>
         <Reveal>
           <SectionHead eyebrow="So funktioniert’s" id="how-title">

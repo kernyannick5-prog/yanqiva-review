@@ -149,8 +149,9 @@ export function Hero() {
   const chipB = useTransform(scrollYProgress, [0, 1], [0, parallax ? 70 : 0])
 
   return (
-    <section id="top" ref={loop} className="relative overflow-x-clip pb-14 pt-24 sm:pb-20 sm:pt-36 lg:pb-32 lg:pt-40">
-      <Container className="grid items-center gap-8 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
+    <section id="top" ref={loop} className="section-light relative overflow-x-clip pb-14 pt-24 sm:pb-20 sm:pt-36 lg:pb-32 lg:pt-40">
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_80%_40%,rgb(124_58_237/0.07),transparent),radial-gradient(ellipse_40%_50%_at_10%_20%,rgb(15_118_110/0.06),transparent)]" />
+      <Container className="relative grid items-center gap-8 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
         <div>
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 10 }}
@@ -191,7 +192,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.4, ease }}
           className="relative mx-auto w-full max-w-[440px] px-1 py-2 sm:py-8 lg:mx-0 lg:ml-auto"
         >
-          <div aria-hidden className="absolute inset-x-6 bottom-0 h-24 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.55),transparent)] opacity-80" />
+          <div aria-hidden className="absolute inset-x-6 bottom-0 h-24 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.4),transparent)] opacity-80" />
           <NfcCard reduce={reduce} />
 
           {/* Mobil: Chips in einer Zeile unter der Karte (nichts überdeckt die Karte); ab sm als schwebende Chips */}
@@ -207,7 +208,7 @@ export function Hero() {
               style={{ y: chipB }}
               className="glass flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm sm:absolute sm:-bottom-1 sm:-left-4 sm:py-2.5"
             >
-              <span aria-hidden className="text-amber-300">★</span>
+              <svg aria-hidden viewBox="0 0 24 24" className="size-4 text-amber-500" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
               <span className="font-medium">4,8</span>
               <span className="text-muted">Ø Bewertung</span>
             </motion.div>

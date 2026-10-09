@@ -35,11 +35,11 @@ function StageBackdrop() {
     <div aria-hidden className="pointer-events-none absolute inset-0">
       <div
         className="absolute left-1/2 top-[55%] h-[90vmin] w-[90vmin] -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{ background: 'radial-gradient(closest-side, rgb(46 16 101 / 0.5), rgb(46 16 101 / 0))' }}
+        style={{ background: 'radial-gradient(closest-side, rgb(124 58 237 / 0.1), rgb(124 58 237 / 0))' }}
       />
       <div
         className="absolute right-[8%] top-[30%] h-[50vmin] w-[50vmin] rounded-full"
-        style={{ background: 'radial-gradient(closest-side, rgb(94 234 212 / 0.08), rgb(94 234 212 / 0))' }}
+        style={{ background: 'radial-gradient(closest-side, rgb(15 118 110 / 0.09), rgb(15 118 110 / 0))' }}
       />
       <div className="bg-grid absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
     </div>
@@ -64,7 +64,7 @@ function FullShowcase() {
   }
 
   return (
-    <section id="produkt" ref={sectionRef} aria-labelledby="produkt-title" className="relative h-[260vh]">
+    <section id="produkt" ref={sectionRef} aria-labelledby="produkt-title" className="section-light relative h-[260vh]">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <StageBackdrop />
         <Container className="relative grid h-full grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-center gap-10 pb-8 pt-24">
@@ -153,7 +153,7 @@ function TouchShowcase() {
   }, [visible, pause, resume])
 
   return (
-    <section id="produkt" ref={sectionRef} aria-labelledby="produkt-title" className="relative overflow-hidden py-10 sm:py-14">
+    <section id="produkt" ref={sectionRef} aria-labelledby="produkt-title" className="section-light relative overflow-hidden py-10 sm:py-14">
       <StageBackdrop />
       <Container className="relative flex flex-col gap-3 sm:gap-4">
         <div>
@@ -183,7 +183,7 @@ function LiteShowcase() {
   const active = useActiveStep(p)
   const jump = (i: number) => p.set(STEP_TARGETS[i])
   return (
-    <section id="produkt" aria-labelledby="produkt-title" className="section-y relative overflow-hidden">
+    <section id="produkt" aria-labelledby="produkt-title" className="section-light section-y relative overflow-hidden">
       <StageBackdrop />
       <Container className="relative grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-10">
         <div className="flex flex-col gap-6 sm:gap-8">

@@ -23,7 +23,7 @@ const linkClass =
 /** Seitenfuß. Auf Rechtsseiten zeigen die Anker auf die Startseite. */
 export function Footer({ onLegalPage = false }: { onLegalPage?: boolean }) {
   return (
-    <footer className="section-sep relative overflow-hidden bg-gradient-to-b from-transparent to-ink-950/80 pb-8 pt-12 sm:pt-16">
+    <footer className={`${onLegalPage ? 'section-sep ' : ''}relative overflow-hidden bg-gradient-to-b from-transparent to-ink-950/80 pb-8 pt-12 sm:pt-16`}>
       <Container>
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div>
