@@ -2,42 +2,14 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" href="data:,">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0b2c23">
 <title>Bewertung schreiben – YANQIVA Demo</title>
-<style>
-  *{box-sizing:border-box}
-  body{margin:0;min-height:100vh;background:radial-gradient(80% 50% at 50% 0%,#0c5242 0%,transparent 70%),#0b2c23;color:#e9f7f0;font:16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
-  .banner{background:#fcd34d;color:#1c1400;padding:12px 16px;font-size:14px;font-weight:600;text-align:center}
-  main{max-width:480px;margin:0 auto;padding:24px 16px 48px}
-  .back{display:inline-flex;align-items:center;min-height:44px;color:#5eead4;text-decoration:none;font-size:14px}
-  .back:hover{text-decoration:underline}
-  .card{margin-top:8px;padding:24px 20px;border:1px solid rgba(150,235,200,.2);border-radius:24px;background:rgba(255,255,255,.04)}
-  h1{margin:0;font-size:24px;line-height:1.2;letter-spacing:-.02em}
-  .biz{margin:4px 0 0;color:#a8cbba}
-  fieldset{border:0;margin:24px 0 0;padding:0}
-  legend{padding:0;font-size:14px;color:#a8cbba}
-  .stars{display:flex;gap:2px;margin-top:6px}
-  .star{width:48px;height:48px;padding:0;border:0;background:none;cursor:pointer;color:#86b8a2;font-size:36px;line-height:1;border-radius:12px;transition:transform .15s,color .15s}
-  .star.on{color:#fcd34d}
-  .star:hover{transform:scale(1.1)}
-  label.t{display:block;margin-top:20px;font-size:14px;color:#a8cbba}
-  textarea{display:block;width:100%;min-height:130px;margin-top:6px;padding:12px 14px;resize:vertical;border:1px solid #6fa18c;border-radius:14px;background:rgba(4,22,17,.6);color:#e9f7f0;font:inherit}
-  textarea::placeholder{color:#a8cbba}
-  :focus-visible{outline:2px solid #5eead4;outline-offset:3px}
-  .send{width:100%;min-height:52px;margin-top:20px;border:0;border-radius:999px;background:#5eead4;color:#0b2c23;font:600 16px inherit;font-family:inherit;cursor:pointer}
-  .send:hover{background:#2dd4bf}
-  .msg{margin-top:12px;min-height:20px;font-size:14px;color:#fca5a5}
-  .done{display:none;text-align:center;padding:24px 0}
-  .done .ok{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 16px;border-radius:50%;background:#5eead4;color:#0b2c23;font-size:32px;font-weight:700}
-  .done p{margin:8px 0 0;color:#a8cbba}
-  .done h1{margin:0;font-size:22px}.done h1:focus{outline:none}
-  .sent .form{display:none}
-  .sent .done{display:block}
-  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
+<link rel="stylesheet" href="demo.css">
 </head>
 <body>
 <div class="banner" role="region" aria-label="Demo-Hinweis">Demo: In Produktion leitet YANQIVA hier direkt auf die Google-Bewertungsseite weiter.</div>
@@ -65,57 +37,6 @@
     </div>
   </div>
 </main>
-<script>
-(function () {
-  var name = new URLSearchParams(location.search).get('b');
-  if (name) document.getElementById('biz').textContent = name.slice(0, 80);
-
-  var rating = 0;
-  var box = document.getElementById('stars');
-  var stars = [];
-  function paint() {
-    stars.forEach(function (s, i) {
-      s.classList.toggle('on', i < rating);
-      s.setAttribute('aria-checked', String(i + 1 === rating));
-      s.tabIndex = (rating ? i + 1 === rating : i === 0) ? 0 : -1;
-    });
-  }
-  for (var i = 1; i <= 5; i++) {
-    (function (n) {
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'star';
-      b.setAttribute('role', 'radio');
-      b.setAttribute('aria-label', n + (n === 1 ? ' Stern' : ' Sterne'));
-      b.textContent = '★';
-      b.addEventListener('click', function () { rating = n; document.getElementById('msg').textContent = ''; box.removeAttribute('aria-invalid'); paint(); });
-      b.addEventListener('keydown', function (e) {
-        var d = e.key === 'ArrowRight' || e.key === 'ArrowUp' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowDown' ? -1 : 0;
-        if (!d) return;
-        e.preventDefault();
-        rating = Math.min(5, Math.max(1, (rating || n) + d));
-        document.getElementById('msg').textContent = ''; box.removeAttribute('aria-invalid');
-        paint();
-        stars[rating - 1].focus();
-      });
-      stars.push(b);
-      box.appendChild(b);
-    })(i);
-  }
-  paint();
-
-  document.getElementById('form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (!rating) {
-      document.getElementById('msg').textContent = 'Bitte wähle zuerst eine Sternebewertung.';
-      box.setAttribute('aria-invalid', 'true');
-      stars[0].focus();
-      return;
-    }
-    document.getElementById('card').classList.add('sent');
-    document.getElementById('done-h').focus();
-  });
-})();
-</script>
+<script src="demo.js"></script>
 </body>
 </html>

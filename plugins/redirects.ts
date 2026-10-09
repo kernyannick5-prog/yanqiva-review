@@ -1,8 +1,13 @@
 import type { Plugin } from 'vite'
+import { createHash } from 'node:crypto'
+import { buildCsp } from './csp.ts'
 import { redirects } from '../src/config/redirects.ts'
 
 const escapeHtml = (s: string) =>
   s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!)
+
+const REDIRECT_STYLE = 'body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b2c23;color:#cfe8dc;font:16px system-ui,sans-serif}a{color:#5eead4}a:focus-visible{outline:2px solid #5eead4;outline-offset:3px}'
+const STYLE_HASH = `'sha256-${createHash('sha256').update(REDIRECT_STYLE).digest('base64')}'`
 
 /** Statische Weiterleitungsseite für eine Redirect-Route. */
 function redirectPage(base: string, target: string, business: string): string {
@@ -14,18 +19,18 @@ function redirectPage(base: string, target: string, business: string): string {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="${buildCsp({ styleHashes: [STYLE_HASH] })}">
 <meta name="referrer" content="no-referrer">
 <link rel="icon" href="data:,">
 <!-- Datenschutz: Diese Seite erhebt, speichert und übermittelt keine Besucherdaten (kein Tracking, keine Cookies, keine externen Ressourcen). -->
 <title>Weiterleitung – ${escapeHtml(business)}</title>
 <meta http-equiv="refresh" content="0; url=${safe}">
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b2c23;color:#cfe8dc;font:16px system-ui,sans-serif}a{color:#5eead4}a:focus-visible{outline:2px solid #5eead4;outline-offset:3px}</style>
+<style>${REDIRECT_STYLE}</style>
 </head>
 <body>
 <main>
 <p>Weiterleitung zur Bewertung von ${escapeHtml(business)} … <a href="${safe}">Weiter zur Bewertungsseite</a></p>
 </main>
-<script>location.replace(${JSON.stringify(url)})</script>
 </body>
 </html>
 `

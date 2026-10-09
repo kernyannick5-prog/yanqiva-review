@@ -2,6 +2,7 @@ import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, type Plugin } from 'vite'
+import { yanqivaCsp } from './plugins/csp.ts'
 import { yanqivaRedirects } from './plugins/redirects.ts'
 
 /** Preload der latin-Schriften auf der Startseite: Text wird mit der Webfont gelayoutet statt zweimal (Fallback -> Swap). */
@@ -28,7 +29,7 @@ function preloadFonts(): Plugin {
 // GitHub Pages veröffentlicht unter /yanqiva-review/. Für eine eigene Domain BASE=/ setzen.
 export default defineConfig({
   base: process.env.BASE ?? '/yanqiva-review/',
-  plugins: [react(), tailwindcss(), yanqivaRedirects(), preloadFonts()],
+  plugins: [react(), tailwindcss(), yanqivaRedirects(), preloadFonts(), yanqivaCsp()],
   build: {
     // Multi-Page: Startseite plus eigenständige Rechtsseiten (dist/datenschutz/, dist/impressum/)
     rollupOptions: {
