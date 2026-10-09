@@ -103,7 +103,7 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
             {/* Bewertungsmaske */}
             <motion.div className="absolute inset-0 flex flex-col px-3 pb-4 pt-9" style={{ opacity: formOpacity }}>
               <div className="flex items-center gap-2">
-                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gradient-to-br from-mint to-violet-glow font-display text-[14px] font-bold text-ink-950">
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gradient-to-br from-mint to-[#a78bfa] font-display text-[14px] font-bold text-ink-950">
                   B
                 </span>
                 <span className="min-w-0 text-left">
@@ -133,7 +133,7 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
                 Frische Brötchen und ein richtig nettes Team!
               </motion.div>
               <motion.div
-                className="mt-auto grid h-10 place-items-center rounded-full bg-violet-glow/80 text-[13px] font-semibold text-white"
+                className="mt-auto grid h-10 place-items-center rounded-full bg-[#7c3aed] text-[13px] font-semibold text-white"
                 style={{ scale: sendScale }}
               >
                 Senden
