@@ -1,0 +1,18 @@
+{
+  "_comment": "Erlaubte Google-Bewertungs-/Maps-Links. EINE Quelle fuer Worker (src/reviewrules.js) und Checkout-Frontend (yanqiva-review/src/order/state.ts). Die Datei muss in beiden Repos byte-identisch sein (Test: worker/test/review-google-link-sync.test.js). Pfad-/Parameter-Muster sind JavaScript-RegExp-Quellen.",
+  "maxLength": 2000,
+  "hosts": [
+    { "host": "g.page", "path": "^/(r/)?[A-Za-z0-9_-]+(/review)?/?$" },
+    { "host": "maps.app.goo.gl", "path": "^/[A-Za-z0-9_-]+$" },
+    { "host": "goo.gl", "path": "^/maps/[A-Za-z0-9_-]+$" },
+    { "host": "g.co", "path": "^/kgs/[A-Za-z0-9_-]+$" },
+    { "host": "share.google", "path": "^/[A-Za-z0-9_-]+$" },
+    { "host": "search.google.com", "path": "^/local/writereview$", "param": { "name": "placeid", "pattern": "^[A-Za-z0-9_-]{10,}$" } },
+    { "host": "search.google.com", "path": "^/local/reviews$" }
+  ],
+  "googleDomains": {
+    "tlds": ["com", "de", "at", "ch", "co.uk", "fr", "it", "es", "nl", "be", "pl", "lu", "li", "dk", "se", "com.tr"],
+    "prefixes": ["", "www.", "maps."],
+    "path": "^/(search|maps(/.*)?|local(/.*)?)$"
+  }
+}

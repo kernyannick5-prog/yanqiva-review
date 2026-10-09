@@ -1,5 +1,6 @@
 import { isFormatId, isProductId, QTY_MAX, QTY_MIN, type FormatId, type ProductId } from './catalog'
 import { inDeliveryArea, OUT_OF_AREA_MESSAGE } from './deliveryArea'
+import googleRules from './googleLinkRules.json'
 
 export type StepId = 1 | 2 | 3 | 4
 export const STEPS: readonly { id: StepId; label: string; title: string }[] = [
@@ -112,26 +113,29 @@ export const effectiveQuantity = (raw: string): number => {
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$/i
 const PHONE_CHARS = /^[\d\s+()/-]+$/
 
-const GOOGLE_EXACT = ['g.page', 'g.co', 'goo.gl', 'maps.app.goo.gl', 'share.google']
-const GOOGLE_DOMAINS = [
-  'google.com', 'google.de', 'google.at', 'google.ch', 'google.co.uk', 'google.fr', 'google.it', 'google.es',
-  'google.nl', 'google.be', 'google.pl', 'google.lu', 'google.li', 'google.dk', 'google.se', 'google.com.tr',
-]
-const GOOGLE_PREFIXES = ['www.', 'maps.', 'search.']
+/** Erlaubte Muster: gemeinsame Datei mit dem Worker (worker/src/googleLinkRules.json, byte-identisch, Test im Worker-Repo). */
+interface GoogleHostRule { host: string; path: string; param?: { name: string; pattern: string } }
+const RULES = googleRules as { maxLength: number; hosts: GoogleHostRule[]; googleDomains: { tlds: string[]; prefixes: string[]; path: string } }
+const GOOGLE_MAIN_HOSTS = new Set(RULES.googleDomains.tlds.flatMap((t) => RULES.googleDomains.prefixes.map((p) => `${p}google.${t}`)))
+const GOOGLE_MAIN_PATH = new RegExp(RULES.googleDomains.path)
+const GOOGLE_HOST_RULES = RULES.hosts.map((r) => ({ host: r.host, path: new RegExp(r.path), param: r.param ? { name: r.param.name, pattern: new RegExp(r.param.pattern) } : null }))
 
-/** Wie der Server: https, keine Zugangsdaten, keine Leerzeichen, Host exakt aus der Liste (optional mit genau einem Präfix www./maps./search.). */
+/** Wie der Server (validateGoogleUrl): https, keine Zugangsdaten, Port 443, kein Leerraum/Backslash/Steuerzeichen, Host UND Pfadmuster. */
 export function isGoogleReviewUrl(value: string): boolean {
-  if (/\s/.test(value)) return false
+  if (!value || value.length > RULES.maxLength || /[\s\\]/.test(value) || Array.from(value).some((c) => c.charCodeAt(0) < 32 || c.charCodeAt(0) === 127)) return false
   let url: URL
   try {
     url = new URL(value)
   } catch {
     return false
   }
-  if (url.protocol !== 'https:' || url.username || url.password) return false
-  const host = url.hostname.toLowerCase()
-  if (GOOGLE_EXACT.includes(host) || GOOGLE_DOMAINS.includes(host)) return true
-  return GOOGLE_PREFIXES.some((p) => host.startsWith(p) && GOOGLE_DOMAINS.includes(host.slice(p.length)))
+  if (url.protocol !== 'https:' || url.username || url.password || (url.port && url.port !== '443')) return false
+  const host = url.hostname
+  const path = url.pathname
+  return (
+    GOOGLE_HOST_RULES.some((r) => r.host === host && r.path.test(path) && (!r.param || r.param.pattern.test(url.searchParams.get(r.param.name) ?? ''))) ||
+    (GOOGLE_MAIN_HOSTS.has(host) && GOOGLE_MAIN_PATH.test(path))
+  )
 }
 
 /** Wie der Server: höchstens 254 Zeichen, Lokalteil höchstens 64, keine Steuerzeichen, ASCII-Domain. */
@@ -164,7 +168,7 @@ function validateStep2(f: OrderForm, e: Errors) {
   const link = v(f.reviewLink)
   if (link && !isGoogleReviewUrl(link)) {
     e.reviewLink =
-      'Bitte geben Sie einen Google-Link mit https:// ein (z. B. https://g.page/r/… oder von google.de, maps.app.goo.gl, goo.gl, g.co, share.google), ohne Leerzeichen. Oder lassen Sie das Feld leer und nennen Sie uns Name und Ort Ihres Unternehmens.'
+      'Dieser Link wird nicht akzeptiert. Bitte teilen Sie den Link aus Google Maps (Ihr Unternehmen öffnen, „Rezension schreiben“ bzw. „Teilen“ wählen), z. B. https://g.page/r/…/review oder https://maps.app.goo.gl/…. Beliebige andere Google-Seiten (z. B. Weiterleitungslinks) sind nicht möglich. Oder lassen Sie das Feld leer und nennen Sie uns Name und Ort Ihres Unternehmens.'
   } else if (!link && !v(f.profileQuery)) {
     e.reviewLink = 'Bitte geben Sie entweder den Google-Bewertungslink oder Name und Ort Ihres Unternehmens an.'
   }
