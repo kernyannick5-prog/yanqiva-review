@@ -24,7 +24,7 @@ export function buildMessage(input: OrderForm): string {
     `Menge: ${qty}`,
     `Einzelpreis: ${formatEuro(p.unitPrice)}`,
     `Zwischensumme: ${formatEuro(subtotal(pid, qty))}`,
-    `Versand (Deutschland): ${formatEuro(SHIPPING_EUR)} (inklusive)`,
+    `Lieferung und Übergabe vor Ort (Raum Speyer, Ludwigshafen, Mannheim, Karlsruhe): ${formatEuro(SHIPPING_EUR)} (inklusive)`,
     `Gesamtbetrag einmalig: ${formatEuro(total(pid, qty))}`,
     `Laufende Kosten: ${p.running}`,
     `Lieferzeit: ${shippingText(p)}`,
@@ -96,6 +96,7 @@ export function buildMailBody(input: OrderForm): string {
   const p = PRODUCTS[pid]
   const lines = [
     `Bestellung: ${qty} x ${p.shortName}, ${FORMATS[f.format].name}, gesamt ${formatEuro(total(pid, qty))}`,
+    'Bestätigt: Unternehmer (§ 14 BGB), AGB (yanqiva-bewertung.de/agb/) akzeptiert.',
     `Firma: ${f.company}`,
     `Kontakt: ${f.firstName} ${f.lastName}, ${f.email}${f.phone ? `, ${f.phone}` : ''}`,
     `Rechnung: ${f.billingStreet}, ${f.billingZip} ${f.billingCity}`,

@@ -33,8 +33,8 @@ function Headline({ reduce }: { reduce: boolean }) {
               <span key={w} className="-mb-[0.12em] inline-block overflow-hidden pb-[0.12em] align-bottom">
                 <motion.span
                   className={`inline-block ${line.gradient ? 'text-gradient' : ''}`}
-                  initial={reduce ? false : { y: '110%', opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
+                  initial={reduce ? false : { y: '110%' }}
+                  animate={{ y: 0 }}
                   transition={{ duration: 0.9, delay: 0.15 + i * 0.09, ease }}
                 >
                   {w}
@@ -165,10 +165,11 @@ export function Hero() {
 
           <Headline reduce={reduce} />
 
+          {/* Kein opacity-Fade: der Absatz ist das LCP-Element und soll sofort sichtbar sein */}
           <motion.p
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7, ease }}
+            initial={reduce ? false : { y: 16 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6, ease }}
             className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted sm:mt-6 sm:text-xl"
           >
             YANQIVA REVIEW verbindet NFC und QR-Code zu einem einfachen Bewertungssystem für Unternehmen.
@@ -202,13 +203,14 @@ export function Hero() {
               className="glass flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm sm:absolute sm:-top-1 sm:-right-4 sm:py-2.5"
             >
               <span aria-hidden className="size-2 rounded-full bg-mint shadow-[0_0_10px_var(--color-mint)]" />
-              <span className="font-medium">+32 Bewertungen</span>
+              <span className="font-medium">Beispiel: +32 Bewertungen</span>
             </motion.div>
             <motion.div
               style={{ y: chipB }}
               className="glass flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm sm:absolute sm:-bottom-1 sm:-left-4 sm:py-2.5"
             >
               <svg aria-hidden viewBox="0 0 24 24" className="size-4 text-amber-500" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
+              <span className="text-muted">Beispiel:</span>
               <span className="font-medium">4,8</span>
               <span className="text-muted">Ø Bewertung</span>
             </motion.div>

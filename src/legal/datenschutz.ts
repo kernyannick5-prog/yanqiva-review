@@ -3,17 +3,17 @@ import type { LegalDoc } from './types'
 /**
  * Datenschutzerklärung von yanqiva-bewertung.de.
  * Anbieterdaten, Formulierungen und Aufsichtsbehörde deckungsgleich mit https://yanqiva.de/datenschutz halten.
- * Bei jeder Änderung der Verarbeitung (z. B. Start des Echtbetriebs mit Zählung) vorher anpassen.
+ * Bei jeder Änderung der Verarbeitung vorher anpassen. Abschnitte 7 und 8 beschreiben den geplanten Stand mit Zählung und Dashboard-Login: vor der ersten Lieferung gegen die tatsächliche Umsetzung prüfen.
  */
 export const datenschutz: LegalDoc = {
   title: 'Datenschutzerklärung',
   badge: 'Rechtliches',
-  updated: 'Stand: 8. Oktober 2026',
+  updated: 'Stand: 9. Oktober 2026',
   callouts: [
     {
       tone: 'info',
       title: 'Kurz zusammengefasst',
-      text: 'Diese Website setzt keine Cookies, kein Tracking, keine Analyse-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein. Das einzige Formular, das Daten versendet, ist das Bestellformular (Abschnitt 5). Beim Aufruf verarbeiten unsere Dienstleister für Auslieferung und Hosting (Cloudflare, GitHub Pages) technisch notwendige Verbindungsdaten wie Ihre IP-Adresse. Wir selbst speichern keine Zugriffsprotokolle. Das Dashboard auf dieser Website ist eine Demo mit erfundenen Beispieldaten; Weiterleitungen und Statistiken der Demo werden nicht gezählt oder gespeichert.',
+      text: 'Diese Website setzt keine Tracking- oder Analyse-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein. Das einzige Formular für Besucher, das Daten versendet, ist das Bestellformular (Abschnitt 5); Kunden mit der Variante Dashboard melden sich zusätzlich im Dashboard an (Abschnitt 8). Beim Aufruf verarbeiten unsere Dienstleister für Auslieferung und Hosting (Cloudflare, GitHub Pages) technisch notwendige Verbindungsdaten wie Ihre IP-Adresse. Wir selbst speichern keine Zugriffsprotokolle. Das Dashboard auf der Startseite ist eine Demo mit erfundenen Beispieldaten; Weiterleitungen der Demo-Karten werden nicht gezählt oder gespeichert. Beim Antippen einer echten Karte zählen wir nur die Zahl der Aufrufe, ohne Personenbezug (Abschnitt 7).',
     },
   ],
   sections: [
@@ -37,10 +37,10 @@ export const datenschutz: LegalDoc = {
       heading: '2. Überblick',
       blocks: [
         {
-          p: 'Auf dieser Website stellen wir das Produkt „YANQIVA REVIEW“ (NFC-Karten und QR-Codes, die zur Google-Bewertungsseite eines Unternehmens führen) vor und bieten es Unternehmern über ein Bestellformular zum Kauf an (Abschnitt 5). Das Dashboard auf dieser Website ist eine Demo: Die Statistiken, Unternehmensnamen und Bewertungstexte darin sind erfundene Beispieldaten. Die Bewertungstexte enthalten keine Namen. In der Demo werden keine echten Kundendaten angezeigt oder verarbeitet.',
+          p: 'Auf dieser Website stellen wir das Produkt „YANQIVA REVIEW“ (NFC-Karten und QR-Codes, die zur Google-Bewertungsseite eines Unternehmens führen) vor und bieten es Unternehmern über ein Bestellformular zum Kauf an (Abschnitt 5). Das Dashboard auf der Startseite ist eine Demo: Die Statistiken und Unternehmensnamen darin sind erfundene Beispieldaten. In der Demo werden keine echten Kundendaten angezeigt oder verarbeitet. Das echte Dashboard für Kunden der Variante Dashboard beschreiben wir in Abschnitt 8.',
         },
         {
-          p: 'Wir setzen keine Cookies, keine Analyse- oder Tracking-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein; alle Schriften werden von dieser Website selbst ausgeliefert. Außer dem Bestellformular (Abschnitt 5) gibt es keine Formulare, die Daten an uns oder Dritte senden; es gibt kein Login und keinen Newsletter. Zur Auslieferung und zum Schutz der Website nutzen wir Dienstleister (siehe Abschnitt 3); zu einer möglichen Sicherheitsabfrage durch Cloudflare siehe ebenfalls Abschnitt 3. Personenbezogene Daten verarbeiten wir nur in den unten beschriebenen Fällen.',
+          p: 'Wir setzen auf den Seiten für Besucher keine Cookies (Ausnahme: das technisch notwendige Cookie der Cloudflare-Sicherheitsabfrage, Abschnitt 3), keine Analyse- oder Tracking-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein; alle Schriften werden von dieser Website selbst ausgeliefert. Außer dem Bestellformular (Abschnitt 5) gibt es für Besucher keine Formulare, die Daten an uns oder Dritte senden; es gibt keinen Newsletter. Ein Login gibt es nur für Kunden der Variante Dashboard (Abschnitt 8). Zur Auslieferung und zum Schutz der Website nutzen wir Dienstleister (siehe Abschnitt 3); zu einer möglichen Sicherheitsabfrage durch Cloudflare siehe ebenfalls Abschnitt 3. Personenbezogene Daten verarbeiten wir nur in den unten beschriebenen Fällen.',
         },
         {
           p: 'Website und Produkt sind nach den Grundsätzen der Datenminimierung (Art. 5 Abs. 1 lit. c DSGVO) und des Datenschutzes durch Technikgestaltung (Art. 25 DSGVO) konzipiert: Personen, die eine Karte antippen oder einen QR-Code scannen, sollen nicht identifiziert, nicht wiedererkannt und nicht über Websites hinweg verfolgt werden. Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne von Art. 22 DSGVO findet nicht statt.',
@@ -104,7 +104,7 @@ export const datenschutz: LegalDoc = {
               ['Anzeigename für den Aufdruck, Google-Bewertungslink oder Name und Ort des Unternehmens laut Google, freiwillige Hinweise (zum Beispiel Gestaltungswunsch)', 'Einrichtung und Gestaltung der Karten bzw. Aufsteller'],
               ['Firma, Vor- und Nachname der Ansprechperson, E-Mail-Adresse', 'Vertragsabwicklung, Eingangs- und Auftragsbestätigung, Rechnung, Rückfragen'],
               ['Telefonnummer (freiwillig)', 'Rückfragen zur Lieferung'],
-              ['Rechnungsadresse, gegebenenfalls abweichende Lieferadresse mit Empfänger', 'Rechnung und Versand'],
+              ['Rechnungsadresse, gegebenenfalls abweichende Lieferadresse mit Empfänger', 'Rechnung und Lieferung'],
               ['Bestellnummer, Zeitpunkt des Eingangs, Kennung Ihres Browsers (User-Agent), aus der Verbindung abgeleitetes Land, Ergebnis der automatischen Spam-Prüfung', 'Zuordnung der Bestellung, Erkennung von Missbrauch und Fehlern'],
             ],
           },
@@ -122,7 +122,7 @@ export const datenschutz: LegalDoc = {
           p: 'Auftragsbestätigung, Rechnung und Zahlung: Auftragsbestätigung, Rechnung, gegebenenfalls die Zugangsdaten zum Dashboard und Rückfragen senden wir von support@yanqiva.de über den E-Mail-Dienst der IONOS SE (siehe Abschnitt 4). Ihre Zahlung per Überweisung wickeln die beteiligten Kreditinstitute ab; wir erhalten dabei die Angaben der Überweisung (Name des Kontoinhabers, IBAN, Betrag, Verwendungszweck).',
         },
         {
-          p: 'Versand: Für die Lieferung übermitteln wir Firma bzw. Name des Empfängers und die Lieferadresse an das von uns beauftragte Versandunternehmen. E-Mail-Adresse und Telefonnummer geben wir dafür nicht weiter.',
+          p: 'Lieferung: Wir liefern nur lokal und übergeben die Produkte persönlich. Einen Versanddienstleister setzen wir nicht ein; Lieferadresse, E-Mail-Adresse und Telefonnummer geben wir dafür an niemanden weiter. Die Postleitzahl der Lieferadresse wird im Formular und auf unserer Schnittstelle mit der Liste der Postleitzahlen unseres Liefergebiets abgeglichen; dabei wird nichts zusätzlich gespeichert.',
         },
         {
           p: 'Missbrauchs- und Spamschutz: Zum Schutz vor automatisierten Einsendungen setzen wir keine Dienste von Drittanbietern und keine Cookies ein, sondern folgende Maßnahmen:',
@@ -173,28 +173,50 @@ export const datenschutz: LegalDoc = {
           p: 'Beim Antippen einer Karte oder beim Scannen eines QR-Codes wird zunächst eine Weiterleitungsadresse dieser Website aufgerufen (/r/ gefolgt von einer Kartenkennung). Diese Seiten sind statische Seiten ohne Skripte von Drittanbietern; sie weisen Ihren Browser an, keine Referrer-Angabe weiterzugeben (no-referrer).',
         },
         {
-          p: 'Heute (Demo): Die Weiterleitungsseiten leiten auf eine simulierte Bewertungsseite dieser Website (/review-demo/) weiter. Dabei wird nichts gezählt, protokolliert oder gespeichert; es findet nur die in Abschnitt 3 beschriebene technische Verarbeitung durch Cloudflare und GitHub statt. Die simulierte Bewertungsseite zeigt den Namen des Demo-Unternehmens aus der aufgerufenen Adresse an und sendet keine Daten: Sternebewertung und Text bleiben in Ihrem Browser und werden beim Verlassen der Seite verworfen. Alle Statistiken im Dashboard sind erfundene Beispieldaten.',
+          p: 'Karten und QR-Codes unserer Kunden: Die Weiterleitungsadresse führt Ihren Browser zum Google-Bewertungsformular des jeweiligen Unternehmens (siehe Abschnitt 9). Dabei zählen wir den Aufruf: Gezählt werden ausschließlich aggregierte Tageszähler je Karte, getrennt nach NFC und QR-Code. Gespeichert wird nur die Zahl der Aufrufe; wir speichern keine IP-Adressen, Browserkennungen, Besucher-IDs oder Standortdaten und erkennen Personen nicht wieder. Die Zähler stehen Kunden der Variante Dashboard im Dashboard zur Verfügung (Abschnitt 8). Bei dieser Verarbeitung werden technisch bedingt die in Abschnitt 3 beschriebenen Verbindungsdaten durch Cloudflare verarbeitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse liegt darin, unseren Kunden die vertraglich zugesagten Zahlen bereitzustellen und die Weiterleitung sicher zu betreiben.',
         },
         {
-          p: 'Späterer Echtbetrieb: Im Echtbetrieb sollen Aufrufe der Weiterleitung ausschließlich als aggregierte Tageszähler je Karte gezählt werden, getrennt nach NFC und QR-Code. Gespeichert würde nur die Zahl der Aufrufe; keine IP-Adressen, keine Browserkennungen, keine Besucher-IDs, keine Standortdaten. Diese Zählung findet derzeit nicht statt. Vor dem Start des Echtbetriebs aktualisieren wir diese Datenschutzerklärung.',
+          p: 'Demo-Adressen: Die Demo-Weiterleitungen (zum Beispiel /r/demo-baeckerei) führen auf eine simulierte Bewertungsseite dieser Website (/review-demo/). Dabei wird nichts gezählt oder gespeichert. Die simulierte Bewertungsseite zeigt den Namen des Demo-Unternehmens aus der aufgerufenen Adresse an und sendet keine Daten: Sternebewertung und Text bleiben in Ihrem Browser und werden beim Verlassen der Seite verworfen. Alle Statistiken in der Dashboard-Demo sind erfundene Beispieldaten.',
+        },
+      ],
+    },
+    {
+      id: 'dashboard',
+      heading: '8. Dashboard für Kunden (Variante Dashboard)',
+      blocks: [
+        {
+          p: 'Kunden der Variante Dashboard erhalten Zugangsdaten für einen geschützten Bereich, in dem sie ihre Karten verwalten, die Zahl der Aufrufe je Karte ansehen und den Ziel-Link ändern können. Dabei verarbeiten wir:',
+        },
+        {
+          list: [
+            'Anmeldedaten: die E-Mail-Adresse der Ansprechperson. Die Anmeldung erfolgt ohne Passwort per Magic-Link: Wir senden einen einmalig nutzbaren, zeitlich begrenzten Anmeldelink per E-Mail (Versand über Resend, siehe Abschnitt 5),',
+            'Karten: Kartennummer, Anzeigename, die vom Kunden hinterlegte Ziel-URL (in der Regel der Google-Bewertungslink des Unternehmens) und den Zeitpunkt der letzten Änderung,',
+            'aggregierte Zähler: je Karte und Tag zwei Zahlen (Aufrufe über NFC und über QR-Code). Diese Zähler enthalten keine personenbezogenen Daten über Personen, die eine Karte antippen oder einen QR-Code scannen (Abschnitt 7).',
+          ],
+        },
+        {
+          p: 'Zweck ist die Bereitstellung des Dashboards nach Ziffer 3 und 8 unserer AGB. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Nach der Anmeldung speichert Ihr Browser ein Sitzungs-Token im Browser-Speicher (kein Cookie); es dient nur der Anmeldung, nicht der Analyse (§ 25 Abs. 2 Nr. 2 TDDDG), und wird beim Abmelden gelöscht. Die Daten verarbeiten wir in unserem Auftrag bei Cloudflare (Workers und Datenbank Cloudflare D1 mit EU-Jurisdiktion, siehe Abschnitt 3). Die Zähler werden ohne IP-Adressen und ohne Cookies erfasst.',
+        },
+        {
+          p: 'Speicherdauer: Konto, Karten und Ziel-URLs speichern wir, solange der Dashboard-Zugang besteht (12 Monate ab Freischaltung; eine Verlängerung erfolgt nur auf Wunsch des Kunden). Tageszähler zeigen wir bis zu 25 Monate rückwirkend und löschen sie sowie das Konto 90 Tage nach dem Ende des Dashboard-Zugangs; die Ziel-URL je Karte speichern wir für die Weiterleitung weiter (Abschnitt 7), solange wir diese nach Ziffer 9 der AGB betreiben. Gesetzliche Aufbewahrungspflichten für Vertragsunterlagen (Abschnitt 5) bleiben unberührt.',
         },
       ],
     },
     {
       id: 'google',
-      heading: '8. Google-Bewertungslink und Weiterleitung zu Google',
+      heading: '9. Google-Bewertungslink und Weiterleitung zu Google',
       blocks: [
         {
-          p: 'Im Echtbetrieb hinterlegt ein Unternehmen als Ziel seiner Karten den Link zu seiner Google-Bewertungsseite. Dieser Link ist eine geschäftliche Ziel-URL des Unternehmens. Nach der Weiterleitung verlassen Sie unsere Website. Für die Verarbeitung auf den Seiten von Google ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, verantwortlich; es gelten deren Datenschutzbestimmungen (https://policies.google.com/privacy). Wir erhalten von Google keine Daten über Personen, die die Bewertungsseite aufrufen oder eine Bewertung abgeben.',
+          p: 'Ein Unternehmen hinterlegt als Ziel seiner Karten den Link zu seiner Google-Bewertungsseite. Dieser Link ist eine geschäftliche Ziel-URL des Unternehmens. Nach der Weiterleitung verlassen Sie unsere Website. Für die Verarbeitung auf den Seiten von Google ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, verantwortlich; es gelten deren Datenschutzbestimmungen (https://policies.google.com/privacy). Wir erhalten von Google keine Daten über Personen, die die Bewertungsseite aufrufen oder eine Bewertung abgeben.',
         },
         {
-          p: 'In der Demo findet keine Weiterleitung zu Google statt; Ziel ist die simulierte Bewertungsseite dieser Website (siehe Abschnitt 7).',
+          p: 'Bei den Demo-Adressen findet keine Weiterleitung zu Google statt (siehe Abschnitt 7).',
         },
       ],
     },
     {
       id: 'links',
-      heading: '9. Externe Links',
+      heading: '10. Externe Links',
       blocks: [
         {
           p: 'Unsere Seiten enthalten Links zu anderen Websites, zum Beispiel zu yanqiva.de. Beim Anklicken gilt die Datenschutzerklärung des jeweiligen Anbieters. Wir binden keine Inhalte von Dritten ein.',
@@ -203,7 +225,7 @@ export const datenschutz: LegalDoc = {
     },
     {
       id: 'rechte',
-      heading: '10. Ihre Rechte',
+      heading: '11. Ihre Rechte',
       blocks: [
         {
           p: 'Sie haben gegenüber uns folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:',
@@ -228,7 +250,7 @@ export const datenschutz: LegalDoc = {
     },
     {
       id: 'beschwerde',
-      heading: '11. Beschwerderecht',
+      heading: '12. Beschwerderecht',
       blocks: [
         {
           p: 'Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren (Art. 77 DSGVO). Zuständig ist die Aufsichtsbehörde Ihres Wohnorts oder die für uns zuständige Behörde: Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz, Hintere Bleiche 34, 55116 Mainz.',
@@ -237,10 +259,10 @@ export const datenschutz: LegalDoc = {
     },
     {
       id: 'aenderungen',
-      heading: '12. Datensicherheit und Änderungen',
+      heading: '13. Datensicherheit und Änderungen',
       blocks: [
         {
-          p: 'Die Übertragung erfolgt verschlüsselt über HTTPS. Wir passen diese Erklärung an, wenn sich unsere Verarbeitung ändert, insbesondere vor dem Start des Echtbetriebs. Es gilt die jeweils aktuelle Fassung.',
+          p: 'Die Übertragung erfolgt verschlüsselt über HTTPS. Wir passen diese Erklärung an, wenn sich unsere Verarbeitung ändert. Es gilt die jeweils aktuelle Fassung.',
         },
       ],
     },

@@ -16,7 +16,7 @@ export function OrderSidebar({ form }: { form: OrderForm }) {
       <p className="text-sm text-muted">{FORMATS[form.format].name}</p>
       <dl className="mt-4 space-y-2 border-t border-line pt-4 text-[15px]">
         <Line k={p ? `${qty} × ${formatEuro(p.unitPrice)}` : `${qty} ×`} v={pid ? formatEuro(subtotal(pid, qty)) : '–'} />
-        <Line k="Versand (Deutschland)" v={`${formatEuro(SHIPPING_EUR)} (inklusive)`} />
+        <Line k="Lieferung vor Ort" v={`${formatEuro(SHIPPING_EUR)} (inklusive)`} />
         <div className="flex items-baseline justify-between gap-3 border-t border-line pt-3">
           <dt className="font-display font-semibold text-text">Gesamt einmalig</dt>
           <dd className="font-display text-3xl font-semibold text-mint">
@@ -32,6 +32,7 @@ export function OrderSidebar({ form }: { form: OrderForm }) {
         </p>
       )}
       {p && <p className="mt-3 text-[13px] text-muted">Lieferzeit: {shippingText(p)}.</p>}
+      <p className="mt-3 text-[13px] text-muted">Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe.</p>
       <p className="mt-3 text-[13px] text-muted">Zahlung per Rechnung (Überweisung), nur für Unternehmer.</p>
     </aside>
   )

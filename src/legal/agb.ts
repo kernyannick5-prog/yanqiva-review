@@ -9,7 +9,7 @@ import type { LegalDoc } from './types'
 export const agb: LegalDoc = {
   title: 'Allgemeine Geschäftsbedingungen',
   badge: 'Rechtliches',
-  updated: 'Stand: 8. Oktober 2026',
+  updated: 'Stand: 9. Oktober 2026',
   callouts: [
     {
       tone: 'info',
@@ -47,7 +47,10 @@ export const agb: LegalDoc = {
           p: 'Den Eingang der Bestellung bestätigen wir unverzüglich automatisch per E-Mail (Eingangsbestätigung). Die Eingangsbestätigung ist noch keine Annahme der Bestellung.',
         },
         {
-          p: 'Der Vertrag kommt erst zustande, wenn wir die Bestellung durch eine Auftragsbestätigung per E-Mail annehmen. Mit der Auftragsbestätigung erhält der Kunde die Rechnung. In der Regel senden wir die Auftragsbestätigung innerhalb eines Werktags. An seine Bestellung ist der Kunde fünf Werktage nach dem Absenden gebunden; nehmen wir sie bis dahin nicht an, ist er nicht mehr gebunden. Lässt sich das angegebene Google-Unternehmensprofil nicht eindeutig zuordnen oder sind Angaben unklar, fragen wir vor der Auftragsbestätigung nach.',
+          p: 'Der Vertrag kommt erst zustande, wenn wir die Bestellung durch eine Auftragsbestätigung per E-Mail annehmen. Mit der Auftragsbestätigung erhält der Kunde die Rechnung. In der Regel senden wir die Auftragsbestätigung innerhalb eines Werktags, frühestens jedoch am 15. Oktober 2026 (siehe nächster Absatz). An seine Bestellung ist der Kunde bis zum Ablauf von fünf Werktagen nach dem Absenden bzw., bei Bestellungen vor dem 15. Oktober 2026, nach dem 15. Oktober 2026 gebunden, je nachdem, was später eintritt; nehmen wir sie bis dahin nicht an, ist er nicht mehr gebunden. Lässt sich das angegebene Google-Unternehmensprofil nicht eindeutig zuordnen oder sind Angaben unklar, fragen wir vor der Auftragsbestätigung nach.',
+        },
+        {
+          p: 'Aufnahme der Tätigkeit: Wir nehmen unsere Tätigkeit am 15. Oktober 2026 auf. Ein Vertrag kommt daher frühestens am 15. Oktober 2026 zustande. Bestellungen, die vor diesem Tag eingehen, prüfen und bestätigen wir ab dem 15. Oktober 2026. Fristen für die Lieferung (Ziffer 6) beginnen nicht vor der Auftragsbestätigung bzw. dem Zahlungseingang.',
         },
         {
           p: 'Kann das Bestellformular wegen einer technischen Störung nicht übermittelt werden, bietet es an, die Bestellung als vorbereitete E-Mail an support@yanqiva.de zu senden. Diese E-Mail gilt als Bestellung; für die Annahme gilt der vorstehende Absatz.',
@@ -62,12 +65,12 @@ export const agb: LegalDoc = {
       heading: '3. Leistungsumfang',
       blocks: [
         {
-          p: 'Wir liefern die bestellte Anzahl NFC-Produkte in der gewählten Ausführung, entweder als NFC-Karte im Kartenformat oder als NFC-Aufsteller für Theke oder Tisch, jeweils mit NFC-Chip und aufgedrucktem QR-Code, und richten sie ein. Tippt eine Person das Produkt mit einem Smartphone an oder scannt sie den QR-Code, wird sie über eine Weiterleitungsadresse von uns (Ziffer 9) zum Google-Bewertungsformular des Unternehmensprofils des Kunden geleitet. Es gibt zwei Varianten:',
+          p: 'Wir liefern die bestellte Anzahl NFC-Produkte in der gewählten Ausführung (Lieferung nur im Liefergebiet nach Ziffer 6), entweder als NFC-Karte im Kartenformat oder als NFC-Aufsteller für Theke oder Tisch, jeweils mit NFC-Chip und aufgedrucktem QR-Code, und richten sie ein. Tippt eine Person das Produkt mit einem Smartphone an oder scannt sie den QR-Code, wird sie über eine Weiterleitungsadresse von uns (Ziffer 9) zum Google-Bewertungsformular des Unternehmensprofils des Kunden geleitet. Es gibt zwei Varianten:',
         },
         {
           list: [
             'YANQIVA REVIEW Klassik: Lieferung und Einrichtung der Produkte mit Weiterleitung zum Google-Bewertungsformular. Laufende Kosten fallen nicht an.',
-            'YANQIVA REVIEW Dashboard: Leistungen wie Klassik und zusätzlich ein Zugang zu einem Online-Dashboard für 12 Monate (Ziffer 8). Das Dashboard zeigt Statistiken zur Zahl der Aufrufe der Weiterleitung über NFC und QR-Code und ermöglicht es dem Kunden, das Ziel der Weiterleitung jederzeit selbst zu ändern.',
+            'YANQIVA REVIEW Dashboard: Leistungen wie Klassik und zusätzlich ein Zugang zu einem Online-Dashboard für 12 Monate (Ziffer 8). Das Dashboard zeigt Statistiken zur Zahl der Aufrufe der Weiterleitung über NFC und QR-Code und ermöglicht es dem Kunden, das Ziel der Weiterleitung jederzeit selbst zu ändern. Ein Google-Bewertungslink als Ziel ist sofort aktiv; ein anderes https-Ziel wird erst nach Freigabe durch uns wirksam.',
           ],
         },
         {
@@ -89,7 +92,7 @@ export const agb: LegalDoc = {
       heading: '4. Einrichtung und Angaben des Kunden',
       blocks: [
         {
-          p: 'Wir richten die Produkte anhand der Angaben des Kunden in der Bestellung ein: Anzeigename, Google-Bewertungslink oder, wenn kein Link angegeben ist, Name und Ort des Unternehmens, wie bei Google angezeigt. Im letzten Fall ermitteln wir den Bewertungslink des Profils; ist das Profil nicht eindeutig zu finden, fragen wir nach. Vor dem Versand prüfen wir, dass die Weiterleitung zu dem angegebenen oder ermittelten Bewertungsformular führt.',
+          p: 'Wir richten die Produkte anhand der Angaben des Kunden in der Bestellung ein: Anzeigename, Google-Bewertungslink oder, wenn kein Link angegeben ist, Name und Ort des Unternehmens, wie bei Google angezeigt. Im letzten Fall ermitteln wir den Bewertungslink des Profils; ist das Profil nicht eindeutig zu finden, fragen wir nach. Vor der Übergabe prüfen wir, dass die Weiterleitung zu dem angegebenen oder ermittelten Bewertungsformular führt.',
         },
         {
           p: 'Der Kunde ist dafür verantwortlich, dass seine Angaben richtig und vollständig sind, insbesondere dass der Anzeigename richtig geschrieben ist und dass der angegebene Link bzw. das genannte Profil das Google-Unternehmensprofil seines eigenen Unternehmens ist oder eines Unternehmens, für das er handeln darf. Abweichungen, die auf unrichtigen oder unvollständigen Angaben des Kunden beruhen, sind kein Mangel. Ein falsches Weiterleitungsziel korrigieren wir in diesem Fall ohne Rücksendung; eine Neuanfertigung bedruckter Produkte erfolgt nach vorheriger Absprache gegen Entgelt.',
@@ -104,13 +107,13 @@ export const agb: LegalDoc = {
       heading: '5. Preise und Zahlung',
       blocks: [
         {
-          p: 'Es gelten die zum Zeitpunkt der Bestellung im Bestellformular genannten Preise. Alle Preise sind Endpreise in Euro je Stück; der Gesamtbetrag ergibt sich aus dem Preis je Stück und der Menge. Der Versand innerhalb Deutschlands ist im Preis enthalten. Weitere Kosten fallen für die Bestellung nicht an; zur optionalen Verlängerung des Dashboards siehe Ziffer 8.',
+          p: 'Es gelten die zum Zeitpunkt der Bestellung im Bestellformular genannten Preise. Alle Preise sind Endpreise in Euro je Stück; der Gesamtbetrag ergibt sich aus dem Preis je Stück und der Menge. Lieferung und Übergabe vor Ort im Liefergebiet (Ziffer 6) sind im Preis enthalten. Weitere Kosten fallen für die Bestellung nicht an; zur optionalen Verlängerung des Dashboards siehe Ziffer 8.',
         },
         {
           p: 'Wir sind Kleinunternehmer im Sinne von § 19 UStG. Es wird keine Umsatzsteuer berechnet und in Rechnungen keine Umsatzsteuer ausgewiesen. Entfallen die Voraussetzungen der Kleinunternehmerregelung, können wir für Verlängerungszeiträume des Dashboards, die danach beginnen, die gesetzliche Umsatzsteuer zusätzlich berechnen. Wir informieren den Kunden darüber mindestens einen Monat vorher in Textform.',
         },
         {
-          p: 'Zahlung erfolgt per Rechnung. Die Rechnung erhält der Kunde mit der Auftragsbestätigung per E-Mail. Sie ist innerhalb von 14 Tagen nach Rechnungsdatum ohne Abzug per Überweisung zu zahlen. Mit der Einrichtung, der Produktion und dem Versand beginnen wir nach Zahlungseingang.',
+          p: 'Zahlung erfolgt per Rechnung. Die Rechnung erhält der Kunde mit der Auftragsbestätigung per E-Mail. Sie ist innerhalb von 14 Tagen nach Rechnungsdatum ohne Abzug per Überweisung zu zahlen. Mit der Einrichtung, der Produktion und der Lieferung beginnen wir nach Zahlungseingang.',
         },
         {
           p: 'Geht die Zahlung nicht fristgerecht ein, können wir dem Kunden eine angemessene Nachfrist setzen und nach deren erfolglosem Ablauf vom Vertrag zurücktreten. Die gesetzlichen Rechte bei Zahlungsverzug bleiben unberührt.',
@@ -119,19 +122,19 @@ export const agb: LegalDoc = {
     },
     {
       id: 'lieferung',
-      heading: '6. Lieferung und Gefahrübergang',
+      heading: '6. Lieferung, Übergabe und Gefahrübergang',
       blocks: [
         {
-          p: 'Wir liefern nur an Lieferadressen in Deutschland, und zwar an die Rechnungsadresse oder an die in der Bestellung angegebene abweichende Lieferadresse.',
+          p: 'Wir liefern ausschließlich lokal an Unternehmen im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe (Liefergebiet). Die Übergabe und Einrichtung erfolgen persönlich vor Ort; einen Postversand gibt es nicht. Maßgeblich ist die Postleitzahl der Lieferadresse, also der Rechnungsadresse oder der in der Bestellung angegebenen abweichenden Lieferadresse. Sie wird im Bestellformular geprüft. Bestellungen mit einer Lieferadresse außerhalb des Liefergebiets nehmen wir nicht an. Auf Anfrage an support@yanqiva.de prüfen wir im Einzelfall, ob eine Lieferung möglich ist.',
         },
         {
-          p: 'Wir versenden die Produkte in der Regel innerhalb von 2 bis 5 Werktagen (Variante Klassik) bzw. innerhalb von 7 Werktagen (Variante Dashboard, einschließlich Einrichtung des Dashboards). Die voraussichtliche Lieferzeit bestätigen wir zusätzlich in der Auftragsbestätigung. Sie beginnt mit dem Zahlungseingang, frühestens jedoch, wenn Rückfragen zur Einrichtung (Ziffer 4) geklärt sind. Verbindlich ist ein Liefertermin nur, wenn er ausdrücklich als verbindlich vereinbart ist. Überschreiten wir die genannte Lieferzeit, kann der Kunde uns eine angemessene Nachfrist setzen; seine gesetzlichen Rechte bleiben unberührt.',
+          p: 'Wir übergeben die Produkte in der Regel innerhalb von 2 bis 5 Werktagen (Variante Klassik) bzw. innerhalb von 7 Werktagen (Variante Dashboard, einschließlich Einrichtung des Dashboards) nach Zahlungseingang. Den Übergabetermin vereinbaren wir mit dem Kunden. Die voraussichtliche Lieferzeit bestätigen wir zusätzlich in der Auftragsbestätigung. Sie beginnt mit dem Zahlungseingang, frühestens jedoch mit der Auftragsbestätigung (Ziffer 2) und frühestens, wenn Rückfragen zur Einrichtung (Ziffer 4) geklärt sind. Verbindlich ist ein Liefertermin nur, wenn er ausdrücklich als verbindlich vereinbart ist. Überschreiten wir die genannte Lieferzeit, kann der Kunde uns eine angemessene Nachfrist setzen; seine gesetzlichen Rechte bleiben unberührt.',
         },
         {
-          p: 'Die Gefahr des zufälligen Untergangs und der zufälligen Verschlechterung der Ware geht mit der Übergabe an das Versandunternehmen auf den Kunden über (§ 447 BGB). Geht eine Sendung verloren oder kommt sie beschädigt an, unterstützen wir den Kunden bei der Abwicklung mit dem Versandunternehmen. Äußerlich erkennbare Transportschäden soll der Kunde möglichst bei der Zustellung beim Zusteller reklamieren und uns unverzüglich mitteilen.',
+          p: 'Die Produkte werden ohne Versandverpackung übergeben. Die Gefahr des zufälligen Untergangs und der zufälligen Verschlechterung der Ware geht mit der Übergabe an den Kunden oder an eine von ihm benannte Person am vereinbarten Ort über. Kann die Übergabe aus Gründen, die der Kunde zu vertreten hat, nicht stattfinden, vereinbaren wir einen neuen Termin; die gesetzlichen Regeln zum Annahmeverzug bleiben unberührt. Äußerlich erkennbare Schäden soll der Kunde bei der Übergabe anzeigen.',
         },
         {
-          p: 'Bei der Variante Dashboard senden wir die Zugangsdaten zum Dashboard mit dem Versand per E-Mail.',
+          p: 'Bei der Variante Dashboard senden wir die Zugangsdaten zum Dashboard mit der Übergabe per E-Mail.',
         },
       ],
     },
@@ -152,7 +155,7 @@ export const agb: LegalDoc = {
           p: 'Bei der Variante Dashboard ist der Zugang zum Dashboard für 12 Monate im einmaligen Preis enthalten. Die 12 Monate beginnen mit dem Tag, an dem wir die Zugangsdaten per E-Mail senden. Der Zugang gilt für den Standort und das Google-Unternehmensprofil der Bestellung und für die mit der Bestellung gelieferten Produkte.',
         },
         {
-          p: 'Nach Ablauf der 12 Monate endet der Zugang automatisch, ohne dass es einer Kündigung bedarf. Es gibt kein automatisches Abonnement; ohne aktive Verlängerung durch den Kunden entstehen keine weiteren Kosten. Vor Ablauf weisen wir den Kunden per E-Mail auf das Ende und die Möglichkeit der Verlängerung hin.',
+          p: 'Nach Ablauf der 12 Monate endet der Zugang automatisch, ohne dass es einer Kündigung bedarf. Es gibt keine automatische Verlängerung und kein automatisches Abonnement; ohne aktive Verlängerung auf Wunsch des Kunden entstehen keine weiteren Kosten. Vor Ablauf erinnern wir den Kunden per E-Mail an das Ende und die Möglichkeit der Verlängerung.',
         },
         {
           p: 'Ohne Verlängerung funktionieren die Produkte weiter: Die Weiterleitung führt dann wie bei der Variante Klassik direkt zum zuletzt eingestellten Google-Bewertungsformular. Statistiken und die Änderung des Ziels im Dashboard stehen nicht mehr zur Verfügung; Änderungen des Ziels nehmen wir dann auf Anfrage nach Ziffer 9 vor. Nach dem Ende des Zugangs sind wir nicht verpflichtet, die Statistiken weiter vorzuhalten.',
@@ -167,7 +170,7 @@ export const agb: LegalDoc = {
           p: 'Wir stellen das Dashboard mit der Sorgfalt eines ordentlichen Kaufmanns über das Internet bereit. Eine ununterbrochene Verfügbarkeit schulden wir nicht. Vorübergehende Einschränkungen, etwa durch Wartung, Sicherheitsupdates oder Störungen bei technischen Dienstleistern oder im Internet, sind möglich. Geplante Wartungen führen wir nach Möglichkeit außerhalb üblicher Geschäftszeiten durch. Störungen beheben wir in angemessener Frist, nachdem wir von ihnen Kenntnis erlangt haben.',
         },
         {
-          p: 'Der Kunde hält seine Zugangsdaten vertraulich und gibt sie nur an Personen weiter, die für ihn auf das Dashboard zugreifen sollen. Als Ziel der Weiterleitung darf er nur Seiten einstellen, die zu seinem Unternehmen gehören und deren Inhalt rechtmäßig ist; Ziffer 10 gilt auch für selbst eingestellte Ziele. Leitet ein Ziel offensichtlich auf rechtswidrige Inhalte, Schadsoftware oder Seiten zum Abgreifen von Zugangsdaten, können wir die Weiterleitung bis zur Klärung auf das zuvor eingestellte Ziel zurücksetzen oder vorübergehend sperren; wir informieren den Kunden darüber unverzüglich.',
+          p: 'Der Kunde hält seine Zugangsdaten vertraulich und gibt sie nur an Personen weiter, die für ihn auf das Dashboard zugreifen sollen. Als Ziel der Weiterleitung darf er Google-Bewertungslinks einstellen (sofort aktiv) sowie andere https-Seiten, die zu seinem Unternehmen gehören und deren Inhalt rechtmäßig ist (diese werden erst nach unserer Freigabe wirksam); Ziffer 10 gilt auch für selbst eingestellte Ziele. Leitet ein Ziel offensichtlich auf rechtswidrige Inhalte, Schadsoftware oder Seiten zum Abgreifen von Zugangsdaten, können wir die Weiterleitung bis zur Klärung auf das zuvor eingestellte Ziel zurücksetzen oder vorübergehend sperren; wir informieren den Kunden darüber unverzüglich.',
         },
       ],
     },

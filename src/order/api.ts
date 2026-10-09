@@ -236,6 +236,7 @@ export interface LeadPayload {
 }
 
 export interface LeadResult {
+  /** Bestellnummer; leer, wenn der Server die Bestellung als bereits angenommen bestätigt, ohne eine Nummer zu nennen. */
   id: string
 }
 
@@ -254,8 +255,9 @@ export async function submitLead(payload: LeadPayload, form: HTMLFormElement | n
   if (solution) body.pow = solution
   const data = await postJson('/api/lead', body)
   const rec = (typeof data === 'object' && data !== null ? data : {}) as { ok?: unknown; id?: unknown }
-  if (rec.ok !== true || typeof rec.id !== 'string' || !rec.id) throw new ApiError('network', 'Keine gültige Antwort vom Server.')
-  return { id: rec.id }
+  if (rec.ok !== true) throw new ApiError('network', 'Keine gültige Antwort vom Server.')
+  // {ok:true} ohne id: dieselbe Bestellung (orderKey) wurde bereits angenommen, z. B. bei parallelem Doppel-Absenden. Gilt als Erfolg, nur ohne Bestellnummer.
+  return { id: typeof rec.id === 'string' ? rec.id : '' }
 }
 
 // ---- mailto-Rückfall ----

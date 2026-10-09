@@ -1,17 +1,13 @@
-import { motion, useReducedMotion } from 'framer-motion'
 import { useMemo, useState } from 'react'
 import { ActionButton } from '../components/ActionButton'
 import { CheckIcon, ShieldIcon } from '../components/Icons'
 import { LineChart, type ChartPoint } from '../components/LineChart'
-import { LiveFeed } from '../components/LiveFeed'
 import { Panel } from '../components/Panel'
 import { StaggerItem } from '../components/Stagger'
-import { StarRating } from '../components/StarRating'
 import { StatCard } from '../components/StatCard'
 import { StatusBadge } from '../components/StatusBadge'
-import { CONVERSION_RATE, KPI_TRENDS, RATING_AVERAGE, RATING_DISTRIBUTION, REVIEWS_THIS_MONTH, REVIEW_TOTAL } from '../data'
-import type { Card, Stars, ViewId } from '../types'
-import { dailySeries, dayLabelLong, dayLabelShort, formatDecimal, formatInt, formatLastScan, mergeSeries, scansToday, sumScans, totalScans } from '../utils'
+import type { Card, ViewId } from '../types'
+import { dailySeries, dayLabelLong, dayLabelShort, formatInt, formatLastScan, mergeSeries, scansToday, sumScans, totalScans } from '../utils'
 
 interface OverviewProps {
   cards: Card[]
@@ -20,11 +16,9 @@ interface OverviewProps {
 
 const RANGES = [7, 30] as const
 type Range = (typeof RANGES)[number]
-const STAR_ROWS: Stars[] = [5, 4, 3, 2, 1]
 const SHORTLIST = 3
 
 export function Overview({ cards, onNavigate }: OverviewProps) {
-  const reduce = useReducedMotion()
   const [range, setRange] = useState<Range>(30)
   const totals = useMemo(() => sumScans(cards), [cards])
   const series = useMemo(() => mergeSeries(cards.map((c) => dailySeries(c))), [cards])
@@ -38,24 +32,21 @@ export function Overview({ cards, onNavigate }: OverviewProps) {
   }))
   const today = series[series.length - 1] ?? { nfc: 0, qr: 0 }
   const rangeTotal = visible.reduce((sum, p) => sum + p.nfc, 0)
-  const maxStarCount = Math.max(...Object.values(RATING_DISTRIBUTION))
+  const total = totals.nfc + totals.qr
 
   return (
     <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-12">
-      <StaggerItem index={0} className="col-span-1 min-w-0 md:col-span-3">
-        <StatCard label="Bewertungen" value={REVIEW_TOTAL} delta="+12 %" hint="ggü. Vormonat" trend={KPI_TRENDS.reviews} />
-      </StaggerItem>
-      <StaggerItem index={1} className="col-span-1 min-w-0 md:col-span-3">
+      <StaggerItem index={0} className="col-span-1 min-w-0 md:col-span-4">
         <StatCard label="NFC-Taps" value={totals.nfc} delta="+18 %" hint="ggü. Vormonat" trend={series.map((p) => p.nfc).slice(-14)} />
       </StaggerItem>
-      <StaggerItem index={2} className="col-span-1 min-w-0 md:col-span-3">
+      <StaggerItem index={1} className="col-span-1 min-w-0 md:col-span-4">
         <StatCard label="QR-Scans" value={totals.qr} delta="+9 %" hint="ggü. Vormonat" trend={series.map((p) => p.qr).slice(-14)} />
       </StaggerItem>
-      <StaggerItem index={3} className="col-span-1 min-w-0 md:col-span-3">
-        <StatCard label="Conversion" value={CONVERSION_RATE} decimals={1} suffix={' %'} delta="+2,1 Pp." hint="Bewertungsklicks je Scan" trend={KPI_TRENDS.conversion} />
+      <StaggerItem index={2} className="col-span-2 min-w-0 md:col-span-4">
+        <StatCard label="Aufrufe gesamt" value={total} delta="+15 %" hint="NFC und QR zusammen, ggü. Vormonat" trend={series.map((p) => p.nfc + p.qr).slice(-14)} />
       </StaggerItem>
 
-      <StaggerItem index={4} className="col-span-2 min-w-0 md:col-span-12">
+      <StaggerItem index={3} className="col-span-2 min-w-0 md:col-span-12">
         <div className="flex flex-col gap-2 rounded-2xl border border-line bg-white/[0.03] px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <p className="text-sm text-muted">
             Aufrufe heute: <span className="font-display text-lg font-semibold tabular-nums text-text">{formatInt(scansToday(series))}</span>
@@ -70,7 +61,7 @@ export function Overview({ cards, onNavigate }: OverviewProps) {
         </div>
       </StaggerItem>
 
-      <StaggerItem index={5} className="col-span-2 min-w-0 md:col-span-12 lg:col-span-8">
+      <StaggerItem index={4} className="col-span-2 min-w-0 md:col-span-12 lg:col-span-8">
         <Panel
           title={`NFC-Taps der letzten ${range} Tage`}
           description={`${formatInt(rangeTotal)} Taps · alle Karten`}
@@ -97,40 +88,30 @@ export function Overview({ cards, onNavigate }: OverviewProps) {
         </Panel>
       </StaggerItem>
 
-      <StaggerItem index={6} className="col-span-2 min-w-0 md:col-span-6 lg:col-span-4">
-        <Panel title="Google-Bewertungen" className="h-full">
-          <div className="flex items-end gap-3">
-            <span className="font-display text-5xl font-semibold leading-none tabular-nums text-text">{formatDecimal(RATING_AVERAGE)}</span>
-            <div className="pb-1">
-              <StarRating value={Math.round(RATING_AVERAGE * 10) / 10} className="text-lg" />
-              <p className="mt-1 text-[13px] text-mint">+{REVIEWS_THIS_MONTH} Bewertungen diesen Monat</p>
-            </div>
-          </div>
-          <ul className="mt-5 space-y-2.5" aria-label="Sterneverteilung">
-            {STAR_ROWS.map((stars, i) => {
-              const count = RATING_DISTRIBUTION[stars]
-              return (
-                <li key={stars} className="grid grid-cols-[2.25rem_minmax(0,1fr)_2.5rem] items-center gap-2 text-xs">
-                  <span className="tabular-nums text-muted">{stars} ★</span>
-                  <span className="h-2 overflow-hidden rounded-full bg-white/[0.06]">
-                    <motion.span
-                      className="block h-full origin-left rounded-full bg-gradient-to-r from-mint-strong to-mint"
-                      style={{ width: `${(count / maxStarCount) * 100}%` }}
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: reduce ? 0 : 0.9, delay: reduce ? 0 : 0.15 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    />
+      <StaggerItem index={5} className="col-span-2 min-w-0 md:col-span-12 lg:col-span-4">
+        <Panel title="Kanäle" description="Anteil an allen Aufrufen, letzte 30 Tage" className="h-full">
+          <ul className="space-y-4">
+            {[
+              { label: 'NFC-Taps', value: totals.nfc, bar: 'bg-mint' },
+              { label: 'QR-Scans', value: totals.qr, bar: 'bg-[#a78bfa]' },
+            ].map((c) => (
+              <li key={c.label}>
+                <div className="mb-1.5 flex items-baseline justify-between gap-3 text-sm">
+                  <span className="text-text">{c.label}</span>
+                  <span className="text-xs tabular-nums text-muted">
+                    {formatInt(c.value)} · {total > 0 ? Math.round((c.value / total) * 100) : 0} %
                   </span>
-                  <span className="text-right tabular-nums text-text">{formatInt(count)}</span>
-                </li>
-              )
-            })}
+                </div>
+                <div className="h-2.5 overflow-hidden rounded-full bg-white/[0.06]">
+                  <span className={`block h-full rounded-full ${c.bar}`} style={{ width: `${total > 0 ? (c.value / total) * 100 : 0}%` }} />
+                </div>
+              </li>
+            ))}
           </ul>
         </Panel>
       </StaggerItem>
 
-      <StaggerItem index={7} className="col-span-2 min-w-0 md:order-1 md:col-span-12 lg:order-none lg:col-span-8">
+      <StaggerItem index={6} className="col-span-2 min-w-0 md:col-span-12">
         <Panel
           title="Meine Karten"
           className="h-full"
@@ -176,16 +157,6 @@ export function Overview({ cards, onNavigate }: OverviewProps) {
             ))}
           </ul>
           {cards.length > SHORTLIST && <p className="mt-3 text-[13px] text-faint">+ {cards.length - SHORTLIST} weitere Karten</p>}
-        </Panel>
-      </StaggerItem>
-
-      <StaggerItem index={8} className="col-span-2 min-w-0 md:col-span-6 lg:col-span-4">
-        <Panel
-          title="Live-Aktivität"
-          className="h-full"
-          action={<span className="rounded-full border border-line px-2 py-0.5 text-xs text-muted">Simulation</span>}
-        >
-          <LiveFeed cards={cards} />
         </Panel>
       </StaggerItem>
     </div>

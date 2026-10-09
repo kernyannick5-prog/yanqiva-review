@@ -15,8 +15,10 @@ export interface Product {
   features: readonly string[]
   /** Laufende Kosten in Worten (für Übersicht und Bestätigung). */
   running: string
-  /** Versandzeit ab Zahlungseingang (Richtwert, Werktage). */
+  /** Zeit bis zur Übergabe ab Zahlungseingang (Richtwert, Werktage). */
   shipping: string
+  /** Hinweis zur Weiterleitung (Abhängigkeit von der YANQIVA-Weiterleitung, AGB Ziffer 9). */
+  redirectNote: string
 }
 
 export interface FormatOption {
@@ -30,8 +32,11 @@ export const QTY_MAX = 10
 export const SHIPPING_EUR = 0
 export const DASHBOARD_RENEWAL_EUR = 15
 export const CONTACT_EMAIL = 'support@yanqiva.de'
-/** Versandzeit als Satz, z. B. für Karten und Übersicht. */
-export const shippingText = (p: Product): string => `Versand in der Regel innerhalb von ${p.shipping} nach Zahlungseingang`
+/** Lieferzeit als Satz, z. B. für Karten und Übersicht (persönliche Übergabe vor Ort, kein Postversand). */
+export const shippingText = (p: Product): string => `Übergabe vor Ort in der Regel innerhalb von ${p.shipping} nach Zahlungseingang`
+/** Weiterleitungs-Hinweis (R-11). */
+export const REDIRECT_NOTE =
+  'Karte und QR-Code führen über unsere Weiterleitung (yanqiva-bewertung.de/r/…). Wir betreiben sie ohne laufende Kosten, mindestens 24 Monate ab Lieferung (AGB Ziffer 9).'
 export const VAT_NOTE = 'Endpreise. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.'
 
 export const PRODUCTS: Record<ProductId, Product> = {
@@ -40,11 +45,12 @@ export const PRODUCTS: Record<ProductId, Product> = {
     param: 'klassik',
     name: 'YANQIVA REVIEW Klassik',
     shortName: 'Klassik',
-    tagline: 'Der klassische Google-NFC-Tag',
+    tagline: 'Der klassische NFC-Tag für Google-Bewertungen',
     unitPrice: 60,
-    features: ['NFC-Chip und QR-Code', 'Direkter Link zum Google-Bewertungsformular', 'Einrichtung inklusive'],
+    features: ['NFC-Chip und QR-Code', 'Weiterleitung direkt zum Google-Bewertungsformular', 'Einrichtung inklusive'],
     running: 'Keine laufenden Kosten',
     shipping: '2–5 Werktagen',
+    redirectNote: REDIRECT_NOTE,
   },
   'review-dashboard': {
     id: 'review-dashboard',
@@ -55,13 +61,14 @@ export const PRODUCTS: Record<ProductId, Product> = {
     unitPrice: 99,
     features: [
       'NFC-Chip und QR-Code',
-      'Direkter Link zum Google-Bewertungsformular',
+      'Weiterleitung direkt zum Google-Bewertungsformular',
       'Dashboard 12 Monate inklusive: Statistiken zu Taps und Scans',
       'Ziel-Link jederzeit änderbar',
       'Einrichtung inklusive',
     ],
     running: `12 Monate Dashboard inklusive. Danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar, nur wenn Sie aktiv verlängern. Ohne Verlängerung funktioniert die Karte weiter und leitet direkt zur Google-Bewertung.`,
     shipping: '7 Werktagen',
+    redirectNote: REDIRECT_NOTE,
   },
 }
 
@@ -79,7 +86,7 @@ export const isFormatId = (v: unknown): v is FormatId => v === 'karte' || v === 
 
 /** Zwischensumme in ganzen Euro. */
 export const subtotal = (id: ProductId, qty: number): number => PRODUCTS[id].unitPrice * qty
-/** Gesamtbetrag in ganzen Euro (Versand innerhalb Deutschlands inklusive). */
+/** Gesamtbetrag in ganzen Euro (Lieferung und Übergabe vor Ort inklusive). */
 export const total = (id: ProductId, qty: number): number => subtotal(id, qty) + SHIPPING_EUR
 
 const euro = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0, minimumFractionDigits: 0 })

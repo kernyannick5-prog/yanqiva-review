@@ -58,6 +58,7 @@ export function Footer({ onLegalPage = false }: { onLegalPage?: boolean }) {
           <p>© 2026 YANQIVA. Alle Rechte vorbehalten.</p>
           <p>Endpreise, gemäß § 19 UStG keine Umsatzsteuer. Daten in der Dashboard-Demo sind fiktiv.</p>
         </div>
+        <p className="mt-3 text-[13px] text-faint">Google ist eine Marke der Google LLC; YANQIVA steht in keiner Verbindung zu Google.</p>
       </Container>
     </footer>
   )

@@ -23,7 +23,7 @@ function Heading({ fitHeight = false }: { fitHeight?: boolean }) {
       <Eyebrow>Das Produkt</Eyebrow>
       <h2 id="produkt-title" className={`mt-2.5 lg:mt-5 ${titleClass} ${fitHeight ? shortTitle : ''}`}>
         <span className="block">Ein Aufsteller.</span>
-        <span className="text-gradient block">Unzählige Bewertungen.</span>
+        <span className="text-gradient block">Bewerten mit einem Tap.</span>
       </h2>
     </>
   )

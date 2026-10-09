@@ -23,7 +23,7 @@ export function FinalCta() {
           <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000,transparent)]" />
           <Eyebrow className="relative">Los geht’s</Eyebrow>
           <h2 id="cta-title" className="relative mt-4 font-display text-[clamp(1.95rem,1.1rem+3.8vw,3.9rem)] font-semibold leading-[1.06] tracking-[-0.035em] text-balance sm:mt-5">
-            Bereit für mehr Bewertungen?
+            Bereit loszulegen?
             <span className="text-gradient block">Mach es deinen Kunden einfach.</span>
           </h2>
           <div className="relative mt-8 flex flex-col justify-center gap-3 sm:mt-10 sm:flex-row">

@@ -1,5 +1,6 @@
 import { LinkButton } from '../components/Button'
-import { CountUp } from '../components/CountUp'
+import { DELIVERY_SHORT } from '../order/deliveryArea'
+import { PRODUCTS, shippingText } from '../order/catalog'
 import { Reveal } from '../components/Reveal'
 import { Container, SectionHead } from './ui'
 
@@ -7,19 +8,19 @@ const plans = [
   {
     id: 'klassik',
     name: 'Klassik',
-    tagline: 'Der klassische Google-NFC-Tag',
-    price: 60,
+    tagline: PRODUCTS['review-klassik'].tagline,
+    price: PRODUCTS['review-klassik'].unitPrice,
     note: 'Kein Dashboard, keine Folgekosten.',
-    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'Direkter Google-Bewertungslink', 'Einrichtung inklusive', 'Versand in 2–5 Werktagen'],
+    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'Weiterleitung direkt zum Google-Bewertungsformular', 'Einrichtung inklusive', DELIVERY_SHORT, shippingText(PRODUCTS['review-klassik'])],
     popular: false,
   },
   {
     id: 'dashboard',
     name: 'Dashboard',
     tagline: 'Alles aus Klassik, plus Kontrolle',
-    price: 99,
-    note: 'inkl. 12 Monate Dashboard, danach 15 €/Monat (monatlich kündbar). Ohne Dashboard funktioniert die Karte weiter wie Klassik.',
-    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'YANQIVA Dashboard, 12 Monate inklusive', 'Statistiken zu Taps und Scans', 'Ziel-Link jederzeit änderbar', 'Einrichtung inklusive', 'Versand in 7 Werktagen'],
+    price: PRODUCTS['review-dashboard'].unitPrice,
+    note: 'inkl. 12 Monate Dashboard. Danach nur auf Wunsch verlängerbar für 15 €/Monat, monatlich kündbar, kein automatisches Abo. Ohne Verlängerung leitet die Karte weiter zu Google.',
+    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'YANQIVA Dashboard, 12 Monate inklusive', 'Statistiken zu Taps und Scans', 'Ziel-Link jederzeit änderbar', 'Einrichtung inklusive', DELIVERY_SHORT, shippingText(PRODUCTS['review-dashboard'])],
     popular: true,
   },
 ]
@@ -54,7 +55,7 @@ export function Pricing() {
                   <h3 className="font-display text-lg font-semibold uppercase tracking-[0.16em] text-muted">{p.name}</h3>
                   <p className="mt-1 text-sm text-muted">{p.tagline}</p>
                   <p className="mt-4 font-display text-5xl font-semibold tracking-tight">
-                    <CountUp to={p.price} suffix=" €" />
+                    <span className="tabular-nums">{p.price} €</span>
                   </p>
                   <p className="mt-1 text-sm text-faint">einmalig · Endpreis</p>
                   <p className="mt-2 text-sm text-muted">{p.note}</p>
@@ -78,7 +79,7 @@ export function Pricing() {
             </li>
           ))}
         </ul>
-        <p className="mt-8 text-center text-[13px] text-faint">Endpreise inkl. Versand innerhalb Deutschlands. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Nur für Unternehmer.</p>
+        <p className="mt-8 text-center text-[13px] text-faint">Endpreise inkl. Lieferung und Übergabe vor Ort. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Nur für Unternehmer.</p>
       </Container>
     </section>
   )

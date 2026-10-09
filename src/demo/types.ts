@@ -1,6 +1,6 @@
-/** Domänenmodell der Demo – so wie es später ein echtes Backend ausliefern würde. */
+/** Domänenmodell der Demo (Karten, Ziel-Links, Zähler für NFC und QR). */
 
-export type ViewId = 'overview' | 'cards' | 'statistics' | 'reviews' | 'company' | 'settings'
+export type ViewId = 'overview' | 'cards' | 'statistics' | 'settings'
 
 export type CardStatus = 'active' | 'paused'
 
@@ -25,31 +25,6 @@ export interface DailyPoint {
   date: string
   nfc: number
   qr: number
-}
-
-export type Stars = 1 | 2 | 3 | 4 | 5
-
-export interface Review {
-  id: string
-  businessSlug: string
-  stars: Stars
-  text: string
-  /** ISO-Zeitstempel */
-  createdAt: string
-}
-
-export interface CompanyMeta {
-  industry: string
-  address: string
-  placeId: string
-  reviewCount: number
-  rating: number
-}
-
-export interface DemoSettings {
-  weeklyReport: boolean
-  newReviewAlert: boolean
-  idleCardAlert: boolean
 }
 
 export interface NewCardInput {

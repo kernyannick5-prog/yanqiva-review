@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
-import { DEFAULT_SETTINGS, SEED_CARDS, SEED_CARD_IDS } from './data'
-import type { Card, DemoSettings, NewCardInput } from './types'
+import { SEED_CARDS, SEED_CARD_IDS } from './data'
+import type { Card, NewCardInput } from './types'
 import { randomSlug } from './utils'
 
 const STORAGE_KEY = 'yanqiva-demo-cards-v1'
@@ -42,10 +42,9 @@ function saveCreatedCards(cards: Card[]) {
   }
 }
 
-/** Zustand der Demo: Karten (neu angelegte werden in localStorage gehalten) und Einstellungen. */
+/** Zustand der Demo: Karten (neu angelegte werden in localStorage gehalten). */
 export function useDemoStore() {
   const [cards, setCards] = useState<Card[]>(() => [...loadCreatedCards(), ...SEED_CARDS])
-  const [settings, setSettings] = useState<DemoSettings>(DEFAULT_SETTINGS)
 
   useEffect(() => {
     saveCreatedCards(cards.filter((c) => !SEED_CARD_IDS.has(c.id)))
@@ -73,10 +72,6 @@ export function useDemoStore() {
     setCards((prev) => prev.map((c) => (c.id === id ? { ...c, targetUrl: targetUrl.trim() } : c)))
   }, [])
 
-  const toggleSetting = useCallback((key: keyof DemoSettings) => {
-    setSettings((prev) => ({ ...prev, [key]: !prev[key] }))
-  }, [])
-
   const reset = useCallback(() => {
     try {
       localStorage.removeItem(STORAGE_KEY)
@@ -84,8 +79,7 @@ export function useDemoStore() {
       /* ignorieren */
     }
     setCards(SEED_CARDS)
-    setSettings(DEFAULT_SETTINGS)
   }, [])
 
-  return { cards, settings, addCard, updateTargetUrl, toggleSetting, reset }
+  return { cards, addCard, updateTargetUrl, reset }
 }

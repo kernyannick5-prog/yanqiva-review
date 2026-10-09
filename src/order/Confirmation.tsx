@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { LinkButton } from '../components/Button'
 import { CONTACT_EMAIL, FORMATS, formatEuro, PRODUCTS, total, VAT_NOTE } from './catalog'
 import { effectiveQuantity, productOf, trimmed, type OrderForm } from './state'
+import { StartNotice } from './notices'
 import { NextSteps } from './steps'
 
 const BASE = import.meta.env.BASE_URL
@@ -37,7 +38,7 @@ export function Confirmation({ orderId, form }: Props) {
         )}
         <p className="mt-3 text-[15px] leading-relaxed text-muted">
           Eine Eingangsbestätigung senden wir in der Regel innerhalb weniger Minuten an <strong className="break-all font-semibold text-text">{f.email}</strong>. Falls keine E-Mail
-          ankommt, prüfen Sie bitte Ihren Spam-Ordner oder schreiben Sie an {CONTACT_EMAIL} unter Angabe der Bestellnummer. Die Eingangsbestätigung ist noch keine Annahme Ihrer
+          ankommt, prüfen Sie bitte Ihren Spam-Ordner oder schreiben Sie an {CONTACT_EMAIL}{orderId ? ' unter Angabe der Bestellnummer' : ''}. Die Eingangsbestätigung ist noch keine Annahme Ihrer
           Bestellung: Der Vertrag kommt mit unserer Auftragsbestätigung zustande, die Rechnung folgt mit ihr.
         </p>
         <dl className="mt-6 space-y-2 border-t border-line pt-5 text-[15px]">
@@ -54,6 +55,8 @@ export function Confirmation({ orderId, form }: Props) {
         </dl>
         <p className="mt-2 text-[13px] text-muted">{VAT_NOTE}</p>
       </div>
+
+      <StartNotice />
 
       <NextSteps dashboard={f.product === 'review-dashboard'} done />
 

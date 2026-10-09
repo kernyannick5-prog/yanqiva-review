@@ -5,9 +5,8 @@ import { CountUp } from '../../components/CountUp'
 import { LineChart, type ChartPoint } from '../components/LineChart'
 import { Panel } from '../components/Panel'
 import { StaggerItem } from '../components/Stagger'
-import { DAY_PARTS, HEAT_WEIGHTS, WEEKDAYS } from '../data'
 import type { Card } from '../types'
-import { dailySeries, dayLabelLong, dayLabelShort, distribute, formatInt, mergeSeries, sumScans, totalScans } from '../utils'
+import { dailySeries, dayLabelLong, dayLabelShort, formatInt, mergeSeries, sumScans, totalScans } from '../utils'
 
 interface StatisticsProps {
   cards: Card[]
@@ -31,11 +30,6 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
     value: p.nfc + p.qr,
   }))
 
-  const heat = useMemo(() => {
-    const flat = distribute(total, HEAT_WEIGHTS.flat())
-    return DAY_PARTS.map((_, row) => flat.slice(row * WEEKDAYS.length, (row + 1) * WEEKDAYS.length))
-  }, [total])
-  const heatMax = Math.max(1, ...heat.flat())
   const barMax = Math.max(1, ...cards.map(totalScans))
   const nfcShare = total > 0 ? Math.round((totals.nfc / total) * 100) : 0
 
@@ -82,99 +76,56 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
         </Panel>
       </StaggerItem>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <StaggerItem index={3} className="min-w-0">
-          <Panel
-            title="Taps vs. QR-Scans je Karte"
-            className="h-full"
-            action={
-              <div className="flex gap-3 text-xs text-muted" aria-hidden>
-                <span className="inline-flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-mint" />
-                  NFC
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-[#a78bfa]" />
-                  QR
-                </span>
-              </div>
-            }
-          >
-            <ul className="space-y-4">
-              {cards.map((card, i) => {
-                const dim = current !== 'all' && current !== card.id
-                return (
-                  <li key={card.id} className={`transition-opacity duration-300 ${dim ? 'opacity-40' : ''}`}>
-                    <div className="mb-1.5 flex items-baseline justify-between gap-3 text-sm">
-                      <span className="min-w-0 truncate text-text">{card.businessName}</span>
-                      <span className="shrink-0 text-xs tabular-nums text-muted">
-                        {formatInt(card.scans.nfc)} NFC · {formatInt(card.scans.qr)} QR
-                      </span>
-                    </div>
-                    <div className="flex h-3 w-full overflow-hidden rounded-full bg-white/[0.05]">
-                      {[
-                        { key: 'nfc', value: card.scans.nfc, color: 'bg-mint' },
-                        { key: 'qr', value: card.scans.qr, color: 'bg-[#a78bfa]' },
-                      ].map((seg, j) => (
-                        <motion.span
-                          key={seg.key}
-                          className={`h-full origin-left ${seg.color}`}
-                          style={{ width: `${(seg.value / barMax) * 100}%` }}
-                          initial={{ scaleX: 0 }}
-                          whileInView={{ scaleX: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: reduce ? 0 : 0.9, delay: reduce ? 0 : 0.1 + i * 0.1 + j * 0.15, ease: [0.22, 1, 0.36, 1] }}
-                        />
-                      ))}
-                    </div>
-                  </li>
-                )
-              })}
-            </ul>
-          </Panel>
-        </StaggerItem>
-
-        <StaggerItem index={4} className="min-w-0">
-          <Panel title="Wochentag & Tageszeit" description="Wann deine Karten am häufigsten gescannt werden" className="h-full">
-            <table className="w-full table-fixed border-separate border-spacing-1">
-              <caption className="sr-only">Scans nach Wochentag und Tageszeit</caption>
-              <thead>
-                <tr>
-                  <td className="w-[3.75rem] sm:w-28" />
-                  {WEEKDAYS.map((d) => (
-                    <th key={d} scope="col" className="pb-1 text-center text-xs font-medium text-muted">
-                      {d}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {DAY_PARTS.map((part, row) => (
-                  <tr key={part.label}>
-                    <th scope="row" className="pr-1 text-left text-xs font-medium text-muted">
-                      <span className="block truncate">{part.label}</span>
-                      <span className="hidden text-xs font-normal text-faint sm:block">{part.range}</span>
-                    </th>
-                    {heat[row].map((count, col) => {
-                      const intensity = count / heatMax
-                      return (
-                        <td
-                          key={WEEKDAYS[col]}
-                          title={`${WEEKDAYS[col]}, ${part.range}: ${count} Scans`}
-                          className={`h-10 rounded-md text-center text-xs tabular-nums transition-transform duration-200 hover:scale-110 text-text`}
-                          style={{ backgroundColor: `rgb(94 234 212 / ${(0.06 + intensity * 0.2).toFixed(2)})` }}
-                        >
-                          {count}
-                        </td>
-                      )
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </Panel>
-        </StaggerItem>
-      </div>
+      <StaggerItem index={3} className="min-w-0">
+        <Panel
+          title="Taps vs. QR-Scans je Karte"
+          className="h-full"
+          action={
+            <div className="flex gap-3 text-xs text-muted" aria-hidden>
+              <span className="inline-flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-mint" />
+                NFC
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-[#a78bfa]" />
+                QR
+              </span>
+            </div>
+          }
+        >
+          <ul className="space-y-4">
+            {cards.map((card, i) => {
+              const dim = current !== 'all' && current !== card.id
+              return (
+                <li key={card.id} className={`transition-opacity duration-300 ${dim ? 'opacity-40' : ''}`}>
+                  <div className="mb-1.5 flex items-baseline justify-between gap-3 text-sm">
+                    <span className="min-w-0 truncate text-text">{card.businessName}</span>
+                    <span className="shrink-0 text-xs tabular-nums text-muted">
+                      {formatInt(card.scans.nfc)} NFC · {formatInt(card.scans.qr)} QR
+                    </span>
+                  </div>
+                  <div className="flex h-3 w-full overflow-hidden rounded-full bg-white/[0.05]">
+                    {[
+                      { key: 'nfc', value: card.scans.nfc, color: 'bg-mint' },
+                      { key: 'qr', value: card.scans.qr, color: 'bg-[#a78bfa]' },
+                    ].map((seg, j) => (
+                      <motion.span
+                        key={seg.key}
+                        className={`h-full origin-left ${seg.color}`}
+                        style={{ width: `${(seg.value / barMax) * 100}%` }}
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: reduce ? 0 : 0.9, delay: reduce ? 0 : 0.1 + i * 0.1 + j * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                      />
+                    ))}
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
+        </Panel>
+      </StaggerItem>
 
       <StaggerItem index={5}>
         <p className="flex items-start gap-2 text-xs leading-relaxed text-faint">

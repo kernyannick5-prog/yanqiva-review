@@ -5,6 +5,8 @@ import {
 } from './catalog'
 import { CheckboxField, ErrorSummary, FieldError, Fieldset, RequiredLegend, TextField, type FormCtx } from './fields'
 import { errId, fieldId } from './ids'
+import { DeliveryAreaCheck, StartNotice, ZipAreaNote } from './notices'
+import { beforeOrderStart, ORDER_START_LONG } from './orderStart'
 import { effectiveQuantity, MAX, parseQuantity, productOf, trimmed, type FieldKey, type StepId } from './state'
 
 const BASE = import.meta.env.BASE_URL
@@ -100,6 +102,7 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
                 <span id={`prod-${p.id}-r`} className="mt-3 block rounded-lg bg-white/[0.04] px-3 py-2 text-[13px] leading-snug text-muted">
                   <span className="font-semibold text-text">Laufende Kosten: </span>
                   {p.running}
+                  <span className="mt-1.5 block">{p.redirectNote}</span>
                 </span>
                 <span className="mt-2 block text-[13px] leading-snug text-muted">
                   <span className="font-semibold text-text">Lieferzeit: </span>
@@ -186,13 +189,15 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
             <span>{pid ? `${qtyEff} × ${PRODUCTS[pid].shortName} (${FORMATS[form.format].name}) à ${formatEuro(PRODUCTS[pid].unitPrice)}` : 'Noch keine Variante gewählt'}</span>
             <span className="shrink-0 font-display text-xl font-semibold text-text">{pid ? formatEuro(subtotal(pid, qtyEff)) : '–'}</span>
           </p>
-          <p className="mt-1.5 text-[13px] text-muted">Versand innerhalb Deutschlands inklusive. {VAT_NOTE}</p>
+          <p className="mt-1.5 text-[13px] text-muted">Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe inklusive. {VAT_NOTE}</p>
         </div>
         {/* Verzögerte Ansage der Zwischensumme (nicht bei jedem Tastendruck) */}
         <p role="status" aria-live="polite" className="sr-only">
           {announced}
         </p>
       </div>
+
+      <DeliveryAreaCheck />
 
       <NextSteps dashboard={form.product === '' ? undefined : form.product === 'review-dashboard'} />
     </div>
@@ -203,9 +208,11 @@ export function NextSteps({ dashboard, done = false }: { dashboard?: boolean; do
   const all = [
     'Sie senden Ihre Bestellung ab. Das ist Ihr verbindliches Angebot.',
     'Sie erhalten eine Eingangsbestätigung per E-Mail. Das ist noch keine Annahme.',
-    'Mit der Auftragsbestätigung per E-Mail, in der Regel innerhalb eines Werktags, kommt der Vertrag zustande. Die Rechnung folgt zusammen mit ihr.',
+    beforeOrderStart()
+      ? `Mit der Auftragsbestätigung per E-Mail kommt der Vertrag zustande. Wir nehmen unsere Tätigkeit am ${ORDER_START_LONG} auf und bestätigen Bestellungen, die vorher eingehen, ab diesem Tag. Die Rechnung folgt zusammen mit der Auftragsbestätigung.`
+      : 'Mit der Auftragsbestätigung per E-Mail, in der Regel innerhalb eines Werktags, kommt der Vertrag zustande. Die Rechnung folgt zusammen mit ihr.',
     'Sie überweisen den Betrag innerhalb von 14 Tagen.',
-    `Nach Zahlungseingang richten wir Ihre Karte mit Ihrem Google-Link ein, produzieren und versenden sie, ${dashboard === undefined ? 'in der Regel innerhalb von 2–5 Werktagen (Klassik) bzw. 7 Werktagen (Dashboard).' : dashboard ? 'in der Regel innerhalb von 7 Werktagen. Den Dashboard-Zugang erhalten Sie per E-Mail mit dem Versand.' : 'in der Regel innerhalb von 2–5 Werktagen.'}`,
+    `Nach Zahlungseingang richten wir Ihre Karte mit Ihrem Google-Link ein, produzieren sie und übergeben sie Ihnen persönlich vor Ort, ${dashboard === undefined ? 'in der Regel innerhalb von 2–5 Werktagen (Klassik) bzw. 7 Werktagen (Dashboard).' : dashboard ? 'in der Regel innerhalb von 7 Werktagen. Den Dashboard-Zugang erhalten Sie per E-Mail mit der Übergabe.' : 'in der Regel innerhalb von 2–5 Werktagen.'}`,
   ]
   const items = done ? all.slice(1) : all
   return (
@@ -326,10 +333,12 @@ export function StepData({ ctx, summaryKeys, onJump }: StepProps) {
           <TextField ctx={ctx} name="billingZip" required inputMode="numeric" maxLength={5} autoComplete="billing postal-code" className="sm:col-span-2" />
           <TextField ctx={ctx} name="billingCity" required maxLength={MAX.billingCity} autoComplete="billing address-level2" className="sm:col-span-4" />
         </div>
-        <p className="mt-3 text-sm text-muted">Land: Deutschland. Wir liefern nur innerhalb Deutschlands.</p>
+        <p className="mt-3 text-sm text-muted">Land: Deutschland. Die Rechnungsadresse kann überall in Deutschland liegen. Geliefert wird nur im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe.</p>
+        {!form.shipDifferent && !ctx.errors.billingZip && <ZipAreaNote id="zip-area-billing" zip={form.billingZip} />}
       </Fieldset>
 
       <Fieldset legend="Lieferadresse">
+        <p className="mb-3 text-sm text-muted">Wir liefern persönlich im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe. Die Lieferadresse muss dort liegen.</p>
         <CheckboxField ctx={ctx} name="shipDifferent">
           Die Lieferadresse weicht von der Rechnungsadresse ab
         </CheckboxField>
@@ -339,6 +348,11 @@ export function StepData({ ctx, summaryKeys, onJump }: StepProps) {
             <TextField ctx={ctx} name="shipStreet" required maxLength={MAX.shipStreet} label="Straße und Hausnummer" autoComplete="shipping street-address" className="sm:col-span-6" />
             <TextField ctx={ctx} name="shipZip" required inputMode="numeric" maxLength={5} label="Postleitzahl" autoComplete="shipping postal-code" className="sm:col-span-2" />
             <TextField ctx={ctx} name="shipCity" required maxLength={MAX.shipCity} label="Ort" autoComplete="shipping address-level2" className="sm:col-span-4" />
+            {!ctx.errors.shipZip && (
+              <div className="sm:col-span-6">
+                <ZipAreaNote id="zip-area-ship" zip={form.shipZip} />
+              </div>
+            )}
           </div>
         )}
       </Fieldset>
@@ -413,7 +427,7 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
             <dd className="text-right text-text">{formatEuro(subtotal(pid, qty))}</dd>
           </div>
           <div className="flex justify-between gap-4">
-            <dt className="text-muted">Versand (Deutschland)</dt>
+            <dt className="text-muted">Lieferung vor Ort</dt>
             <dd className="text-right text-text">{formatEuro(SHIPPING_EUR)} (inklusive)</dd>
           </div>
           <div className="flex justify-between gap-4">
@@ -478,6 +492,8 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
           gelesen und akzeptiere sie.
         </CheckboxField>
       </div>
+
+      <StartNotice />
 
       <p className="text-sm leading-relaxed text-muted">
         Mit „Zahlungspflichtig bestellen“ geben Sie ein verbindliches Angebot ab. Die Eingangsbestätigung ist noch keine Annahme; der Vertrag kommt erst mit unserer

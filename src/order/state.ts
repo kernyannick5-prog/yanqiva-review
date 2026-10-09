@@ -1,4 +1,5 @@
 import { isFormatId, isProductId, QTY_MAX, QTY_MIN, type FormatId, type ProductId } from './catalog'
+import { inDeliveryArea, OUT_OF_AREA_MESSAGE } from './deliveryArea'
 
 export type StepId = 1 | 2 | 3 | 4
 export const STEPS: readonly { id: StepId; label: string; title: string }[] = [
@@ -190,11 +191,15 @@ function validateStep3(f: OrderForm, e: Errors) {
   if (!v(f.billingStreet)) e.billingStreet = 'Bitte geben Sie Straße und Hausnummer der Rechnungsadresse ein.'
   const zip = validateZip(v(f.billingZip), 'der Rechnungsadresse')
   if (zip) e.billingZip = zip
+  else if (!f.shipDifferent && !inDeliveryArea(v(f.billingZip))) {
+    e.billingZip = `${OUT_OF_AREA_MESSAGE} Liegt Ihre Lieferadresse im Liefergebiet, wählen Sie bitte „Die Lieferadresse weicht von der Rechnungsadresse ab“.`
+  }
   if (!v(f.billingCity)) e.billingCity = 'Bitte geben Sie den Ort der Rechnungsadresse ein.'
   if (f.shipDifferent) {
     if (!v(f.shipStreet)) e.shipStreet = 'Bitte geben Sie Straße und Hausnummer der Lieferadresse ein.'
     const sz = validateZip(v(f.shipZip), 'der Lieferadresse')
     if (sz) e.shipZip = sz
+    else if (!inDeliveryArea(v(f.shipZip))) e.shipZip = OUT_OF_AREA_MESSAGE
     if (!v(f.shipCity)) e.shipCity = 'Bitte geben Sie den Ort der Lieferadresse ein.'
   }
 }
@@ -338,9 +343,13 @@ const CODE_FIELD: Record<string, FieldKey> = {
   invalid_format: 'quantity',
 }
 
+/** Lieferadresse außerhalb des Liefergebiets (Worker, 400): je nach Formular die abweichende Lieferadresse oder die Rechnungsadresse. */
+const OUT_OF_AREA_CODE = 'out_of_delivery_area'
+
 /** Ordnet einen Fehlercode (z. B. invalid_email, missing_company) einem Feld und dem zugehörigen Schritt zu; null = nicht zuordenbar. */
-export function mapServerCode(code: string | undefined): { step: StepId; field: FieldKey } | null {
+export function mapServerCode(code: string | undefined, form?: Pick<OrderForm, 'shipDifferent'>): { step: StepId; field: FieldKey } | null {
   if (!code) return null
+  if (code === OUT_OF_AREA_CODE) return { step: 3, field: form?.shipDifferent ? 'shipZip' : 'billingZip' }
   let field: FieldKey | undefined = CODE_FIELD[code]
   if (!field) {
     const m = /^(?:missing|invalid|field_too_long|too_long)_([A-Za-z]+)$/.exec(code)

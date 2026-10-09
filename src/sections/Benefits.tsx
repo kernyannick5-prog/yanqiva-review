@@ -42,7 +42,7 @@ const items: { tag: string; title: string; text: string; icon: ReactNode }[] = [
   {
     tag: 'Messbar',
     title: 'Sehe, wie oft deine Karten genutzt werden.',
-    text: 'Das Dashboard zählt jeden Scan und jeden Tap.',
+    text: 'Das Dashboard zeigt, wie oft deine Karten angetippt und gescannt werden.',
     icon: (
       <svg {...svgProps}>
         <path d="M4 20V10M10 20V4M16 20v-7M21 20H3" />
