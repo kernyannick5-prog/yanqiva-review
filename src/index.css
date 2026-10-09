@@ -21,6 +21,12 @@
   --color-muted: #bcd9cc;
   --color-faint: #abcdbc;
   --color-line: rgb(150 235 200 / 0.16);
+  /* Flaechen-/Randtoene (auf Dunkel: Weiss-Schleier, im hellen Scope: Gruen-Schleier) */
+  --color-wash: rgb(255 255 255 / 0.06);
+  --color-wash-weak: rgb(255 255 255 / 0.04);
+  --color-edge: rgb(255 255 255 / 0.15);
+  --color-edge-weak: rgb(255 255 255 / 0.1);
+  --color-eyebrow: #d0c4fe;
 
   --shadow-glow: 0 1px 0 0 rgb(255 255 255 / 0.12) inset, 0 0 0 1px rgb(94 234 212 / 0.28), 0 14px 44px -14px rgb(94 234 212 / 0.4);
   --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.1) inset, 0 -1px 0 0 rgb(0 0 0 / 0.25) inset, 0 2px 6px -2px rgb(0 0 0 / 0.35), 0 28px 56px -32px rgb(0 0 0 / 0.7);
@@ -28,6 +34,29 @@
   /* Kleinster Fliesstext/Label: 13 px (statt 12 px) */
   --text-xs: 0.8125rem;
   --text-xs--line-height: 1.4;
+}
+
+/* Variablen, die Glas, Buttons und Verlaufstext je Scope umschalten (Defaults = dunkel) */
+:root {
+  --glass-fill: rgb(19 66 53 / 0.62);
+  --glass-sheen-1: rgb(255 255 255 / 0.075);
+  --glass-sheen-2: rgb(255 255 255 / 0.02);
+  --glass-solid: rgb(19 66 53 / 0.92);
+  --glass-border-1: rgb(94 234 212 / 0.65);
+  --glass-border-2: rgb(139 92 246 / 0.5);
+  --glass-border-3: rgb(94 234 212 / 0.12);
+  --grad-1: #5eead4;
+  --grad-2: #a5b4fc;
+  --grad-3: #c4b5fd;
+  --ghost-border: rgb(255 255 255 / 0.15);
+  --ghost-border-hover: rgb(139 92 246 / 0.6);
+  --ghost-bg: rgb(255 255 255 / 0.04);
+  --ghost-bg-hover: rgb(255 255 255 / 0.07);
+  --btn-ring: rgb(167 139 250 / 0.45);
+  --btn-ring-hover: rgb(167 139 250 / 0.65);
+  --btn-glow: rgb(139 92 246 / 0.55);
+  --btn-glow-hover: rgb(139 92 246 / 0.7);
+  --qr-glow: rgb(94 234 212 / 0.35);
 }
 
 html {
@@ -47,7 +76,6 @@ body {
 }
 ::selection { background: rgb(94 234 212 / 0.3); }
 
-/* Glas-Oberfläche */
 /* Alte Navy/Violett-Palette nur für 3D-Aufsteller, Smartphone und Hero-Karte (Eigentümerwunsch) */
 .legacy-palette {
   --color-ink-950: #05071a;
@@ -62,8 +90,59 @@ body {
   --color-line: rgb(148 163 255 / 0.14);
 }
 
+/* Heller Abschnitt (Scope wie .legacy-palette): Token-Overrides, volle Breite weiss, dunkle Schrift.
+   Teal-/Violett-Toene sind auf Weiss >= 4.5:1; Fokusring (mint) wird dunkles Teal (>= 3:1). */
+.section-light {
+  --color-ink-950: #ffffff;
+  --color-ink-900: #f6faf8;
+  --color-ink-800: #eaf3ef;
+  --color-ink-700: #d5e5de;
+  --color-indigo-deep: #eef5f2;
+  --color-violet-dark: #e6f0ec;
+  --color-violet-glow: #7c3aed;
+  --color-mint: #0f766e;
+  --color-mint-strong: #0d9488;
+  --color-text: #0b2c23;
+  --color-muted: #3d5a50;
+  --color-faint: #4a665b;
+  --color-line: rgb(11 44 35 / 0.14);
+  --color-wash: rgb(11 44 35 / 0.06);
+  --color-wash-weak: rgb(11 44 35 / 0.035);
+  --color-edge: rgb(11 44 35 / 0.32);
+  --color-edge-weak: rgb(11 44 35 / 0.2);
+  --color-eyebrow: #6d28d9;
+  --shadow-card: 0 1px 2px 0 rgb(11 44 35 / 0.06), 0 14px 32px -18px rgb(11 44 35 / 0.22);
+  --shadow-glow: 0 1px 2px 0 rgb(11 44 35 / 0.06), 0 18px 40px -18px rgb(15 118 110 / 0.4);
+  --glass-fill: #ffffff;
+  --glass-sheen-1: rgb(255 255 255 / 0);
+  --glass-sheen-2: rgb(255 255 255 / 0);
+  --glass-solid: #ffffff;
+  --glass-border-1: rgb(15 118 110 / 0.75);
+  --glass-border-2: rgb(109 40 217 / 0.6);
+  --glass-border-3: rgb(15 118 110 / 0.3);
+  --grad-1: #0f766e;
+  --grad-2: #4f46b5;
+  --grad-3: #7c3aed;
+  --ghost-border: #5a766b;
+  --ghost-border-hover: #6d28d9;
+  --ghost-bg: #ffffff;
+  --ghost-bg-hover: #f1f7f4;
+  --btn-ring: #0f766e;
+  --btn-ring-hover: #115e59;
+  --btn-glow: rgb(15 118 110 / 0.3);
+  --btn-glow-hover: rgb(15 118 110 / 0.42);
+  --qr-glow: rgb(15 118 110 / 0.22);
+  position: relative;
+  background: #ffffff;
+  color: var(--color-text);
+}
+.section-light ::selection { background: rgb(15 118 110 / 0.25); }
+/* Hell auf Dunkel: Glow-Trennlinie/-Schein am oberen Rand entfaellt (sauberer harter Wechsel) */
+.section-light.section-sep::before, .section-light.section-sep::after,
+.section-light + .section-sep::before, .section-light + .section-sep::after { display: none; }
+
 @utility glass {
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.075), rgb(255 255 255 / 0.02) 55%), rgb(19 66 53 / 0.62);
+  background: linear-gradient(180deg, var(--glass-sheen-1), var(--glass-sheen-2) 55%), var(--glass-fill);
   border: 1px solid var(--color-line);
   box-shadow: var(--shadow-card);
 }
@@ -72,9 +151,9 @@ body {
 @utility glass-accent {
   border: 1px solid transparent;
   background:
-    linear-gradient(180deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.02) 55%) padding-box,
-    linear-gradient(rgb(19 66 53 / 0.92), rgb(19 66 53 / 0.92)) padding-box,
-    linear-gradient(140deg, rgb(94 234 212 / 0.65), rgb(139 92 246 / 0.5) 55%, rgb(94 234 212 / 0.12)) border-box;
+    linear-gradient(180deg, var(--glass-sheen-1), var(--glass-sheen-2) 55%) padding-box,
+    linear-gradient(var(--glass-solid), var(--glass-solid)) padding-box,
+    linear-gradient(140deg, var(--glass-border-1), var(--glass-border-2) 55%, var(--glass-border-3)) border-box;
   box-shadow: var(--shadow-glow);
 }
 
@@ -143,7 +222,7 @@ body {
 
 /* Verlaufstext Mint -> Violett */
 @utility text-gradient {
-  background: linear-gradient(100deg, #5eead4 0%, #a5b4fc 55%, #c4b5fd 100%);
+  background: linear-gradient(100deg, var(--grad-1) 0%, var(--grad-2) 55%, var(--grad-3) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

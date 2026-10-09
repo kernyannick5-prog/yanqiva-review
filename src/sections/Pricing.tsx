@@ -27,7 +27,7 @@ const plans = [
 /** Preise (Endpreise, Kleinunternehmer; Dashboard 12 Monate inklusive, danach optional). */
 export function Pricing() {
   return (
-    <section id="pricing" className="section-y section-sep section-tint relative overflow-hidden" aria-labelledby="pricing-title">
+    <section id="pricing" className="section-light section-y section-sep relative overflow-hidden" aria-labelledby="pricing-title">
       <Container>
         <Reveal>
           <SectionHead
@@ -47,7 +47,7 @@ export function Pricing() {
                   className={`relative flex h-full flex-col rounded-3xl p-6 sm:p-8 ${p.popular ? 'glass-accent' : 'glass'}`}
                 >
                   {p.popular && (
-                    <span className="absolute right-6 top-0 -translate-y-1/2 rounded-full bg-gradient-to-b from-[#7ff0dc] to-mint px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink-950 shadow-[0_6px_18px_-6px_rgb(94_234_212/0.7)]">
+                    <span className="absolute right-6 top-0 -translate-y-1/2 rounded-full bg-mint px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink-950 shadow-[0_6px_18px_-6px_var(--btn-glow)]">
                       Beliebt
                     </span>
                   )}

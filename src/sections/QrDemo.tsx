@@ -29,7 +29,7 @@ function RedirectDiagram({ reduce }: { reduce: boolean }) {
       <figcaption className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-faint">So läuft die Weiterleitung</figcaption>
       <div className="flex justify-center gap-3">
         {['NFC', 'QR-Code'].map((l) => (
-          <span key={l} className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[13px] font-semibold tracking-wide text-muted">{l}</span>
+          <span key={l} className="rounded-lg border border-edge-weak bg-wash-weak px-3 py-1.5 text-[13px] font-semibold tracking-wide text-muted">{l}</span>
         ))}
       </div>
       <Connector reduce={reduce} />
@@ -38,7 +38,7 @@ function RedirectDiagram({ reduce }: { reduce: boolean }) {
         <p className="mt-1 font-mono text-[13px] text-text sm:text-sm">{redirectParts[0]}<wbr />{redirectParts[1]}</p>
       </div>
       <Connector reduce={reduce} />
-      <div className="rounded-2xl border border-line bg-white/[0.05] px-4 py-3 text-center">
+      <div className="rounded-2xl border border-line bg-wash-weak px-4 py-3 text-center">
         <p className="text-sm font-medium">Google-Bewertung</p>
         <p className="mt-0.5 text-xs text-muted">Ziel änderbar im Dashboard</p>
       </div>
@@ -52,12 +52,12 @@ export function QrDemo() {
   const loop = useLoopVisible<HTMLElement>()
 
   return (
-    <section id="qr" ref={loop} className="section-y section-sep relative overflow-hidden" aria-labelledby="qr-title">
+    <section id="qr" ref={loop} className="section-light section-y section-sep relative overflow-hidden" aria-labelledby="qr-title">
       <Container className="grid items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
         <Reveal className="mx-auto w-full max-w-[300px] sm:max-w-[340px] lg:mx-0">
-          <div className="relative rounded-[2rem] p-3 shadow-[0_0_80px_-10px_rgb(94_234_212/0.35)]">
+          <div className="relative rounded-[2rem] p-3 shadow-[0_0_80px_-10px_var(--qr-glow)]">
             <div aria-hidden className="absolute -inset-px rounded-[2rem] bg-gradient-to-br from-mint via-violet-glow to-mint/20 opacity-70" />
-            <div className="relative rounded-[1.6rem] bg-ink-900 p-4">
+            <div className="relative rounded-[1.6rem] bg-ink-900 p-4 shadow-[inset_0_0_0_1px_var(--color-edge-weak)]">
               <div className="relative overflow-hidden rounded-2xl">
                 <QrCode value={demoRedirectUrl(SLUG)} size={300} className="!h-auto !w-full aspect-square" />
                 {!reduce && (

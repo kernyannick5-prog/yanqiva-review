@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 /** Kleines mint Label in Großbuchstaben über Section-Überschriften. */
 export function Eyebrow({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <p className={`inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#d0c4fe] ${className}`}>
+    <p className={`inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-eyebrow ${className}`}>
       <span aria-hidden className="h-px w-6 bg-gradient-to-r from-violet-glow/0 to-violet-glow" />
       {children}
     </p>

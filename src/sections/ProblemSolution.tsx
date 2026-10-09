@@ -19,7 +19,7 @@ const after = ['NFC-Tap', 'Google-Bewertung']
 /** Vorher/Nachher-Vergleich. */
 export function ProblemSolution() {
   return (
-    <section className="section-y section-sep relative overflow-hidden" aria-labelledby="ps-title">
+    <section className="section-light section-y section-sep relative overflow-hidden" aria-labelledby="ps-title">
       <Container>
         <Reveal>
           <SectionHead eyebrow="Vorher · Nachher" id="ps-title">
@@ -31,7 +31,7 @@ export function ProblemSolution() {
           {/* VORHER */}
           <Reveal className="glass relative rounded-3xl p-5 sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-faint">Vorher</p>
-            <div className="mt-5 max-w-sm rounded-2xl rounded-bl-sm bg-white/[0.06] px-4 py-3 text-[15px] text-muted">
+            <div className="mt-5 max-w-sm rounded-2xl rounded-bl-sm bg-wash px-4 py-3 text-[15px] text-muted">
               „Können Sie uns bitte auf Google bewerten?“
             </div>
             <motion.ol
@@ -45,10 +45,10 @@ export function ProblemSolution() {
                 <motion.li
                   key={s}
                   variants={itemVariants}
-                  className="flex min-h-11 items-center gap-3 border-l-2 border-dashed border-white/15 pl-4 text-[15px] text-faint"
+                  className="flex min-h-11 items-center gap-3 border-l-2 border-dashed border-edge pl-4 text-[15px] text-faint"
 
                 >
-                  <span aria-hidden className="grid size-6 shrink-0 place-items-center rounded-full border border-white/10 text-xs">{i + 1}</span>
+                  <span aria-hidden className="grid size-6 shrink-0 place-items-center rounded-full border border-edge-weak text-xs">{i + 1}</span>
                   {s}
                 </motion.li>
               ))}
