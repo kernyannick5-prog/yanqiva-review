@@ -8,6 +8,7 @@ import {
 } from 'framer-motion'
 import { useEffect } from 'react'
 import { LinkButton } from '../components/Button'
+import { MotionToggle } from '../components/MotionToggle'
 import { lowPower } from '../lib/lowPower'
 import { useLoopVisible } from '../lib/useLoopVisible'
 import { Container } from './ui'
@@ -184,6 +185,9 @@ export function Hero() {
             <LinkButton href="#demo">Demo ansehen</LinkButton>
             <LinkButton href="#how" variant="ghost">So funktioniert’s</LinkButton>
           </motion.div>
+
+          {/* WCAG 2.2.2: Pause-Schalter direkt bei den animierten Bereichen (zusätzlich zum Seitenfuß) */}
+          <MotionToggle className="mt-4 min-h-6 rounded text-[13px] text-faint underline underline-offset-2 hover:text-text aria-pressed:text-mint" />
         </div>
 
         <motion.div

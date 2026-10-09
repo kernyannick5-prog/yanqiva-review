@@ -24,7 +24,7 @@ function isCard(value: unknown): value is Card {
 
 function loadCreatedCards(): Card[] {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = sessionStorage.getItem(STORAGE_KEY)
     const parsed: unknown = raw ? JSON.parse(raw) : []
     return Array.isArray(parsed) ? parsed.filter(isCard).filter((c) => !SEED_CARD_IDS.has(c.id)) : []
   } catch {
@@ -35,14 +35,14 @@ function loadCreatedCards(): Card[] {
 function saveCreatedCards(cards: Card[]) {
   try {
     // Nichts schreiben, solange keine Karte angelegt wurde (kein leerer Eintrag, kein Speicher ohne Nutzeraktion).
-    if (cards.length === 0) localStorage.removeItem(STORAGE_KEY)
-    else localStorage.setItem(STORAGE_KEY, JSON.stringify(cards))
+    if (cards.length === 0) sessionStorage.removeItem(STORAGE_KEY)
+    else sessionStorage.setItem(STORAGE_KEY, JSON.stringify(cards))
   } catch {
     /* Speicher nicht verfügbar (z. B. privater Modus) – Demo läuft ohne Persistenz weiter. */
   }
 }
 
-/** Zustand der Demo: Karten (neu angelegte werden in localStorage gehalten). */
+/** Zustand der Demo: Karten (neu angelegte werden in sessionStorage gehalten (nur dieser Tab/Besuch)). */
 export function useDemoStore() {
   const [cards, setCards] = useState<Card[]>(() => [...loadCreatedCards(), ...SEED_CARDS])
 
@@ -74,7 +74,7 @@ export function useDemoStore() {
 
   const reset = useCallback(() => {
     try {
-      localStorage.removeItem(STORAGE_KEY)
+      sessionStorage.removeItem(STORAGE_KEY)
     } catch {
       /* ignorieren */
     }

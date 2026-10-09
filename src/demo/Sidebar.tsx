@@ -56,6 +56,8 @@ export function Sidebar({ view, onChange, cardCount }: SidebarProps) {
               key={id}
               type="button"
               onClick={() => onChange(id)}
+              // WCAG 2.4.7/2.4.11: per Tastatur fokussierten Tab in der scrollenden Leiste vollständig sichtbar machen
+              onFocus={(e) => e.currentTarget.scrollIntoView({ block: 'nearest', inline: 'nearest' })}
               aria-current={active ? 'page' : undefined}
               className={`relative flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-xl px-3.5 text-sm font-medium transition-[color,background-color,transform] duration-200 active:scale-[0.97] focus-visible:outline-offset-[-2px] lg:w-full ${
                 active ? 'text-text' : 'text-muted hover:bg-white/[0.04] hover:text-text active:bg-white/[0.08]'

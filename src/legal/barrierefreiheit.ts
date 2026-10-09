@@ -77,7 +77,7 @@ export const barrierefreiheit: LegalDoc = {
         {
           list: [
             'Die Seiten sind mit HTML-Landmarken (Kopfbereich, Navigation, Hauptinhalt, Fußbereich), einer logischen Überschriftenstruktur und Listen aufgebaut. Ein Sprunglink „Zum Inhalt springen“ führt direkt zum Hauptinhalt.',
-            'Alle Bedienelemente lassen sich mit der Tastatur erreichen und bedienen. Der Fokus (die Markierung, wo Sie gerade sind) ist als farbige Umrandung sichtbar.',
+            'Alle Bedienelemente lassen sich mit der Tastatur erreichen und bedienen. Der Fokus (die Markierung, wo Sie gerade sind) ist als farbige Umrandung sichtbar; die Navigationsleiste der Dashboard-Demo scrollt bei schmaler Breite mit dem Fokus mit.',
             'Fenster in der Demo („Neue Karte hinzufügen“, „Link bearbeiten“, QR-Code) nehmen den Tastaturfokus beim Öffnen auf, halten ihn darin, schließen sich mit der Esc-Taste und geben den Fokus danach zurück.',
             'Im Formular „Neue Karte hinzufügen“ hat jedes Feld eine sichtbare Beschriftung. Pflichtfelder sind benannt. Fehler stehen als Text direkt am Feld und sind mit dem Feld verknüpft. Der Fokus springt zum ersten fehlerhaften Feld.',
             'Statusmeldungen („Karte erstellt“, „Link kopiert“) und die Auswahl im Diagramm werden Screenreadern über Live-Regionen mitgeteilt.',
@@ -85,7 +85,7 @@ export const barrierefreiheit: LegalDoc = {
             'Zustände wie „Aktiv“, „Pausiert“ oder ausgewählte Filter sind nicht nur durch Farbe erkennbar, sondern auch durch Text oder Form.',
             'Wir haben die Farbkontraste gemessen: Text mindestens 4,5 : 1, Bedienelemente und Eingabefelder mindestens 3 : 1 (siehe Abschnitt 6).',
             'Die Seiten passen sich schmalen Bildschirmen an (geprüft ab 320 Pixel Breite) und lassen sich vergrößern, ohne dass Sie in zwei Richtungen scrollen müssen. Klickflächen sind mindestens 24 × 24 Pixel groß, die meisten mindestens 44 × 44.',
-            'Wenn Ihr Gerät „Bewegung reduzieren“ eingestellt hat, laufen keine Endlos-Animationen, und die Produktanimation erscheint als ruhige Standansicht. Zusätzlich können Sie auf der Startseite im Seitenfuß über „Animationen anhalten“ alle Endlos-Animationen und die simulierte Live-Aktivität selbst stoppen.',
+            'Wenn Ihr Gerät „Bewegung reduzieren“ eingestellt hat, laufen keine Endlos-Animationen, und die Produktanimation erscheint als ruhige Standansicht. Zusätzlich können Sie auf der Startseite direkt unter den Schaltflächen am Seitenanfang und im Seitenfuß über „Animationen anhalten“ alle Endlos-Animationen, die automatische Produktanimation auf Touch-Geräten und die simulierte Live-Aktivität selbst stoppen.',
             'Wir setzen keine Cookies, kein Tracking, keine Overlay-Widgets und keine externen Schriftarten ein.',
           ],
         },
@@ -116,7 +116,7 @@ export const barrierefreiheit: LegalDoc = {
       blocks: [
         {
           list: [
-            'Produktanimation (Abschnitt „Das Produkt“): Die 3D-Szene mit Aufsteller und Smartphone ist rein bildlich und für Screenreader ausgeblendet. Den Ablauf beschreiben die drei Schritte und die Kurztexte daneben als normaler Text. Am Computer läuft die Szene mit dem Scrollen, auf Touch-Geräten einmal automatisch und lässt sich dort mit einer Schaltfläche anhalten. Auf Geräten mit „Bewegung reduzieren“ oder schwacher Leistung zeigen wir eine ruhige Standansicht. Die Szene selbst ist nicht für Tastatur oder Screenreader erlebbar.',
+            'Produktanimation (Abschnitt „Das Produkt“): Die 3D-Szene mit Aufsteller und Smartphone ist rein bildlich und für Screenreader ausgeblendet. Den Ablauf beschreiben die drei Schritte und die Kurztexte daneben als normaler Text. Am Computer läuft die Szene mit dem Scrollen, auf Touch-Geräten einmal automatisch und lässt sich dort mit einer Schaltfläche oder über „Animationen anhalten“ anhalten. Auf Geräten mit „Bewegung reduzieren“ oder schwacher Leistung zeigen wir eine ruhige Standansicht. Die Szene selbst ist nicht für Tastatur oder Screenreader erlebbar.',
             'Dashboard-Demo: Alle Daten und Firmen sind erfunden. Die Demo ist nur teilweise auf Screenreadern getestet (siehe Abschnitt 6).',
             'Diagramme: Die Diagramme sind eigene Zeichnungen. Sie haben eine Textzusammenfassung und Tastaturbedienung, aber keine vollständige Datentabelle. Hinweisfelder am Mauszeiger sind kein Ersatz für die Tastaturbedienung.',
             'Kurze Meldungen („Karte erstellt“) verschwinden nach wenigen Sekunden. Sie werden vorgelesen; das Ergebnis (z. B. die neue Karte) bleibt sichtbar.',

@@ -3,6 +3,7 @@ import { useInView, useMotionValue, useScroll, useSpring } from 'framer-motion'
 import { Button } from '../components/Button'
 import { Reveal } from '../components/Reveal'
 import { lowPower } from '../lib/lowPower'
+import { useMotionPaused } from '../lib/motionPause'
 import { useTouchLayout } from '../lib/useTouchLayout'
 import { Container, Eyebrow } from './ui'
 import { Scene } from './showcase/Scene'
@@ -141,9 +142,19 @@ function TouchShowcase() {
   const autoPaused = useRef(false)
 
   // Einmal automatisch abspielen (~50 % sichtbar); verlässt die Szene den Viewport, pausieren.
+  // Nutzerschalter „Animationen anhalten“ (WCAG 2.2.2): kein Autoplay, laufende Wiedergabe pausieren.
+  const motionPaused = useMotionPaused()
+  const motionPauseHeld = useRef(false)
   useEffect(() => {
-    if (half) autoplay()
-  }, [half, autoplay])
+    if (half && !motionPaused) autoplay()
+  }, [half, autoplay, motionPaused])
+  useEffect(() => {
+    if (motionPaused) motionPauseHeld.current = pause()
+    else if (motionPauseHeld.current) {
+      motionPauseHeld.current = false
+      resume()
+    }
+  }, [motionPaused, pause, resume])
   useEffect(() => {
     if (!visible) autoPaused.current = pause()
     else if (autoPaused.current) {

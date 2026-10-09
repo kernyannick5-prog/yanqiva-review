@@ -1,6 +1,6 @@
 import { setMotionPaused, useMotionPaused } from '../lib/motionPause'
 
-/** Schalter im Seitenfuß: stoppt alle automatisch laufenden Animationen und die simulierte Live-Aktivität. */
+/** Schalter (Hero und Seitenfuß): stoppt alle automatisch laufenden Animationen und die simulierte Live-Aktivität. */
 export function MotionToggle({ className = '' }: { className?: string }) {
   const paused = useMotionPaused()
   return (

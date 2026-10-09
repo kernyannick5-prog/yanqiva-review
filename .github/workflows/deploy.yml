@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Taeglicher Neubau: haelt die statischen Fallback-Seiten /r/<slug>/ (Snapshot der Karten, siehe plugins/redirects.ts) aktuell.
+  schedule:
+    - cron: '17 3 * * *'
 
 permissions:
   contents: read
@@ -25,6 +28,9 @@ jobs:
       - run: npm run build
         env:
           BASE: /
+          # Optional (Repo-Secrets): ohne beide nur die Demo-Weiterleitungen. Nie im Log ausgeben (oeffentliches Repo).
+          FALLBACK_EXPORT_URL: ${{ secrets.FALLBACK_EXPORT_URL }}
+          FALLBACK_EXPORT_TOKEN: ${{ secrets.FALLBACK_EXPORT_TOKEN }}
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: dist
