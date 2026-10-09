@@ -1,10 +1,10 @@
-# YANQIVA REVIEW – Demo
+# YANQIVA REVIEW
 
 **Mehr Bewertungen. Weniger Aufwand.**
 
 Marketing-Website mit interaktiver SaaS-Dashboard-Demo für YANQIVA REVIEW: ein NFC- und QR-System, das Kunden mit einem Tap direkt zur Google-Bewertungsseite eines Unternehmens bringt.
 
-> **Demo / Prototyp.** Alle Firmen, Zahlen und Bewertungen sind erfunden. Es werden keine echten Google-Profile verlinkt.
+> **Hinweis:** Die Dashboard-Demo zeigt erfundene Firmen, Zahlen und Bewertungen; es werden keine echten Google-Profile verlinkt. Bestellungen laufen über /bestellen/
 
 **Live:** https://yanqiva-bewertung.de/
 

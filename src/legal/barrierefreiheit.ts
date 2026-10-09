@@ -24,7 +24,7 @@ export const barrierefreiheit: LegalDoc = {
       heading: '1. Worum es geht',
       blocks: [
         {
-          p: 'Yanqiva stellt auf dieser Website das Produkt „YANQIVA REVIEW“ (NFC-Karten und QR-Codes für Google-Bewertungen) als Demo bzw. Prototyp vor. Wir möchten, dass möglichst viele Menschen die Website nutzen können – auch mit Tastatur, Screenreader (Vorleseprogramm), Vergrößerung oder auf kleinen Bildschirmen.',
+          p: 'Yanqiva stellt auf dieser Website das Produkt „YANQIVA REVIEW“ (NFC-Karten und QR-Codes für Google-Bewertungen) vor und verkauft es an Unternehmen. Wir möchten, dass möglichst viele Menschen die Website nutzen können – auch mit Tastatur, Screenreader (Vorleseprogramm), Vergrößerung oder auf kleinen Bildschirmen.',
         },
         {
           p: 'Unser Angebot richtet sich ausschließlich an Unternehmer. Nach unserer Einschätzung sind wir deshalb nicht verpflichtet, eine solche Erklärung zu veröffentlichen. Wir stellen sie freiwillig bereit, damit Sie wissen, was funktioniert und wo es noch Lücken gibt.',

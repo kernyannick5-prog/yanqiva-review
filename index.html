@@ -3,11 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0b2c23" />
-    <meta name="robots" content="noindex" />
-    <meta name="description" content="YANQIVA REVIEW – Google-Bewertungen per NFC-Karte und QR-Code. Demo / Prototyp." />
+    <meta name="description" content="Mehr Google-Bewertungen per NFC-Karte und QR-Code: einfach für Unternehmen, Einrichtung und Versand in Deutschland inklusive. Preise ab 60 €." />
     <title>YANQIVA REVIEW – Mehr Bewertungen. Weniger Aufwand.</title>
+    <link rel="canonical" href="https://yanqiva-bewertung.de/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="YANQIVA REVIEW" />
+    <meta property="og:title" content="YANQIVA REVIEW – Mehr Bewertungen. Weniger Aufwand." />
+    <meta property="og:description" content="Mehr Google-Bewertungen per NFC-Karte und QR-Code: einfach für Unternehmen, Einrichtung und Versand in Deutschland inklusive. Preise ab 60 €." />
+    <meta property="og:url" content="https://yanqiva-bewertung.de/" />
+    <meta property="og:image" content="https://yanqiva-bewertung.de/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="YANQIVA REVIEW: Mehr Bewertungen. Weniger Aufwand. NFC-Karte mit Sternebewertung" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="YANQIVA REVIEW – Mehr Bewertungen. Weniger Aufwand." />
+    <meta name="twitter:description" content="Mehr Google-Bewertungen per NFC-Karte und QR-Code: einfach für Unternehmen, Einrichtung und Versand in Deutschland inklusive. Preise ab 60 €." />
+    <meta name="twitter:image" content="https://yanqiva-bewertung.de/og-image.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://yanqiva-bewertung.de/#organization",
+            "name": "Yanqiva",
+            "url": "https://yanqiva.de/",
+            "logo": "https://yanqiva-bewertung.de/icon-512.png",
+            "email": "support@yanqiva.de"
+          },
+          {
+            "@type": "Product",
+            "@id": "https://yanqiva-bewertung.de/#product",
+            "name": "YANQIVA REVIEW",
+            "description": "NFC-Karten und QR-Codes, die Kunden mit einem Tap direkt zur Google-Bewertungsseite eines Unternehmens führen.",
+            "image": "https://yanqiva-bewertung.de/og-image.png",
+            "url": "https://yanqiva-bewertung.de/",
+            "brand": { "@type": "Brand", "name": "YANQIVA REVIEW" },
+            "manufacturer": { "@id": "https://yanqiva-bewertung.de/#organization" },
+            "offers": [
+              {
+                "@type": "Offer",
+                "name": "YANQIVA REVIEW Klassik",
+                "url": "https://yanqiva-bewertung.de/bestellen/",
+                "price": "60",
+                "priceCurrency": "EUR",
+                "availability": "https://schema.org/InStock",
+                "seller": { "@id": "https://yanqiva-bewertung.de/#organization" },
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "EUR" },
+                  "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "DE" }
+                }
+              },
+              {
+                "@type": "Offer",
+                "name": "YANQIVA REVIEW Dashboard",
+                "url": "https://yanqiva-bewertung.de/bestellen/",
+                "price": "99",
+                "priceCurrency": "EUR",
+                "availability": "https://schema.org/InStock",
+                "seller": { "@id": "https://yanqiva-bewertung.de/#organization" },
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "EUR" },
+                  "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "DE" }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

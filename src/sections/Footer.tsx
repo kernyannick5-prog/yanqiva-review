@@ -30,6 +30,9 @@ export function Footer({ onLegalPage = false }: { onLegalPage?: boolean }) {
             <p className="font-display text-2xl font-bold tracking-[0.14em]">YANQIVA</p>
             <p className="mt-1.5 font-display text-lg text-text">Digital Solutions.</p>
             <p className="mt-1 text-sm text-muted">KI. Websites. Automatisierung. SaaS.</p>
+            <p className="mt-3 text-sm text-muted">
+              <a href="https://yanqiva.de/" className="-mx-2 inline-flex min-h-11 items-center rounded-lg px-2 underline-offset-2 transition-colors hover:text-text hover:underline active:text-mint">Ein Angebot von Yanqiva</a>
+            </p>
           </div>
           <nav aria-label="Footer">
             <ul className="grid grid-cols-2 gap-x-8 sm:flex sm:flex-wrap sm:gap-x-6 md:max-w-md md:justify-end">

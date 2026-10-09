@@ -160,7 +160,7 @@ export function Hero() {
             className="chip mb-5 sm:mb-6"
           >
             <span aria-hidden className="size-1.5 rounded-full bg-mint" />
-            Demo · Prototyp
+            NFC + QR · Für Unternehmen
           </motion.p>
 
           <Headline reduce={reduce} />
