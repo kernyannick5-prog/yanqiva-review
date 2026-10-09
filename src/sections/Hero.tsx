@@ -150,7 +150,7 @@ export function Hero() {
   const chipB = useTransform(scrollYProgress, [0, 1], [0, parallax ? 70 : 0])
 
   return (
-    <section id="top" ref={loop} className="section-light relative overflow-x-clip pb-14 pt-24 sm:pb-20 sm:pt-36 lg:pb-32 lg:pt-40">
+    <section id="start" ref={loop} className="section-light relative overflow-x-clip pb-14 pt-24 sm:pb-20 sm:pt-36 lg:pb-32 lg:pt-40">
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_80%_40%,rgb(124_58_237/0.07),transparent),radial-gradient(ellipse_40%_50%_at_10%_20%,rgb(15_118_110/0.06),transparent)]" />
       <Container className="relative grid items-center gap-8 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
         <div>
@@ -183,7 +183,7 @@ export function Hero() {
             className="mt-7 flex gap-3 sm:mt-9 [&>a]:min-w-0 [&>a]:flex-1 [&>a]:px-3 [&>a]:text-sm sm:[&>a]:flex-none sm:[&>a]:px-6 sm:[&>a]:text-[15px]"
           >
             <LinkButton href="#demo">Demo ansehen</LinkButton>
-            <LinkButton href="#how" variant="ghost">So funktioniert’s</LinkButton>
+            <LinkButton href="#ablauf" variant="ghost">So funktioniert’s</LinkButton>
           </motion.div>
 
           {/* WCAG 2.2.2: Pause-Schalter direkt bei den animierten Bereichen (zusätzlich zum Seitenfuß) */}

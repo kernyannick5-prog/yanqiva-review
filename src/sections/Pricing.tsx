@@ -28,12 +28,12 @@ const plans = [
 /** Preise (Endpreise, Kleinunternehmer; Dashboard 12 Monate inklusive, danach optional). */
 export function Pricing() {
   return (
-    <section id="pricing" className="section-y section-tint relative overflow-hidden" aria-labelledby="pricing-title">
+    <section id="preise" className="section-y section-tint relative overflow-hidden" aria-labelledby="preise-title">
       <Container>
         <Reveal>
           <SectionHead
             eyebrow="Preise"
-            id="pricing-title"
+            id="preise-title"
             lead="Das Dashboard ist 12 Monate inklusive, danach optional für 15 €/Monat. Die Karte funktioniert auch ohne. Mehrere Karten oder Filialen auf Anfrage."
           >
             Einmal zahlen. Sofort loslegen.

@@ -101,10 +101,10 @@ export function HowItWorks() {
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 })
 
   return (
-    <section id="how" className="section-light section-y relative overflow-hidden" aria-labelledby="how-title">
+    <section id="ablauf" className="section-light section-y relative overflow-hidden" aria-labelledby="ablauf-title">
       <Container>
         <Reveal>
-          <SectionHead eyebrow="So funktioniert’s" id="how-title">
+          <SectionHead eyebrow="So funktioniert’s" id="ablauf-title">
             Drei Schritte. Keine Reibung.
           </SectionHead>
         </Reveal>

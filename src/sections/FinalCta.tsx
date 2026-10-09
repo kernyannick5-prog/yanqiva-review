@@ -7,7 +7,7 @@ import { Container, Eyebrow } from './ui'
 export function FinalCta() {
   const loop = useLoopVisible<HTMLElement>()
   return (
-    <section id="cta" ref={loop} className="section-light section-y relative overflow-hidden" aria-labelledby="cta-title">
+    <section id="loslegen" ref={loop} className="section-light section-y relative overflow-hidden" aria-labelledby="loslegen-title">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div
           className="yq-breathe absolute left-1/2 top-1/2 h-[60vmax] w-[60vmax] max-w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(124_58_237/0.12),rgb(15_118_110/0.1)_55%,transparent)]"
@@ -22,7 +22,7 @@ export function FinalCta() {
           <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
           <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 opacity-30 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,#000,transparent)]" />
           <Eyebrow className="relative">Los geht’s</Eyebrow>
-          <h2 id="cta-title" className="relative mt-4 font-display text-[clamp(1.95rem,1.1rem+3.8vw,3.9rem)] font-semibold leading-[1.06] tracking-[-0.035em] text-balance sm:mt-5">
+          <h2 id="loslegen-title" className="relative mt-4 font-display text-[clamp(1.95rem,1.1rem+3.8vw,3.9rem)] font-semibold leading-[1.06] tracking-[-0.035em] text-balance sm:mt-5">
             Bereit loszulegen?
             <span className="text-gradient block">Mach es deinen Kunden einfach.</span>
           </h2>

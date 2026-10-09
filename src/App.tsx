@@ -25,7 +25,7 @@ function ShowcaseFallback() {
 // Dashboard-Demo als eigener Chunk, damit der Hero schneller lädt.
 const DashboardDemo = lazy(() => import('./demo/DashboardDemo').then((m) => ({ default: m.DashboardDemo })))
 
-// Platzhalter so hoch wie die fertige Demo (gemessen bei 320 bis 1920 px), damit Anker wie #pricing nicht wegspringen, wenn die Demo nachlädt.
+// Platzhalter so hoch wie die fertige Demo (gemessen bei 320 bis 1920 px), damit Anker wie #preise nicht wegspringen, wenn die Demo nachlädt.
 const demoFallback = <section id="demo" className="section-light min-h-[2100px] sm:min-h-[1990px] md:min-h-[1800px] lg:min-h-[1600px]" aria-busy="true" />
 
 /** Mountet die (schwere) Demo erst, wenn sie nahe am Viewport ist; bis dahin Platzhalter gleicher Höhe. */
@@ -60,11 +60,15 @@ function DemoWhenNear() {
 }
 
 /**
- * Anker-Sprünge (Navigation, /#pricing): Nachgeladene Abschnitte (Demo, Produktszene) können die Seite verlängern, während der sanfte Sprung läuft.
+ * Anker-Sprünge (Navigation, /#preise): Nachgeladene Abschnitte (Demo, Produktszene) können die Seite verlängern, während der sanfte Sprung läuft.
  * Nach dem Sprung prüfen wir daher noch zweimal, ob das Ziel wirklich oben liegt, und korrigieren es sonst ohne Animation.
  */
 function useAnchorSettle() {
   useEffect(() => {
+    // Alte englische Anker (geteilte Links, z. B. /#pricing) auf die deutschen umschreiben
+    const legacy: Record<string, string> = { '#pricing': '#preise', '#how': '#ablauf', '#top': '#start', '#cta': '#loslegen' }
+    const renamed = legacy[window.location.hash]
+    if (renamed) history.replaceState(history.state, '', renamed)
     const timers: number[] = []
     const settle = (hash: string) => {
       const id = decodeURIComponent(hash.slice(1))

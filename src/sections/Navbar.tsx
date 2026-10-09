@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../components/Button'
 
 const links = [
-  { href: '#how', label: 'Produkt' },
+  { href: '#ablauf', label: 'Produkt' },
   { href: '#demo', label: 'Demo' },
   { href: '#qr', label: 'QR' },
-  { href: '#pricing', label: 'Preise' },
+  { href: '#preise', label: 'Preise' },
 ] as const
 
 /**
@@ -59,7 +59,7 @@ export function Navbar({ anchorBase = '', onLight = false }: { anchorBase?: stri
             : 'h-16 border-transparent bg-transparent'
         }`}
       >
-        <a href={`${anchorBase}#top`} onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-2.5 transition-opacity active:opacity-70" aria-label="YANQIVA Review – zum Seitenanfang">
+        <a href={`${anchorBase}#start`} onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-2.5 transition-opacity active:opacity-70" aria-label="YANQIVA Review – zum Seitenanfang">
           <span className="font-display text-lg font-bold tracking-[0.12em] text-text">YANQIVA</span>
           {' '}
           <span className="rounded-full border border-mint/40 bg-mint/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-widest text-mint">Review</span>

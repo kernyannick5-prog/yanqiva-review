@@ -4,8 +4,8 @@ import { Container } from './ui'
 const BASE = import.meta.env.BASE_URL
 
 const internal = [
-  { hash: '#how', label: 'Produkt' },
-  { hash: '#pricing', label: 'Preise' },
+  { hash: '#ablauf', label: 'Produkt' },
+  { hash: '#preise', label: 'Preise' },
   { hash: '#demo', label: 'Dashboard' },
 ]
 const external = [
