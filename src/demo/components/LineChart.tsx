@@ -17,6 +17,8 @@ interface LineChartProps {
   /** Einheit im Tooltip, z. B. "NFC-Taps" */
   valueLabel: string
   ariaLabel: string
+  /** Zeiteinheit der Punkte (Standard: Tage); 'month' für Monatswerte im Kunden-Dashboard */
+  unit?: 'day' | 'month'
 }
 
 const PAD = { top: 14, right: 14, bottom: 30, left: 42 }
@@ -44,7 +46,9 @@ function smoothPath(coords: [number, number][]) {
 }
 
 /** Eigenes SVG-Liniendiagramm: Gradient-Fläche, einzeichnende Linie, Hover-/Touch-/Tastatur-Tooltip. */
-export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
+export function LineChart({ points, valueLabel, ariaLabel, unit = 'day' }: LineChartProps) {
+  const unitPlural = unit === 'month' ? 'Monate' : 'Tage'
+  const unitSingular = unit === 'month' ? 'Monat' : 'Tag'
   const wrapRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const width = useElementWidth(wrapRef, 640)
@@ -108,7 +112,7 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
   const hi = points.reduce((b, p) => (p.value > b.value ? p : b), points[0])
   const lo = points.reduce((b, p) => (p.value < b.value ? p : b), points[0])
   const summary = n
-    ? `${n} Tage von ${points[0].tooltipLabel} bis ${points[n - 1].tooltipLabel}. Insgesamt ${formatInt(sum)} ${valueLabel}, im Schnitt ${formatInt(Math.round(sum / n))} pro Tag. Höchster Wert: ${formatInt(hi.value)} am ${hi.tooltipLabel}. Niedrigster Wert: ${formatInt(lo.value)} am ${lo.tooltipLabel}.`
+    ? `${n} ${unitPlural} von ${points[0].tooltipLabel} bis ${points[n - 1].tooltipLabel}. Insgesamt ${formatInt(sum)} ${valueLabel}, im Schnitt ${formatInt(Math.round(sum / n))} pro ${unitSingular}. Höchster Wert: ${formatInt(hi.value)} ${unit === 'month' ? 'im' : 'am'} ${hi.tooltipLabel}. Niedrigster Wert: ${formatInt(lo.value)} ${unit === 'month' ? 'im' : 'am'} ${lo.tooltipLabel}.`
     : 'Keine Daten.'
   const duration = reduce ? 0 : 1.4
 
@@ -117,7 +121,7 @@ export function LineChart({ points, valueLabel, ariaLabel }: LineChartProps) {
       ref={wrapRef}
       role="group"
       tabIndex={0}
-      aria-label={`${ariaLabel}. Mit den Pfeiltasten einzelne Tage auswählen.`}
+      aria-label={`${ariaLabel}. Mit den Pfeiltasten einzelne ${unitPlural} auswählen.`}
       aria-describedby={summaryId}
       onKeyDown={onKeyDown}
       onBlur={() => setActive(null)}

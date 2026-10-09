@@ -15,6 +15,7 @@ const external = [
   { href: `${BASE}datenschutz/`, label: 'Datenschutz' },
   { href: `${BASE}agb/`, label: 'AGB' },
   { href: `${BASE}barrierefreiheit/`, label: 'Barrierefreiheit' },
+  { href: `${BASE}dashboard/`, label: 'Kunden-Login' },
 ]
 
 const linkClass =
