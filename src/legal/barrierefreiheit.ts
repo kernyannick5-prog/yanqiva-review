@@ -43,6 +43,7 @@ export const barrierefreiheit: LegalDoc = {
             'die Startseite mit allen Abschnitten, einschließlich der interaktiven Dashboard-Demo (Übersicht, Karten, Statistiken, Einstellungen) und dem Formular „Neue Karte hinzufügen“',
             'die Seiten Impressum, Datenschutz, AGB und diese Erklärung',
             'den Bestellprozess unter /bestellen/ (siehe Abschnitt 8)',
+            'den Kundenbereich unter /dashboard/ mit Anmeldung und Dashboard für Kunden der Variante Dashboard (siehe Abschnitt 8)',
             'die Demo-Weiterleitungen unter /r/… und die simulierte Bewertungsseite (/review-demo/), zu der sie führen',
             'die Fehlerseite „Seite nicht gefunden“',
           ],
@@ -131,7 +132,7 @@ export const barrierefreiheit: LegalDoc = {
     },
     {
       id: 'bestellung',
-      heading: '8. Bestellprozess',
+      heading: '8. Bestellprozess und Kundenbereich',
       blocks: [
         {
           p: 'Seit dem 9. Oktober 2026 können Sie YANQIVA REVIEW über den Bestellprozess unter /bestellen/ bestellen. Er besteht aus vier Schritten (Produkt, Einrichtung, Ihre Daten, Prüfen) und einer Bestätigungsseite. Wir haben ihn am 9. Oktober 2026 selbst geprüft: mit dem Prüfwerkzeug axe-core in den Breiten 320, 390 und 1280 Pixel für jeden Schritt, auch mit Fehlermeldungen und für die Bestätigung, und von Hand nur mit der Tastatur bis zur Bestellübersicht.',
@@ -150,10 +151,13 @@ export const barrierefreiheit: LegalDoc = {
           p: 'Bekannte Einschränkungen: Die Ansagen für Screenreader (zum Beispiel bei Fehlern, beim Absenden und beim Zwischenpreis, der nach einer kurzen Pause angesagt wird) haben wir nicht mit echten Screenreadern geprüft (siehe Abschnitt 6). Ob Meldungen dort nicht doppelt vorgelesen werden, wissen wir deshalb nicht sicher.',
         },
         {
-          p: 'Wenn Sie beim Bestellen auf eine Barriere stoßen, schreiben Sie uns an support@yanqiva.de. Wir nehmen Ihre Bestellung dann auch gern per E-Mail entgegen.',
+          p: 'Wenn Sie beim Bestellen oder im Kundenbereich auf eine Barriere stoßen, schreiben Sie uns an support@yanqiva.de. Wir nehmen Ihre Bestellung dann auch gern per E-Mail entgegen und senden Ihnen Statistiken oder ändern Ziele auf Wunsch per E-Mail.',
         },
         {
-          p: 'Eine Anmeldung (Login) und ein Video gibt es auf dieser Website nicht.',
+          p: 'Kundenbereich (/dashboard/): Kunden der Variante Dashboard melden sich ohne Passwort und ohne Rätsel an: Sie geben ihre E-Mail-Adresse ein und erhalten einen Anmeldelink, der 15 Minuten gültig ist; einen neuen Link können sie jederzeit anfordern. Die Sicherheitsprüfung läuft unsichtbar im Browser. Wir haben Anmeldung und Dashboard am 9. Oktober 2026 selbst geprüft: axe-core meldete keine Verstöße, die Bedienung nur mit der Tastatur funktionierte, und bei 320 Pixel Breite ist kein waagerechtes Scrollen nötig. Mit echten Screenreadern haben wir den Kundenbereich nicht geprüft (siehe Abschnitt 6).',
+        },
+        {
+          p: 'Ein Video gibt es auf dieser Website nicht.',
         },
       ],
     },

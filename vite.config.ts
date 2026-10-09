@@ -12,7 +12,7 @@ function preloadFonts(): Plugin {
     transformIndexHtml: {
       order: 'post',
       handler(_html, ctx) {
-        if (!ctx.bundle || !ctx.filename.endsWith('index.html') || /datenschutz|impressum|barrierefreiheit|bestellen|agb/.test(ctx.filename)) return
+        if (!ctx.bundle || !ctx.filename.endsWith('index.html') || /datenschutz|impressum|barrierefreiheit|bestellen|agb|dashboard/.test(ctx.filename)) return
         const base = process.env.BASE ?? '/yanqiva-review/'
         return Object.keys(ctx.bundle)
           .filter((f) => /(inter|space-grotesk)-latin-wght-normal-.*\.woff2$/.test(f))
@@ -40,6 +40,7 @@ export default defineConfig({
         barrierefreiheit: resolve(import.meta.dirname, 'barrierefreiheit/index.html'),
         bestellen: resolve(import.meta.dirname, 'bestellen/index.html'),
         agb: resolve(import.meta.dirname, 'agb/index.html'),
+        dashboard: resolve(import.meta.dirname, 'dashboard/index.html'),
       },
     },
   },
