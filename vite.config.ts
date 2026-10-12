@@ -27,9 +27,11 @@ function preloadFonts(): Plugin {
 }
 
 // GitHub Pages veröffentlicht unter /yanqiva-review/. Für eine eigene Domain BASE=/ setzen.
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   base: process.env.BASE ?? '/yanqiva-review/',
-  plugins: [react(), tailwindcss(), yanqivaRedirects(), preloadFonts(), yanqivaCsp()],
+  // Der SSR-Build (Prerender, siehe scripts/prerender.mjs) braucht nur React und Tailwind, nicht die Seiten-Plugins.
+  plugins: isSsrBuild ? [react(), tailwindcss()] : [react(), tailwindcss(), yanqivaRedirects(), preloadFonts(), yanqivaCsp()],
+  ssr: { noExternal: true },
   build: {
     // Multi-Page: Startseite plus eigenständige Rechtsseiten (dist/datenschutz/, dist/impressum/)
     rollupOptions: {
@@ -44,4 +46,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))

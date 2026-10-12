@@ -9,7 +9,7 @@ import { Pricing } from './sections/Pricing'
 import { FinalCta } from './sections/FinalCta'
 import { Footer } from './sections/Footer'
 import { Background } from './sections/Background'
-import { lowPower } from './lib/lowPower'
+import { useLowPower } from './lib/lowPower'
 import { useTouchLayout } from './lib/useTouchLayout'
 
 // 3D-Produktszene als eigener Chunk: Hero und LCP warten nicht auf den Szenen-Code. Der Platzhalter ist so hoch wie die fertige Sektion (kein Layout-Shift, Anker bleiben stabil).
@@ -18,6 +18,7 @@ const ProductShowcase = lazy(() => import('./sections/ProductShowcase').then((m)
 /** Gleiche Höhe wie die Sektion je Variante: Desktop (Sticky-Szene) 260vh, Touch/Lite je nach Breite. */
 function ShowcaseFallback() {
   const touch = useTouchLayout()
+  const lowPower = useLowPower()
   const height = lowPower || touch ? 'min-h-[810px] sm:min-h-[900px]' : 'h-[260vh]'
   return <section id="produkt" className={`section-light relative ${height}`} aria-busy="true" />
 }

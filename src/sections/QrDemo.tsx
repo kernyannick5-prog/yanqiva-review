@@ -1,9 +1,9 @@
-import { useReducedMotion } from 'framer-motion'
+import { useReduceMotion } from '../lib/useReduceMotion'
 import { LinkButton } from '../components/Button'
 import { QrCode } from '../components/QrCode'
 import { Reveal } from '../components/Reveal'
 import { useLoopVisible } from '../lib/useLoopVisible'
-import { demoRedirectUrl, productionRedirectUrl } from '../lib/redirectUrl'
+import { useDemoRedirectUrl, productionRedirectUrl } from '../lib/redirectUrl'
 import { Container, SectionHead } from './ui'
 
 const SLUG = 'demo-baeckerei'
@@ -48,8 +48,9 @@ function RedirectDiagram({ reduce }: { reduce: boolean }) {
 
 /** Abschnitt mit echtem QR-Code und Redirect-Erklärung. */
 export function QrDemo() {
-  const reduce = useReducedMotion() ?? false
+  const reduce = useReduceMotion()
   const loop = useLoopVisible<HTMLElement>()
+  const demoUrl = useDemoRedirectUrl(SLUG)
 
   return (
     <section id="qr" ref={loop} className="section-y relative overflow-hidden" aria-labelledby="qr-title">
@@ -59,7 +60,7 @@ export function QrDemo() {
             <div aria-hidden className="absolute -inset-px rounded-[2rem] bg-gradient-to-br from-mint via-violet-glow to-mint/20 opacity-70" />
             <div className="relative rounded-[1.6rem] bg-ink-900 p-4">
               <div className="relative overflow-hidden rounded-2xl">
-                <QrCode value={demoRedirectUrl(SLUG)} size={300} className="!h-auto !w-full aspect-square" />
+                <QrCode value={demoUrl} size={300} className="!h-auto !w-full aspect-square" />
                 {!reduce && (
                   <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
                     <div className="yq-scan h-full w-full border-b-2 border-mint bg-gradient-to-b from-transparent to-mint/30 shadow-[0_8px_20px_rgb(94_234_212/0.5)]" />
@@ -86,7 +87,7 @@ export function QrDemo() {
               Auf der Karte steht nur die Redirect-URL. Wohin sie führt, änderst du jederzeit im Dashboard, ohne die Karte neu zu programmieren.
             </p>
             <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center [&>a]:w-full sm:[&>a]:w-auto">
-              <LinkButton href={demoRedirectUrl(SLUG)} target="_blank" rel="noopener">
+              <LinkButton href={demoUrl} target="_blank" rel="noopener">
                 Weiterleitung testen<span aria-hidden>↗</span>
                 <span className="sr-only">(öffnet in neuem Tab)</span>
               </LinkButton>

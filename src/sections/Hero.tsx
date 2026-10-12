@@ -1,7 +1,6 @@
 import {
   motion,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -9,7 +8,8 @@ import {
 import { useEffect } from 'react'
 import { LinkButton } from '../components/Button'
 import { MotionToggle } from '../components/MotionToggle'
-import { lowPower } from '../lib/lowPower'
+import { useLowPower } from '../lib/lowPower'
+import { useReduceMotion } from '../lib/useReduceMotion'
 import { useLoopVisible } from '../lib/useLoopVisible'
 import { Container } from './ui'
 
@@ -141,9 +141,10 @@ function NfcCard({ reduce }: { reduce: boolean }) {
 
 /** Hero-Abschnitt mit Headline, CTAs und virtueller NFC-Karte. */
 export function Hero() {
-  const reduce = useReducedMotion() ?? false
+  const reduce = useReduceMotion()
+  const lowPower = useLowPower()
   const loop = useLoopVisible<HTMLElement>()
-  const parallax = !reduce && !lowPower && window.innerWidth >= 640
+  const parallax = !reduce && !lowPower && (typeof window === 'undefined' || window.innerWidth >= 640)
   const { scrollYProgress } = useScroll({ target: loop, offset: ['start start', 'end start'] })
   const cardY = useTransform(scrollYProgress, [0, 1], [0, parallax ? -50 : 0])
   const chipA = useTransform(scrollYProgress, [0, 1], [0, parallax ? -110 : 0])

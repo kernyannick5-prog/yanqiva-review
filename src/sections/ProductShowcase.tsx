@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useInView, useMotionValue, useScroll, useSpring } from 'framer-motion'
 import { Button } from '../components/Button'
 import { Reveal } from '../components/Reveal'
-import { lowPower } from '../lib/lowPower'
+import { useLowPower } from '../lib/lowPower'
 import { useMotionPaused } from '../lib/motionPause'
 import { useTouchLayout } from '../lib/useTouchLayout'
 import { Container, Eyebrow } from './ui'
@@ -217,7 +217,7 @@ function LiteShowcase() {
 }
 
 export function ProductShowcase() {
-  const [lite] = useState(lowPower)
+  const lite = useLowPower()
   const touch = useTouchLayout()
   if (lite) return <LiteShowcase />
   return touch ? <TouchShowcase /> : <FullShowcase />

@@ -1,3 +1,5 @@
+import { useSyncExternalStore } from 'react'
+
 /**
  * Schwache Geräte / Nutzerpräferenz -> Low-Power-Modus (keine Endlos-Loops, kein Parallax,
  * Lite-Variante der 3D-Szene). Einmalig beim Start ermittelt (reine Client-App).
@@ -12,6 +14,13 @@ export function detectLowPower(): boolean {
 }
 
 export const lowPower = detectLowPower()
+
+const noopSubscribe = () => () => {}
+
+/** Hydration-sicher: Server und erster Client-Render liefern false, danach der echte Wert (kein Mismatch beim Prerender). */
+export function useLowPower(): boolean {
+  return useSyncExternalStore(noopSubscribe, () => lowPower, () => false)
+}
 
 /** Setzt data-lowpower auf <html>; CSS schaltet damit alle Endlos-Animationen ab. */
 export function applyLowPowerAttribute() {

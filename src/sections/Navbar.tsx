@@ -1,4 +1,5 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useReduceMotion } from '../lib/useReduceMotion'
 import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../components/Button'
 
@@ -17,7 +18,7 @@ const links = [
 export function Navbar({ anchorBase = '', onLight = false }: { anchorBase?: string; onLight?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const reduce = useReducedMotion()
+  const reduce = useReduceMotion()
   const toggleRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
