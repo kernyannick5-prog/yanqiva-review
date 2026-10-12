@@ -28,7 +28,7 @@ export function buildMessage(input: OrderForm): string {
     `Gesamtbetrag einmalig: ${formatEuro(total(pid, qty))}`,
     `Laufende Kosten: ${p.running}`,
     `Lieferzeit: ${shippingText(p)}`,
-    `Zahlungsart: Rechnung (Überweisung). ${VAT_NOTE}`,
+    `Zahlungsart: Vorkasse per Überweisung (Zahlungsaufforderung bzw. Rechnung). ${VAT_NOTE}`,
     '',
     'EINRICHTUNG',
     `Name auf der Karte: ${f.displayName}`,

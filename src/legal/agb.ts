@@ -9,7 +9,7 @@ import type { LegalDoc } from './types'
 export const agb: LegalDoc = {
   title: 'Allgemeine Geschäftsbedingungen',
   badge: 'Rechtliches',
-  updated: 'Stand: 9. Oktober 2026',
+  updated: 'Stand: 12. Oktober 2026',
   callouts: [
     {
       tone: 'info',
@@ -47,10 +47,7 @@ export const agb: LegalDoc = {
           p: 'Den Eingang der Bestellung bestätigen wir unverzüglich automatisch per E-Mail (Eingangsbestätigung). Die Eingangsbestätigung ist noch keine Annahme der Bestellung.',
         },
         {
-          p: 'Der Vertrag kommt erst zustande, wenn wir die Bestellung durch eine Auftragsbestätigung per E-Mail annehmen. Mit der Auftragsbestätigung erhält der Kunde die Rechnung. In der Regel senden wir die Auftragsbestätigung innerhalb eines Werktags, frühestens jedoch am 15. Oktober 2026 (siehe nächster Absatz). An seine Bestellung ist der Kunde bis zum Ablauf von fünf Werktagen nach dem Absenden bzw., bei Bestellungen vor dem 15. Oktober 2026, nach dem 15. Oktober 2026 gebunden, je nachdem, was später eintritt; nehmen wir sie bis dahin nicht an, ist er nicht mehr gebunden. Lässt sich das angegebene Google-Unternehmensprofil nicht eindeutig zuordnen oder sind Angaben unklar, fragen wir vor der Auftragsbestätigung nach.',
-        },
-        {
-          p: 'Aufnahme der Tätigkeit: Wir nehmen unsere Tätigkeit am 15. Oktober 2026 auf. Ein Vertrag kommt daher frühestens am 15. Oktober 2026 zustande. Bestellungen, die vor diesem Tag eingehen, prüfen und bestätigen wir ab dem 15. Oktober 2026. Fristen für die Lieferung (Ziffer 6) beginnen nicht vor der Auftragsbestätigung bzw. dem Zahlungseingang.',
+          p: 'Der Vertrag kommt erst zustande, wenn wir die Bestellung durch eine Auftragsbestätigung per E-Mail annehmen. Mit der Auftragsbestätigung erhält der Kunde eine Rechnung oder eine Zahlungsaufforderung (Ziffer 5). In der Regel senden wir die Auftragsbestätigung innerhalb eines Werktags. An seine Bestellung ist der Kunde bis zum Ablauf von fünf Werktagen nach dem Absenden gebunden; nehmen wir sie bis dahin nicht an, ist er nicht mehr gebunden. Lässt sich das angegebene Google-Unternehmensprofil nicht eindeutig zuordnen oder sind Angaben unklar, fragen wir vor der Auftragsbestätigung nach.',
         },
         {
           p: 'Kann das Bestellformular wegen einer technischen Störung nicht übermittelt werden, bietet es an, die Bestellung als vorbereitete E-Mail an support@yanqiva.de zu senden. Diese E-Mail gilt als Bestellung; für die Annahme gilt der vorstehende Absatz.',
@@ -113,7 +110,7 @@ export const agb: LegalDoc = {
           p: 'Wir sind Kleinunternehmer im Sinne von § 19 UStG. Es wird keine Umsatzsteuer berechnet und in Rechnungen keine Umsatzsteuer ausgewiesen. Entfallen die Voraussetzungen der Kleinunternehmerregelung, können wir für Verlängerungszeiträume des Dashboards, die danach beginnen, die gesetzliche Umsatzsteuer zusätzlich berechnen. Wir informieren den Kunden darüber mindestens einen Monat vorher in Textform.',
         },
         {
-          p: 'Zahlung erfolgt per Rechnung. Die Rechnung erhält der Kunde mit der Auftragsbestätigung per E-Mail. Sie ist innerhalb von 14 Tagen nach Rechnungsdatum ohne Abzug per Überweisung zu zahlen. Mit der Einrichtung, der Produktion und der Lieferung beginnen wir nach Zahlungseingang.',
+          p: 'Die Zahlung erfolgt per Vorkasse durch Überweisung. Mit der Auftragsbestätigung erhält der Kunde per E-Mail eine Rechnung oder eine Zahlungsaufforderung. Eine Zahlungsaufforderung ist keine Rechnung; in diesem Fall stellen wir die Rechnung gesondert aus. Der Gesamtbetrag ist innerhalb von 14 Tagen nach Zugang der Rechnung bzw. der Zahlungsaufforderung ohne Abzug zu überweisen. Mit der Einrichtung, der Produktion und der Übergabe beginnen wir nach Zahlungseingang.',
         },
         {
           p: 'Geht die Zahlung nicht fristgerecht ein, können wir dem Kunden eine angemessene Nachfrist setzen und nach deren erfolglosem Ablauf vom Vertrag zurücktreten. Die gesetzlichen Rechte bei Zahlungsverzug bleiben unberührt.',

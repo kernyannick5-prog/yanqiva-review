@@ -9,7 +9,6 @@ import { PRODUCT_LIST } from './catalog'
 import { type FormCtx } from './fields'
 import { fieldId } from './ids'
 import { buildFields, buildMailBody, buildMessage, mailSubject } from './message'
-import { StartNotice } from './notices'
 import { StepData, StepProduct, StepReview, StepSetup } from './steps'
 import {
   clearDraft, FIELD_ORDER, firstIncompleteStep, initialForm, loadDraft, mapServerCode, newOrderKey, saveDraft, STEPS, stepFromUrl, stepUrl, trimmed, validateStep,
@@ -233,8 +232,7 @@ export function OrderApp() {
         <header className="mb-8 max-w-2xl">
           <p className="chip">Bestellen</p>
           <h1 className="mt-4 font-display text-[clamp(1.9rem,1.3rem+2.6vw,3rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-balance">YANQIVA REVIEW bestellen</h1>
-          <p className="mt-3 text-base text-muted">Für Unternehmen. Zahlung bequem per Rechnung, Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße inklusive.</p>
-          <StartNotice className="mt-5" />
+          <p className="mt-3 text-base text-muted">Für Unternehmen. Zahlung per Vorkasse (Zahlungsaufforderung bzw. Rechnung), Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße inklusive.</p>
         </header>
 
         <p role="status" aria-live="polite" className="sr-only">

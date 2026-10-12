@@ -80,6 +80,7 @@ export function Pricing() {
           ))}
         </ul>
         <p className="mt-8 text-center text-[13px] text-faint">Endpreise inkl. Lieferung und Übergabe vor Ort. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Nur für Unternehmer.</p>
+        <p className="mt-2 text-center text-[13px] text-faint">Zahlung per Vorkasse (Zahlungsaufforderung bzw. Rechnung), per Überweisung innerhalb von 14 Tagen. Einrichtung und Übergabe nach Zahlungseingang.</p>
       </Container>
     </section>
   )

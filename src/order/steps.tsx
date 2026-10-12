@@ -1,12 +1,11 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import {
-  DASHBOARD_RENEWAL_EUR, FORMAT_LIST, FORMATS, formatEuro, PRODUCT_LIST, PRODUCTS, QTY_MAX, QTY_MIN, SHIPPING_EUR, subtotal, total, VAT_NOTE,
+  DASHBOARD_RENEWAL_EUR, FORMAT_LIST, FORMATS, formatEuro, PRODUCT_LIST, PRODUCTS, QTY_MAX, QTY_MIN, PAYMENT_NOTE, SHIPPING_EUR, subtotal, total, VAT_NOTE,
   shippingText,
 } from './catalog'
 import { CheckboxField, ErrorSummary, FieldError, Fieldset, RequiredLegend, TextField, type FormCtx } from './fields'
 import { errId, fieldId } from './ids'
-import { DeliveryAreaCheck, StartNotice, ZipAreaNote } from './notices'
-import { beforeOrderStart, ORDER_START_LONG } from './orderStart'
+import { DeliveryAreaCheck, ZipAreaNote } from './notices'
 import { effectiveQuantity, MAX, parseQuantity, productOf, trimmed, type FieldKey, type StepId } from './state'
 
 const BASE = import.meta.env.BASE_URL
@@ -208,10 +207,8 @@ export function NextSteps({ dashboard, done = false }: { dashboard?: boolean; do
   const all = [
     'Sie senden Ihre Bestellung ab. Das ist Ihr verbindliches Angebot.',
     'Sie erhalten eine Eingangsbestätigung per E-Mail. Das ist noch keine Annahme.',
-    beforeOrderStart()
-      ? `Mit der Auftragsbestätigung per E-Mail kommt der Vertrag zustande. Wir nehmen unsere Tätigkeit am ${ORDER_START_LONG} auf und bestätigen Bestellungen, die vorher eingehen, ab diesem Tag. Die Rechnung folgt zusammen mit der Auftragsbestätigung.`
-      : 'Mit der Auftragsbestätigung per E-Mail, in der Regel innerhalb eines Werktags, kommt der Vertrag zustande. Die Rechnung folgt zusammen mit ihr.',
-    'Sie überweisen den Betrag innerhalb von 14 Tagen.',
+    'Mit der Auftragsbestätigung per E-Mail, in der Regel innerhalb eines Werktags, kommt der Vertrag zustande. Mit ihr erhalten Sie eine Rechnung oder eine Zahlungsaufforderung (keine Rechnung; diese folgt dann gesondert).',
+    'Sie zahlen per Vorkasse: Sie überweisen den Betrag innerhalb von 14 Tagen.',
     `Nach Zahlungseingang richten wir Ihre Karte mit Ihrem Google-Link ein, produzieren sie und übergeben sie Ihnen persönlich vor Ort, ${dashboard === undefined ? 'in der Regel innerhalb von 2–5 Werktagen (Klassik) bzw. 7 Werktagen (Dashboard).' : dashboard ? 'in der Regel innerhalb von 7 Werktagen. Den Dashboard-Zugang erhalten Sie per E-Mail mit der Übergabe.' : 'in der Regel innerhalb von 2–5 Werktagen.'}`,
   ]
   const items = done ? all.slice(1) : all
@@ -446,7 +443,7 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Zahlungsart</dt>
-            <dd className="text-right text-text">Rechnung (Überweisung)</dd>
+            <dd className="max-w-[26ch] text-right text-text sm:max-w-[40ch]">Vorkasse per Überweisung (Zahlungsaufforderung bzw. Rechnung)</dd>
           </div>
         </dl>
         <p className="mt-3 text-[13px] text-muted">{VAT_NOTE}</p>
@@ -493,7 +490,10 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
         </CheckboxField>
       </div>
 
-      <StartNotice />
+      <p data-testid="payment-note" className="rounded-2xl border border-mint/40 bg-mint/[0.07] p-4 text-[15px] leading-snug text-muted sm:p-5">
+        <strong className="font-semibold text-text">Zahlungsweise: </strong>
+        {PAYMENT_NOTE}
+      </p>
 
       <p className="text-sm leading-relaxed text-muted">
         Mit „Zahlungspflichtig bestellen“ geben Sie ein verbindliches Angebot ab. Die Eingangsbestätigung ist noch keine Annahme; der Vertrag kommt erst mit unserer

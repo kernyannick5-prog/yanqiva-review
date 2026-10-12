@@ -1,20 +1,5 @@
 import { useId, useState } from 'react'
 import { DELIVERY_REGION, deliveryPlace, inDeliveryArea, OUT_OF_AREA_MESSAGE } from './deliveryArea'
-import { beforeOrderStart, ORDER_START_LONG } from './orderStart'
-
-/** Hinweis zum Start der Tätigkeit; erscheint nur vor dem Startdatum (R-01). */
-export function StartNotice({ className = '' }: { className?: string }) {
-  if (!beforeOrderStart()) return null
-  return (
-    <aside role="note" aria-label="Hinweis zum Start" className={`rounded-2xl border border-mint/40 bg-mint/[0.07] p-4 text-[15px] leading-snug text-text sm:p-5 ${className}`}>
-      <p className="font-display text-base font-semibold">Wichtiger Hinweis zum Start</p>
-      <p className="mt-1.5 text-muted">
-        Wir nehmen unsere Tätigkeit am <strong className="font-semibold text-text">{ORDER_START_LONG}</strong> auf. Bestellungen, die vorher eingehen, prüfen und bestätigen wir ab dem {ORDER_START_LONG}; erst
-        mit unserer Auftragsbestätigung kommt der Vertrag zustande. Lieferfristen laufen ab Auftragsbestätigung bzw. Zahlungseingang.
-      </p>
-    </aside>
-  )
-}
 
 /** Liefergebiet-Hinweis mit kurzer PLZ-Prüfung (nur zur Information, nichts wird gespeichert oder gesendet). */
 export function DeliveryAreaCheck() {

@@ -37,6 +37,11 @@ export const shippingText = (p: Product): string => `Übergabe vor Ort in der Re
 /** Weiterleitungs-Hinweis (R-11). */
 export const REDIRECT_NOTE =
   'Karte und QR-Code führen über unsere Weiterleitung (yanqiva-bewertung.de/r/…). Wir betreiben sie ohne laufende Kosten, mindestens 24 Monate ab Lieferung (AGB Ziffer 9).'
+/** Zahlungsweise (Kurzform) für Preisbereich, Übersicht und Mails. */
+export const PAYMENT_SHORT = 'Zahlung per Vorkasse (Zahlungsaufforderung bzw. Rechnung)'
+/** Zahlungsweise (Langform) vor dem Absenden. */
+export const PAYMENT_NOTE =
+  'Vorkasse per Überweisung innerhalb von 14 Tagen. Mit der Auftragsbestätigung erhalten Sie eine Rechnung oder eine Zahlungsaufforderung. Eine Zahlungsaufforderung ist keine Rechnung; die Rechnung stellen wir dann gesondert aus. Einrichtung und Übergabe erfolgen nach Zahlungseingang.'
 export const VAT_NOTE = 'Endpreise. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.'
 
 export const PRODUCTS: Record<ProductId, Product> = {
