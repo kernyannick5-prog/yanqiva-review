@@ -14,7 +14,8 @@ import { useReduceMotion } from '../lib/useReduceMotion'
 import { useLoopVisible } from '../lib/useLoopVisible'
 import { Container } from './ui'
 
-const ease = [0.22, 1, 0.36, 1] as const
+// Einblend-Animationen laufen als CSS (yq-in-*, siehe index.css) statt über framer-motion-Startwerte: Das vorgerenderte HTML ist damit
+// sofort sichtbar und animiert ab dem ersten Frame, ohne auf JS und Hydration zu warten.
 
 const lines: { words: string[]; gradient?: boolean }[] = [
   { words: ['Google-', 'Bewertungen.'] },
@@ -22,7 +23,7 @@ const lines: { words: string[]; gradient?: boolean }[] = [
 ]
 
 /** Zweizeilige Headline, Wörter fahren einzeln aus einer Maske hoch. */
-function Headline({ reduce }: { reduce: boolean }) {
+function Headline() {
   let n = 0
   return (
     <h1 className="font-display text-[clamp(2.35rem,1.2rem+7.2vw,5.75rem)] font-semibold leading-[1.03] tracking-[-0.04em]">
@@ -33,14 +34,9 @@ function Headline({ reduce }: { reduce: boolean }) {
             const spaced = !w.endsWith('-') && wi < line.words.length - 1
             return (
               <span key={w} className="-mb-[0.12em] inline-block overflow-hidden pb-[0.12em] align-bottom">
-                <motion.span
-                  className={`inline-block ${line.gradient ? 'text-gradient' : ''}`}
-                  initial={reduce ? false : { y: '110%' }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.9, delay: 0.15 + i * 0.09, ease }}
-                >
+                <span className={`yq-in-word inline-block ${line.gradient ? 'text-gradient' : ''}`} style={{ animationDelay: `${(0.05 + i * 0.05).toFixed(2)}s` }}>
                   {w}
-                </motion.span>
+                </span>
                 {spaced && <span className="inline-block w-[0.25em]" />}
               </span>
             )
@@ -156,37 +152,24 @@ export function Hero() {
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_80%_40%,rgb(124_58_237/0.07),transparent),radial-gradient(ellipse_40%_50%_at_10%_20%,rgb(15_118_110/0.06),transparent)]" />
       <Container className="relative grid items-center gap-8 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
         <div>
-          <motion.p
-            initial={reduce ? false : { opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease }}
-            className="chip mb-5 sm:mb-6"
-          >
+          <p className="yq-in-fade chip mb-5 sm:mb-6">
             <span aria-hidden className="size-1.5 rounded-full bg-mint" />
             NFC + QR · Für Unternehmen
-          </motion.p>
+          </p>
 
-          <Headline reduce={reduce} />
+          <Headline />
 
           {/* Kein opacity-Fade: der Absatz ist das LCP-Element und soll sofort sichtbar sein */}
-          <motion.p
-            initial={reduce ? false : { y: 16 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6, ease }}
-            className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted sm:mt-6 sm:text-xl"
-          >
+          <p className="yq-in-rise mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted sm:mt-6 sm:text-xl">
             YANQIVA REVIEW verbindet NFC und QR-Code zu einem einfachen Bewertungssystem für Unternehmen.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.85, ease }}
-            className="mt-7 flex gap-3 sm:mt-9 [&>a]:min-w-0 [&>a]:flex-1 [&>a]:px-3 [&>a]:text-sm sm:[&>a]:flex-none sm:[&>a]:px-6 sm:[&>a]:text-[15px]"
+          <div
+            className="yq-in-fade yq-in-cta mt-7 flex gap-3 sm:mt-9 [&>a]:min-w-0 [&>a]:flex-1 [&>a]:px-3 [&>a]:text-sm sm:[&>a]:flex-none sm:[&>a]:px-6 sm:[&>a]:text-[15px]"
           >
             <LinkButton href={sectionHref('demo')}>Demo ansehen</LinkButton>
             <LinkButton href={sectionHref('ablauf')} variant="ghost">So funktioniert’s</LinkButton>
-          </motion.div>
+          </div>
 
           {/* WCAG 2.2.2: Pause-Schalter direkt bei den animierten Bereichen (zusätzlich zum Seitenfuß) */}
           <MotionToggle className="mt-4 min-h-6 rounded text-[13px] text-faint underline underline-offset-2 hover:text-text aria-pressed:text-mint" />
@@ -194,10 +177,7 @@ export function Hero() {
 
         <motion.div
           style={{ y: cardY }}
-          initial={reduce ? false : { opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.4, ease }}
-          className="relative mx-auto w-full max-w-[440px] px-1 py-2 sm:py-8 lg:mx-0 lg:ml-auto"
+          className="yq-in-pop relative mx-auto w-full max-w-[440px] px-1 py-2 sm:py-8 lg:mx-0 lg:ml-auto"
         >
           <div aria-hidden className="absolute inset-x-6 bottom-0 h-24 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.4),transparent)] opacity-80" />
           <NfcCard reduce={reduce} />

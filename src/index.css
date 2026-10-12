@@ -302,6 +302,19 @@ body {
   }
 }
 
+/* Einblendung des Hero beim Laden: reine CSS-Animation (läuft ab dem ersten Frame, auch vor der Hydration). Nutzt die einzelnen Eigenschaften
+   translate/scale statt transform, damit sie nicht mit dem Parallax-transform von framer-motion kollidieren; "backwards" = nach dem Ende
+   gilt wieder der normale Stil (kein dauerhafter Layer). Reduced-Motion kürzt alles per Regel oben auf 0,01 ms. */
+@keyframes yq-in-word { from { translate: 0 110%; } }
+@keyframes yq-in-fade { from { opacity: 0; translate: 0 14px; } }
+@keyframes yq-in-rise { from { translate: 0 16px; } }
+@keyframes yq-in-pop  { from { opacity: 0; scale: 0.94; } }
+.yq-in-word { animation: yq-in-word 0.65s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.yq-in-fade { animation: yq-in-fade 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.yq-in-rise { animation: yq-in-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.yq-in-pop  { animation: yq-in-pop 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s backwards; }
+.yq-in-cta  { animation-duration: 0.7s; animation-delay: 0.35s; }
+
 /* Endlos-Animationen (Compositor: nur transform/opacity). Pausiert, solange der Container
    offscreen ist (data-loop="off", siehe useLoopVisible) bzw. im Low-Power-Modus abgeschaltet. */
 @keyframes yq-card-float {
@@ -341,7 +354,7 @@ body {
 .yq-scan       { transform: translateY(-100%); animation: yq-scan 3.2s ease-in-out infinite; }
 .yq-dot        { opacity: 0; animation: yq-dot 1.6s linear infinite; }
 
-[data-loop='off'], [data-loop='off'] * { animation-play-state: paused !important; }
+[data-loop='off'], [data-loop='off'] *:not([class*='yq-in-']) { animation-play-state: paused !important; }
 html[data-lowpower] .yq-card-float, html[data-lowpower] .yq-sweep, html[data-lowpower] .yq-wave,
 html[data-lowpower] .yq-breathe, html[data-lowpower] .yq-scan, html[data-lowpower] .yq-dot,
 html[data-lowpower] .animate-ping { animation: none !important; }
@@ -378,3 +391,12 @@ html[data-motion='paused'] .yq-ripple, html[data-motion='paused'] .yq-star { ani
 @keyframes yq-star-4 { 0%, 48% { opacity: 0; scale: 0.5; } 58% { opacity: 1; scale: 1.15; } 90% { opacity: 1; scale: 1; } 100% { opacity: 0; scale: 0.5; } }
 html[data-lowpower] .yq-stand, html[data-lowpower] .yq-phone, html[data-lowpower] .yq-ripple,
 html[data-lowpower] .yq-star { animation: none !important; }
+
+/* Sektionen unterhalb des Hero werden erst gelayoutet/gemalt, wenn sie in die Nähe des Viewports kommen (Erstlayout deutlich kürzer).
+   Der Browser merkt sich die echte Höhe (auto), bis dahin gilt der Schätzwert. #start/#produkt/#demo bleiben ausgenommen
+   (Sticky-3D-Szene, Platzhalter fester Höhe, Hero = LCP). */
+main > section:not(#start, #produkt, #demo),
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1100px;
+}
