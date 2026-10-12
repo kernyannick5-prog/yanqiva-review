@@ -107,3 +107,9 @@ Live unter **https://yanqiva-bewertung.de/** (Domain bei IONOS registriert; Name
 - Redirect-Basis der Karten: `https://yanqiva-bewertung.de/r/` (`VITE_REDIRECT_BASE`).
 - Cloudflare: *Web Analytics* und *Bot Fight Mode* **aus** lassen (sonst Cookies/Skripte, Datenschutzerklärung müsste angepasst werden). Cloudflare ist in `src/legal/datenschutz.ts` als Dienstleister genannt.
 - Offen: Security-Header (HSTS, CSP, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) per Cloudflare Response Header Rule setzen, da GitHub Pages keine eigenen Header unterstützt.
+
+## Sektions-Pfade statt Sprungmarken
+
+Die Startseite bleibt eine Seite, ihre Sektionen haben saubere Pfade: `/ablauf/`, `/demo/`, `/qr/`, `/preise/`, `/loslegen/` (Start = `/`).
+`scripts/prerender.mjs` schreibt dafür `dist/<name>/index.html` (vorgerenderte Startseite mit eigenem Titel/Description, `canonical` bleibt `/`, nicht in der Sitemap).
+Die App (`useSectionRouting` in `src/App.tsx`, Pfadtabelle in `src/lib/sectionRoutes.ts`) scrollt beim Laden bzw. Klick zur Sektion (pushState, kein Reload) und schreibt alte Hash-Links (`/#preise`, `#pricing`, `#how`, `#top`, `#cta`, ...) per replaceState um. Neue Sektionen: Eintrag in `SECTION_IDS` und in `SECTION_PAGES` (Prerender-Skript).

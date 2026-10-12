@@ -1,3 +1,4 @@
+import { sectionHref } from '../lib/sectionRoutes'
 import { LinkButton } from '../components/Button'
 import { Reveal } from '../components/Reveal'
 import { useLoopVisible } from '../lib/useLoopVisible'
@@ -28,7 +29,7 @@ export function FinalCta() {
           </h2>
           <div className="relative mt-8 flex flex-col justify-center gap-3 sm:mt-10 sm:flex-row">
             <LinkButton href={`${import.meta.env.BASE_URL}bestellen/`}>Jetzt bestellen</LinkButton>
-            <LinkButton href="#demo" variant="ghost">Demo öffnen</LinkButton>
+            <LinkButton href={sectionHref('demo')} variant="ghost">Demo öffnen</LinkButton>
           </div>
         </div>
         </Reveal>

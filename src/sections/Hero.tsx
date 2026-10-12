@@ -1,3 +1,4 @@
+import { sectionHref } from '../lib/sectionRoutes'
 import {
   motion,
   useMotionValue,
@@ -183,8 +184,8 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.85, ease }}
             className="mt-7 flex gap-3 sm:mt-9 [&>a]:min-w-0 [&>a]:flex-1 [&>a]:px-3 [&>a]:text-sm sm:[&>a]:flex-none sm:[&>a]:px-6 sm:[&>a]:text-[15px]"
           >
-            <LinkButton href="#demo">Demo ansehen</LinkButton>
-            <LinkButton href="#ablauf" variant="ghost">So funktioniert’s</LinkButton>
+            <LinkButton href={sectionHref('demo')}>Demo ansehen</LinkButton>
+            <LinkButton href={sectionHref('ablauf')} variant="ghost">So funktioniert’s</LinkButton>
           </motion.div>
 
           {/* WCAG 2.2.2: Pause-Schalter direkt bei den animierten Bereichen (zusätzlich zum Seitenfuß) */}

@@ -1,12 +1,13 @@
 import { MotionToggle } from '../components/MotionToggle'
 import { Container } from './ui'
+import { sectionHref, type SectionName } from '../lib/sectionRoutes'
 
 const BASE = import.meta.env.BASE_URL
 
-const internal = [
-  { hash: '#ablauf', label: 'Produkt' },
-  { hash: '#preise', label: 'Preise' },
-  { hash: '#demo', label: 'Dashboard' },
+const internal: { section: SectionName; label: string }[] = [
+  { section: 'ablauf', label: 'Produkt' },
+  { section: 'preise', label: 'Preise' },
+  { section: 'demo', label: 'Dashboard' },
 ]
 const external = [
   { href: `${BASE}bestellen/`, label: 'Bestellen' },
@@ -38,8 +39,8 @@ export function Footer({ onLegalPage = false }: { onLegalPage?: boolean }) {
           <nav aria-label="Footer">
             <ul className="grid grid-cols-2 gap-x-8 sm:flex sm:flex-wrap sm:gap-x-6 md:max-w-md md:justify-end">
               {internal.map((l) => (
-                <li key={l.hash}>
-                  <a href={onLegalPage ? `${BASE}${l.hash}` : l.hash} className={linkClass}>{l.label}</a>
+                <li key={l.section}>
+                  <a href={sectionHref(l.section)} className={linkClass}>{l.label}</a>
                 </li>
               ))}
               {external.map((l) => (

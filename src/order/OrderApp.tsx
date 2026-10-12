@@ -17,7 +17,6 @@ import {
 } from './state'
 import { MobileBar, OrderSidebar } from './summary'
 
-const BASE = import.meta.env.BASE_URL
 const ORDER_FORM_ID = 'order-form'
 
 function computeInitial(): { form: OrderForm; step: StepId } {
@@ -229,7 +228,7 @@ export function OrderApp() {
         Zum Inhalt springen
       </a>
       <Background />
-      <Navbar anchorBase={BASE} />
+      <Navbar />
       <main id="main" tabIndex={-1} className="relative mx-auto w-full max-w-6xl px-4 pb-14 pt-28 outline-none sm:px-8 sm:pt-32">
         <header className="mb-8 max-w-2xl">
           <p className="chip">Bestellen</p>

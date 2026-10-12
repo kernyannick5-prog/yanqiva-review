@@ -2,20 +2,20 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useReduceMotion } from '../lib/useReduceMotion'
 import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../components/Button'
+import { sectionHref, type SectionName } from '../lib/sectionRoutes'
 
-const links = [
-  { href: '#ablauf', label: 'Produkt' },
-  { href: '#demo', label: 'Demo' },
-  { href: '#qr', label: 'QR' },
-  { href: '#preise', label: 'Preise' },
-] as const
+const links: { section: SectionName; label: string }[] = [
+  { section: 'ablauf', label: 'Produkt' },
+  { section: 'demo', label: 'Demo' },
+  { section: 'qr', label: 'QR' },
+  { section: 'preise', label: 'Preise' },
+]
 
 /**
  * Sticky Glas-Navbar mit Scroll-Verdichtung und Mobile-Overlay.
- * `anchorBase`: auf Unterseiten import.meta.env.BASE_URL, damit die Anker zur Startseite führen.
  * `onLight`: Startseite mit weissen Abschnitten: die dunkle Pille bleibt immer sichtbar (auch ganz oben).
  */
-export function Navbar({ anchorBase = '', onLight = false }: { anchorBase?: string; onLight?: boolean }) {
+export function Navbar({ onLight = false }: { onLight?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const reduce = useReduceMotion()
@@ -60,7 +60,7 @@ export function Navbar({ anchorBase = '', onLight = false }: { anchorBase?: stri
             : 'h-16 border-transparent bg-transparent'
         }`}
       >
-        <a href={`${anchorBase}#start`} onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-2.5 transition-opacity active:opacity-70" aria-label="YANQIVA Review – zum Seitenanfang">
+        <a href={sectionHref('start')} onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-2.5 transition-opacity active:opacity-70" aria-label="YANQIVA Review – zum Seitenanfang">
           <span className="font-display text-lg font-bold tracking-[0.12em] text-text">YANQIVA</span>
           {' '}
           <span className="rounded-full border border-mint/40 bg-mint/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-widest text-mint">Review</span>
@@ -68,8 +68,8 @@ export function Navbar({ anchorBase = '', onLight = false }: { anchorBase?: stri
 
         <ul className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
-            <li key={l.href}>
-              <a href={anchorBase + l.href} className="inline-flex min-h-11 items-center rounded-full px-4 text-sm text-muted transition-colors hover:text-text active:bg-white/[0.08] active:text-text">
+            <li key={l.section}>
+              <a href={sectionHref(l.section)} className="inline-flex min-h-11 items-center rounded-full px-4 text-sm text-muted transition-colors hover:text-text active:bg-white/[0.08] active:text-text">
                 {l.label}
               </a>
             </li>
@@ -77,7 +77,7 @@ export function Navbar({ anchorBase = '', onLight = false }: { anchorBase?: stri
         </ul>
 
         <div className="hidden md:block">
-          <LinkButton href={`${anchorBase}#demo`} className="!min-h-11 !px-5 !text-sm">Demo ansehen</LinkButton>
+          <LinkButton href={sectionHref('demo')} className="!min-h-11 !px-5 !text-sm">Demo ansehen</LinkButton>
         </div>
 
         <button
@@ -110,20 +110,20 @@ export function Navbar({ anchorBase = '', onLight = false }: { anchorBase?: stri
             <ul className="flex flex-col">
               {links.map((l, i) => (
                 <motion.li
-                  key={l.href}
+                  key={l.section}
                   initial={reduce ? false : { opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: reduce ? 0 : 0.06 * i + 0.05, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   className="border-b border-line"
                 >
-                  <a href={anchorBase + l.href} onClick={() => setOpen(false)} className="flex min-h-14 items-center font-display text-3xl font-semibold tracking-tight transition-colors active:text-mint">
+                  <a href={sectionHref(l.section)} onClick={() => setOpen(false)} className="flex min-h-14 items-center font-display text-3xl font-semibold tracking-tight transition-colors active:text-mint">
                     {l.label}
                   </a>
                 </motion.li>
               ))}
             </ul>
             <div className="mt-8" onClick={() => setOpen(false)}>
-              <LinkButton href={`${anchorBase}#demo`} className="w-full">Demo ansehen</LinkButton>
+              <LinkButton href={sectionHref('demo')} className="w-full">Demo ansehen</LinkButton>
             </div>
           </motion.div>
         )}
