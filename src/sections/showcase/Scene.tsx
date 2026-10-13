@@ -86,7 +86,7 @@ export function Scene({ p, lite = false }: SceneProps) {
   // Zum Schluss ein ruhiger Lichtreflex über die Platte (nicht im Lite-Modus, dort statisch).
   const glareX = useCombine(rotGlareX, p, (g, pv) => (lite ? g : map(pv, [0.88, 1], [g, 260])))
 
-  const standX = useCombine(p, k, (pv, kv) => map(pv, [0, 0.3, 0.6, 1], [0, 0, -(78 + 42 * kv), -(78 + 42 * kv)]))
+  const standX = useCombine(p, k, (pv, kv) => map(pv, [0, 0.3, 0.6, 1], [0, 0, -(88 + 42 * kv), -(88 + 42 * kv)]))
 
   // Boden: weicher Schatten, scale/opacity folgen der Rotation
   const shadowScale = useTransform(standRotY, [-40, 0, 40], [1.14, 1, 1.14], { clamp: true })
@@ -108,9 +108,9 @@ export function Scene({ p, lite = false }: SceneProps) {
   ]
 
   // Smartphone fährt von rechts/unten heran (35–60 %)
-  const phoneEndX = useTransform(k, (kv) => 123 + 7 * kv + 4 + 6 * kv)
+  const phoneEndX = useTransform(k, (kv) => 143 + 7 * kv + 4 + 6 * kv)
   const phoneWrapX = useCombine(p, k, (pv, kv) =>
-    map(pv, [0, 0.33, 0.6, 1], [330 + 250 * kv, 330 + 250 * kv, 123 + 7 * kv, 127 + 13 * kv]),
+    map(pv, [0, 0.33, 0.6, 1], [350 + 250 * kv, 350 + 250 * kv, 143 + 7 * kv, 147 + 13 * kv]),
   )
   const phoneWrapY = useTransform(p, (v) => map(v, [0, 0.33, 0.6], [240, 240, -10]))
   const phoneOpacity = useTransform(p, [0.33, 0.42], [0, 1])
