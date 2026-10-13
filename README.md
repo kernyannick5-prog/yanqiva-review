@@ -40,6 +40,24 @@ Für eine eigene Domain ohne Unterpfad: `BASE=/ npm run build`.
 
 Jeder Push auf `main` baut die Seite über GitHub Actions (`.github/workflows/deploy.yml`) und veröffentlicht sie automatisch auf GitHub Pages.
 
+## Rechtstexte archivieren (AGB und Datenschutzerklärung)
+
+AGB (`src/legal/agb.ts`) und Datenschutzerklärung (`src/legal/datenschutz.ts`) liegen beim Build als `dist/dokumente/agb.pdf` und `datenschutz.pdf` (`scripts/build-pdfs.mjs`). Frühere Fassungen bleiben dauerhaft als feste PDFs abrufbar: `public/dokumente/archiv/` (kommt per Vite-Kopie nach `dist/dokumente/archiv/`), Übersicht unter **https://yanqiva-bewertung.de/dokumente/archiv/** (verlinkt als „Frühere Fassungen“ auf `/agb/` und `/datenschutz/`). Die Bestellbestätigung hängt nur die aktuellen PDFs an (`/dokumente/agb.pdf`, `/dokumente/datenschutz.pdf`, Pfade nicht ändern).
+
+**Ablauf bei jeder Änderung eines Rechtstexts** (immer in dieser Reihenfolge):
+
+1. **Vor** der Änderung die bisherige Fassung archivieren, am besten mit der Zeit der Veröffentlichung (`gh run list`, Spalte `updatedAt` des Deploy-Laufs, ersatzweise Commit-Zeit):
+   ```bash
+   npm run archive-legal -- --live 2026-10-13T23:13:26+02:00 --note "Kernunterschied zur Vorfassung in einem Satz"
+   ```
+   Das rendert `agb.ts` und `datenschutz.ts` des Arbeitsverzeichnisses nach `public/dokumente/archiv/<agb|datenschutz>-<JJJJ-MM-TT>-f<n>.pdf`, ergänzt `versionen.json` und erzeugt `index.html` neu. Dieselbe Fassung wird nicht doppelt archiviert (Vergleich des Rechtstexts, nicht der Datei). Mit `--doc agb` bzw. `--doc datenschutz` nur ein Dokument, mit `--dry` nur anzeigen.
+2. Text ändern und `updated` anpassen: `Stand: <Datum>`; wird am selben Tag mehrfach veröffentlicht, ab der zweiten Veröffentlichung mit Zusatz `Stand: <Datum> (Fassung <n>)`. Die Fassungsnummer zählt die Veröffentlichungen eines Tages mit geänderten Rechtstexten (AGB und Datenschutz gemeinsam), an einem neuen Tag beginnt sie wieder bei 1 (Beispiel: 13.10.2026 hatte die Fassungen 1 bis 3). Datum = Tag der Veröffentlichung (geht die Änderung erst nach Mitternacht live, das neue Datum eintragen).
+3. Beide Dateien und das Archiv zusammen committen und pushen. Die Archiv-PDFs sind feste Dateien im Repo und ändern sich beim Build nicht.
+
+Frühere Fassungen aus der git-Historie nachträglich ins Archiv holen: `npm run archive-legal -- --commit <sha> --doc agb --live <Zeit> --fassung <n> --note "…"`. Das Skript legt dafür einen temporären `git worktree` des Commits an, lädt dessen Rechtstext unverändert und rendert ihn mit dem aktuellen Renderer (`scripts/lib/legal-pdf.mjs`); jedes Archiv-PDF trägt einen Hinweiskasten „Archivierte Fassung“ mit Fassung, Datum und Uhrzeit. Alle bis zum 13.10.2026 live gewesenen Fassungen seit dem ersten Bestellformular (09.10.2026) sind so erzeugt worden.
+
+Die Fristen zum Laufzeitende des Dashboards (Erinnerungen 14 und 3 Tage vorher, Verlängerungsfenster 14 Tage) stehen zentral in `src/config/terms.ts` und werden von AGB Ziffer 8, Datenschutz Abschnitt 8 und dem Dashboard (Laufzeit) verwendet. Gegenstück im Worker (Repo zugangsklar): `worker/src/reviewrules.js` (`REMINDER_DAYS`).
+
 ## NFC/QR-Konzept
 
 ```

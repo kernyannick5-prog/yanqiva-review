@@ -83,6 +83,17 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
               >
                 Als PDF herunterladen
               </a>
+              {doc.archive && (
+                <>
+                  <span aria-hidden className="mx-2 text-faint">·</span>
+                  <a
+                    href={`${BASE}${doc.archive}`}
+                    className="inline-flex min-h-11 items-center text-sm text-faint underline underline-offset-2 transition-colors hover:text-mint"
+                  >
+                    Frühere Fassungen
+                  </a>
+                </>
+              )}
             </p>
           )}
 

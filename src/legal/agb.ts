@@ -1,3 +1,4 @@
+import { REMINDER_DAYS_TEXT } from '../config/terms.ts'
 import type { LegalDoc } from './types'
 
 /**
@@ -9,8 +10,9 @@ import type { LegalDoc } from './types'
 export const agb: LegalDoc = {
   title: 'Allgemeine Geschäftsbedingungen',
   badge: 'Rechtliches',
-  updated: 'Stand: 13. Oktober 2026',
+  updated: 'Stand: 14. Oktober 2026',
   pdf: 'agb.pdf',
+  archive: 'dokumente/archiv/#agb',
   callouts: [
     {
       tone: 'info',
@@ -153,7 +155,7 @@ export const agb: LegalDoc = {
           p: 'Bei der Variante Dashboard ist der Zugang zum Dashboard für 2 Monate im einmaligen Preis enthalten. Die 2 Monate beginnen mit dem Tag der Übergabe, an dem wir den Zugang freischalten (Ziffer 6). Der Zugang gilt für den Standort und das Google-Unternehmensprofil der Bestellung und für die mit der Bestellung gelieferten Produkte.',
         },
         {
-          p: 'Nach Ablauf der 2 Monate endet der Zugang automatisch, ohne dass es einer Kündigung bedarf. Es gibt keine automatische Verlängerung und kein automatisches Abonnement; ohne aktive Verlängerung auf Wunsch des Kunden entstehen keine weiteren Kosten. 30 und 7 Tage vor Ablauf erinnern wir den Kunden per E-Mail an das Ende und die Möglichkeit der Verlängerung.',
+          p: `Nach Ablauf der 2 Monate endet der Zugang automatisch, ohne dass es einer Kündigung bedarf. Es gibt keine automatische Verlängerung und kein automatisches Abonnement; ohne aktive Verlängerung auf Wunsch des Kunden entstehen keine weiteren Kosten. ${REMINDER_DAYS_TEXT} vor Ablauf erinnern wir den Kunden per E-Mail an das Ende und die Möglichkeit der Verlängerung.`,
         },
         {
           p: 'Ohne Verlängerung funktionieren die Produkte weiter: Die Weiterleitung führt dann wie bei der Variante Klassik direkt zum zuletzt eingestellten Google-Bewertungsformular. Ein eigenes Ziel, das kein Google-Bewertungslink ist, wird nicht mehr verwendet. Statistiken und die Änderung des Ziels im Dashboard stehen nicht mehr zur Verfügung; Änderungen des Ziels nehmen wir dann auf Anfrage nach Ziffer 9 vor. Bis 90 Tage nach dem Ende kann sich der Kunde noch anmelden und eine Verlängerung anfragen; danach löschen wir die Nutzerkonten, die Statistiken und ein eigenes Ziel.',

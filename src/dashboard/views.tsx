@@ -3,6 +3,7 @@ import { ActionButton } from '../demo/components/ActionButton'
 import { ChartIcon, CheckIcon, NfcIcon, PencilIcon, QrIcon, ShieldIcon } from '../demo/components/Icons'
 import { LineChart } from '../demo/components/LineChart'
 import { Panel } from '../demo/components/Panel'
+import { RENEWAL_WINDOW_DAYS } from '../config/terms.ts'
 import { type DashCard, type Me, type StatsRange } from './api'
 import { cardTitle, daysText, formatDay, formatInt, shortUrl, toChartPoints } from './format'
 import { Banner, EmptyState, ErrorPanel, Kpi, LoadingPanel } from './parts'
@@ -325,7 +326,7 @@ export function TermView({ me, onRenew }: { me: Me; onRenew: () => void }) {
           <li>Eine Verlängerung gibt es nur auf Ihren ausdrücklichen Wunsch, nie automatisch.</li>
         </ul>
       </Panel>
-      <Panel headingLevel={3} title="Verlängerung" description="Ab 30 Tage vor dem Ende können Sie die Verlängerung anfragen.">
+      <Panel headingLevel={3} title="Verlängerung" description={`Ab ${RENEWAL_WINDOW_DAYS} Tage vor dem Ende können Sie die Verlängerung anfragen.`}>
         {a.renewalRequestedAt ? (
           <p role="status" className="text-sm text-text">
             Ihre Anfrage vom {formatDay(a.renewalRequestedAt.slice(0, 10))} liegt uns vor. Wir melden uns bei Ihnen.

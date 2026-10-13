@@ -35,6 +35,8 @@ export interface LegalDoc {
   updated: string
   /** Dateiname der PDF-Fassung unter /dokumente/ (erzeugt von scripts/build-pdfs.mjs), z. B. „agb.pdf“ */
   pdf?: string
+  /** Pfad der Übersicht früherer Fassungen (PDF-Archiv, Dateien unter public/dokumente/archiv/), z. B. „dokumente/archiv/“. Erzeugt von scripts/archive-legal.mjs */
+  archive?: string
   /** Hinweise ganz oben (Demo-Hinweis, tatsächliche Verarbeitung der Demo …) */
   callouts: LegalCallout[]
   sections: LegalSection[]
