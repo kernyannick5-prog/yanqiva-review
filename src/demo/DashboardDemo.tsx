@@ -1,4 +1,4 @@
-import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
+import { AnimatePresence, LazyMotion, MotionConfig, m, domMax } from 'framer-motion'
 import { useCallback, useState } from 'react'
 import { Reveal } from '../components/Reveal'
 import { SectionHead } from '../sections/ui'
@@ -45,7 +45,8 @@ export function DashboardDemo() {
   const meta = NAV_ITEMS.find((n) => n.id === view) ?? NAV_ITEMS[0]
 
   return (
-    <MotionConfig reducedMotion="user">
+    <LazyMotion features={domMax}>
+<MotionConfig reducedMotion="user">
       <section id="demo" ref={loop} aria-labelledby="demo-title" className="section-light section-y relative overflow-x-clip">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal className="text-center">
@@ -63,7 +64,7 @@ export function DashboardDemo() {
             </p>
           </Reveal>
 
-          <motion.div
+          <m.div
             className="relative mt-8 sm:mt-12"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -102,7 +103,7 @@ export function DashboardDemo() {
                   </div>
 
                   <AnimatePresence mode="wait" initial={false}>
-                    <motion.div
+                    <m.div
                       key={view}
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -116,16 +117,17 @@ export function DashboardDemo() {
                       )}
                       {view === 'statistics' && <Statistics cards={cards} selected={statsCard} onSelect={setStatsCard} />}
                       {view === 'settings' && <Settings onReset={handleReset} />}
-                    </motion.div>
+                    </m.div>
                   </AnimatePresence>
                 </div>
               </div>
             </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
         <Toast toast={toast} onDismiss={dismissToast} />
       </section>
     </MotionConfig>
+</LazyMotion>
   )
 }

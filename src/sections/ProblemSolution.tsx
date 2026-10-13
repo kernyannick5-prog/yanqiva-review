@@ -1,4 +1,4 @@
-import { motion, type Variants } from 'framer-motion'
+import { m, type Variants } from 'framer-motion'
 import { Reveal } from '../components/Reveal'
 import { Container, SectionHead } from './ui'
 
@@ -34,7 +34,7 @@ export function ProblemSolution() {
             <div className="mt-5 max-w-sm rounded-2xl rounded-bl-sm bg-wash px-4 py-3 text-[15px] text-muted">
               „Können Sie uns bitte auf Google bewerten?“
             </div>
-            <motion.ol
+            <m.ol
               variants={listVariants}
               initial="hidden"
               whileInView="show"
@@ -42,7 +42,7 @@ export function ProblemSolution() {
               className="mt-6 space-y-2"
             >
               {before.map((s, i) => (
-                <motion.li
+                <m.li
                   key={s}
                   variants={itemVariants}
                   className="flex min-h-11 items-center gap-3 border-l-2 border-dashed border-edge pl-4 text-[15px] text-faint"
@@ -50,9 +50,9 @@ export function ProblemSolution() {
                 >
                   <span aria-hidden className="grid size-6 shrink-0 place-items-center rounded-full border border-edge-weak text-xs">{i + 1}</span>
                   {s}
-                </motion.li>
+                </m.li>
               ))}
-            </motion.ol>
+            </m.ol>
             <p className="mt-5 text-sm text-faint">Vier Schritte. Viele springen unterwegs ab.</p>
           </Reveal>
 
@@ -63,7 +63,7 @@ export function ProblemSolution() {
             <div className="relative mt-5 max-w-sm rounded-2xl rounded-bl-sm bg-mint/10 px-4 py-3 text-[15px] text-text">
               Einmal antippen. Das war’s.
             </div>
-            <motion.ol
+            <m.ol
               variants={listVariants}
               initial="hidden"
               whileInView="show"
@@ -71,28 +71,28 @@ export function ProblemSolution() {
               className="relative mt-6 space-y-2"
             >
               {after.map((s, i) => (
-                <motion.li
+                <m.li
                   key={s}
                   variants={itemVariants}
                   className="flex min-h-11 items-center gap-3 border-l-2 border-mint/60 pl-4 text-[15px] font-medium text-text"
                 >
                   <span aria-hidden className="grid size-6 shrink-0 place-items-center rounded-full bg-mint text-xs font-bold text-ink-950">{i + 1}</span>
                   {s}
-                </motion.li>
+                </m.li>
               ))}
-              <motion.li
+              <m.li
                 variants={itemVariants}
                 className="flex min-h-11 items-center gap-3 rounded-xl border border-mint/40 bg-mint/[0.12] px-4 text-[15px] font-semibold text-mint"
               >
                 <svg viewBox="0 0 24 24" className="size-6 shrink-0" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <motion.path
+                  <m.path
                     d="M5 12.5l4.5 4.5L19 7.5"
                     variants={{ hidden: { pathLength: 0 }, show: { pathLength: 1, transition: { duration: 0.5, delay: 0.3 } } }}
                   />
                 </svg>
                 Fertig
-              </motion.li>
-            </motion.ol>
+              </m.li>
+            </m.ol>
             <p className="relative mt-5 text-sm text-muted">Zwei Schritte, null Suchen.</p>
           </Reveal>
         </div>

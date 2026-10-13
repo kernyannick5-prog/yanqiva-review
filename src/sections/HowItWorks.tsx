@@ -1,4 +1,4 @@
-import { motion, useScroll, useSpring } from 'framer-motion'
+import { m, useScroll, useSpring } from 'framer-motion'
 import { useRef, type CSSProperties, type ReactNode } from 'react'
 import { useLoopVisible } from '../lib/useLoopVisible'
 import { Reveal } from '../components/Reveal'
@@ -112,10 +112,10 @@ export function HowItWorks() {
         <div ref={ref} className="relative mt-9 sm:mt-14">
           {/* Linie: mobil vertikal, ab lg horizontal */}
           <div aria-hidden className="absolute bottom-0 left-7 top-0 w-px -translate-x-1/2 bg-line lg:hidden">
-            <motion.div className="h-full w-full origin-top bg-gradient-to-b from-mint to-violet-glow" style={{ scaleY: progress }} />
+            <m.div className="h-full w-full origin-top bg-gradient-to-b from-mint to-violet-glow" style={{ scaleY: progress }} />
           </div>
           <div aria-hidden className="absolute left-7 right-0 top-7 hidden h-px -translate-y-1/2 bg-line lg:block">
-            <motion.div className="h-full w-full origin-left bg-gradient-to-r from-mint to-violet-glow" style={{ scaleX: progress }} />
+            <m.div className="h-full w-full origin-left bg-gradient-to-r from-mint to-violet-glow" style={{ scaleX: progress }} />
           </div>
 
           <ol className="grid gap-10 sm:gap-12 lg:grid-cols-3 lg:gap-8">

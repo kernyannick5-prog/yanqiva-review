@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { useMemo } from 'react'
 import { ShieldIcon } from '../components/Icons'
 import { CountUp } from '../../components/CountUp'
@@ -109,7 +109,7 @@ export function Statistics({ cards, selected, onSelect }: StatisticsProps) {
                       { key: 'nfc', value: card.scans.nfc, color: 'bg-mint' },
                       { key: 'qr', value: card.scans.qr, color: 'bg-[#a78bfa]' },
                     ].map((seg, j) => (
-                      <motion.span
+                      <m.span
                         key={seg.key}
                         className={`h-full origin-left ${seg.color}`}
                         style={{ width: `${(seg.value / barMax) * 100}%` }}

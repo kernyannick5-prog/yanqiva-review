@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import type { PointerEvent, ReactNode } from 'react'
 import { Reveal } from '../components/Reveal'
 import { Container, SectionHead } from './ui'
@@ -83,7 +83,7 @@ export function Benefits() {
           {items.map((it, i) => (
             <li key={it.tag}>
               <Reveal delay={i * 0.08} className="h-full">
-                <motion.article
+                <m.article
                   onPointerMove={trackPointer}
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.25 }}
@@ -102,7 +102,7 @@ export function Benefits() {
                     <h3 className="mt-2 font-display text-[1.375rem] font-semibold leading-tight tracking-tight text-balance sm:text-2xl">{it.title}</h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-muted sm:text-base">{it.text}</p>
                   </div>
-                </motion.article>
+                </m.article>
               </Reveal>
             </li>
           ))}

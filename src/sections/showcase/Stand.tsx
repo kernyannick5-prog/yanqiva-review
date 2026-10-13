@@ -1,4 +1,4 @@
-import { motion, useTransform, type MotionValue } from 'framer-motion'
+import { m, useTransform, type MotionValue } from 'framer-motion'
 import { Box } from './primitives'
 import { P3D, STAR_GOLD } from './constants'
 
@@ -61,15 +61,15 @@ function NfcBadge({ p }: { p: MotionValue<number> }) {
   const r1Opacity = useTransform(p, [0.17, 0.19, 0.27], [0, 0.6, 0])
   return (
     <div className="relative mt-2.5 h-14 w-14">
-      <motion.div
+      <m.div
         className="absolute -inset-4 rounded-full"
         style={{ opacity: glow, background: 'radial-gradient(closest-side, rgb(94 234 212 / 0.35), rgb(94 234 212 / 0))' }}
       />
       <div className="absolute inset-0 grid place-items-center rounded-full border border-mint/50 bg-mint/10">
         <NfcIcon className="h-8 w-8" />
       </div>
-      <motion.div className="absolute inset-0 rounded-full border border-mint" style={{ scale: r0Scale, opacity: r0Opacity }} />
-      <motion.div className="absolute inset-0 rounded-full border border-mint" style={{ scale: r1Scale, opacity: r1Opacity }} />
+      <m.div className="absolute inset-0 rounded-full border border-mint" style={{ scale: r0Scale, opacity: r0Opacity }} />
+      <m.div className="absolute inset-0 rounded-full border border-mint" style={{ scale: r1Scale, opacity: r1Opacity }} />
     </div>
   )
 }
@@ -84,12 +84,12 @@ function QrBadge({ p }: { p: MotionValue<number> }) {
   return (
     <span className="relative block">
       <DecorativeQr />
-      <motion.span className="absolute -inset-[5px]" style={{ opacity: frame, scale: frameScale }}>
+      <m.span className="absolute -inset-[5px]" style={{ opacity: frame, scale: frameScale }}>
         {CORNERS.map((c) => (
           <span key={c} className={`absolute h-3 w-3 border-mint ${c}`} />
         ))}
-      </motion.span>
-      <motion.span
+      </m.span>
+      <m.span
         className="absolute left-[-3px] right-[-3px] top-0 h-[2px] rounded-full bg-mint"
         style={{ y: scanY, opacity: scanOpacity, boxShadow: '0 0 8px 1px rgb(94 234 212 / 0.7)' }}
       />
@@ -112,7 +112,7 @@ const sideDark = { style: { background: 'linear-gradient(180deg, var(--color-ink
 export function Stand({ p, rotX, rotY, glareX }: StandProps) {
   return (
     <div className="absolute left-0 top-[130px] h-0 w-0" style={{ perspective: 1100, perspectiveOrigin: '0px -150px' }}>
-      <motion.div className={`absolute left-0 top-0 h-0 w-0 ${P3D}`} style={{ rotateX: rotX, rotateY: rotY }}>
+      <m.div className={`absolute left-0 top-0 h-0 w-0 ${P3D}`} style={{ rotateX: rotX, rotateY: rotY }}>
         {/* Sockel */}
         <div className={`absolute left-0 top-0 h-0 w-0 ${P3D}`} style={{ transform: 'translateY(14px)' }}>
           <Box
@@ -177,7 +177,7 @@ export function Stand({ p, rotX, rotY, glareX }: StandProps) {
                       </div>
                     </div>
                     {/* Lichtreflex: wandert mit der Rotation */}
-                    <motion.div
+                    <m.div
                       className="pointer-events-none absolute -top-10 left-0 h-[400px] w-[64px]"
                       style={{
                         x: glareX,
@@ -204,7 +204,7 @@ export function Stand({ p, rotX, rotY, glareX }: StandProps) {
             />
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { sectionHref } from '../lib/sectionRoutes'
 import {
-  motion,
+  m,
   useMotionValue,
   useScroll,
   useSpring,
@@ -93,7 +93,7 @@ function NfcCard({ reduce }: { reduce: boolean }) {
   return (
     <div className="legacy-palette [perspective:1200px]">
       <div className={reduce ? '' : 'yq-card-float'} style={{ transformStyle: 'preserve-3d' }}>
-        <motion.div
+        <m.div
           style={{ rotateX, rotateY: sx, transformStyle: 'preserve-3d' }}
           className="relative mx-auto aspect-[1.586/1] w-full max-w-[420px] overflow-hidden rounded-[22px] border border-white/15 bg-[linear-gradient(135deg,#1e1b4b_0%,#2e1065_55%,#0d1233_100%)] p-4 shadow-[0_40px_80px_-30px_rgb(139_92_246/0.6),0_0_0_1px_rgb(94_234_212/0.12)] sm:p-6"
         >
@@ -130,7 +130,7 @@ function NfcCard({ reduce }: { reduce: boolean }) {
               className="yq-sweep pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent"
             />
           )}
-        </motion.div>
+        </m.div>
       </div>
     </div>
   )
@@ -175,7 +175,7 @@ export function Hero() {
           <MotionToggle className="mt-4 min-h-6 rounded text-[13px] text-faint underline underline-offset-2 hover:text-text aria-pressed:text-mint" />
         </div>
 
-        <motion.div
+        <m.div
           style={{ y: cardY }}
           className="yq-in-pop relative mx-auto w-full max-w-[440px] px-1 py-2 sm:py-8 lg:mx-0 lg:ml-auto"
         >
@@ -184,14 +184,14 @@ export function Hero() {
 
           {/* Mobil: Chips in einer Zeile unter der Karte (nichts überdeckt die Karte); ab sm als schwebende Chips */}
           <div className="relative mt-4 flex flex-wrap justify-center gap-2 sm:contents">
-            <motion.div
+            <m.div
               style={{ y: chipA }}
               className="glass flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm sm:absolute sm:-top-1 sm:-right-4 sm:py-2.5"
             >
               <span aria-hidden className="size-2 rounded-full bg-mint shadow-[0_0_10px_var(--color-mint)]" />
               <span className="font-medium">Beispiel: +32 Bewertungen</span>
-            </motion.div>
-            <motion.div
+            </m.div>
+            <m.div
               style={{ y: chipB }}
               className="glass flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm sm:absolute sm:-bottom-1 sm:-left-4 sm:py-2.5"
             >
@@ -199,9 +199,9 @@ export function Hero() {
               <span className="text-muted">Beispiel:</span>
               <span className="font-medium">4,8</span>
               <span className="text-muted">Ø Bewertung</span>
-            </motion.div>
+            </m.div>
           </div>
-        </motion.div>
+        </m.div>
       </Container>
     </section>
   )

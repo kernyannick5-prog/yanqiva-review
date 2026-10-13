@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 
 interface SparklineProps {
   values: number[]
@@ -23,7 +23,7 @@ export function Sparkline({ values, className = 'h-8 w-24' }: SparklineProps) {
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} aria-hidden className={className} fill="none" preserveAspectRatio="none">
-      <motion.path
+      <m.path
         d={d}
         stroke="#5eead4"
         strokeWidth={1.8}

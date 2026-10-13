@@ -1,4 +1,4 @@
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { m, useInView, useReducedMotion } from 'framer-motion'
 import { useEffect, useId, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 import { useElementWidth } from '../useElementWidth'
 import { formatInt } from '../utils'
@@ -176,14 +176,14 @@ export function LineChart({ points, valueLabel, ariaLabel, unit = 'day' }: LineC
         )}
 
         <g key={dataKey}>
-          <motion.path
+          <m.path
             d={area}
             fill={`url(#${gradientId})`}
             initial={{ opacity: 0 }}
             animate={{ opacity: inView ? 1 : 0 }}
             transition={{ duration: reduce ? 0 : 1, delay: reduce ? 0 : 0.5 }}
           />
-          <motion.path
+          <m.path
             d={line}
             fill="none"
             stroke="#5eead4"

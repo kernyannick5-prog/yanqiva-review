@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
+import { LazyMotion } from 'framer-motion'
+import { loadMotionFeatures } from '../lib/loadMotionFeatures'
 import { Button } from '../components/Button'
 import { Background } from '../sections/Background'
 import { Footer } from '../sections/Footer'
@@ -227,7 +229,7 @@ export function OrderApp() {
         Zum Inhalt springen
       </a>
       <Background />
-      <Navbar />
+      <LazyMotion features={loadMotionFeatures} strict><Navbar /></LazyMotion>
       <main id="main" tabIndex={-1} className="relative mx-auto w-full max-w-6xl px-4 pb-14 pt-28 outline-none sm:px-8 sm:pt-32">
         <header className="mb-8 max-w-2xl">
           <p className="chip">Bestellen</p>

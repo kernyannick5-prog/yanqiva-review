@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import { AccountChip } from './components/AccountChip'
 import { NAV_ITEMS } from './navItems'
@@ -64,7 +64,7 @@ export function Sidebar({ view, onChange, cardCount }: SidebarProps) {
               }`}
             >
               {active && (
-                <motion.span
+                <m.span
                   layoutId="demo-nav-indicator"
                   aria-hidden
                   className="absolute inset-0 rounded-xl bg-white/[0.08] shadow-[inset_0_0_0_1px_rgb(94_234_212/0.3)]"

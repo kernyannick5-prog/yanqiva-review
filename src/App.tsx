@@ -1,3 +1,4 @@
+import { LazyMotion } from 'framer-motion'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Navbar } from './sections/Navbar'
 import { Hero } from './sections/Hero'
@@ -9,6 +10,7 @@ import { Pricing } from './sections/Pricing'
 import { FinalCta } from './sections/FinalCta'
 import { Footer } from './sections/Footer'
 import { Background } from './sections/Background'
+import { loadMotionFeatures } from './lib/loadMotionFeatures'
 import { useLowPower } from './lib/lowPower'
 import { useTouchLayout } from './lib/useTouchLayout'
 import { sectionElementId, sectionFromLegacyHash, sectionFromPath, sectionHref, type SectionName } from './lib/sectionRoutes'
@@ -150,7 +152,7 @@ function useSectionRouting() {
 export default function App() {
   useSectionRouting()
   return (
-    <>
+    <LazyMotion features={loadMotionFeatures} strict>
       <a href="#main" className="fixed left-3 top-3 z-[200] inline-flex min-h-11 -translate-y-[200%] items-center rounded-full bg-mint px-5 text-sm font-semibold text-ink-950 focus:translate-y-0">Zum Inhalt springen</a>
       <Background />
       <Navbar onLight />
@@ -168,6 +170,6 @@ export default function App() {
         <FinalCta />
       </main>
       <Footer />
-    </>
+    </LazyMotion>
   )
 }

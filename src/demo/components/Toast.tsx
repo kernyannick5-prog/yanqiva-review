@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { CheckIcon } from './Icons'
@@ -30,7 +30,7 @@ export function Toast({ toast, onDismiss }: ToastProps) {
     >
       <AnimatePresence>
         {toast && (
-          <motion.div
+          <m.div
             key={toast.id}
             initial={{ opacity: 0, y: 16, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -42,7 +42,7 @@ export function Toast({ toast, onDismiss }: ToastProps) {
               <CheckIcon className="h-3.5 w-3.5" />
             </span>
             {toast.text}
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>,

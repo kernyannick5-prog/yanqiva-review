@@ -1,4 +1,4 @@
-import { motion, type HTMLMotionProps } from 'framer-motion'
+import { m, type HTMLMotionProps } from 'framer-motion'
 
 interface RevealProps extends HTMLMotionProps<'div'> {
   delay?: number
@@ -8,7 +8,7 @@ interface RevealProps extends HTMLMotionProps<'div'> {
 /** Blendet Inhalte beim Scrollen sanft ein (einmalig). */
 export function Reveal({ delay = 0, y = 24, children, ...rest }: RevealProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
@@ -16,6 +16,6 @@ export function Reveal({ delay = 0, y = 24, children, ...rest }: RevealProps) {
       {...rest}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }

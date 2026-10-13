@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { useReduceMotion } from '../lib/useReduceMotion'
 import { useEffect, useRef, useState } from 'react'
 import { LinkButton } from '../components/Button'
@@ -99,7 +99,7 @@ export function Navbar({ onLight = false }: { onLight?: boolean }) {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             id="mobile-menu"
             className="fixed inset-0 flex flex-col bg-ink-950/95 px-6 pt-28 backdrop-blur-2xl md:hidden"
             initial={{ opacity: 0 }}
@@ -109,7 +109,7 @@ export function Navbar({ onLight = false }: { onLight?: boolean }) {
           >
             <ul className="flex flex-col">
               {links.map((l, i) => (
-                <motion.li
+                <m.li
                   key={l.section}
                   initial={reduce ? false : { opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -119,13 +119,13 @@ export function Navbar({ onLight = false }: { onLight?: boolean }) {
                   <a href={sectionHref(l.section)} onClick={() => setOpen(false)} className="flex min-h-14 items-center font-display text-3xl font-semibold tracking-tight transition-colors active:text-mint">
                     {l.label}
                   </a>
-                </motion.li>
+                </m.li>
               ))}
             </ul>
             <div className="mt-8" onClick={() => setOpen(false)}>
               <LinkButton href={sectionHref('demo')} className="w-full">Demo ansehen</LinkButton>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

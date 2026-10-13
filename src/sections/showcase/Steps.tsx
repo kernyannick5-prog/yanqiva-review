@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { motion, useTransform, type MotionValue } from 'framer-motion'
+import { m, useTransform, type MotionValue } from 'framer-motion'
 import { STEPS, STEP_WINDOWS } from './constants'
 
 export type StepLayout = 'row' | 'column'
@@ -25,7 +25,7 @@ function StepItem({ p, index, active, layout, onSelect }: StepItemProps) {
   const bar = useTransform(p, [from, to], [0, 1], { clamp: true })
   const step = STEPS[index]
   return (
-    <motion.li className={column ? '' : 'min-w-0 flex-1'} style={{ opacity }}>
+    <m.li className={column ? '' : 'min-w-0 flex-1'} style={{ opacity }}>
       <button
         type="button"
         onClick={() => onSelect(index)}
@@ -51,13 +51,13 @@ function StepItem({ p, index, active, layout, onSelect }: StepItemProps) {
           </span>
         </span>
         <span className={`mt-2 block h-0.5 w-full overflow-hidden rounded-full bg-edge-weak ${column ? 'lg:ml-11 lg:w-[calc(100%-2.75rem)]' : ''}`}>
-          <motion.span className="block h-full origin-left bg-mint" style={{ scaleX: bar }} />
+          <m.span className="block h-full origin-left bg-mint" style={{ scaleX: bar }} />
         </span>
         {column && (
           <span className="mt-2 block pl-11 text-[15px] leading-relaxed text-muted [@media(max-height:800px)]:hidden">{step.text}</span>
         )}
       </button>
-    </motion.li>
+    </m.li>
   )
 }
 
@@ -94,9 +94,9 @@ function Fade({ p, win, children }: FadeProps) {
   const opacity = useTransform(p, [a, b, c, d], [a === 0 ? 1 : 0, 1, 1, d >= 1 ? 1 : 0])
   const y = useTransform(p, [a, b, c, d], [a === 0 ? 0 : 10, 0, 0, d >= 1 ? 0 : -10])
   return (
-    <motion.p className="col-start-1 row-start-1" style={{ opacity, y }}>
+    <m.p className="col-start-1 row-start-1" style={{ opacity, y }}>
       {children}
-    </motion.p>
+    </m.p>
   )
 }
 

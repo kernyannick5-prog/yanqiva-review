@@ -1,4 +1,4 @@
-import { AnimatePresence, MotionConfig } from 'framer-motion'
+import { AnimatePresence, LazyMotion, MotionConfig, domMax } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState, type ComponentType } from 'react'
 import { ActionButton } from '../demo/components/ActionButton'
 import { CardsIcon, ChartIcon, OverviewIcon } from '../demo/components/Icons'
@@ -75,7 +75,8 @@ export function AppShell({ stored, onSignOut, onExpired }: AppShellProps) {
   const meta = NAV.find((n) => n.id === view) ?? NAV[0]
 
   return (
-    <MotionConfig reducedMotion="user">
+    <LazyMotion features={domMax}>
+<MotionConfig reducedMotion="user">
       <div className="section-light flex min-h-dvh flex-col">
         <SkipLink />
         <header className="border-b border-line">
@@ -200,5 +201,6 @@ export function AppShell({ stored, onSignOut, onExpired }: AppShellProps) {
         <Toast toast={toast} onDismiss={dismissToast} />
       </div>
     </MotionConfig>
+</LazyMotion>
   )
 }

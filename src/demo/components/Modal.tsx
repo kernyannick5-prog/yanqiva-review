@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useEffect, useRef, type KeyboardEvent, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { CloseIcon } from './Icons'
@@ -67,7 +67,7 @@ export function Modal({ titleId, title, onClose, children }: ModalProps) {
   }
 
   return createPortal(
-    <motion.div
+    <m.div
       className="fixed inset-0 z-[100] flex items-end justify-center bg-ink-950/75 backdrop-blur-sm sm:items-center sm:p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -77,7 +77,7 @@ export function Modal({ titleId, title, onClose, children }: ModalProps) {
         if (e.target === e.currentTarget) onClose()
       }}
     >
-      <motion.div
+      <m.div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
@@ -104,8 +104,8 @@ export function Modal({ titleId, title, onClose, children }: ModalProps) {
           </button>
         </div>
         {children}
-      </motion.div>
-    </motion.div>,
+      </m.div>
+    </m.div>,
     document.body,
   )
 }

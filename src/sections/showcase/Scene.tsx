@@ -1,7 +1,7 @@
 import { useLayoutEffect, useEffect, useRef } from 'react'
 import {
   easeInOut,
-  motion,
+  m,
   transform,
   useMotionValue,
   useSpring,
@@ -131,14 +131,14 @@ export function Scene({ p, lite = false }: SceneProps) {
 
   return (
     <div ref={areaRef} aria-hidden className="legacy-palette absolute inset-0">
-      <motion.div
+      <m.div
         className="absolute left-1/2 top-1/2"
         style={{ width: SCENE_W_WIDE, height: SCENE_H, marginLeft: -SCENE_W_WIDE / 2, marginTop: -SCENE_H / 2, scale }}
       >
         {/* Stand-Ebene: wandert beim Annähern des Phones nach links */}
-        <motion.div className="absolute left-1/2 top-1/2 h-0 w-0" style={{ x: standX }}>
+        <m.div className="absolute left-1/2 top-1/2 h-0 w-0" style={{ x: standX }}>
           {/* mint Glow-Puls hinter dem Aufsteller */}
-          <motion.div
+          <m.div
             className="absolute h-[320px] w-[320px] rounded-full"
             style={{
               left: -160,
@@ -149,7 +149,7 @@ export function Scene({ p, lite = false }: SceneProps) {
             }}
           />
           {/* Schluss-Schein hinter dem Aufsteller */}
-          <motion.div
+          <m.div
             className="absolute h-[380px] w-[340px] rounded-full"
             style={{
               left: -170,
@@ -159,7 +159,7 @@ export function Scene({ p, lite = false }: SceneProps) {
             }}
           />
           {/* Bodenschatten + dezenter Violett-Schimmer */}
-          <motion.div
+          <m.div
             className="absolute h-[64px] w-[380px] rounded-[50%]"
             style={{
               left: -190,
@@ -180,37 +180,37 @@ export function Scene({ p, lite = false }: SceneProps) {
           <Stand p={p} rotX={standRotX} rotY={standRotY} glareX={glareX} />
           {/* NFC-Wellen */}
           {rings.map((r, i) => (
-            <motion.div
+            <m.div
               key={i}
               className="absolute h-[120px] w-[120px] rounded-full border-2 border-mint"
               style={{ left: -60, top: NFC_CENTER_Y - 60, scale: r.scale, opacity: r.opacity }}
             />
           ))}
-        </motion.div>
+        </m.div>
 
         {/* Smartphone */}
-        <motion.div
+        <m.div
           className="absolute left-1/2 top-1/2 h-0 w-0"
           style={{ x: phoneWrapX, y: phoneWrapY, opacity: phoneOpacity }}
         >
           <div className="absolute" style={{ left: -80, top: -158 }}>
             <Phone p={p} rotX={phoneRotX} rotY={phoneRotY} z={phoneZ} />
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Ergebnis-Chip */}
-        <motion.div
+        <m.div
           className="absolute left-1/2 top-1/2 h-0 w-0"
           style={{ x: phoneEndX, y: -196, opacity: chipOpacity, scale: chipScale }}
         >
-          <motion.div
+          <m.div
             className="absolute flex h-9 w-[150px] items-center justify-center gap-1.5 rounded-full border border-mint/50 bg-ink-800 font-display text-[14px] font-semibold text-mint"
             style={{ left: -75, top: -18, y: chipY, boxShadow: '0 0 0 1px rgb(94 234 212 / 0.2)' }}
           >
             <span aria-hidden>+1</span> Bewertung
-          </motion.div>
-        </motion.div>
-      </motion.div>
+          </m.div>
+        </m.div>
+      </m.div>
     </div>
   )
 }
