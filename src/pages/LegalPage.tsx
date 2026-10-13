@@ -74,6 +74,17 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
           <p className="inline-flex rounded-full border border-mint/30 bg-mint/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-mint">{doc.badge}</p>
           <h1 className="mt-4 hyphens-auto break-words font-display text-[clamp(1.9rem,1.3rem+2.6vw,3rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-balance">{doc.title}</h1>
           <p className="mt-3 text-sm text-faint">{renderText(doc.updated)}</p>
+          {doc.pdf && (
+            <p className="mt-1">
+              <a
+                href={`${BASE}dokumente/${doc.pdf}`}
+                download
+                className="inline-flex min-h-11 items-center text-sm text-muted underline underline-offset-2 transition-colors hover:text-mint"
+              >
+                Als PDF herunterladen
+              </a>
+            </p>
+          )}
 
           {doc.callouts.length > 0 && (
             <div className="mt-8 space-y-3">

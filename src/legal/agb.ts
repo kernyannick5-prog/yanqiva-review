@@ -10,6 +10,7 @@ export const agb: LegalDoc = {
   title: 'Allgemeine Geschäftsbedingungen',
   badge: 'Rechtliches',
   updated: 'Stand: 12. Oktober 2026',
+  pdf: 'agb.pdf',
   callouts: [
     {
       tone: 'info',

@@ -33,6 +33,8 @@ export interface LegalDoc {
   /** Kurzer Untertitel, z. B. „Demo / Mustertext“ */
   badge: string
   updated: string
+  /** Dateiname der PDF-Fassung unter /dokumente/ (erzeugt von scripts/build-pdfs.mjs), z. B. „agb.pdf“ */
+  pdf?: string
   /** Hinweise ganz oben (Demo-Hinweis, tatsächliche Verarbeitung der Demo …) */
   callouts: LegalCallout[]
   sections: LegalSection[]

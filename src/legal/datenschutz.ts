@@ -10,6 +10,7 @@ export const datenschutz: LegalDoc = {
   title: 'Datenschutzerklärung',
   badge: 'Rechtliches',
   updated: 'Stand: 9. Oktober 2026',
+  pdf: 'datenschutz.pdf',
   callouts: [
     {
       tone: 'info',
