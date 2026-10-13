@@ -68,7 +68,6 @@ export const PRODUCTS: Record<ProductId, Product> = {
       'NFC-Chip und QR-Code',
       'Weiterleitung direkt zum Google-Bewertungsformular',
       'Dashboard 12 Monate inklusive: Statistiken zu Taps und Scans',
-      'Ziel-Link jederzeit änderbar',
       'Einrichtung inklusive',
     ],
     running: `12 Monate Dashboard inklusive. Danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar, nur wenn Sie aktiv verlängern. Ohne Verlängerung funktioniert die Karte weiter und leitet direkt zur Google-Bewertung.`,

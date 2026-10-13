@@ -20,7 +20,7 @@ const plans = [
     tagline: 'Alles aus Klassik, plus Kontrolle',
     price: PRODUCTS['review-dashboard'].unitPrice,
     note: 'inkl. 12 Monate Dashboard. Danach nur auf Wunsch verlängerbar für 15 €/Monat, monatlich kündbar, kein automatisches Abo. Ohne Verlängerung leitet die Karte weiter zu Google.',
-    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'YANQIVA Dashboard, 12 Monate inklusive', 'Statistiken zu Taps und Scans', 'Ziel-Link jederzeit änderbar', 'Einrichtung inklusive', DELIVERY_SHORT, shippingText(PRODUCTS['review-dashboard'])],
+    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'YANQIVA Dashboard, 12 Monate inklusive', 'Statistiken zu Taps und Scans', 'Einrichtung inklusive', DELIVERY_SHORT, shippingText(PRODUCTS['review-dashboard'])],
     popular: true,
   },
 ]
