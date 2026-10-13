@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import {
-  DASHBOARD_RENEWAL_EUR, FORMAT_LIST, FORMATS, formatEuro, PRODUCT_LIST, PRODUCTS, QTY_MAX, QTY_MIN, PAYMENT_NOTE, SHIPPING_EUR, subtotal, total, VAT_NOTE,
+  DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, FORMAT_LIST, FORMATS, formatEuro, PRODUCT_LIST, PRODUCTS, QTY_MAX, QTY_MIN, PAYMENT_NOTE, SHIPPING_EUR, subtotal, total, VAT_NOTE,
   shippingText,
 } from './catalog'
 import { CheckboxField, ErrorSummary, FieldError, Fieldset, RequiredLegend, TextField, type FormCtx } from './fields'
@@ -438,7 +438,7 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Laufende Kosten</dt>
             <dd className="max-w-[26ch] text-right text-text sm:max-w-[40ch]">
-              {f.product === 'review-dashboard' ? `Keine im ersten Jahr. Danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar.` : 'Keine'}
+              {f.product === 'review-dashboard' ? `Keine in den ersten ${DASHBOARD_INCLUDED_MONTHS} Monaten (Dashboard inklusive). Danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar.` : 'Keine'}
             </dd>
           </div>
           <div className="flex justify-between gap-4">

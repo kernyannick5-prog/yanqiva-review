@@ -1,6 +1,6 @@
 import { LinkButton } from '../components/Button'
 import { DELIVERY_SHORT } from '../order/deliveryArea'
-import { PRODUCTS, shippingText } from '../order/catalog'
+import { DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, PRODUCTS, shippingText } from '../order/catalog'
 import { Reveal } from '../components/Reveal'
 import { Container, SectionHead } from './ui'
 
@@ -19,13 +19,13 @@ const plans = [
     name: 'Dashboard',
     tagline: 'Alles aus Klassik, plus Kontrolle',
     price: PRODUCTS['review-dashboard'].unitPrice,
-    note: 'inkl. 12 Monate Dashboard. Danach nur auf Wunsch verlängerbar für 15 €/Monat, monatlich kündbar, kein automatisches Abo. Ohne Verlängerung leitet die Karte weiter zu Google.',
-    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'YANQIVA Dashboard, 12 Monate inklusive', 'Statistiken zu Taps und Scans', 'Einrichtung inklusive', DELIVERY_SHORT, shippingText(PRODUCTS['review-dashboard'])],
+    note: `inkl. ${DASHBOARD_INCLUDED_MONTHS} Monate Dashboard. Danach nur auf Wunsch verlängerbar für ${DASHBOARD_RENEWAL_EUR} €/Monat je Standort, monatlich kündbar, kein automatisches Abo. Ohne Verlängerung leitet die Karte direkt weiter zu Google.`,
+    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', `YANQIVA Dashboard, ${DASHBOARD_INCLUDED_MONTHS} Monate inklusive`, 'Statistiken zu Taps und Scans', 'Einrichtung inklusive', DELIVERY_SHORT, shippingText(PRODUCTS['review-dashboard'])],
     popular: true,
   },
 ]
 
-/** Preise (Endpreise, Kleinunternehmer; Dashboard 12 Monate inklusive, danach optional). */
+/** Preise (Endpreise, Kleinunternehmer; Dashboard 2 Monate inklusive, danach optional). */
 export function Pricing() {
   return (
     <section id="preise" className="section-y section-tint relative overflow-hidden" aria-labelledby="preise-title">
@@ -34,7 +34,7 @@ export function Pricing() {
           <SectionHead
             eyebrow="Preise"
             id="preise-title"
-            lead="Das Dashboard ist 12 Monate inklusive, danach optional für 15 €/Monat. Die Karte funktioniert auch ohne. Mehrere Karten oder Filialen auf Anfrage."
+            lead={`Das Dashboard ist ${DASHBOARD_INCLUDED_MONTHS} Monate inklusive, danach optional für ${DASHBOARD_RENEWAL_EUR} €/Monat je Standort. Die Karte funktioniert auch ohne. Mehrere Karten oder Filialen auf Anfrage.`}
           >
             Einmal zahlen. Sofort loslegen.
           </SectionHead>

@@ -30,6 +30,9 @@ export interface FormatOption {
 export const QTY_MIN = 1
 export const QTY_MAX = 10
 export const SHIPPING_EUR = 0
+/** Im Paketpreis enthaltene Dashboard-Laufzeit in Monaten. Muss zu AGB Ziffer 8 und zum Worker (zugangsklar: DASHBOARD_INCLUDED_MONTHS) passen. */
+export const DASHBOARD_INCLUDED_MONTHS = 2
+/** Verlängerung nur auf Wunsch: Euro je Monat und Standort, monatlich kündbar, keine automatische Verlängerung. */
 export const DASHBOARD_RENEWAL_EUR = 15
 export const CONTACT_EMAIL = 'support@yanqiva.de'
 /** Lieferzeit als Satz, z. B. für Karten und Übersicht (persönliche Übergabe vor Ort, kein Postversand). */
@@ -67,10 +70,10 @@ export const PRODUCTS: Record<ProductId, Product> = {
     features: [
       'NFC-Chip und QR-Code',
       'Weiterleitung direkt zum Google-Bewertungsformular',
-      'Dashboard 12 Monate inklusive: Statistiken zu Taps und Scans',
+      `Dashboard ${DASHBOARD_INCLUDED_MONTHS} Monate inklusive: Statistiken zu Taps und Scans`,
       'Einrichtung inklusive',
     ],
-    running: `12 Monate Dashboard inklusive. Danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar, nur wenn Sie aktiv verlängern. Ohne Verlängerung funktioniert die Karte weiter und leitet direkt zur Google-Bewertung.`,
+    running: `${DASHBOARD_INCLUDED_MONTHS} Monate Dashboard inklusive. Danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar, nur wenn Sie aktiv verlängern. Ohne Verlängerung funktioniert die Karte weiter und leitet direkt zur Google-Bewertung.`,
     shipping: '7 Werktagen',
     redirectNote: REDIRECT_NOTE,
   },

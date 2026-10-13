@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react'
-import { DASHBOARD_RENEWAL_EUR, FORMATS, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
+import { DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, FORMATS, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
 import { effectiveQuantity, type OrderForm } from './state'
 
 /** Sticky Bestellübersicht (Desktop-Seitenleiste). */
@@ -28,7 +28,7 @@ export function OrderSidebar({ form }: { form: OrderForm }) {
       {pid && (
         <p className="mt-4 rounded-xl bg-white/[0.04] px-3 py-2.5 text-[13px] leading-snug text-muted">
           <span className="font-semibold text-text">Laufende Kosten: </span>
-          {pid === 'review-dashboard' ? `Dashboard 12 Monate inklusive, danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort. Kein automatisches Abo.` : 'keine.'}
+          {pid === 'review-dashboard' ? `Dashboard ${DASHBOARD_INCLUDED_MONTHS} Monate inklusive, danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar. Kein automatisches Abo.` : 'keine.'}
         </p>
       )}
       {p && <p className="mt-3 text-[13px] text-muted">Lieferzeit: {shippingText(p)}.</p>}
