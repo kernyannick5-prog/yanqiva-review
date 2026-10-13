@@ -42,7 +42,7 @@ export const agb: LegalDoc = {
           p: 'Die Darstellung der Produkte und Preise auf der Website ist kein bindendes Angebot, sondern eine Aufforderung zur Bestellung.',
         },
         {
-          p: 'Technischer Ablauf: Im Bestellformular wählt der Kunde Variante, Ausführung und Menge, macht die Angaben zur Einrichtung sowie seine Kontakt- und Adressdaten. Im letzten Schritt zeigt das Formular eine Übersicht aller Angaben und Preise. Bis zum Absenden kann der Kunde jeden Schritt über „Ändern“ oder die Zurück-Funktion erneut aufrufen und seine Eingaben korrigieren; Pflichtfelder werden vor dem Absenden auf Vollständigkeit geprüft. Mit Klick auf die Schaltfläche „Zahlungspflichtig bestellen“ gibt der Kunde ein verbindliches Angebot zum Kauf der gewählten Produkte ab (Bestellung).',
+          p: 'Technischer Ablauf: Im Bestellformular wählt der Kunde Variante und Menge, macht die Angaben zur Einrichtung sowie seine Kontakt- und Adressdaten. Im letzten Schritt zeigt das Formular eine Übersicht aller Angaben und Preise. Bis zum Absenden kann der Kunde jeden Schritt über „Ändern“ oder die Zurück-Funktion erneut aufrufen und seine Eingaben korrigieren; Pflichtfelder werden vor dem Absenden auf Vollständigkeit geprüft. Mit Klick auf die Schaltfläche „Zahlungspflichtig bestellen“ gibt der Kunde ein verbindliches Angebot zum Kauf der gewählten Produkte ab (Bestellung).',
         },
         {
           p: 'Den Eingang der Bestellung bestätigen wir unverzüglich automatisch per E-Mail (Eingangsbestätigung). Die Eingangsbestätigung ist noch keine Annahme der Bestellung.',
@@ -63,7 +63,7 @@ export const agb: LegalDoc = {
       heading: '3. Leistungsumfang',
       blocks: [
         {
-          p: 'Wir liefern die bestellte Anzahl NFC-Produkte in der gewählten Ausführung (Lieferung nur im Liefergebiet nach Ziffer 6), entweder als NFC-Karte im Kartenformat oder als NFC-Aufsteller für Theke oder Tisch, jeweils mit NFC-Chip und aufgedrucktem QR-Code, und richten sie ein. Tippt eine Person das Produkt mit einem Smartphone an oder scannt sie den QR-Code, wird sie über eine Weiterleitungsadresse von uns (Ziffer 9) zum Google-Bewertungsformular des Unternehmensprofils des Kunden geleitet. Es gibt zwei Varianten:',
+          p: 'Wir liefern die bestellte Anzahl NFC-Bewertungskarten (Lieferung nur im Liefergebiet nach Ziffer 6) als quadratische Acrylkarte im Format 12 × 12 cm, jeweils mit NFC-Chip und einem QR-Code auf der Vorderseite der Karte, und richten sie ein. Tippt eine Person die Karte mit einem Smartphone an oder scannt sie den QR-Code, wird sie über eine Weiterleitungsadresse von uns (Ziffer 9) zum Google-Bewertungsformular des Unternehmensprofils des Kunden geleitet. Es gibt zwei Varianten:',
         },
         {
           list: [

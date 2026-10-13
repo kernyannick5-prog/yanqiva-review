@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { LinkButton } from '../components/Button'
-import { CONTACT_EMAIL, FORMATS, formatEuro, PRODUCTS, total, VAT_NOTE } from './catalog'
+import { CONTACT_EMAIL, PRODUCT_LABEL, formatEuro, PRODUCTS, total, VAT_NOTE } from './catalog'
 import { effectiveQuantity, productOf, trimmed, type OrderForm } from './state'
 import { NextSteps } from './steps'
 
@@ -44,7 +44,7 @@ export function Confirmation({ orderId, form }: Props) {
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Bestellung</dt>
             <dd className="text-right text-text">
-              {qty} × {p.name}, {FORMATS[f.format].name}
+              {qty} × {p.name}, {PRODUCT_LABEL}
             </dd>
           </div>
           <div className="flex items-baseline justify-between gap-4">

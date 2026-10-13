@@ -7,6 +7,63 @@ const PH = 260
 /** 12 x 12 cm, 0,3 cm dick -> 260 px Kantenlänge ergeben ca. 6,5 px Dicke. */
 const PT = 6
 
+/** Dekoratives QR-Muster (kein echter Code), nur zur Veranschaulichung der QR-Scan-Phase. */
+const N = 11
+const FINDERS: ReadonlyArray<readonly [number, number]> = [
+  [0, 0],
+  [N - 4, 0],
+  [0, N - 4],
+]
+const inFinder = (x: number, y: number) => FINDERS.some(([fx, fy]) => x >= fx && x < fx + 4 && y >= fy && y < fy + 4)
+const MODULES: Array<{ x: number; y: number }> = []
+for (let y = 0; y < N; y++) {
+  for (let x = 0; x < N; x++) {
+    if (!inFinder(x, y) && (x * 7 + y * 13 + x * y * 5) % 5 < 2) MODULES.push({ x, y })
+  }
+}
+
+function DecorativeQr() {
+  return (
+    <svg viewBox={`0 0 ${N} ${N}`} className="h-[56px] w-[56px] rounded-[5px] border border-indigo-deep/25 bg-white p-[3px]" aria-hidden>
+      {FINDERS.map(([fx, fy]) => (
+        <g key={`${fx}-${fy}`} fill="var(--color-indigo-deep)">
+          <rect x={fx + 0.5} y={fy + 0.5} width={3} height={3} fill="none" stroke="var(--color-indigo-deep)" strokeWidth={1} />
+          <rect x={fx + 1.5} y={fy + 1.5} width={1} height={1} />
+        </g>
+      ))}
+      <g fill="var(--color-indigo-deep)">
+        {MODULES.map((q) => (
+          <rect key={`${q.x}-${q.y}`} x={q.x} y={q.y} width={1} height={1} />
+        ))}
+      </g>
+    </svg>
+  )
+}
+
+const CORNERS = ['left-0 top-0 border-l-2 border-t-2 rounded-tl-[4px]', 'right-0 top-0 border-r-2 border-t-2 rounded-tr-[4px]', 'left-0 bottom-0 border-l-2 border-b-2 rounded-bl-[4px]', 'right-0 bottom-0 border-r-2 border-b-2 rounded-br-[4px]']
+
+/** QR-Code auf der Vorderseite: Scanrahmen und Scanlinie in der QR-Scan-Phase der Timeline. */
+function QrBadge({ p }: { p: MotionValue<number> }) {
+  const frame = useTransform(p, [0.2, 0.25, 0.36, 0.42], [0, 1, 1, 0])
+  const frameScale = useTransform(p, [0.2, 0.25], [1.18, 1])
+  const scanY = useTransform(p, [0.22, 0.32], [0, 54])
+  const scanOpacity = useTransform(p, [0.22, 0.24, 0.3, 0.32], [0, 1, 1, 0])
+  return (
+    <span className="relative block">
+      <DecorativeQr />
+      <m.span className="absolute -inset-[5px]" style={{ opacity: frame, scale: frameScale }}>
+        {CORNERS.map((c) => (
+          <span key={c} className={`absolute h-3 w-3 border-mint-strong ${c}`} />
+        ))}
+      </m.span>
+      <m.span
+        className="absolute left-[-3px] right-[-3px] top-0 h-[2px] rounded-full bg-mint-strong"
+        style={{ y: scanY, opacity: scanOpacity, boxShadow: '0 0 6px 1px rgb(94 234 212 / 0.7)' }}
+      />
+    </span>
+  )
+}
+
 const STAR_PATH = 'M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z'
 
 export function NfcIcon({ className = '', color = 'var(--color-mint)' }: { className?: string; color?: string }) {
@@ -35,8 +92,8 @@ function NfcPhoneSymbol({ className = '' }: { className?: string }) {
 /** Neutrales Bewertungssymbol (Stern im Kreis) anstelle eines Markenlogos. */
 function StarMark() {
   return (
-    <span className="grid h-[68px] w-[68px] place-items-center rounded-full bg-indigo-deep">
-      <svg viewBox="0 0 24 24" className="h-[42px] w-[42px]" fill="#ffffff" aria-hidden>
+    <span className="grid h-[56px] w-[56px] place-items-center rounded-full bg-indigo-deep">
+      <svg viewBox="0 0 24 24" className="h-[34px] w-[34px]" fill="#ffffff" aria-hidden>
         <path d={STAR_PATH} />
       </svg>
     </span>
@@ -51,7 +108,7 @@ function NfcBadge({ p }: { p: MotionValue<number> }) {
   const r1Scale = useTransform(p, [0.17, 0.27], [1, 1.6])
   const r1Opacity = useTransform(p, [0.17, 0.19, 0.27], [0, 0.6, 0])
   return (
-    <div className="relative mt-2 h-[58px] w-[58px]">
+    <div className="relative h-[58px] w-[58px]">
       <m.div
         className="absolute -inset-4 rounded-full"
         style={{ opacity: glow, background: 'radial-gradient(closest-side, rgb(94 234 212 / 0.45), rgb(94 234 212 / 0))' }}
@@ -77,8 +134,8 @@ interface StandProps {
 const edgeAcryl = { style: { background: 'linear-gradient(180deg, rgb(255 255 255 / 0.9), rgb(190 200 245 / 0.7))' } }
 
 /**
- * 3D-Aufsteller nach dem Produktfoto: quadratische Acrylkarte (12 x 12 cm, 3 mm), abgerundete Ecken,
- * Band oben (Hinweistext), weiße Mitte (Sternsymbol + NFC-Symbol), Band unten. Kein Fuß: die Platte
+ * 3D-Karte nach dem Produktfoto: quadratische Acrylkarte (12 x 12 cm, 3 mm), abgerundete Ecken,
+ * Band oben (Hinweistext), weiße Mitte (Sternsymbol, NFC-Symbol und QR-Code), Band unten. Kein Fuß: die Platte
  * steht leicht nach hinten geneigt. Es wird bewusst kein Name/Firmenname aufgedruckt.
  */
 export function Stand({ p, rotX, rotY, glareX }: StandProps) {
@@ -103,7 +160,10 @@ export function Stand({ p, rotX, rotY, glareX }: StandProps) {
                       <div className="mt-3">
                         <StarMark />
                       </div>
-                      <NfcBadge p={p} />
+                      <div className="mt-3 flex items-center gap-6">
+                        <NfcBadge p={p} />
+                        <QrBadge p={p} />
+                      </div>
                       <div className="mt-auto flex h-[40px] w-full items-center justify-center bg-indigo-deep font-display text-[11px] font-bold uppercase tracking-[0.08em] text-white">
                         Hier kontaktlos bewerten
                       </div>

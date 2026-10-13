@@ -1,7 +1,6 @@
 /** Katalog und Preise der Bestellung: einzige Quelle für Preise im Frontend (der Server rechnet selbst nach). */
 
 export type ProductId = 'review-klassik' | 'review-dashboard'
-export type FormatId = 'karte' | 'aufsteller'
 
 export interface Product {
   id: ProductId
@@ -19,12 +18,6 @@ export interface Product {
   shipping: string
   /** Hinweis zur Weiterleitung (Abhängigkeit von der YANQIVA-Weiterleitung, AGB Ziffer 9). */
   redirectNote: string
-}
-
-export interface FormatOption {
-  id: FormatId
-  name: string
-  description: string
 }
 
 export const QTY_MIN = 1
@@ -81,15 +74,10 @@ export const PRODUCTS: Record<ProductId, Product> = {
 
 export const PRODUCT_LIST: readonly Product[] = [PRODUCTS['review-klassik'], PRODUCTS['review-dashboard']]
 
-export const FORMATS: Record<FormatId, FormatOption> = {
-  karte: { id: 'karte', name: 'NFC-Karte', description: 'Im Kartenformat, passt an Kasse und in jede Tasche' },
-  aufsteller: { id: 'aufsteller', name: 'NFC-Aufsteller', description: 'Für Theke, Tisch oder Empfang' },
-}
-
-export const FORMAT_LIST: readonly FormatOption[] = [FORMATS.karte, FORMATS.aufsteller]
+/** Die einzige Ausführung: quadratische Acrylkarte im Standarddesign (keine Auswahl im Formular). */
+export const PRODUCT_LABEL = 'NFC-Bewertungskarte (Acryl, 12 × 12 cm)'
 
 export const isProductId = (v: unknown): v is ProductId => v === 'review-klassik' || v === 'review-dashboard'
-export const isFormatId = (v: unknown): v is FormatId => v === 'karte' || v === 'aufsteller'
 
 /** Zwischensumme in ganzen Euro. */
 export const subtotal = (id: ProductId, qty: number): number => PRODUCTS[id].unitPrice * qty

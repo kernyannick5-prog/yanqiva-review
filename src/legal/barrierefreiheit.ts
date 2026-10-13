@@ -117,7 +117,7 @@ export const barrierefreiheit: LegalDoc = {
       blocks: [
         {
           list: [
-            'Produktanimation (Abschnitt „Das Produkt“): Die 3D-Szene mit Aufsteller und Smartphone ist rein bildlich und für Screenreader ausgeblendet. Den Ablauf beschreiben die drei Schritte und die Kurztexte daneben als normaler Text. Am Computer läuft die Szene mit dem Scrollen, auf Touch-Geräten einmal automatisch und lässt sich dort mit einer Schaltfläche oder über „Animationen anhalten“ anhalten. Auf Geräten mit „Bewegung reduzieren“ oder schwacher Leistung zeigen wir eine ruhige Standansicht. Die Szene selbst ist nicht für Tastatur oder Screenreader erlebbar.',
+            'Produktanimation (Abschnitt „Das Produkt“): Die 3D-Szene mit Karte und Smartphone ist rein bildlich und für Screenreader ausgeblendet. Den Ablauf beschreiben die drei Schritte und die Kurztexte daneben als normaler Text. Am Computer läuft die Szene mit dem Scrollen, auf Touch-Geräten einmal automatisch und lässt sich dort mit einer Schaltfläche oder über „Animationen anhalten“ anhalten. Auf Geräten mit „Bewegung reduzieren“ oder schwacher Leistung zeigen wir eine ruhige Standansicht. Die Szene selbst ist nicht für Tastatur oder Screenreader erlebbar.',
             'Dashboard-Demo: Alle Daten und Firmen sind erfunden. Die Demo ist nur teilweise auf Screenreadern getestet (siehe Abschnitt 6).',
             'Diagramme: Die Diagramme sind eigene Zeichnungen. Sie haben eine Textzusammenfassung und Tastaturbedienung, aber keine vollständige Datentabelle. Hinweisfelder am Mauszeiger sind kein Ersatz für die Tastaturbedienung.',
             'Kurze Meldungen („Karte erstellt“) verschwinden nach wenigen Sekunden. Sie werden vorgelesen; das Ergebnis (z. B. die neue Karte) bleibt sichtbar.',
@@ -139,7 +139,7 @@ export const barrierefreiheit: LegalDoc = {
         },
         {
           list: [
-            'Jedes Feld hat eine sichtbare Beschriftung. Pflichtfelder sind mit * und im Quelltext als Pflichtfeld gekennzeichnet, freiwillige Angaben mit „(freiwillig)“. Zusammengehörende Auswahlmöglichkeiten (Variante, Ausführung, Adressen) sind als Gruppe mit Überschrift ausgezeichnet. Ihr Browser kann Name, E-Mail, Telefon und Adresse automatisch ausfüllen. Die Produktvariante ist nicht vorausgewählt, Sie wählen sie selbst.',
+            'Jedes Feld hat eine sichtbare Beschriftung. Pflichtfelder sind mit * und im Quelltext als Pflichtfeld gekennzeichnet, freiwillige Angaben mit „(freiwillig)“. Zusammengehörende Auswahlmöglichkeiten (Variante, Adressen) sind als Gruppe mit Überschrift ausgezeichnet. Ihr Browser kann Name, E-Mail, Telefon und Adresse automatisch ausfüllen. Die Produktvariante ist nicht vorausgewählt, Sie wählen sie selbst.',
             'Eine Fortschrittsanzeige nennt den aktuellen Schritt auch als Text („Schritt 2 von 4“). Bei jedem Schrittwechsel setzt die Seite den Tastaturfokus auf die Überschrift des neuen Schritts. Der Seitentitel nennt den Schritt.',
             'Wenn Angaben fehlen oder nicht stimmen, nennt eine Zusammenfassung oben alle Fehler mit Links zu den Feldern. Der Fokus springt zum ersten fehlerhaften Feld, und jede Fehlermeldung steht als Text direkt am Feld und ist nicht nur durch Farbe erkennbar.',
             'Vor dem verbindlichen Absenden sehen Sie eine Übersicht aller Angaben mit „Ändern“-Links. Ihre Eingaben bleiben beim Zurückgehen und beim Neuladen der Seite in dieser Sitzung erhalten. Mit der Zurück-Taste des Browsers kommen Sie zum vorigen Schritt.',

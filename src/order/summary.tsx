@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react'
-import { DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, FORMATS, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
+import { DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, PRODUCT_LABEL, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
 import { effectiveQuantity, type OrderForm } from './state'
 
 /** Sticky Bestellübersicht (Desktop-Seitenleiste). */
@@ -13,7 +13,7 @@ export function OrderSidebar({ form }: { form: OrderForm }) {
         Ihre Bestellung
       </h2>
       <p className="mt-3 font-display text-lg font-semibold text-text">{p ? p.name : 'Noch keine Variante gewählt'}</p>
-      <p className="text-sm text-muted">{FORMATS[form.format].name}</p>
+      <p className="text-sm text-muted">{PRODUCT_LABEL}</p>
       <dl className="mt-4 space-y-2 border-t border-line pt-4 text-[15px]">
         <Line k={p ? `${qty} × ${formatEuro(p.unitPrice)}` : `${qty} ×`} v={pid ? formatEuro(subtotal(pid, qty)) : '–'} />
         <Line k="Lieferung vor Ort" v={`${formatEuro(SHIPPING_EUR)} (inklusive)`} />

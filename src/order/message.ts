@@ -1,4 +1,4 @@
-import { FORMATS, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
+import { PRODUCT_LABEL, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
 import { effectiveQuantity, productOf, trimmed, type OrderForm } from './state'
 
 export const MESSAGE_MAX = 3500
@@ -20,7 +20,7 @@ export function buildMessage(input: OrderForm): string {
     '',
     'BESTELLUNG',
     `Produkt: ${p.name}`,
-    `Ausführung: ${FORMATS[f.format].name}`,
+    `Ausführung: ${PRODUCT_LABEL}`,
     `Menge: ${qty}`,
     `Einzelpreis: ${formatEuro(p.unitPrice)}`,
     `Zwischensumme: ${formatEuro(subtotal(pid, qty))}`,
@@ -60,7 +60,6 @@ export function buildFields(input: OrderForm): Record<string, string> {
   const f = trimmed(input)
   const out: Record<string, string> = {
     product: f.product,
-    format: f.format,
     quantity: String(effectiveQuantity(f.quantity)),
     company: f.company,
     firstName: f.firstName,
@@ -95,7 +94,7 @@ export function buildMailBody(input: OrderForm): string {
   const pid = productOf(f)
   const p = PRODUCTS[pid]
   const lines = [
-    `Bestellung: ${qty} x ${p.shortName}, ${FORMATS[f.format].name}, gesamt ${formatEuro(total(pid, qty))}`,
+    `Bestellung: ${qty} x ${p.shortName}, ${PRODUCT_LABEL}, gesamt ${formatEuro(total(pid, qty))}`,
     'Bestätigt: Unternehmer (§ 14 BGB), AGB (yanqiva-bewertung.de/agb/) akzeptiert.',
     `Firma: ${f.company}`,
     `Kontakt: ${f.firstName} ${f.lastName}, ${f.email}${f.phone ? `, ${f.phone}` : ''}`,

@@ -11,7 +11,7 @@ Marketing-Website mit interaktiver SaaS-Dashboard-Demo für YANQIVA REVIEW: ein 
 ## Features
 
 - **Hero** mit animierter Headline und schwebender NFC-Karte (3D-Neigung, Lichtreflex, Parallax)
-- **3D-Produktszene „Das Produkt“**: scroll-gesteuerter NFC-Aufsteller in CSS-3D, Smartphone-Tap, Bewertungsmaske. Läuft ohne WebGL; schwache Geräte und „Bewegung reduzieren“ bekommen automatisch eine statische Variante
+- **3D-Produktszene „Das Produkt“**: scroll-gesteuerte NFC-Karte in CSS-3D, Smartphone-Tap, Bewertungsmaske. Läuft ohne WebGL; schwache Geräte und „Bewegung reduzieren“ bekommen automatisch eine statische Variante
 - **Vorher / Nachher** und **So funktioniert’s** (3 animierte Schritte)
 - **Interaktives Dashboard** mit Sidebar (Übersicht, Karten, Statistiken, Bewertungen, Unternehmen, Einstellungen)
   - KPIs mit animierten Zahlen, Liniendiagramm „NFC-Taps der letzten 30 Tage“ (7/30 Tage, Hover/Touch-Tooltip)

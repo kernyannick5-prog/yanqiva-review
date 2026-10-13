@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import {
-  DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, FORMAT_LIST, FORMATS, formatEuro, PRODUCT_LIST, PRODUCTS, QTY_MAX, QTY_MIN, PAYMENT_NOTE, SHIPPING_EUR, subtotal, total, VAT_NOTE,
+  DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, formatEuro, PRODUCT_LABEL, PRODUCT_LIST, PRODUCTS, QTY_MAX, QTY_MIN, PAYMENT_NOTE, SHIPPING_EUR, subtotal, total, VAT_NOTE,
   shippingText,
 } from './catalog'
 import { CheckboxField, ErrorSummary, FieldError, Fieldset, RequiredLegend, TextField, type FormCtx } from './fields'
@@ -56,7 +56,7 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
   const prodError = errors.product
   const pid = form.product || null
   const sumText = pid
-    ? `${qtyEff} × ${PRODUCTS[pid].shortName} (${FORMATS[form.format].name}), Zwischensumme ${formatEuro(subtotal(pid, qtyEff))}`
+    ? `${qtyEff} × ${PRODUCTS[pid].shortName} (${PRODUCT_LABEL}), Zwischensumme ${formatEuro(subtotal(pid, qtyEff))}`
     : 'Bitte wählen Sie eine Variante, um den Preis zu sehen.'
   const announced = useDebounced(sumText, 600)
   return (
@@ -115,30 +115,9 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
         <FieldError id={errId('product')} message={prodError} />
       </Fieldset>
 
-      <Fieldset legend="Ausführung">
-        <div className="grid gap-3.5 sm:grid-cols-2">
-          {FORMAT_LIST.map((o) => (
-            <label key={o.id} className={cardBase}>
-              <input
-                type="radio"
-                name="format"
-                value={o.id}
-                checked={form.format === o.id}
-                onChange={() => ctx.set('format', o.id)}
-                aria-labelledby={`fmt-${o.id}-n`}
-                aria-describedby={`fmt-${o.id}-d`}
-                className="peer sr-only"
-              />
-              <RadioDot />
-              <span>
-                <span id={`fmt-${o.id}-n`} className="block font-display text-base font-semibold text-text">{o.name}</span>
-                <span id={`fmt-${o.id}-d`} className="mt-0.5 block text-sm text-muted">{o.description}</span>
-              </span>
-            </label>
-          ))}
-        </div>
-        <p className="mt-2 text-sm text-muted">Beide Ausführungen kosten dasselbe.</p>
-      </Fieldset>
+      <p className="text-sm text-muted">
+        Geliefert wird die {PRODUCT_LABEL}, 3 mm stark, im Standarddesign ohne individuellen Aufdruck.
+      </p>
 
       <div role="group" aria-labelledby="qty-label">
         <label id="qty-label" htmlFor={fieldId('quantity')} className="mb-1 block font-display text-lg font-semibold text-text">
@@ -185,7 +164,7 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
         <FieldError id="f-quantity-err" message={qtyError} />
         <div className="glass mt-5 rounded-2xl p-4 sm:p-5">
           <p className="flex items-baseline justify-between gap-3 text-[15px] text-muted">
-            <span>{pid ? `${qtyEff} × ${PRODUCTS[pid].shortName} (${FORMATS[form.format].name}) à ${formatEuro(PRODUCTS[pid].unitPrice)}` : 'Noch keine Variante gewählt'}</span>
+            <span>{pid ? `${qtyEff} × ${PRODUCTS[pid].shortName} (${PRODUCT_LABEL}) à ${formatEuro(PRODUCTS[pid].unitPrice)}` : 'Noch keine Variante gewählt'}</span>
             <span className="shrink-0 font-display text-xl font-semibold text-text">{pid ? formatEuro(subtotal(pid, qtyEff)) : '–'}</span>
           </p>
           <p className="mt-1.5 text-[13px] text-muted">Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße inklusive. {VAT_NOTE}</p>
@@ -241,7 +220,7 @@ export function StepSetup({ ctx, summaryKeys, onJump }: StepProps) {
         name="displayName"
         maxLength={MAX.displayName}
         autoComplete="off"
-        hint="Optional. Erscheint nur in Ihrem Dashboard und in unseren Unterlagen, nicht auf dem Aufsteller. Ohne Angabe verwenden wir den Firmennamen."
+        hint="Optional. Erscheint nur in Ihrem Dashboard und in unseren Unterlagen, nicht auf der Karte. Ohne Angabe verwenden wir den Firmennamen."
         placeholder="z. B. Filiale Hauptstraße"
       />
       <Fieldset legend="Ihr Google-Unternehmensprofil">
@@ -410,7 +389,7 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Ausführung</dt>
-            <dd className="text-right text-text">{FORMATS[f.format].name}</dd>
+            <dd className="text-right text-text">{PRODUCT_LABEL}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Menge</dt>

@@ -127,7 +127,7 @@ body {
 }
 .section-dark ::selection { background: rgb(94 234 212 / 0.3); }
 
-/* Alte Navy/Violett-Palette nur für 3D-Aufsteller, Smartphone und Hero-Karte (Eigentümerwunsch) */
+/* Alte Navy/Violett-Palette nur für die 3D-Karte, Smartphone und Hero-Karte (Eigentümerwunsch) */
 .legacy-palette {
   --color-ink-950: #05071a;
   --color-ink-900: #070a1f;

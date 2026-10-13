@@ -11,7 +11,7 @@ const plans = [
     tagline: PRODUCTS['review-klassik'].tagline,
     price: PRODUCTS['review-klassik'].unitPrice,
     note: 'Kein Dashboard, keine Folgekosten.',
-    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', 'Weiterleitung direkt zum Google-Bewertungsformular', 'Einrichtung inklusive', DELIVERY_SHORT, shippingText(PRODUCTS['review-klassik'])],
+    features: ['1 NFC-Bewertungskarte (Acryl, 12 × 12 cm)', 'QR-Code', 'Weiterleitung direkt zum Google-Bewertungsformular', 'Einrichtung inklusive', DELIVERY_SHORT, shippingText(PRODUCTS['review-klassik'])],
     popular: false,
   },
   {
@@ -20,7 +20,7 @@ const plans = [
     tagline: 'Alles aus Klassik, plus Kontrolle',
     price: PRODUCTS['review-dashboard'].unitPrice,
     note: `inkl. ${DASHBOARD_INCLUDED_MONTHS} Monate Dashboard. Danach nur auf Wunsch verlängerbar für ${DASHBOARD_RENEWAL_EUR} €/Monat je Standort, monatlich kündbar, kein automatisches Abo. Ohne Verlängerung leitet die Karte direkt weiter zu Google.`,
-    features: ['1 NFC-Karte oder Aufsteller', 'QR-Code', `YANQIVA Dashboard, ${DASHBOARD_INCLUDED_MONTHS} Monate inklusive`, 'Statistiken zu Taps und Scans', 'Einrichtung inklusive', DELIVERY_SHORT, shippingText(PRODUCTS['review-dashboard'])],
+    features: ['1 NFC-Bewertungskarte (Acryl, 12 × 12 cm)', 'QR-Code', `YANQIVA Dashboard, ${DASHBOARD_INCLUDED_MONTHS} Monate inklusive`, 'Statistiken zu Taps und Scans', 'Einrichtung inklusive', DELIVERY_SHORT, shippingText(PRODUCTS['review-dashboard'])],
     popular: true,
   },
 ]

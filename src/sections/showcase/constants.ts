@@ -18,7 +18,7 @@ export const STAR_GOLD = '#fbbf24'
 export const NFC_CENTER_Y = 53
 
 export const STEPS = [
-  { title: 'Aufstellen', text: 'Aufsteller auf Tisch, Theke oder Kasse stellen.' },
+  { title: 'Platzieren', text: 'Karte gut sichtbar platzieren, etwa an Theke, Tisch oder Kasse.' },
   { title: 'Antippen', text: 'Gast hält das Smartphone an den NFC-Chip oder scannt den QR-Code.' },
   { title: 'Bewerten', text: 'Die Google-Bewertungsseite öffnet sich direkt, in unter 10 Sekunden.' },
 ] as const

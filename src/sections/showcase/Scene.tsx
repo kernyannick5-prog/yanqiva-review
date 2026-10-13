@@ -118,7 +118,7 @@ export function Scene({ p, lite = false }: SceneProps) {
   const phoneBaseRotX = useTransform(p, (v) => map(v, [0.33, 0.6], [14, 6]))
   const phoneRotY = useCombine(phoneBaseRotY, mx, (a, b) => a + b * 6)
   const phoneRotX = useCombine(phoneBaseRotX, my, (a, b) => a - b * 6)
-  // Nach der Bestätigung tritt das Smartphone leicht zurück, der Aufsteller bleibt im Fokus.
+  // Nach der Bestätigung tritt das Smartphone leicht zurück, die Karte bleibt im Fokus.
   const phoneZ = useTransform(p, (v) => map(v, [0.33, 0.6, 0.88, 1], [0, 40, 40, lite ? 40 : 8]))
 
   // Ergebnis-Chip (86–100 %)
@@ -126,7 +126,7 @@ export function Scene({ p, lite = false }: SceneProps) {
   const chipY = useTransform(p, [0.86, 0.93], [12, 0])
   const chipScale = useTransform(p, [0.86, 0.93], [0.9, 1])
 
-  // Ruhige Schluss-Produktansicht: weicher Schein hinter dem Aufsteller
+  // Ruhige Schluss-Produktansicht: weicher Schein hinter der Karte
   const heroGlow = useTransform(p, [0.86, 1], [0, 1])
 
   return (
@@ -137,7 +137,7 @@ export function Scene({ p, lite = false }: SceneProps) {
       >
         {/* Stand-Ebene: wandert beim Annähern des Phones nach links */}
         <m.div className="absolute left-1/2 top-1/2 h-0 w-0" style={{ x: standX }}>
-          {/* mint Glow-Puls hinter dem Aufsteller */}
+          {/* mint Glow-Puls hinter der Karte */}
           <m.div
             className="absolute h-[320px] w-[320px] rounded-full"
             style={{
@@ -148,7 +148,7 @@ export function Scene({ p, lite = false }: SceneProps) {
               background: 'radial-gradient(circle, rgb(94 234 212 / 0.5), rgb(94 234 212 / 0) 65%)',
             }}
           />
-          {/* Schluss-Schein hinter dem Aufsteller */}
+          {/* Schluss-Schein hinter der Karte */}
           <m.div
             className="absolute h-[380px] w-[340px] rounded-full"
             style={{

@@ -1,4 +1,4 @@
-import { isFormatId, isProductId, QTY_MAX, QTY_MIN, type FormatId, type ProductId } from './catalog'
+import { isProductId, QTY_MAX, QTY_MIN, type ProductId } from './catalog'
 import { inDeliveryArea, OUT_OF_AREA_MESSAGE } from './deliveryArea'
 import googleRules from './googleLinkRules.json'
 
@@ -14,7 +14,6 @@ export const STEPS: readonly { id: StepId; label: string; title: string }[] = [
 export interface OrderForm {
   /** Leer, bis die Kundin oder der Kunde aktiv eine Variante wählt (oder ?paket= gesetzt ist). */
   product: ProductId | ''
-  format: FormatId
   quantity: string
   displayName: string
   reviewLink: string
@@ -72,7 +71,6 @@ export function newOrderKey(): string {
 
 export const initialForm = (): OrderForm => ({
   product: '',
-  format: 'karte',
   quantity: '1',
   displayName: '',
   reviewLink: '',
@@ -309,7 +307,6 @@ export function loadDraft(): { form: OrderForm; step: StepId } | null {
     }
     const form = merged as unknown as OrderForm
     if (form.product !== '' && !isProductId(form.product)) form.product = base.product
-    if (!isFormatId(form.format)) form.format = base.format
     form.confirmB2B = false
     form.acceptAgb = false
     if (!KEY_RE.test(form.orderKey)) form.orderKey = newOrderKey()
@@ -343,7 +340,6 @@ const CODE_FIELD: Record<string, FieldKey> = {
   invalid_ship_zip: 'shipZip',
   invalid_quantity: 'quantity',
   invalid_product: 'product',
-  invalid_format: 'quantity',
 }
 
 /** Lieferadresse außerhalb des Liefergebiets (Worker, 400): je nach Formular die abweichende Lieferadresse oder die Rechnungsadresse. */

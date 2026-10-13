@@ -83,7 +83,7 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
               <span className="mt-4 text-[13px] font-medium leading-snug text-muted">
                 Halte dein Handy
                 <br />
-                an den Aufsteller
+                an die Karte
               </span>
               {/* Hinweis nach dem Antippen */}
               <m.div

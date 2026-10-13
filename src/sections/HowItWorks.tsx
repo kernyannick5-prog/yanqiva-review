@@ -29,7 +29,7 @@ function MiniCard({ className = '' }: { className?: string }) {
   )
 }
 
-/** 01: Aufsteller fährt hoch. */
+/** 01: Karte fährt hoch. */
 function IllustrationStand() {
   return (
     <Stage>
@@ -89,7 +89,7 @@ function IllustrationStars() {
 }
 
 const steps = [
-  { n: '01', title: 'Karte aufstellen', text: 'Platziere die NFC-Karte am Tresen, an der Kasse oder auf dem Tisch. Mehr Einrichtung braucht es nicht.', Illustration: IllustrationStand },
+  { n: '01', title: 'Karte platzieren', text: 'Platziere die NFC-Karte am Tresen, an der Kasse oder auf dem Tisch. Mehr Einrichtung braucht es nicht.', Illustration: IllustrationStand },
   { n: '02', title: 'Kunde tippt', text: 'Smartphone an die Karte halten oder den QR-Code scannen. Keine App, kein Login.', Illustration: IllustrationTap },
   { n: '03', title: 'Bewertung abgeben', text: 'Die Bewertungsseite öffnet sich direkt. Sterne wählen, ein paar Worte, fertig.', Illustration: IllustrationStars },
 ]

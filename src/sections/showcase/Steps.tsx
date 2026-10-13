@@ -105,7 +105,7 @@ export function Captions({ p, className = "" }: { p: MotionValue<number>; classN
   return (
     <div className={`grid min-h-[3.1rem] font-display text-[1.0625rem] font-medium leading-snug text-text sm:min-h-[3.6rem] sm:text-xl ${className}`}>
       <Fade p={p} win={[0, 0.08, 0.1, 0.13]}>
-        Ein stabiler Aufsteller aus Acryl, 12 × 12 cm.
+        Eine stabile Acrylkarte, 12 × 12 cm.
       </Fade>
       <Fade p={p} win={[0.1, 0.15, 0.34, 0.38]}>
         NFC-Chip zum Antippen, QR-Code zum Scannen.
