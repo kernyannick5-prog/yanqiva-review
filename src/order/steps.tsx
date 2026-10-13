@@ -239,11 +239,10 @@ export function StepSetup({ ctx, summaryKeys, onJump }: StepProps) {
       <TextField
         ctx={ctx}
         name="displayName"
-        required
         maxLength={MAX.displayName}
-        autoComplete="organization"
-        hint="Dieser Name wird auf Karte oder Aufsteller gedruckt und ist für Ihre Kunden sichtbar."
-        placeholder="z. B. Café Sonnenschein"
+        autoComplete="off"
+        hint="Optional. Erscheint nur in Ihrem Dashboard und in unseren Unterlagen, nicht auf dem Aufsteller. Ohne Angabe verwenden wir den Firmennamen."
+        placeholder="z. B. Filiale Hauptstraße"
       />
       <Fieldset legend="Ihr Google-Unternehmensprofil">
         <p id="profile-help" className="mb-4 text-sm leading-snug text-muted">
@@ -282,7 +281,7 @@ export function StepSetup({ ctx, summaryKeys, onJump }: StepProps) {
         multiline
         rows={4}
         maxLength={MAX.notes}
-        hint="Zum Beispiel Gestaltungswünsche oder dass Sie ein Logo nachreichen."
+        hint="Allgemeine Hinweise zu Ihrer Bestellung, zum Beispiel zur Übergabe oder zu Ihrem Standort."
       />
     </div>
   )
@@ -450,7 +449,7 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
       </section>
 
       <ReviewBlock title="Einrichtung" step={2} onEdit={onEdit}>
-        <Row k="Name auf der Karte">{f.displayName}</Row>
+        <Row k="Bezeichnung des Standorts">{f.displayName.trim() || f.company.trim()}</Row>
         {f.reviewLink && <Row k="Bewertungslink">{f.reviewLink}</Row>}
         {f.profileQuery && <Row k="Name und Ort">{f.profileQuery}</Row>}
         {f.notes && <Row k="Hinweise">{f.notes}</Row>}

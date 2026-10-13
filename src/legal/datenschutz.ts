@@ -9,7 +9,7 @@ import type { LegalDoc } from './types'
 export const datenschutz: LegalDoc = {
   title: 'Datenschutzerklärung',
   badge: 'Rechtliches',
-  updated: 'Stand: 9. Oktober 2026',
+  updated: 'Stand: 13. Oktober 2026',
   pdf: 'datenschutz.pdf',
   callouts: [
     {
@@ -106,7 +106,7 @@ export const datenschutz: LegalDoc = {
             head: ['Daten', 'Zweck'],
             rows: [
               ['Gewählte Variante (Klassik oder Dashboard), Ausführung (Karte oder Aufsteller), Menge', 'Bestellung, Preisberechnung, Herstellung'],
-              ['Anzeigename für den Aufdruck, Google-Bewertungslink oder Name und Ort des Unternehmens laut Google, freiwillige Hinweise (zum Beispiel Gestaltungswunsch)', 'Einrichtung und Gestaltung der Karten bzw. Aufsteller'],
+              ['Freiwillige Bezeichnung des Standorts, Google-Bewertungslink oder Name und Ort des Unternehmens laut Google, freiwillige Hinweise', 'Einrichtung der Weiterleitung und Zuordnung im Dashboard'],
               ['Firma, Vor- und Nachname der Ansprechperson, E-Mail-Adresse', 'Vertragsabwicklung, Eingangs- und Auftragsbestätigung, Rechnung, Rückfragen'],
               ['Telefonnummer (freiwillig)', 'Rückfragen zur Lieferung'],
               ['Rechnungsadresse, gegebenenfalls abweichende Lieferadresse mit Empfänger', 'Rechnung und Lieferung'],

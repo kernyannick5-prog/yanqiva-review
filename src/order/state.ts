@@ -163,8 +163,7 @@ function validateStep1(f: OrderForm, e: Errors) {
 }
 
 function validateStep2(f: OrderForm, e: Errors) {
-  if (!v(f.displayName)) e.displayName = 'Bitte geben Sie den Namen ein, der auf der Karte stehen soll.'
-  else if (v(f.displayName).length > MAX.displayName) e.displayName = `Bitte kürzen Sie den Namen auf höchstens ${MAX.displayName} Zeichen.`
+  if (v(f.displayName).length > MAX.displayName) e.displayName = `Bitte kürzen Sie die Bezeichnung auf höchstens ${MAX.displayName} Zeichen.`
   const link = v(f.reviewLink)
   if (link && !isGoogleReviewUrl(link)) {
     e.reviewLink =
@@ -239,7 +238,7 @@ export const FIELD_ORDER: readonly FieldKey[] = [
 export const FIELD_LABELS: Partial<Record<FieldKey, string>> = {
   product: 'Variante',
   quantity: 'Stückzahl',
-  displayName: 'Name auf der Karte',
+  displayName: 'Bezeichnung des Standorts',
   reviewLink: 'Google-Bewertungslink',
   profileQuery: 'Name und Ort Ihres Unternehmens',
   notes: 'Hinweise',

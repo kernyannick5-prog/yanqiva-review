@@ -31,7 +31,7 @@ export function buildMessage(input: OrderForm): string {
     `Zahlungsart: Vorkasse per Überweisung (Zahlungsaufforderung bzw. Rechnung). ${VAT_NOTE}`,
     '',
     'EINRICHTUNG',
-    `Name auf der Karte: ${f.displayName}`,
+    `Bezeichnung des Standorts: ${f.displayName || f.company}`,
     `Google-Bewertungslink: ${f.reviewLink || '(nicht angegeben)'}`,
     `Name und Ort bei Google: ${f.profileQuery || '(nicht angegeben)'}`,
   ]
@@ -101,7 +101,7 @@ export function buildMailBody(input: OrderForm): string {
     `Kontakt: ${f.firstName} ${f.lastName}, ${f.email}${f.phone ? `, ${f.phone}` : ''}`,
     `Rechnung: ${f.billingStreet}, ${f.billingZip} ${f.billingCity}`,
     f.shipDifferent ? `Lieferung: ${f.shipName ? `${f.shipName}, ` : ''}${f.shipStreet}, ${f.shipZip} ${f.shipCity}` : 'Lieferung: wie Rechnung',
-    `Name auf Karte: ${f.displayName}`,
+    `Standort: ${f.displayName || f.company}`,
     f.reviewLink ? `Google-Link: ${f.reviewLink}` : `Google-Profil: ${f.profileQuery}`,
     `Bestellschlüssel: ${f.orderKey}`,
   ]
