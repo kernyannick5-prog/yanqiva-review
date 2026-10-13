@@ -4,7 +4,7 @@ export const P3D = '[transform-style:preserve-3d] [-webkit-transform-style:prese
 /** Logische Szenengröße (px); wird per Skalierung an die Bühne angepasst. */
 export const SCENE_H = 500
 export const SCENE_W_WIDE = 700
-export const SCENE_W_NARROW = 450
+export const SCENE_W_NARROW = 490
 /** Tatsächlich genutzte Höhe (Chip bis Bodenschatten), für die Skalierung. */
 export const SCENE_H_USED = 430
 
@@ -15,7 +15,7 @@ export const WIDE_BREAKPOINT = 560
 export const STAR_GOLD = '#fbbf24'
 
 /** Mittelpunkt des NFC-Symbols auf der Platte, relativ zur Szenenmitte (px). */
-export const NFC_CENTER_Y = -12
+export const NFC_CENTER_Y = 53
 
 export const STEPS = [
   { title: 'Aufstellen', text: 'Aufsteller auf Tisch, Theke oder Kasse stellen.' },
@@ -30,13 +30,13 @@ export const STEP_WINDOWS: ReadonlyArray<readonly [number, number]> = [
   [0.68, 1],
 ]
 
-/** Schlüsselmomente je Schritt: Frontansicht (QR/NFC markiert), Tap (Wellen), Ergebnis. */
+/** Schlüsselmomente je Schritt: Frontansicht (NFC-Symbol markiert), Tap (Wellen), Ergebnis. */
 export const STEP_TARGETS: readonly number[] = [0.33, 0.62, 1]
 
 /** Zeitplan der Abspiel-Animation (Touch): [Fortschritt, Sekunde]. Gleiche Werte = Haltepunkt. */
 export const TIMELINE: ReadonlyArray<readonly [number, number]> = [
   [0, 0],
-  [0.33, 2.0], // Frontansicht, NFC + QR werden hervorgehoben
+  [0.33, 2.0], // Frontansicht, NFC wird hervorgehoben
   [0.33, 2.6],
   [0.62, 4.0], // Tap
   [0.62, 4.6],

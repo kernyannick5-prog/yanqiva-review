@@ -1,50 +1,17 @@
 import { m, useTransform, type MotionValue } from 'framer-motion'
 import { Box } from './primitives'
-import { P3D, STAR_GOLD } from './constants'
+import { P3D } from './constants'
 
-const PW = 220
-const PH = 300
-const PT = 8
-const BW = 250
-const BH = 28
-const BD = 86
+const PW = 260
+const PH = 260
+/** 12 x 12 cm, 0,3 cm dick -> 260 px Kantenlänge ergeben ca. 6,5 px Dicke. */
+const PT = 6
 
-/** Dekoratives QR-Muster (kein echter Code). */
-const N = 11
-const FINDERS: ReadonlyArray<readonly [number, number]> = [
-  [0, 0],
-  [N - 4, 0],
-  [0, N - 4],
-]
-const inFinder = (x: number, y: number) => FINDERS.some(([fx, fy]) => x >= fx && x < fx + 4 && y >= fy && y < fy + 4)
-const MODULES: Array<{ x: number; y: number }> = []
-for (let y = 0; y < N; y++) {
-  for (let x = 0; x < N; x++) {
-    if (!inFinder(x, y) && (x * 7 + y * 13 + x * y * 5) % 5 < 2) MODULES.push({ x, y })
-  }
-}
+const STAR_PATH = 'M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z'
 
-function DecorativeQr() {
+export function NfcIcon({ className = '', color = 'var(--color-mint)' }: { className?: string; color?: string }) {
   return (
-    <svg viewBox={`0 0 ${N} ${N}`} className="h-[48px] w-[48px] rounded-[5px] bg-text p-[3px]" aria-hidden>
-      {FINDERS.map(([fx, fy]) => (
-        <g key={`${fx}-${fy}`} fill="var(--color-ink-950)">
-          <rect x={fx + 0.5} y={fy + 0.5} width={3} height={3} fill="none" stroke="var(--color-ink-950)" strokeWidth={1} />
-          <rect x={fx + 1.5} y={fy + 1.5} width={1} height={1} />
-        </g>
-      ))}
-      <g fill="var(--color-ink-950)">
-        {MODULES.map((m) => (
-          <rect key={`${m.x}-${m.y}`} x={m.x} y={m.y} width={1} height={1} />
-        ))}
-      </g>
-    </svg>
-  )
-}
-
-export function NfcIcon({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="var(--color-mint)" strokeWidth={1.8} strokeLinecap="round" aria-hidden>
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke={color} strokeWidth={1.8} strokeLinecap="round" aria-hidden>
       <path d="M6 8.5a6 6 0 0 1 0 7" />
       <path d="M9.5 6a10 10 0 0 1 0 12" />
       <path d="M13 3.5a14 14 0 0 1 0 17" />
@@ -52,48 +19,49 @@ export function NfcIcon({ className = '' }: { className?: string }) {
   )
 }
 
-/** Dezente Hervorhebung von NFC (Puls) und QR-Code (Rahmen + Scanlinie) in der Frontansicht. */
-function NfcBadge({ p }: { p: MotionValue<number> }) {
-  const glow = useTransform(p, [0.1, 0.16, 0.26, 0.32], [0, 1, 1, 0])
-  const r0Scale = useTransform(p, [0.12, 0.22], [1, 1.7])
-  const r0Opacity = useTransform(p, [0.12, 0.14, 0.22], [0, 0.7, 0])
-  const r1Scale = useTransform(p, [0.17, 0.27], [1, 1.7])
-  const r1Opacity = useTransform(p, [0.17, 0.19, 0.27], [0, 0.6, 0])
+/** Nachgebautes NFC-Symbol: Smartphone mit Funkwellen (neutral, eigene Zeichnung). */
+function NfcPhoneSymbol({ className = '' }: { className?: string }) {
   return (
-    <div className="relative mt-2.5 h-14 w-14">
-      <m.div
-        className="absolute -inset-4 rounded-full"
-        style={{ opacity: glow, background: 'radial-gradient(closest-side, rgb(94 234 212 / 0.35), rgb(94 234 212 / 0))' }}
-      />
-      <div className="absolute inset-0 grid place-items-center rounded-full border border-mint/50 bg-mint/10">
-        <NfcIcon className="h-8 w-8" />
-      </div>
-      <m.div className="absolute inset-0 rounded-full border border-mint" style={{ scale: r0Scale, opacity: r0Opacity }} />
-      <m.div className="absolute inset-0 rounded-full border border-mint" style={{ scale: r1Scale, opacity: r1Opacity }} />
-    </div>
+    <svg viewBox="0 0 48 48" className={className} fill="none" stroke="var(--color-indigo-deep)" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <rect x="9" y="12" width="17" height="30" rx="3.5" />
+      <path d="M15.5 38h4" />
+      <path d="M31 18.5a8 8 0 0 1 0 11" />
+      <path d="M35.5 14.5a14 14 0 0 1 0 19" />
+      <path d="M40 10.5a20 20 0 0 1 0 27" />
+    </svg>
   )
 }
 
-const CORNERS = ['left-0 top-0 border-l-2 border-t-2 rounded-tl-[4px]', 'right-0 top-0 border-r-2 border-t-2 rounded-tr-[4px]', 'left-0 bottom-0 border-l-2 border-b-2 rounded-bl-[4px]', 'right-0 bottom-0 border-r-2 border-b-2 rounded-br-[4px]']
-
-function QrBadge({ p }: { p: MotionValue<number> }) {
-  const frame = useTransform(p, [0.2, 0.25, 0.36, 0.42], [0, 1, 1, 0])
-  const frameScale = useTransform(p, [0.2, 0.25], [1.18, 1])
-  const scanY = useTransform(p, [0.22, 0.32], [0, 46])
-  const scanOpacity = useTransform(p, [0.22, 0.24, 0.3, 0.32], [0, 1, 1, 0])
+/** Neutrales Bewertungssymbol (Stern im Kreis) anstelle eines Markenlogos. */
+function StarMark() {
   return (
-    <span className="relative block">
-      <DecorativeQr />
-      <m.span className="absolute -inset-[5px]" style={{ opacity: frame, scale: frameScale }}>
-        {CORNERS.map((c) => (
-          <span key={c} className={`absolute h-3 w-3 border-mint ${c}`} />
-        ))}
-      </m.span>
-      <m.span
-        className="absolute left-[-3px] right-[-3px] top-0 h-[2px] rounded-full bg-mint"
-        style={{ y: scanY, opacity: scanOpacity, boxShadow: '0 0 8px 1px rgb(94 234 212 / 0.7)' }}
-      />
+    <span className="grid h-[68px] w-[68px] place-items-center rounded-full bg-indigo-deep">
+      <svg viewBox="0 0 24 24" className="h-[42px] w-[42px]" fill="#ffffff" aria-hidden>
+        <path d={STAR_PATH} />
+      </svg>
     </span>
+  )
+}
+
+/** Dezente Hervorhebung von NFC (Puls) im Frontsymbol. */
+function NfcBadge({ p }: { p: MotionValue<number> }) {
+  const glow = useTransform(p, [0.1, 0.16, 0.26, 0.32], [0, 1, 1, 0])
+  const r0Scale = useTransform(p, [0.12, 0.22], [1, 1.6])
+  const r0Opacity = useTransform(p, [0.12, 0.14, 0.22], [0, 0.7, 0])
+  const r1Scale = useTransform(p, [0.17, 0.27], [1, 1.6])
+  const r1Opacity = useTransform(p, [0.17, 0.19, 0.27], [0, 0.6, 0])
+  return (
+    <div className="relative mt-2 h-[58px] w-[58px]">
+      <m.div
+        className="absolute -inset-4 rounded-full"
+        style={{ opacity: glow, background: 'radial-gradient(closest-side, rgb(94 234 212 / 0.45), rgb(94 234 212 / 0))' }}
+      />
+      <div className="absolute inset-0 grid place-items-center">
+        <NfcPhoneSymbol className="h-[54px] w-[54px]" />
+      </div>
+      <m.div className="absolute inset-0 rounded-full border-2 border-mint-strong" style={{ scale: r0Scale, opacity: r0Opacity }} />
+      <m.div className="absolute inset-0 rounded-full border-2 border-mint-strong" style={{ scale: r1Scale, opacity: r1Opacity }} />
+    </div>
   )
 }
 
@@ -106,74 +74,38 @@ interface StandProps {
   glareX: MotionValue<number>
 }
 
-const sideDark = { style: { background: 'linear-gradient(180deg, var(--color-ink-800), var(--color-ink-900))' } }
+const edgeAcryl = { style: { background: 'linear-gradient(180deg, rgb(255 255 255 / 0.9), rgb(190 200 245 / 0.7))' } }
 
-/** 3D-NFC-Aufsteller: Sockel (5 Flächen) + leicht nach hinten geneigte Glasplatte (5 Flächen). */
+/**
+ * 3D-Aufsteller nach dem Produktfoto: quadratische Acrylkarte (12 x 12 cm, 3 mm), abgerundete Ecken,
+ * Band oben (Hinweistext), weiße Mitte (Sternsymbol + NFC-Symbol), Band unten. Kein Fuß: die Platte
+ * steht leicht nach hinten geneigt. Es wird bewusst kein Name/Firmenname aufgedruckt.
+ */
 export function Stand({ p, rotX, rotY, glareX }: StandProps) {
   return (
     <div className="absolute left-0 top-[130px] h-0 w-0" style={{ perspective: 1100, perspectiveOrigin: '0px -150px' }}>
       <m.div className={`absolute left-0 top-0 h-0 w-0 ${P3D}`} style={{ rotateX: rotX, rotateY: rotY }}>
-        {/* Sockel */}
-        <div className={`absolute left-0 top-0 h-0 w-0 ${P3D}`} style={{ transform: 'translateY(14px)' }}>
-          <Box
-            w={BW}
-            h={BH}
-            d={BD}
-            front={{
-              className: 'flex items-center justify-center gap-2 rounded-[3px] border-t border-white/25',
-              style: { background: 'linear-gradient(180deg, var(--color-ink-700), var(--color-ink-800))' },
-              children: (
-                <>
-                  <span className="h-1.5 w-1.5 rounded-full bg-mint" />
-                  <span className="font-display text-[11px] font-semibold tracking-[0.26em] text-muted">YANQIVA</span>
-                </>
-              ),
-            }}
-            back={sideDark}
-            left={sideDark}
-            right={sideDark}
-            top={{
-              style: { background: 'linear-gradient(180deg, var(--color-indigo-deep), var(--color-ink-700))' },
-              children: <div className="absolute left-4 right-4 top-[39px] h-2 rounded-full bg-ink-950/90" />,
-            }}
-          />
-        </div>
-
-        {/* Glasplatte, leicht nach hinten geneigt */}
-        <div className={`absolute left-0 top-0 h-0 w-0 ${P3D}`} style={{ transform: 'translateY(4px) rotateX(8deg)' }}>
+        <div className={`absolute left-0 top-0 h-0 w-0 ${P3D}`} style={{ transform: 'translateY(4px) rotateX(10deg)' }}>
           <div className={`absolute left-0 top-0 h-0 w-0 ${P3D}`} style={{ transform: `translateY(${-PH / 2}px)` }}>
             <Box
               w={PW}
               h={PH}
               d={PT}
               front={{
-                className: 'overflow-hidden rounded-[10px] border border-white/30',
-                style: {
-                  background:
-                    'linear-gradient(180deg, rgb(255 255 255 / 0.12), transparent 30%), linear-gradient(155deg, rgb(139 92 246 / 0.34) 0%, rgb(30 27 75 / 0.8) 42%, rgb(7 10 31 / 0.88) 100%)',
-                },
+                className: 'overflow-hidden rounded-[22px] bg-white',
                 children: (
                   <>
-                    <div className="flex h-full flex-col items-center px-[16px] py-[14px] text-center">
-                      <div className="flex items-center gap-1.5 font-display text-[12px] font-semibold tracking-[0.2em] text-text">
-                        <span className="h-1.5 w-1.5 rounded-full bg-mint" />
-                        YANQIVA <span className="text-mint">REVIEW</span>
+                    <div className="flex h-full flex-col items-center text-center">
+                      <div className="flex h-[62px] w-full flex-col items-center justify-center bg-indigo-deep px-3 font-display font-bold uppercase leading-tight text-white">
+                        <span className="text-[10.5px] tracking-[0.04em]">Wir freuen uns über Ihre</span>
+                        <span className="text-[13px] tracking-[0.03em]">Google-Bewertung!</span>
                       </div>
-                      <div className="mt-2 text-[18px] leading-none tracking-[0.12em]" style={{ color: STAR_GOLD }}>
-                        ★★★★★
+                      <div className="mt-3">
+                        <StarMark />
                       </div>
-                      <p className="mt-1.5 font-display text-[15px] font-semibold leading-snug text-text">
-                        Wir freuen uns über Ihre Bewertung
-                      </p>
                       <NfcBadge p={p} />
-                      <p className="mt-2 text-[12.5px] font-medium tracking-wide text-mint">Hier kontaktlos bewerten</p>
-                      <div className="mt-auto flex items-center gap-2.5">
-                        <QrBadge p={p} />
-                        <span className="text-left text-[11px] leading-tight text-muted">
-                          Oder QR-Code
-                          <br />
-                          scannen
-                        </span>
+                      <div className="mt-auto flex h-[40px] w-full items-center justify-center bg-indigo-deep font-display text-[11px] font-bold uppercase tracking-[0.08em] text-white">
+                        Hier kontaktlos bewerten
                       </div>
                     </div>
                     {/* Lichtreflex: wandert mit der Rotation */}
@@ -182,25 +114,19 @@ export function Stand({ p, rotX, rotY, glareX }: StandProps) {
                       style={{
                         x: glareX,
                         skewX: -18,
-                        background: 'linear-gradient(90deg, transparent, rgb(255 255 255 / 0.24), transparent)',
+                        background: 'linear-gradient(90deg, transparent, rgb(255 255 255 / 0.28), transparent)',
                       }}
                     />
                   </>
                 ),
               }}
               back={{
-                className: 'flex flex-col items-center justify-center gap-3 rounded-[10px] border border-white/15',
-                style: { background: 'linear-gradient(200deg, rgb(46 16 101 / 0.75), rgb(7 10 31 / 0.94))' },
-                children: (
-                  <>
-                    <NfcIcon className="h-9 w-9 opacity-60" />
-                    <span className="font-display text-[11px] font-semibold tracking-[0.2em] text-faint">YANQIVA REVIEW</span>
-                  </>
-                ),
+                className: 'rounded-[22px]',
+                style: { background: 'linear-gradient(200deg, rgb(238 241 255), rgb(196 204 240))' },
               }}
-              left={{ style: { background: 'linear-gradient(180deg, rgb(255 255 255 / 0.55), rgb(165 180 255 / 0.25))' } }}
-              right={{ style: { background: 'linear-gradient(180deg, rgb(255 255 255 / 0.4), rgb(165 180 255 / 0.18))' } }}
-              top={{ style: { background: 'rgb(255 255 255 / 0.6)' } }}
+              left={edgeAcryl}
+              right={edgeAcryl}
+              top={{ style: { background: 'rgb(255 255 255 / 0.85)' } }}
             />
           </div>
         </div>
