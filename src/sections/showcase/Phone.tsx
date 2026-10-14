@@ -81,7 +81,7 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
                 <NfcIcon className="h-7 w-7" />
               </span>
               <span className="mt-4 text-[13px] font-medium leading-snug text-muted">
-                Halte dein Handy
+                Halten Sie Ihr Handy
                 <br />
                 an die Karte
               </span>
@@ -111,7 +111,7 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
                   <span className="block whitespace-nowrap text-[10.5px] leading-tight text-muted">Bewertungsseite</span>
                 </span>
               </div>
-              <p className="mt-4 text-center font-display text-[14.5px] font-semibold text-text">Wie war dein Besuch?</p>
+              <p className="mt-4 text-center font-display text-[14.5px] font-semibold text-text">Wie war Ihr Besuch?</p>
               <div className="relative mt-3 flex justify-center gap-0.5">
                 {[0, 1, 2, 3, 4].map((i) => (
                   <Star key={i} p={p} from={0.68 + i * 0.018} to={0.71 + i * 0.018} />
@@ -159,7 +159,7 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
               </m.span>
               <span className="relative mt-4 font-display text-[17px] font-semibold text-text">Danke!</span>
               <span className="relative mt-1 text-[12px] leading-snug text-muted">
-                Deine Bewertung
+                Ihre Bewertung
                 <br />
                 wurde gesendet.
               </span>

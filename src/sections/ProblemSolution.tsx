@@ -53,7 +53,7 @@ export function ProblemSolution() {
                 </m.li>
               ))}
             </m.ol>
-            <p className="mt-5 text-sm text-faint">Vier Schritte. Viele springen unterwegs ab.</p>
+            <p className="mt-5 text-sm text-faint">Vier Schritte. Jeder kostet Aufmerksamkeit.</p>
           </Reveal>
 
           {/* NACHHER */}
@@ -93,7 +93,7 @@ export function ProblemSolution() {
                 Fertig
               </m.li>
             </m.ol>
-            <p className="relative mt-5 text-sm text-muted">Zwei Schritte, null Suchen.</p>
+            <p className="relative mt-5 text-sm text-muted">Ein Tap, null Suchen.</p>
           </Reveal>
         </div>
       </Container>

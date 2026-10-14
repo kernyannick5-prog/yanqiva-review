@@ -40,7 +40,7 @@ function RedirectDiagram({ reduce }: { reduce: boolean }) {
       <Connector reduce={reduce} />
       <div className="rounded-2xl border border-line bg-wash-weak px-4 py-3 text-center">
         <p className="text-sm font-medium">Google-Bewertung</p>
-        <p className="mt-0.5 text-xs text-muted">Ziel änderbar im Dashboard</p>
+        <p className="mt-0.5 text-xs text-muted">Ziel änderbar, ohne neue Karte</p>
       </div>
     </figure>
   )
@@ -73,8 +73,8 @@ export function QrDemo() {
 
         <div>
           <Reveal>
-            <SectionHead eyebrow="QR + NFC" id="qr-title" lead="oder tippe mit deinem Smartphone auf die NFC-Karte.">
-              Scanne den QR-Code
+            <SectionHead eyebrow="QR + NFC" id="qr-title" lead="oder tippen Sie mit Ihrem Smartphone auf die NFC-Karte.">
+              Scannen Sie den QR-Code
             </SectionHead>
           </Reveal>
 
@@ -84,7 +84,7 @@ export function QrDemo() {
 
           <Reveal delay={0.15} className="mt-5">
             <p className="max-w-[65ch] text-[15px] leading-relaxed text-muted sm:text-base">
-              Auf der Karte steht nur die Redirect-URL. Wohin sie führt, änderst du jederzeit im Dashboard, ohne die Karte neu zu programmieren.
+              Auf der Karte steht nur die Redirect-URL. Das Ziel lässt sich ändern, ohne die Karte neu zu programmieren: mit aktivem Dashboard selbst (Google-Links sofort, andere Ziele nach unserer Freigabe), sonst auf Anfrage per E-Mail.
             </p>
             <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center [&>a]:w-full sm:[&>a]:w-auto">
               <LinkButton href={demoUrl} target="_blank" rel="noopener">

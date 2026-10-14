@@ -10,8 +10,8 @@ export const SkipLink = () => (
 
 export function SiteBrand() {
   return (
-    <a href={BASE} className="flex min-h-11 items-center gap-2.5 active:opacity-70" aria-label="YANQIVA Review – zur Startseite">
-      <span className="font-display text-lg font-bold tracking-[0.12em] text-text">YANQIVA</span>{' '}
+    <a href={BASE} className="flex min-h-11 items-center gap-2.5 active:opacity-70" aria-label="YANQIVA REVIEW – zur Startseite">
+      <span className="font-display text-lg font-bold uppercase tracking-[0.12em] text-text">Yanqiva</span>{' '}
       <span className="rounded-full border border-mint/40 bg-mint/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-widest text-mint">Review</span>
     </a>
   )

@@ -17,7 +17,7 @@ import { Statistics } from './views/Statistics'
 
 /** Abschnitt „Interaktive Demo“: klickbares Dashboard mit ausschließlich erfundenen Daten. */
 export function DashboardDemo() {
-  const { cards, addCard, updateTargetUrl, reset } = useDemoStore()
+  const { cards, updateTargetUrl, reset } = useDemoStore()
   const [view, setView] = useState<ViewId>('overview')
   const [statsCard, setStatsCard] = useState('all')
   const [toast, setToast] = useState<ToastMessage | null>(null)
@@ -54,13 +54,13 @@ export function DashboardDemo() {
               center
               eyebrow="Interaktive Demo"
               id="demo-title"
-              lead="Klick dich durch: Sieh die Aufrufe deiner Karten per NFC und QR-Code, ändere den Ziel-Link und verwalte deine Karten."
+              lead="Klicken Sie sich durch: Sehen Sie die Aufrufe Ihrer Karten per NFC und QR-Code und ändern Sie den Ziel-Link."
             >
-              Dein YANQIVA <span className="text-gradient">Dashboard</span>
+              Ihr YANQIVA <span className="text-gradient">Dashboard</span>
             </SectionHead>
             <p className="mt-5 inline-flex items-center gap-2 rounded-2xl border border-line bg-wash-weak px-3.5 py-2 text-left text-[13px] leading-snug text-muted">
               <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-violet-glow" />
-              Demo mit erfundenen Daten und Firmen. Das Dashboard zeigt die Zahl der Aufrufe über NFC und QR-Code je Karte, lässt dich den Ziel-Link ändern und deine Karten verwalten.
+              Demo mit erfundenen Daten und Firmen. Das Dashboard zeigt die Zahl der Aufrufe über NFC und QR-Code je Karte und lässt Sie den Ziel-Link ändern. Der Funktionsumfang der Demo kann vom echten Dashboard abweichen.
             </p>
           </Reveal>
 
@@ -113,7 +113,7 @@ export function DashboardDemo() {
                     >
                       {view === 'overview' && <Overview cards={cards} onNavigate={navigate} />}
                       {view === 'cards' && (
-                        <Cards cards={cards} onCreate={addCard} onUpdateTarget={updateTargetUrl} onOpenStats={openStats} notify={notify} />
+                        <Cards cards={cards} onUpdateTarget={updateTargetUrl} onOpenStats={openStats} notify={notify} />
                       )}
                       {view === 'statistics' && <Statistics cards={cards} selected={statsCard} onSelect={setStatsCard} />}
                       {view === 'settings' && <Settings onReset={handleReset} />}

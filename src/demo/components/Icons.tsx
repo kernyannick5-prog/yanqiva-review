@@ -64,12 +64,6 @@ export const SettingsIcon = (p: IconProps) => (
   </Svg>
 )
 
-export const PlusIcon = (p: IconProps) => (
-  <Svg {...p}>
-    <path d="M12 5v14M5 12h14" />
-  </Svg>
-)
-
 export const QrIcon = (p: IconProps) => (
   <Svg {...p}>
     <rect x="4" y="4" width="6" height="6" rx="1" />

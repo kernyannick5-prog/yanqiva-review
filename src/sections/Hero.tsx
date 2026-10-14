@@ -119,8 +119,8 @@ export function Hero() {
           <div
             className="yq-in-fade yq-in-cta mt-7 flex gap-3 sm:mt-9 [&>a]:min-w-0 [&>a]:flex-1 [&>a]:px-3 [&>a]:text-sm sm:[&>a]:flex-none sm:[&>a]:px-6 sm:[&>a]:text-[15px]"
           >
-            <LinkButton href={sectionHref('demo')}>Demo ansehen</LinkButton>
-            <LinkButton href={sectionHref('ablauf')} variant="ghost">So funktioniert’s</LinkButton>
+            <LinkButton href={`${import.meta.env.BASE_URL}bestellen/`}>Jetzt bestellen</LinkButton>
+            <LinkButton href={sectionHref('demo')} variant="ghost">Demo ansehen</LinkButton>
           </div>
 
           {/* WCAG 2.2.2: Pause-Schalter direkt bei den animierten Bereichen (zusätzlich zum Seitenfuß) */}
@@ -141,14 +141,14 @@ export function Hero() {
               className="glass flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm sm:absolute sm:-top-1 sm:-right-4 sm:py-2.5"
             >
               <span aria-hidden className="size-2 rounded-full bg-mint shadow-[0_0_10px_var(--color-mint)]" />
-              <span className="font-medium">Beispiel: +32 Bewertungen</span>
+              <span className="font-medium">Beispiel (fiktiv): +32 Bewertungen</span>
             </m.div>
             <m.div
               style={{ y: chipB }}
               className="glass flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm sm:absolute sm:-bottom-1 sm:-left-4 sm:py-2.5"
             >
               <svg aria-hidden viewBox="0 0 24 24" className="size-4 text-amber-500" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" /></svg>
-              <span className="text-muted">Beispiel:</span>
+              <span className="text-muted">Beispiel (fiktiv):</span>
               <span className="font-medium">4,8</span>
               <span className="text-muted">Ø Bewertung</span>
             </m.div>

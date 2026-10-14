@@ -30,37 +30,116 @@ function ShowcaseFallback() {
 const DashboardDemo = lazy(() => import('./demo/DashboardDemo').then((m) => ({ default: m.DashboardDemo })))
 
 // Platzhalter so hoch wie die fertige Demo (gemessen bei 320 bis 1920 px), damit Sprünge wie /preise/ nicht wegspringen, wenn die Demo nachlädt.
-const demoFallback = <section id="demo" className="section-light min-h-[2100px] sm:min-h-[1990px] md:min-h-[1800px] lg:min-h-[1600px]" aria-busy="true" />
+const demoFallback = <section id="demo" className="section-light min-h-[2100px] sm:min-h-[1990px] md:min-h-[1800px] lg:min-h-[1560px] xl:min-h-[1620px]" aria-busy="true" />
 
-/** Mountet die (schwere) Demo erst, wenn sie nahe am Viewport ist; bis dahin Platzhalter gleicher Höhe. */
+/** Lädt den Demo-Chunk vor (ohne Rendern), damit er beim Mounten sofort da ist. */
+const preloadDemo = () => void import('./demo/DashboardDemo')
+
+/**
+ * Mountet die (schwere) Demo, sobald sie nahe am Viewport ist, spätestens kurz nach dem Laden (Leerlauf), und sofort, wenn der Fokus
+ * per Tastatur ins Dokument kommt. Bis dahin steht ein Platzhalter gleicher Höhe da. Wichtig für Tastaturnutzer (WCAG 2.1.1/2.4.3/2.4.11):
+ * Die Demo muss gemountet sein, bevor der erste Tab-Druck den Fokus weiterreicht. Sonst springt der Fokus über die noch leere Sektion hinweg,
+ * und die nachladende Sektion ändert die Seitenhöhe mitten im weichen Scrollen (BR-01).
+ */
 function DemoWhenNear() {
   const ref = useRef<HTMLDivElement>(null)
   const [near, setNear] = useState(false)
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    const mount = () => setNear(true)
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setNear(true)
-          io.disconnect()
-        }
+        if (entry.isIntersecting) mount()
       },
       { rootMargin: '1200px 0px' },
     )
     io.observe(el)
-    // Tastaturnutzer: Demo beim ersten Tab-Druck laden, damit sie nicht aus der Tab-Reihenfolge fällt (WCAG 2.1.1/2.4.3)
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Tab') setNear(true)
+    // Leerlauf nach dem Laden: Chunk laden und Demo mounten, lange bevor jemand per Tab dorthin gelangt
+    let idleId = 0
+    let timeoutId = 0
+    const idle = () => {
+      preloadDemo()
+      timeoutId = window.setTimeout(mount, 400)
     }
-    window.addEventListener('keydown', onKey, { once: false })
+    const start = () => {
+      if (typeof window.requestIdleCallback === 'function') idleId = window.requestIdleCallback(idle, { timeout: 3000 })
+      else timeoutId = window.setTimeout(idle, 1500)
+    }
+    if (document.readyState === 'complete') start()
+    else window.addEventListener('load', start, { once: true })
+    // Tastatur: schon beim ersten Tab-Druck bzw. Fokus (z. B. Sprunglink) laden und mounten
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Tab') {
+        preloadDemo()
+        mount()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    document.addEventListener('focusin', mount, { once: true })
     return () => {
       io.disconnect()
+      window.removeEventListener('load', start)
       window.removeEventListener('keydown', onKey)
+      document.removeEventListener('focusin', mount)
+      if (idleId && typeof window.cancelIdleCallback === 'function') window.cancelIdleCallback(idleId)
+      window.clearTimeout(timeoutId)
     }
   }, [])
   if (near) return <Suspense fallback={demoFallback}><DashboardDemo /></Suspense>
   return <div ref={ref}>{demoFallback}</div>
+}
+
+/**
+ * WCAG 2.4.7/2.4.11: Bekommt ein Element per Tastatur den Fokus, muss es sichtbar und nicht von der fixen Navigationsleiste verdeckt sein.
+ * Beim weichen Scrollen (scroll-behavior: smooth) und bei nachladenden Abschnitten kann der Browser das Ziel verfehlen. Wir warten daher,
+ * bis die Scrollposition zur Ruhe gekommen ist, und holen den Fokus bei Bedarf ohne Animation in die Bildschirmmitte.
+ */
+function useKeepFocusVisible() {
+  useEffect(() => {
+    let raf = 0
+    let recheck = 0
+    const obscuredTop = () => {
+      const bar = document.querySelector('header nav')
+      return bar ? bar.getBoundingClientRect().bottom + 8 : 0
+    }
+    const ensureVisible = (el: HTMLElement) => {
+      if (!el.isConnected || document.activeElement !== el) return
+      const r = el.getBoundingClientRect()
+      if (r.height === 0 || r.height > window.innerHeight * 0.7) return
+      if (r.top >= obscuredTop() && r.bottom <= window.innerHeight - 8) return
+      el.scrollIntoView({ block: 'center', behavior: 'instant' })
+    }
+    const onFocusIn = (e: FocusEvent) => {
+      const el = e.target
+      if (!(el instanceof HTMLElement) || !el.matches(':focus-visible')) return
+      window.cancelAnimationFrame(raf)
+      window.clearTimeout(recheck)
+      let last = window.scrollY
+      let still = 0
+      let frames = 0
+      const tick = () => {
+        if (document.activeElement !== el) return
+        frames += 1
+        still = window.scrollY === last ? still + 1 : 0
+        last = window.scrollY
+        if (still >= 8 || frames > 150) {
+          ensureVisible(el)
+          // Nachladende Abschnitte können die Höhe danach noch ändern: einmal erneut prüfen
+          recheck = window.setTimeout(() => ensureVisible(el), 500)
+          return
+        }
+        raf = window.requestAnimationFrame(tick)
+      }
+      raf = window.requestAnimationFrame(tick)
+    }
+    document.addEventListener('focusin', onFocusIn)
+    return () => {
+      document.removeEventListener('focusin', onFocusIn)
+      window.cancelAnimationFrame(raf)
+      window.clearTimeout(recheck)
+    }
+  }, [])
 }
 
 /**
@@ -151,6 +230,7 @@ function useSectionRouting() {
 
 export default function App() {
   useSectionRouting()
+  useKeepFocusVisible()
   return (
     <LazyMotion features={loadMotionFeatures} strict>
       <a href="#main" className="fixed left-3 top-3 z-[200] inline-flex min-h-11 -translate-y-[200%] items-center rounded-full bg-mint px-5 text-sm font-semibold text-ink-950 focus:translate-y-0">Zum Inhalt springen</a>

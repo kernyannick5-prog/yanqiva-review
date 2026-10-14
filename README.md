@@ -1,6 +1,6 @@
 # YANQIVA REVIEW
 
-**Mehr Bewertungen. Weniger Aufwand.**
+**Google-Bewertungen einfacher sammeln.**
 
 Marketing-Website mit interaktiver SaaS-Dashboard-Demo für YANQIVA REVIEW: ein NFC- und QR-System, das Kunden mit einem Tap direkt zur Google-Bewertungsseite eines Unternehmens bringt.
 
@@ -15,7 +15,7 @@ Marketing-Website mit interaktiver SaaS-Dashboard-Demo für YANQIVA REVIEW: ein 
 - **Vorher / Nachher** und **So funktioniert’s** (3 animierte Schritte)
 - **Interaktives Dashboard** mit Sidebar (Übersicht, Karten, Statistiken, Bewertungen, Unternehmen, Einstellungen)
   - KPIs mit animierten Zahlen, Liniendiagramm „NFC-Taps der letzten 30 Tage“ (7/30 Tage, Hover/Touch-Tooltip)
-  - Karten-Management: Link bearbeiten, Statistik, QR-Code, **neue Karte anlegen** (Validierung, wird im Browser gespeichert)
+  - Karten-Management: Link bearbeiten, Statistik, QR-Code (kein „Neue Karte“: das echte Dashboard hat diese Funktion nicht)
 - **QR-Code-Demo** mit echtem, scanbarem QR-Code auf eine funktionierende Redirect-URL
 - **Redirect-Demo** `/r/demo-baeckerei` und `/r/demo-barbershop` → simulierte Bewertungsseite
 - Vorteile, Preise (Klassik 60 €, Dashboard 99 € einmalig inkl. 2 Monate Dashboard, danach optional 15 €/Monat), Call-to-Action, Footer
@@ -68,7 +68,7 @@ YANQIVA Redirect-URL   https://yanqiva-bewertung.de/r/<slug>
 Google-Bewertungsseite des Unternehmens
 ```
 
-Auf der physischen Karte steht **nur die Redirect-URL**, nie der Google-Link. Das Ziel wird zentral gepflegt und kann im Dashboard jederzeit geändert werden, ohne die Karte neu zu programmieren. Nebenbei lässt sich jeder Aufruf zählen (Statistiken).
+Auf der physischen Karte steht **nur die Redirect-URL**, nie der Google-Link. Das Ziel wird zentral gepflegt und kann geändert werden, ohne die Karte neu zu programmieren: mit aktivem Dashboard selbst, sonst auf Anfrage (AGB Ziffer 8 und 9). Nebenbei lässt sich jeder Aufruf zählen (Statistiken).
 
 **Im Code:**
 
@@ -90,7 +90,7 @@ Auf der physischen Karte steht **nur die Redirect-URL**, nie der Google-Link. Da
 | QR-Code-Erzeugung | echt, scanbar |
 | Datenmodell Karten/Scans | vorbereitet für ein Backend |
 | Dashboard-Daten, Statistiken, Bewertungen | Demo-Daten |
-| Neue Karten / Link-Änderungen | nur im Browser (localStorage bzw. Sitzung) |
+| Link-Änderungen | nur im Arbeitsspeicher der Seite, nichts wird im Browser gespeichert |
 | Login, Zahlung, echte NFC-Zählung | nicht enthalten |
 | Preise | Klassik 60 € einmalig / Dashboard 99 € einmalig inkl. 2 Monate Dashboard, danach optional 15 €/Monat, monatlich kündbar (Karte/QR funktioniert auch ohne Dashboard weiter); Bestellung nicht angebunden |
 
@@ -106,7 +106,7 @@ Die Demo erhebt **keine Besucherdaten**: kein Tracking, keine Analytics, keine C
 - Statistiken sind **aggregierte Zähler** (NFC/QR pro Karte und Tag); der Live-Feed ist eine Simulation ohne Personen- oder Gerätedaten.
 - Dashboard → Einstellungen → „Datenschutz“ (Privacy-Center) zeigt die festen, nicht umschaltbaren Systemeigenschaften.
 - Eigene Seiten `/datenschutz/` und `/impressum/` (Inhalte in `src/legal/`, Renderer `src/pages/LegalPage.tsx`). Die Texte enthalten die echten Anbieterangaben (deckungsgleich mit yanqiva.de/impressum und yanqiva.de/datenschutz, bei Änderungen dort mitziehen); vor Echtbetrieb (Zähler, Kundenkonten, Zahlung) zu erweitern.
-- Einziger lokaler Speicher: `localStorage` (`yanqiva-demo-cards-v1`) mit den selbst angelegten Demo-Karten, erst nach dem Anlegen einer Karte, wird nie übertragen.
+- Die Demo speichert nichts im Browser (früher: `yanqiva-demo-cards-v1` im sessionStorage, mit „Neue Karte“ am 14./15.10.2026 entfernt).
 
 **Wird nie erhoben/gespeichert:** IP-Adressen, User-Agent, Fingerprints, Standort, Besucher-IDs, Cookies, Google-Konten, Daten Bewertender.
 

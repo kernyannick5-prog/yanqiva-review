@@ -19,7 +19,7 @@ export function EditLinkModal({ card, onSave, onClose }: EditLinkModalProps) {
 
   const validate = (v: string) => {
     const trimmed = v.trim()
-    if (!trimmed) return 'Bitte gib die Ziel-URL ein.'
+    if (!trimmed) return 'Bitte geben Sie die Ziel-URL ein.'
     if (!isHttpsUrl(trimmed)) return 'Der Link muss gültig sein und mit https:// beginnen.'
     return undefined
   }

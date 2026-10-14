@@ -26,9 +26,3 @@ export interface DailyPoint {
   nfc: number
   qr: number
 }
-
-export interface NewCardInput {
-  businessName: string
-  targetUrl: string
-  cardNumber: string
-}

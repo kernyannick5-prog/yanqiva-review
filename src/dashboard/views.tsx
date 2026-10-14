@@ -249,6 +249,7 @@ export function StatsView({ me, token, onExpired, initialCard }: Common & { init
           ))}
         </div>
       </div>
+      <p className="text-xs leading-snug text-faint">Gezählt wird ab der Übergabe. Die Zeiträume 90 Tage und 12 Monate zeigen mehr Daten, sobald Ihr Dashboard-Zugang länger läuft (Verlängerung).</p>
 
       <div aria-live="polite" aria-busy={stats.status === 'loading'}>
         {stats.status === 'loading' && <LoadingPanel label="Statistik wird geladen …" />}

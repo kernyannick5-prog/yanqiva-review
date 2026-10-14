@@ -60,8 +60,8 @@ export function Navbar({ onLight = false }: { onLight?: boolean }) {
             : 'h-16 border-transparent bg-transparent'
         }`}
       >
-        <a href={sectionHref('start')} onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-2.5 transition-opacity active:opacity-70" aria-label="YANQIVA Review – zum Seitenanfang">
-          <span className="font-display text-lg font-bold tracking-[0.12em] text-text">YANQIVA</span>
+        <a href={sectionHref('start')} onClick={() => setOpen(false)} className="flex min-h-11 items-center gap-2.5 transition-opacity active:opacity-70" aria-label="YANQIVA REVIEW – zum Seitenanfang">
+          <span className="font-display text-lg font-bold uppercase tracking-[0.12em] text-text">Yanqiva</span>
           {' '}
           <span className="rounded-full border border-mint/40 bg-mint/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-widest text-mint">Review</span>
         </a>
@@ -77,7 +77,7 @@ export function Navbar({ onLight = false }: { onLight?: boolean }) {
         </ul>
 
         <div className="hidden md:block">
-          <LinkButton href={sectionHref('demo')} className="!min-h-11 !px-5 !text-sm">Demo ansehen</LinkButton>
+          <LinkButton href={`${import.meta.env.BASE_URL}bestellen/`} className="!min-h-11 !px-5 !text-sm">Jetzt bestellen</LinkButton>
         </div>
 
         <button
@@ -123,7 +123,7 @@ export function Navbar({ onLight = false }: { onLight?: boolean }) {
               ))}
             </ul>
             <div className="mt-8" onClick={() => setOpen(false)}>
-              <LinkButton href={sectionHref('demo')} className="w-full">Demo ansehen</LinkButton>
+              <LinkButton href={`${import.meta.env.BASE_URL}bestellen/`} className="w-full">Jetzt bestellen</LinkButton>
             </div>
           </m.div>
         )}

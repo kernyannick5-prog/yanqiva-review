@@ -23,7 +23,7 @@
   .done{display:none;text-align:center;padding:24px 0}
   .done .ok{display:grid;place-items:center;width:64px;height:64px;margin:0 auto 16px;border-radius:50%;background:#5eead4;color:#0b2c23;font-size:32px;font-weight:700}
   .done p{margin:8px 0 0;color:#a8cbba}
-  .done h1{margin:0;font-size:22px}.done h1:focus{outline:none}
+  .done h2{margin:0;font-size:22px;line-height:1.2;letter-spacing:-.02em}.done h2:focus{outline:none}
   .sent .form{display:none}
   .sent .done{display:block}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}

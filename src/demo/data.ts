@@ -43,4 +43,3 @@ export const SEED_CARDS: Card[] = [
   },
 ]
 
-export const SEED_CARD_IDS: ReadonlySet<string> = new Set(SEED_CARDS.map((c) => c.id))

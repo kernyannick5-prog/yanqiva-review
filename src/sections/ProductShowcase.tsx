@@ -164,7 +164,7 @@ function TouchShowcase() {
   }, [visible, pause, resume])
 
   return (
-    <section id="produkt" ref={sectionRef} aria-labelledby="produkt-title" className="section-light relative overflow-hidden py-10 sm:py-14">
+    <section id="produkt" ref={sectionRef} aria-labelledby="produkt-title" className="section-light relative overflow-x-clip py-10 sm:py-14">
       <StageBackdrop />
       <Container className="relative flex flex-col gap-3 sm:gap-4">
         <div>
@@ -179,7 +179,7 @@ function TouchShowcase() {
         </div>
         <div className="flex flex-col items-center gap-1.5">
           <PlayButton status={pb.status} onClick={pb.toggle} />
-          <p className="text-center text-[13px] leading-snug text-faint">Tippe auf die Szene, um es nochmal zu sehen.</p>
+          <p className="text-center text-[13px] leading-snug text-faint">Tippen Sie auf die Szene, um es nochmal zu sehen.</p>
         </div>
         <Captions p={pb.p} />
         <StepList p={pb.p} active={step} onSelect={pb.goStep} />
@@ -194,7 +194,7 @@ function LiteShowcase() {
   const active = useActiveStep(p)
   const jump = (i: number) => p.set(STEP_TARGETS[i])
   return (
-    <section id="produkt" aria-labelledby="produkt-title" className="section-light section-y relative overflow-hidden">
+    <section id="produkt" aria-labelledby="produkt-title" className="section-light section-y relative overflow-x-clip">
       <StageBackdrop />
       <Container className="relative grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-10">
         <div className="flex flex-col gap-6 sm:gap-8">

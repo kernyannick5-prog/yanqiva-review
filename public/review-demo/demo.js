@@ -39,7 +39,7 @@
   document.getElementById('form').addEventListener('submit', function (e) {
     e.preventDefault();
     if (!rating) {
-      document.getElementById('msg').textContent = 'Bitte wähle zuerst eine Sternebewertung.';
+      document.getElementById('msg').textContent = 'Bitte wählen Sie zuerst eine Sternebewertung.';
       box.setAttribute('aria-invalid', 'true');
       stars[0].focus();
       return;

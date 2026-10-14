@@ -14,7 +14,7 @@ interface QrModalProps {
 
 /**
  * QR-Code einer Karte. Demo-Karten zeigen auf die live funktionierende Demo-Weiterleitung,
- * neu angelegte Karten auf die Produktions-URL (noch nicht erreichbar).
+ * andere Karten auf die Produktions-URL (noch nicht erreichbar).
  */
 export function QrModal({ card, onClose }: QrModalProps) {
   const live = isLiveDemoSlug(card.slug)
@@ -47,7 +47,7 @@ export function QrModal({ card, onClose }: QrModalProps) {
         </div>
         {live ? (
           <p className="text-center text-xs leading-relaxed text-faint">
-            Dieser Demo-QR-Code funktioniert wirklich: Scanne ihn oder teste die Weiterleitung.
+            Dieser Demo-QR-Code funktioniert wirklich: Scannen Sie ihn oder testen Sie die Weiterleitung.
           </p>
         ) : (
           <p className="w-full rounded-xl border border-violet-glow/30 bg-violet-glow/10 p-3 text-center text-xs leading-relaxed text-text">

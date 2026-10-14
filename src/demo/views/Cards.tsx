@@ -1,24 +1,19 @@
 import { AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import { ActionButton } from '../components/ActionButton'
 import { CardTile } from '../components/CardTile'
 import { EditLinkModal } from '../components/EditLinkModal'
-import { PlusIcon } from '../components/Icons'
-import { NewCardModal } from '../components/NewCardModal'
 import { QrModal } from '../components/QrModal'
 import { StaggerItem } from '../components/Stagger'
-import type { Card, NewCardInput } from '../types'
+import type { Card } from '../types'
 
 interface CardsProps {
   cards: Card[]
-  onCreate: (input: NewCardInput) => void
   onUpdateTarget: (id: string, targetUrl: string) => void
   onOpenStats: (cardId: string) => void
   notify: (text: string) => void
 }
 
-export function Cards({ cards, onCreate, onUpdateTarget, onOpenStats, notify }: CardsProps) {
-  const [newOpen, setNewOpen] = useState(false)
+export function Cards({ cards, onUpdateTarget, onOpenStats, notify }: CardsProps) {
   const [editId, setEditId] = useState<string | null>(null)
   const [qrId, setQrId] = useState<string | null>(null)
 
@@ -31,10 +26,6 @@ export function Cards({ cards, onCreate, onUpdateTarget, onOpenStats, notify }: 
         <p className="text-sm text-muted">
           {cards.length === 1 ? '1 Karte' : `${cards.length} Karten`} · Scans der letzten 30 Tage (NFC + QR)
         </p>
-        <ActionButton variant="primary" onClick={() => setNewOpen(true)}>
-          <PlusIcon className="h-4 w-4" />
-          Neue Karte hinzufügen
-        </ActionButton>
       </StaggerItem>
 
       <div className="space-y-4">
@@ -53,18 +44,6 @@ export function Cards({ cards, onCreate, onUpdateTarget, onOpenStats, notify }: 
       </div>
 
       <AnimatePresence>
-        {newOpen && (
-          <NewCardModal
-            key="new"
-            cards={cards}
-            onClose={() => setNewOpen(false)}
-            onCreate={(input) => {
-              onCreate(input)
-              setNewOpen(false)
-              notify('Karte erstellt')
-            }}
-          />
-        )}
         {editCard && (
           <EditLinkModal
             key="edit"

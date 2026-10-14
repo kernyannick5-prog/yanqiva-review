@@ -31,7 +31,7 @@ const items: { tag: string; title: string; text: string; icon: ReactNode }[] = [
   {
     tag: 'Einfach',
     title: 'Keine App notwendig.',
-    text: 'Das Smartphone deiner Kunden reicht. Kein Download, kein Login.',
+    text: 'Das Smartphone Ihrer Kunden reicht. Kein Download, kein Login.',
     icon: (
       <svg {...svgProps}>
         <rect x="7" y="2.5" width="10" height="19" rx="2.5" />
@@ -41,8 +41,8 @@ const items: { tag: string; title: string; text: string; icon: ReactNode }[] = [
   },
   {
     tag: 'Messbar',
-    title: 'Sehe, wie oft deine Karten genutzt werden.',
-    text: 'Das Dashboard zeigt, wie oft deine Karten angetippt und gescannt werden.',
+    title: 'Sehen Sie, wie oft Ihre Karten genutzt werden.',
+    text: 'Die Variante Dashboard zeigt, wie oft Ihre Karten angetippt und gescannt werden.',
     icon: (
       <svg {...svgProps}>
         <path d="M4 20V10M10 20V4M16 20v-7M21 20H3" />
@@ -51,8 +51,8 @@ const items: { tag: string; title: string; text: string; icon: ReactNode }[] = [
   },
   {
     tag: 'Flexibel',
-    title: 'Ziele und Links später jederzeit ändern.',
-    text: 'Die Karte bleibt, nur das Ziel zieht um.',
+    title: 'Ziel ändern, Karte behalten.',
+    text: 'Ändert sich Ihr Google-Profil, passen wir das Ziel an, ohne neue Karte. Mit aktivem Dashboard ändern Sie es selbst.',
     icon: (
       <svg {...svgProps}>
         <path d="M4 7h12M13 4l3 3-3 3M20 17H8M11 14l-3 3 3 3" />
@@ -71,11 +71,11 @@ function trackPointer(e: PointerEvent<HTMLElement>) {
 /** Vier Vorteile als Glas-Cards mit Hover-Spotlight. */
 export function Benefits() {
   return (
-    <section className="section-light section-y relative overflow-hidden" aria-labelledby="benefits-title">
+    <section className="section-light section-y relative overflow-x-clip" aria-labelledby="benefits-title">
       <Container>
         <Reveal>
           <SectionHead eyebrow="Vorteile" id="benefits-title">
-            Weniger Aufwand für dich. Weniger Hürden für deine Kunden.
+            Weniger Aufwand für Sie. Weniger Hürden für Ihre Kunden.
           </SectionHead>
         </Reveal>
 

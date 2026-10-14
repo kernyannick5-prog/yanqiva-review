@@ -54,8 +54,8 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
       <a href="#main" className="fixed left-3 top-3 z-[200] inline-flex min-h-11 -translate-y-[200%] items-center rounded-full bg-mint px-5 text-sm font-semibold text-ink-950 focus:translate-y-0">Zum Inhalt springen</a>
       <header className="border-b border-line bg-ink-900/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
-          <a href={BASE} className="flex min-h-11 items-center gap-2.5 active:opacity-70" aria-label="YANQIVA Review – zur Startseite">
-            <span className="font-display text-lg font-bold tracking-[0.12em] text-text">YANQIVA</span>
+          <a href={BASE} className="flex min-h-11 items-center gap-2.5 active:opacity-70" aria-label="YANQIVA REVIEW – zur Startseite">
+            <span className="font-display text-lg font-bold uppercase tracking-[0.12em] text-text">Yanqiva</span>
             {' '}
             <span className="rounded-full border border-mint/40 bg-mint/10 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-widest text-mint">Review</span>
           </a>

@@ -89,7 +89,7 @@ function IllustrationStars() {
 }
 
 const steps = [
-  { n: '01', title: 'Karte platzieren', text: 'Platziere die NFC-Karte am Tresen, an der Kasse oder auf dem Tisch. Mehr Einrichtung braucht es nicht.', Illustration: IllustrationStand },
+  { n: '01', title: 'Karte platzieren', text: 'Platzieren Sie die NFC-Karte am Tresen, an der Kasse oder auf dem Tisch. Mehr Einrichtung braucht es nicht.', Illustration: IllustrationStand },
   { n: '02', title: 'Kunde tippt', text: 'Smartphone an die Karte halten oder den QR-Code scannen. Keine App, kein Login.', Illustration: IllustrationTap },
   { n: '03', title: 'Bewertung abgeben', text: 'Die Bewertungsseite öffnet sich direkt. Sterne wählen, ein paar Worte, fertig.', Illustration: IllustrationStars },
 ]
@@ -101,7 +101,7 @@ export function HowItWorks() {
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 })
 
   return (
-    <section id="ablauf" className="section-light section-y relative overflow-hidden" aria-labelledby="ablauf-title">
+    <section id="ablauf" className="section-light section-y relative overflow-x-clip" aria-labelledby="ablauf-title">
       <Container>
         <Reveal>
           <SectionHead eyebrow="So funktioniert’s" id="ablauf-title">

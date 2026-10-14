@@ -36,35 +36,6 @@ export function isHttpsUrl(value: string) {
   }
 }
 
-const SLUG_ALPHABET = '23456789abcdefghjkmnpqrstuvwxyz' // base32 ohne 0/1/i/l/o
-const SLUG_LENGTH = 6
-
-/**
- * Zufälliger Slug im Stil `card_7f82k4` – bewusst NICHT aus dem Firmennamen abgeleitet
- * (kein Personenbezug in URLs, nicht erratbar). Kollisionsfrei gegenüber vorhandenen Slugs.
- */
-export function randomSlug(cards: Card[]) {
-  const taken = new Set([...cards.map((c) => c.slug), ...redirects.map((r) => r.slug)])
-  for (;;) {
-    const bytes = crypto.getRandomValues(new Uint8Array(SLUG_LENGTH))
-    const slug = `card_${Array.from(bytes, (b) => SLUG_ALPHABET[b % 32]).join('')}`
-    if (!taken.has(slug)) return slug
-  }
-}
-
-/** Kartennummer: nur A–Z, 0–9, „-“ und „_“, max. 24 Zeichen (keine Leer- oder Namensmuster). */
-export const CARD_NUMBER_MAX = 24
-export const CARD_NUMBER_PATTERN = /^[A-Z0-9_-]+$/
-
-/** Nächste freie Kartennummer, z. B. YANQIVA-003. */
-export function nextCardNumber(cards: Card[]) {
-  const highest = cards.reduce((max, c) => {
-    const m = /^YANQIVA-(\d+)$/i.exec(c.cardNumber)
-    return m ? Math.max(max, Number(m[1])) : max
-  }, 0)
-  return `YANQIVA-${String(highest + 1).padStart(3, '0')}`
-}
-
 export const initials = (name: string) =>
   name
     .split(/\s+/)

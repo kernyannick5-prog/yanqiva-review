@@ -1,6 +1,6 @@
 import { LinkButton } from '../components/Button'
 import { DELIVERY_SHORT } from '../order/deliveryArea'
-import { DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, PRODUCTS, shippingText } from '../order/catalog'
+import { DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, formatEuro, PRODUCTS, shippingText } from '../order/catalog'
 import { Reveal } from '../components/Reveal'
 import { Container, SectionHead } from './ui'
 
@@ -19,7 +19,7 @@ const plans = [
     name: 'Dashboard',
     tagline: 'Alles aus Klassik, plus Kontrolle',
     price: PRODUCTS['review-dashboard'].unitPrice,
-    note: `inkl. ${DASHBOARD_INCLUDED_MONTHS} Monate Dashboard. Danach nur auf Wunsch verlängerbar für ${DASHBOARD_RENEWAL_EUR} €/Monat je Standort, monatlich kündbar, kein automatisches Abo. Ohne Verlängerung leitet die Karte direkt weiter zu Google.`,
+    note: `inkl. ${DASHBOARD_INCLUDED_MONTHS} Monate Dashboard. Danach nur auf Wunsch verlängerbar für ${DASHBOARD_RENEWAL_EUR} €/Monat je Standort, monatlich kündbar, kein automatisches Abo. Ohne Verlängerung leitet die Karte direkt weiter zu Google.`,
     features: ['1 NFC-Bewertungskarte (Acryl, 12 × 12 cm)', 'QR-Code', `YANQIVA Dashboard, ${DASHBOARD_INCLUDED_MONTHS} Monate inklusive`, 'Statistiken zu Taps und Scans', 'Einrichtung inklusive', DELIVERY_SHORT, shippingText(PRODUCTS['review-dashboard'])],
     popular: true,
   },
@@ -34,9 +34,9 @@ export function Pricing() {
           <SectionHead
             eyebrow="Preise"
             id="preise-title"
-            lead={`Das Dashboard ist ${DASHBOARD_INCLUDED_MONTHS} Monate inklusive, danach optional für ${DASHBOARD_RENEWAL_EUR} €/Monat je Standort. Die Karte funktioniert auch ohne. Mehrere Karten oder Filialen auf Anfrage.`}
+            lead={`Das Dashboard ist ${DASHBOARD_INCLUDED_MONTHS} Monate inklusive, danach optional für ${DASHBOARD_RENEWAL_EUR} €/Monat je Standort. Die Karte funktioniert auch ohne. Mehrere Karten oder Filialen auf Anfrage.`}
           >
-            Einmal zahlen. Sofort loslegen.
+            Einmal zahlen. Persönlich übergeben.
           </SectionHead>
         </Reveal>
 
@@ -55,7 +55,7 @@ export function Pricing() {
                   <h3 className="font-display text-lg font-semibold uppercase tracking-[0.16em] text-muted">{p.name}</h3>
                   <p className="mt-1 text-sm text-muted">{p.tagline}</p>
                   <p className="mt-4 font-display text-5xl font-semibold tracking-tight">
-                    <span className="tabular-nums">{p.price} €</span>
+                    <span className="tabular-nums">{formatEuro(p.price)}</span>
                   </p>
                   <p className="mt-1 text-sm text-faint">einmalig · Endpreis</p>
                   <p className="mt-2 text-sm text-muted">{p.note}</p>
@@ -79,7 +79,10 @@ export function Pricing() {
             </li>
           ))}
         </ul>
-        <p className="mt-8 text-center text-[13px] text-faint">Endpreise inkl. Lieferung und Übergabe vor Ort. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Nur für Unternehmer.</p>
+        <p className="mx-auto mt-8 max-w-3xl text-center text-[13px] text-faint">
+          Weiterleitung: Wir betreiben die Weiterleitung, solange wir YANQIVA REVIEW anbieten, mindestens jedoch 24 Monate ab Lieferung (<a href={`${import.meta.env.BASE_URL}agb/#weiterleitung`} className="underline underline-offset-2 hover:text-text">AGB Ziffer 9</a>).
+        </p>
+        <p className="mt-2 text-center text-[13px] text-faint">Endpreise inkl. Lieferung und Übergabe vor Ort. Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Nur für Unternehmer.</p>
         <p className="mt-2 text-center text-[13px] text-faint">Zahlung per Vorkasse (Zahlungsaufforderung bzw. Rechnung), per Überweisung innerhalb von 14 Tagen. Einrichtung und Übergabe nach Zahlungseingang.</p>
       </Container>
     </section>

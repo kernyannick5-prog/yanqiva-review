@@ -75,7 +75,7 @@ export function Settings({ onReset }: SettingsProps) {
             <span className="rounded-full border border-mint/30 bg-mint/10 px-3 py-1 text-xs font-medium text-mint">Von YANQIVA verwaltet</span>
           </div>
           <p className="mt-3 text-xs leading-relaxed text-faint">
-            Die Ziel-URL änderst du jederzeit unter „Karten“ – die Karte selbst muss dafür nie neu beschrieben werden.
+            Mit aktivem Dashboard ändern Sie die Ziel-URL selbst unter „Karten“. Die Karte selbst muss dafür nie neu beschrieben werden.
           </p>
         </Panel>
       </StaggerItem>
@@ -85,7 +85,7 @@ export function Settings({ onReset }: SettingsProps) {
       </StaggerItem>
 
       <StaggerItem index={2}>
-        <Panel title="Demo zurücksetzen" description="Entfernt neu angelegte Karten und geänderte Ziel-Links.">
+        <Panel title="Demo zurücksetzen" description="Setzt geänderte Ziel-Links auf die Ausgangswerte zurück.">
           <ActionButton onClick={onReset}>Demo zurücksetzen</ActionButton>
         </Panel>
       </StaggerItem>

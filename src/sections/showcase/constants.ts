@@ -20,7 +20,7 @@ export const NFC_CENTER_Y = 53
 export const STEPS = [
   { title: 'Platzieren', text: 'Karte gut sichtbar platzieren, etwa an Theke, Tisch oder Kasse.' },
   { title: 'Antippen', text: 'Gast hält das Smartphone an den NFC-Chip oder scannt den QR-Code.' },
-  { title: 'Bewerten', text: 'Die Google-Bewertungsseite öffnet sich direkt, in unter 10 Sekunden.' },
+  { title: 'Bewerten', text: 'Die Google-Bewertungsseite öffnet sich direkt.' },
 ] as const
 
 /** Fortschrittsfenster (0..1) der drei Schritte. */
