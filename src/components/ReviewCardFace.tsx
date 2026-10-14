@@ -58,18 +58,22 @@ function NfcPictogram({ ink, bg }: { ink: string; bg: string }) {
       <path d="M168 892q20 43 0 86" strokeWidth={10} />
       <path d="M203 872q30 63 0 126" strokeWidth={10} />
       <path d="M238 852q40 83 0 166" strokeWidth={10} />
+      {/* Handfläche und Handgelenk (hinter dem Gerät) */}
+      <path d="M352 984C334 1026 356 1052 398 1056L462 1112L500 1078L452 1030C466 996 466 956 452 924H420Z" fill={bg} />
       {/* Smartphone */}
-      <rect x={332} y={826} width={98} height={188} rx={18} fill={bg} />
-      <path d="M366 842h30" />
-      <text x={381} y={890} textAnchor="middle" fontSize={27} fontWeight={700} fill={ink} stroke="none" className="font-display">
+      <rect x={340} y={822} width={100} height={188} rx={20} fill={bg} />
+      <path d="M374 840h32" />
+      <text x={390} y={890} textAnchor="middle" fontSize={27} fontWeight={700} fill={ink} stroke="none" className="font-display">
         NFC
       </text>
-      {/* Hand: Finger links am Gerät, Daumen rechts, Handballen und Ärmel unten rechts */}
-      <path d="M300 905h40a15 15 0 0 1 0 30h-40a15 15 0 0 1 0-30z" fill={bg} />
-      <path d="M296 940h44a15 15 0 0 1 0 30h-44a15 15 0 0 1 0-30z" fill={bg} />
-      <path d="M304 975h36a14 14 0 0 1 0 28h-36a14 14 0 0 1 0-28z" fill={bg} />
-      <path d="M430 880c22 4 30 30 26 62l-6 38c18 16 30 30 38 48l-46 40c-14-14-30-24-48-30" fill={bg} />
-      <path d="M470 1036l42 50-30 26-42-50" fill={bg} />
+      {/* Fingerkuppen an der linken Kante */}
+      <path d="M356 912H334a15 15 0 0 0 0 30H356" fill={bg} />
+      <path d="M356 942H330a15 15 0 0 0 0 30H356" fill={bg} />
+      <path d="M356 972H334a14 14 0 0 0 0 28H356" fill={bg} />
+      {/* Daumen an der rechten Kante */}
+      <path d="M430 930a16 16 0 0 1 30-4l12 62a16 16 0 0 1-30 6z" fill={bg} />
+      {/* Ärmelbündchen */}
+      <path d="M458 1108L496 1074L522 1100L484 1134Z" fill={bg} />
     </g>
   )
 }
