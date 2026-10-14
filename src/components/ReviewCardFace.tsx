@@ -50,7 +50,7 @@ function DecorativeQr({ x, y, size, ink, bg }: { x: number; y: number; size: num
   )
 }
 
-/** Eigenes NFC-Piktogramm: Lesefeld mit Funkwellen, Hand hält ein Smartphone daran. */
+/** Eigenes NFC-Piktogramm: Lesefeld mit Funkwellen, Hand hält ein Smartphone daran (Finger rechts, Daumen links). */
 function NfcPictogram({ ink, bg }: { ink: string; bg: string }) {
   return (
     <g fill="none" stroke={ink} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round">
@@ -58,22 +58,21 @@ function NfcPictogram({ ink, bg }: { ink: string; bg: string }) {
       <path d="M168 892q20 43 0 86" strokeWidth={10} />
       <path d="M203 872q30 63 0 126" strokeWidth={10} />
       <path d="M238 852q40 83 0 166" strokeWidth={10} />
-      {/* Handfläche und Handgelenk (hinter dem Gerät) */}
-      <path d="M352 984C334 1026 356 1052 398 1056L462 1112L500 1078L452 1030C466 996 466 956 452 924H420Z" fill={bg} />
+      {/* Handfläche mit vier Fingern, die um die rechte Kante greifen (hinter dem Gerät) */}
+      <path
+        d="M388 1108C380 1078 352 1052 344 1014V900H440V890H452a14 14 0 0 1 0 28H440H458a15 15 0 0 1 0 30H440H458a15 15 0 0 1 0 30H440H452a13 13 0 0 1 0 26H440C462 1016 460 1066 452 1108Z"
+        fill={bg}
+      />
       {/* Smartphone */}
       <rect x={340} y={822} width={100} height={188} rx={20} fill={bg} />
       <path d="M374 840h32" />
       <text x={390} y={890} textAnchor="middle" fontSize={27} fontWeight={700} fill={ink} stroke="none" className="font-display">
         NFC
       </text>
-      {/* Fingerkuppen an der linken Kante */}
-      <path d="M356 912H334a15 15 0 0 0 0 30H356" fill={bg} />
-      <path d="M356 942H330a15 15 0 0 0 0 30H356" fill={bg} />
-      <path d="M356 972H334a14 14 0 0 0 0 28H356" fill={bg} />
-      {/* Daumen an der rechten Kante */}
-      <path d="M430 930a16 16 0 0 1 30-4l12 62a16 16 0 0 1-30 6z" fill={bg} />
+      {/* Daumen vor dem Gerät an der linken Kante */}
+      <path d="M355 1045C346 1022 346 990 354 966a14 14 0 0 1 27 6C376 994 378 1018 388 1040" fill={bg} />
       {/* Ärmelbündchen */}
-      <path d="M458 1108L496 1074L522 1100L484 1134Z" fill={bg} />
+      <rect x={378} y={1106} width={84} height={30} rx={6} fill={bg} />
     </g>
   )
 }
