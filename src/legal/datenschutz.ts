@@ -10,7 +10,7 @@ import type { LegalDoc } from './types'
 export const datenschutz: LegalDoc = {
   title: 'Datenschutzerklärung',
   badge: 'Rechtliches',
-  updated: 'Stand: 14. Oktober 2026',
+  updated: 'Stand: 14. Oktober 2026 (Fassung 2)',
   pdf: 'datenschutz.pdf',
   archive: 'dokumente/archiv/#datenschutz',
   callouts: [
@@ -159,13 +159,13 @@ export const datenschutz: LegalDoc = {
     },
     {
       id: 'lokaler-speicher',
-      heading: '6. Speicher im Browser (sessionStorage) in der Dashboard-Demo',
+      heading: '6. Dashboard-Demo: kein Speicher im Browser',
       blocks: [
         {
-          p: 'Nur wenn Sie in der Dashboard-Demo selbst eine Demo-Karte anlegen, legen wir Ihre Eingaben (Unternehmensname, Link, Kartennummer) im Sitzungsspeicher (sessionStorage) Ihres Browsers unter dem Schlüssel yanqiva-demo-cards-v1 ab. Das ist kein Cookie. Die Daten verlassen Ihr Gerät nicht; sie werden weder an uns noch an Dritte übertragen, und wir haben keinen Zugriff darauf. Die Daten werden automatisch gelöscht, sobald Sie den Browser-Tab schließen, oder vorher, wenn Sie in der Demo „Demo zurücksetzen“ wählen.',
+          p: 'Die Dashboard-Demo auf der Startseite legt nichts im Speicher Ihres Browsers ab (weder sessionStorage noch localStorage) und setzt keine Cookies. Änderungen, die Sie in der Demo ausprobieren (zum Beispiel ein geänderter Ziel-Link), bestehen nur im Arbeitsspeicher der geöffneten Seite und verschwinden beim Neuladen oder mit „Demo zurücksetzen“. Die Daten verlassen Ihr Gerät nicht; sie werden weder an uns noch an Dritte übertragen, und wir haben keinen Zugriff darauf.',
         },
         {
-          p: 'Rechtsgrundlage für den Zugriff auf Ihr Endgerät ist § 25 Abs. 2 Nr. 2 TDDDG: Die Speicherung erfolgt nur, wenn Sie die Funktion selbst nutzen, und ist unbedingt erforderlich, damit die von Ihnen ausdrücklich gewünschte Funktion (Ihre angelegte Demo-Karte bleibt beim Neuladen innerhalb desselben Tabs erhalten) bereitgestellt werden kann. Eine Einwilligung ist dafür nicht erforderlich. Soweit dabei überhaupt personenbezogene Daten verarbeitet werden, ist Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse liegt in einer funktionsfähigen Demo.',
+          p: 'Bis zum 14. Oktober 2026 konnte man in der Demo eine Demo-Karte anlegen und legte dafür Eingaben im Sitzungsspeicher (sessionStorage) unter dem Schlüssel yanqiva-demo-cards-v1 ab. Diese Funktion gibt es nicht mehr; ein womöglich noch vorhandener Eintrag wird nicht mehr gelesen und verschwindet, wenn Sie den Tab schließen.',
         },
         {
           p: 'Bitte geben Sie in der Demo keine vertraulichen oder personenbezogenen Daten ein.',

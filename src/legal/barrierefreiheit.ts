@@ -9,12 +9,12 @@ import type { LegalDoc } from './types'
 export const barrierefreiheit: LegalDoc = {
   title: 'Erklärung zur Barrierefreiheit',
   badge: 'Rechtliches',
-  updated: 'Stand: 9. Oktober 2026',
+  updated: 'Stand: 14. Oktober 2026',
   callouts: [
     {
       tone: 'info',
       title: 'Barriere gefunden? Sagen Sie uns Bescheid.',
-      text: 'Schreiben Sie uns an support@yanqiva.de. Nennen Sie bitte die Seite, das Problem und – wenn Sie möchten – Ihr Gerät, Ihren Browser und ggf. Ihre Hilfstechnik. Wir bemühen uns, innerhalb von 5 Werktagen zu antworten.',
+      text: 'Schreiben Sie uns an support@yanqiva.de. Nennen Sie bitte die Seite, das Problem und – wenn Sie möchten – Ihr Gerät, Ihren Browser und gegebenenfalls Ihre Hilfstechnik. Wir bemühen uns, innerhalb von 5 Werktagen zu antworten.',
       link: { label: 'E-Mail schreiben', href: 'mailto:support@yanqiva.de?subject=Barriere%20auf%20yanqiva-bewertung.de' },
     },
   ],
@@ -40,7 +40,7 @@ export const barrierefreiheit: LegalDoc = {
         },
         {
           list: [
-            'die Startseite mit allen Abschnitten, einschließlich der interaktiven Dashboard-Demo (Übersicht, Karten, Statistiken, Einstellungen) und dem Formular „Neue Karte hinzufügen“',
+            'die Startseite mit allen Abschnitten, einschließlich der interaktiven Dashboard-Demo (Übersicht, Karten, Statistiken, Einstellungen)',
             'die Seiten Impressum, Datenschutz, AGB und diese Erklärung',
             'den Bestellprozess unter /bestellen/ (siehe Abschnitt 8)',
             'den Kundenbereich unter /dashboard/ mit Anmeldung und Dashboard für Kunden der Variante Dashboard (siehe Abschnitt 8)',
@@ -78,13 +78,13 @@ export const barrierefreiheit: LegalDoc = {
         {
           list: [
             'Die Seiten sind mit HTML-Landmarken (Kopfbereich, Navigation, Hauptinhalt, Fußbereich), einer logischen Überschriftenstruktur und Listen aufgebaut. Ein Sprunglink „Zum Inhalt springen“ führt direkt zum Hauptinhalt.',
-            'Alle Bedienelemente lassen sich mit der Tastatur erreichen und bedienen. Der Fokus (die Markierung, wo Sie gerade sind) ist als farbige Umrandung sichtbar; die Navigationsleiste der Dashboard-Demo scrollt bei schmaler Breite mit dem Fokus mit.',
-            'Fenster in der Demo („Neue Karte hinzufügen“, „Link bearbeiten“, QR-Code) nehmen den Tastaturfokus beim Öffnen auf, halten ihn darin, schließen sich mit der Esc-Taste und geben den Fokus danach zurück.',
-            'Im Formular „Neue Karte hinzufügen“ hat jedes Feld eine sichtbare Beschriftung. Pflichtfelder sind benannt. Fehler stehen als Text direkt am Feld und sind mit dem Feld verknüpft. Der Fokus springt zum ersten fehlerhaften Feld.',
-            'Statusmeldungen („Karte erstellt“, „Link kopiert“) und die Auswahl im Diagramm werden Screenreadern über Live-Regionen mitgeteilt.',
+            'Alle Bedienelemente lassen sich mit der Tastatur erreichen und bedienen. Der Fokus (die Markierung, wo Sie gerade sind) ist als farbige Umrandung sichtbar; die Navigationsleiste der Dashboard-Demo scrollt bei schmaler Breite mit dem Fokus mit. Liegt das angesteuerte Element nicht im sichtbaren Bereich oder unter der fest stehenden Navigationsleiste, holt die Seite es automatisch ins Bild.',
+            'Fenster in der Demo („Link bearbeiten“, QR-Code) nehmen den Tastaturfokus beim Öffnen auf, halten ihn darin, schließen sich mit der Esc-Taste und geben den Fokus danach zurück.',
+            'Im Fenster „Link bearbeiten“ hat das Feld eine sichtbare Beschriftung. Fehler stehen als Text direkt am Feld und sind mit dem Feld verknüpft. Der Fokus springt zum fehlerhaften Feld.',
+            'Statusmeldungen („Link gespeichert“, „Link kopiert“) und die Auswahl im Diagramm werden Screenreadern über Live-Regionen mitgeteilt.',
             'Die Diagramme haben eine Textzusammenfassung (Summe, Durchschnitt, höchster und niedrigster Wert) und lassen sich mit den Pfeiltasten Tag für Tag durchgehen. In der Heatmap und in den Balken stehen die Zahlen als Text.',
             'Zustände wie „Aktiv“, „Pausiert“ oder ausgewählte Filter sind nicht nur durch Farbe erkennbar, sondern auch durch Text oder Form.',
-            'Wir haben die Farbkontraste gemessen: Text mindestens 4,5 : 1, Bedienelemente und Eingabefelder mindestens 3 : 1 (siehe Abschnitt 6).',
+            'Wir haben die Farbkontraste gemessen: Text mindestens 4,5:1, Bedienelemente und Eingabefelder mindestens 3:1 (siehe Abschnitt 6).',
             'Die Seiten passen sich schmalen Bildschirmen an (geprüft ab 320 Pixel Breite) und lassen sich vergrößern, ohne dass Sie in zwei Richtungen scrollen müssen. Klickflächen sind mindestens 24 × 24 Pixel groß, die meisten mindestens 44 × 44.',
             'Wenn Ihr Gerät „Bewegung reduzieren“ eingestellt hat, laufen keine Endlos-Animationen, und die Produktanimation erscheint als ruhige Standansicht. Zusätzlich können Sie auf der Startseite direkt unter den Schaltflächen am Seitenanfang und im Seitenfuß über „Animationen anhalten“ alle Endlos-Animationen, die automatische Produktanimation auf Touch-Geräten und die simulierte Live-Aktivität selbst stoppen.',
             'Wir setzen keine Cookies, kein Tracking, keine Overlay-Widgets und keine externen Schriftarten ein.',
@@ -120,7 +120,7 @@ export const barrierefreiheit: LegalDoc = {
             'Produktanimation (Abschnitt „Das Produkt“): Die 3D-Szene mit Karte und Smartphone ist rein bildlich und für Screenreader ausgeblendet. Den Ablauf beschreiben die drei Schritte und die Kurztexte daneben als normaler Text. Am Computer läuft die Szene mit dem Scrollen, auf Touch-Geräten einmal automatisch und lässt sich dort mit einer Schaltfläche oder über „Animationen anhalten“ anhalten. Auf Geräten mit „Bewegung reduzieren“ oder schwacher Leistung zeigen wir eine ruhige Standansicht. Die Szene selbst ist nicht für Tastatur oder Screenreader erlebbar.',
             'Dashboard-Demo: Alle Daten und Firmen sind erfunden. Die Demo ist nur teilweise auf Screenreadern getestet (siehe Abschnitt 6).',
             'Diagramme: Die Diagramme sind eigene Zeichnungen. Sie haben eine Textzusammenfassung und Tastaturbedienung, aber keine vollständige Datentabelle. Hinweisfelder am Mauszeiger sind kein Ersatz für die Tastaturbedienung.',
-            'Kurze Meldungen („Karte erstellt“) verschwinden nach wenigen Sekunden. Sie werden vorgelesen; das Ergebnis (z. B. die neue Karte) bleibt sichtbar.',
+            'Kurze Meldungen („Link gespeichert“) verschwinden nach wenigen Sekunden. Sie werden vorgelesen; das Ergebnis (z. B. der geänderte Ziel-Link) bleibt sichtbar.',
             'Die Weiterleitungsseiten unter /r/… leiten sofort weiter und sind nur für Sekundenbruchteile sichtbar. Die simulierte Bewertungsseite ist eine einfache Demo-Seite.',
             'Dekorative Elemente (Glanz, Verläufe, Hintergrund) wechseln die Hintergrundfarbe unter dem Text. Wir haben die Kontraste gemessen; einzelne Stellen können trotzdem knapp ausfallen.',
           ],
@@ -135,7 +135,7 @@ export const barrierefreiheit: LegalDoc = {
       heading: '8. Bestellprozess und Kundenbereich',
       blocks: [
         {
-          p: 'Seit dem 9. Oktober 2026 können Sie YANQIVA REVIEW über den Bestellprozess unter /bestellen/ bestellen. Er besteht aus vier Schritten (Produkt, Einrichtung, Ihre Daten, Prüfen) und einer Bestätigungsseite. Wir haben ihn am 9. Oktober 2026 selbst geprüft: mit dem Prüfwerkzeug axe-core in den Breiten 320, 390 und 1280 Pixel für jeden Schritt, auch mit Fehlermeldungen und für die Bestätigung, und von Hand nur mit der Tastatur bis zur Bestellübersicht.',
+          p: 'Sie können YANQIVA REVIEW über den Bestellprozess unter /bestellen/ bestellen. Er besteht aus vier Schritten (Produkt, Einrichtung, Ihre Daten, Prüfen) und einer Bestätigungsseite. Wir haben ihn am 9. Oktober 2026 selbst geprüft: mit dem Prüfwerkzeug axe-core in den Breiten 320, 390 und 1280 Pixel für jeden Schritt, auch mit Fehlermeldungen und für die Bestätigung, und von Hand nur mit der Tastatur bis zur Bestellübersicht.',
         },
         {
           list: [
@@ -154,7 +154,7 @@ export const barrierefreiheit: LegalDoc = {
           p: 'Wenn Sie beim Bestellen oder im Kundenbereich auf eine Barriere stoßen, schreiben Sie uns an support@yanqiva.de. Wir nehmen Ihre Bestellung dann auch gern per E-Mail entgegen und senden Ihnen Statistiken oder ändern Ziele auf Wunsch per E-Mail.',
         },
         {
-          p: 'Kundenbereich (/dashboard/): Kunden der Variante Dashboard melden sich ohne Passwort und ohne Rätsel an: Sie geben ihre E-Mail-Adresse ein und erhalten einen Anmeldelink, der 15 Minuten gültig ist; einen neuen Link können sie jederzeit anfordern. Die Sicherheitsprüfung läuft unsichtbar im Browser. Wir haben Anmeldung und Dashboard am 9. Oktober 2026 selbst geprüft: axe-core meldete keine Verstöße, die Bedienung nur mit der Tastatur funktionierte, und bei 320 Pixel Breite ist kein waagerechtes Scrollen nötig. Mit echten Screenreadern haben wir den Kundenbereich nicht geprüft (siehe Abschnitt 6).',
+          p: 'Kundenbereich (/dashboard/): Kunden der Variante Dashboard melden sich ohne Passwort und ohne Rätsel an: Kunden geben ihre E-Mail-Adresse ein und erhalten einen Anmeldelink, der 15 Minuten gültig ist; einen neuen Link können sie jederzeit anfordern. Die Sicherheitsprüfung läuft unsichtbar im Browser. Wir haben Anmeldung und Dashboard am 9. Oktober 2026 selbst geprüft: axe-core meldete keine Verstöße, die Bedienung nur mit der Tastatur funktionierte, und bei 320 Pixel Breite ist kein waagerechtes Scrollen nötig. Mit echten Screenreadern haben wir den Kundenbereich nicht geprüft (siehe Abschnitt 6).',
         },
         {
           p: 'Ein Video gibt es auf dieser Website nicht.',
@@ -175,7 +175,7 @@ export const barrierefreiheit: LegalDoc = {
           list: [
             'auf welcher Seite oder in welchem Bereich das Problem auftritt,',
             'was nicht funktioniert hat und was Sie erwartet hätten,',
-            'welchen Browser, welches Gerät und ggf. welche Hilfstechnik Sie nutzen (freiwillig).',
+            'welchen Browser, welches Gerät und gegebenenfalls welche Hilfstechnik Sie nutzen (freiwillig).',
           ],
         },
         {
@@ -200,7 +200,7 @@ export const barrierefreiheit: LegalDoc = {
       heading: '11. Erstellung dieser Erklärung',
       blocks: [
         {
-          p: 'Diese Erklärung wurde am 9. Oktober 2026 erstellt. Grundlage ist die oben beschriebene Selbstbewertung vom selben Tag. Wir überprüfen die Erklärung, wenn sich die Website wesentlich ändert, und erneuern dann das Datum.',
+          p: 'Diese Erklärung wurde am 9. Oktober 2026 erstellt und am 14. Oktober 2026 überarbeitet (Dashboard-Demo ohne das Formular „Neue Karte hinzufügen“, Führung des Tastaturfokus auf der Startseite). Grundlage ist die oben beschriebene Selbstbewertung vom 8. und 9. Oktober 2026, ergänzt um eine erneute Tastaturprüfung der Startseite am 14. Oktober 2026. Wir überprüfen die Erklärung, wenn sich die Website wesentlich ändert, und erneuern dann das Datum.',
         },
       ],
     },

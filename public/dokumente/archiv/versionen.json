@@ -206,5 +206,18 @@
     "hash": "3aefd370fc9e38ad1edda27f63c2ba991a49807a0c93ef8234e402e188ad08a9",
     "pages": 8,
     "note": "Ausführung (Karte oder Aufsteller) entfällt in den Bestelldaten und in der Eingangsbestätigung."
+  },
+  {
+    "doc": "datenschutz",
+    "id": "datenschutz-2026-10-14-f1",
+    "file": "datenschutz-2026-10-14-f1.pdf",
+    "date": "2026-10-14",
+    "fassung": 1,
+    "from": "2026-10-13T22:04:58.000Z",
+    "stand": "Stand: 14. Oktober 2026",
+    "commit": "67e806b",
+    "hash": "d36096d606dbf22fe0108e0c6dbd8762a6c75da88a70fd9a374a9fb27cf4c2e2",
+    "pages": 8,
+    "note": "Erinnerungs-E-Mails 14 und 3 Tage vor Ablauf des Dashboard-Zugangs; Hinweis zu den PDF-Anhängen (AGB, Datenschutzerklärung) der Eingangsbestätigung."
   }
 ]
