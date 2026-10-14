@@ -9,6 +9,7 @@ import {
 import { useEffect } from 'react'
 import { LinkButton } from '../components/Button'
 import { MotionToggle } from '../components/MotionToggle'
+import { ReviewCardFace } from '../components/ReviewCardFace'
 import { useLowPower } from '../lib/lowPower'
 import { useReduceMotion } from '../lib/useReduceMotion'
 import { useLoopVisible } from '../lib/useLoopVisible'
@@ -47,32 +48,7 @@ function Headline() {
   )
 }
 
-/** NFC-Wellen-Symbol mit pulsierenden Bögen. */
-function NfcWaves({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className={className} aria-hidden>
-      <circle cx="5" cy="12" r="1.4" fill="currentColor" stroke="none" />
-      {[5, 9, 13].map((r, i) => (
-        <path
-          key={r}
-          d={`M${5 + r * 0.45} ${12 - r * 0.8}a${r} ${r} 0 0 1 0 ${r * 1.6}`}
-          className="yq-wave"
-          style={{ animationDelay: `${i * 0.35}s` }}
-        />
-      ))}
-    </svg>
-  )
-}
-
-function Stars({ className = '' }: { className?: string }) {
-  return (
-    <span className={`tracking-[0.15em] text-amber-300 ${className}`} role="img" aria-label="5 von 5 Sternen">
-      ★★★★★
-    </span>
-  )
-}
-
-/** Virtuelle NFC-Karte mit Schweben, Maus-Neigung und Glanz-Sweep. */
+/** NFC-Bewertungskarte (Produktdesign, ohne Google-Logo) mit Schweben, Maus-Neigung und Glanz-Sweep. */
 function NfcCard({ reduce }: { reduce: boolean }) {
   const mx = useMotionValue(0)
   const my = useMotionValue(0)
@@ -95,39 +71,15 @@ function NfcCard({ reduce }: { reduce: boolean }) {
       <div className={reduce ? '' : 'yq-card-float'} style={{ transformStyle: 'preserve-3d' }}>
         <m.div
           style={{ rotateX, rotateY: sx, transformStyle: 'preserve-3d' }}
-          className="relative mx-auto aspect-[1.586/1] w-full max-w-[420px] overflow-hidden rounded-[22px] border border-white/15 bg-[linear-gradient(135deg,#1e1b4b_0%,#2e1065_55%,#0d1233_100%)] p-4 shadow-[0_40px_80px_-30px_rgb(139_92_246/0.6),0_0_0_1px_rgb(94_234_212/0.12)] sm:p-6"
+          className="relative mx-auto aspect-square w-full max-w-[360px] overflow-hidden rounded-[22px] shadow-[0_40px_80px_-30px_rgb(11_44_35/0.55),0_0_0_1px_rgb(255_255_255/0.6)] sm:max-w-[380px]"
         >
-          <div aria-hidden className="absolute -right-10 -top-16 size-56 rounded-full bg-[radial-gradient(closest-side,rgb(94_234_212/0.35),transparent)]" />
-          <div aria-hidden className="absolute inset-0 bg-grid opacity-40" />
-
-          <div className="relative flex h-full flex-col justify-between">
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-2">
-                <span className="font-display text-sm font-bold tracking-[0.18em] sm:text-base">YANQIVA</span>
-                <span className="rounded-full border border-mint/40 px-1.5 py-px text-[10px] font-semibold uppercase tracking-widest text-mint">Review</span>
-              </div>
-              <NfcWaves className="size-7 text-mint sm:size-8" />
-            </div>
-
-            <div>
-              <Stars className="text-xl sm:text-2xl" />
-              <p className="mt-1 font-display text-base font-medium leading-snug tracking-tight sm:text-xl">
-                Wir freuen uns über
-                <br />
-                Ihre Bewertung
-              </p>
-            </div>
-
-            <p className="flex items-center gap-2 whitespace-nowrap text-[11px] font-medium uppercase tracking-[0.14em] text-mint">
-              <span aria-hidden className="size-1.5 rounded-full bg-mint" />
-              Hier kontaktlos bewerten
-            </p>
-          </div>
-
+          <ReviewCardFace className="block h-full w-full" />
+          {/* Acrylkante: feiner heller Rand */}
+          <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[22px] shadow-[inset_0_0_0_2px_rgb(255_255_255/0.55)]" />
           {!reduce && (
             <span
               aria-hidden
-              className="yq-sweep pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+              className="yq-sweep pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent"
             />
           )}
         </m.div>

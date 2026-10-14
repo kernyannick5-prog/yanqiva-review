@@ -3,6 +3,7 @@ import { useRef, type CSSProperties, type ReactNode } from 'react'
 import { useLoopVisible } from '../lib/useLoopVisible'
 import { Reveal } from '../components/Reveal'
 import { Container, SectionHead } from './ui'
+import { ReviewCardFace } from '../components/ReviewCardFace'
 
 /** Rahmen für eine Mini-Illustration; die CSS-Loops pausieren, solange sie offscreen ist. */
 function Stage({ children }: { children: ReactNode }) {
@@ -22,9 +23,8 @@ function Stage({ children }: { children: ReactNode }) {
 
 function MiniCard({ className = '' }: { className?: string }) {
   return (
-    <div className={`legacy-palette relative flex h-[68px] w-24 flex-col justify-between rounded-lg border border-white/15 bg-[linear-gradient(135deg,#1e1b4b,#2e1065)] p-2 ${className}`}>
-      <span className="font-display text-[9px] font-bold tracking-[0.16em]">YANQIVA</span>
-      <span className="text-[10px] leading-none tracking-wider text-amber-300">★★★★★</span>
+    <div className={`relative size-[76px] overflow-hidden rounded-md shadow-[0_8px_18px_-6px_rgb(0_0_0/0.5),inset_0_0_0_1px_rgb(255_255_255/0.5)] ${className}`}>
+      <ReviewCardFace className="block h-full w-full" />
     </div>
   )
 }
