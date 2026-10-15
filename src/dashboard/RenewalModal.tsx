@@ -43,7 +43,7 @@ export function RenewalModal({ token, accessUntil, expired, onClose, onDone, onE
           {expired ? 'Ihr Dashboard-Zugang ist beendet.' : `Ihr Dashboard-Zugang endet am ${accessUntil ? formatDay(accessUntil) : ''}.`} Mit Ihrer Anfrage informieren Sie YANQIVA, dass Sie das Dashboard verlängern möchten.
         </p>
         <p className="rounded-xl border border-line bg-white/[0.03] p-3 text-[13px] leading-relaxed text-muted">
-          Mit Ihrer Anfrage wird <strong className="text-text">noch nichts gebucht</strong> und nichts automatisch verlängert. Wir melden uns per E-Mail; erst mit unserer Bestätigung kommt die Verlängerung zustande. Sie kostet 15 € pro Monat je Standort (keine Umsatzsteuer nach § 19 UStG), wird monatlich im Voraus berechnet und ist jederzeit zum Monatsende kündbar. Einzelheiten:{' '}
+          Mit Ihrer Anfrage wird <strong className="text-text">noch nichts gebucht</strong> und nichts automatisch verlängert. Wir melden uns per E-Mail; erst mit unserer Bestätigung kommt die Verlängerung zustande. Sie schließt an das Ende Ihres Zugangs an; der erste Verlängerungsmonat läuft bis zum Ende des Kalendermonats und wird tagesgenau anteilig berechnet. Die Verlängerung kostet 15 € pro Monat je Standort (keine Umsatzsteuer nach § 19 UStG), wird monatlich im Voraus berechnet und ist jederzeit zum Monatsende kündbar. Einzelheiten:{' '}
           <a href="/agb/#dashboard" className="font-medium text-text underline underline-offset-2">Ziffer 8 unserer AGB</a>.
           {expired ? ' Ihre Karten leiten weiterhin zum Google-Bewertungsformular weiter.' : ' Ihre Karten leiten in jedem Fall weiter zum Google-Bewertungsformular.'}
         </p>

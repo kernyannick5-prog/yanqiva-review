@@ -43,7 +43,7 @@ Jeder Push auf `main` baut die Seite über GitHub Actions (`.github/workflows/de
 ## Redirects, Notfall-Fallback und Kundendaten
 
 - Produktionskarten laufen ausschließlich über den Worker `yanqiva-redirect` (Routen `yanqiva-bewertung.de/r/*`, „Fail open“). **Kein Karten-Snapshot im Build:** Kundendaten (Slug → Google-Link) landen nie im Repo, in Pages-Artefakten oder Logs (Audit SEC-3, behoben am 15.10.2026). Der frühere Export-Schritt (`FALLBACK_EXPORT_URL`/`FALLBACK_EXPORT_TOKEN`) und der tägliche Cron-Build sind entfernt. Im Build entstehen nur die Demo-Weiterleitungen aus `src/config/redirects.ts`.
-- Fällt der Worker aus, liefert GitHub Pages für unbekannte Pfade `public/404.html`. Für `/r/<slug>` blendet `public/404.js` die Seite „Die Karte ist gerade nicht erreichbar“ ein (noindex, höchstens 3 automatische Neuversuche im Abstand von 5 s, Zähler im URL-Fragment, kein Browser-Speicher). Alle anderen Pfade zeigen die normale 404.
+- Fällt der Worker aus, liefert GitHub Pages für unbekannte Pfade `public/404.html`. Für `/r/<slug>` blendet `public/404.js` die Seite „Die Weiterleitung ist gerade kurz nicht erreichbar“ ein (ohne Zusagen zum Kartenzustand) (noindex, höchstens 3 automatische Neuversuche im Abstand von 5 s, Zähler im URL-Fragment, kein Browser-Speicher). Alle anderen Pfade zeigen die normale 404.
 
 ## Vorschaubild (og-image)
 

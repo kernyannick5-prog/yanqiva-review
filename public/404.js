@@ -19,7 +19,7 @@
     location.reload()
   })
   if (n >= MAX) {
-    status.textContent = 'Die automatischen Versuche sind beendet. Bitte versuchen Sie es in einer Minute erneut.'
+    status.textContent = 'Die automatischen Versuche sind beendet. Bitte versuchen Sie es in wenigen Minuten noch einmal.'
     return
   }
   status.textContent = 'Wir versuchen es in ' + DELAY + ' Sekunden automatisch erneut (Versuch ' + (n + 1) + ' von ' + MAX + ').'
