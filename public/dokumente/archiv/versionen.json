@@ -39,6 +39,19 @@
     "note": "Dashboard 6 Monate inklusive; Dashboard-Karten eines Standorts teilen Zugang und Verlängerung, Klassik nicht enthalten."
   },
   {
+    "doc": "agb",
+    "id": "agb-2026-10-16-f1",
+    "file": "agb-2026-10-16-f1.pdf",
+    "date": "2026-10-16",
+    "fassung": 1,
+    "from": "2026-10-15T23:04:20.000Z",
+    "stand": "Stand: 16. Oktober 2026",
+    "commit": "7f7d63a",
+    "hash": "48e10d92af0b259fdb0f90ead303355820bc76d4cf0c0de88f3307fc8596d6a4",
+    "pages": 7,
+    "note": ""
+  },
+  {
     "doc": "datenschutz",
     "id": "datenschutz-2026-10-15-f1",
     "file": "datenschutz-2026-10-15-f1.pdf",
@@ -50,5 +63,18 @@
     "hash": "7caa1a4cb12dabb3e63d14b0a3c6d774c9051092cf6960cd062b48228e30ada6",
     "pages": 8,
     "note": "Vorfassung der Überarbeitung vom 16.10.2026 (u. a. Auftragsmodul, Hinweisseite bei Störungen, NEL-Rechtsgrundlage)."
+  },
+  {
+    "doc": "datenschutz",
+    "id": "datenschutz-2026-10-16-f1",
+    "file": "datenschutz-2026-10-16-f1.pdf",
+    "date": "2026-10-16",
+    "fassung": 1,
+    "from": "2026-10-15T23:04:20.000Z",
+    "stand": "Stand: 16. Oktober 2026",
+    "commit": "7f7d63a",
+    "hash": "3a7d8ffac30e51d3e8784fbd77d302470f9848d1911082e2006c54ad5216cd0a",
+    "pages": 8,
+    "note": ""
   }
 ]
