@@ -2,6 +2,7 @@ import { LinkButton } from '../components/Button'
 import { ReviewCardFace } from '../components/ReviewCardFace'
 import { DELIVERY_SHORT } from '../order/deliveryArea'
 import {
+  CARD_IMAGE_NOTE,
   DASHBOARD_EXTRA_CARD_EUR,
   DASHBOARD_FIRST_CARD_EUR,
   DASHBOARD_INCLUDED_MONTHS,
@@ -157,6 +158,7 @@ export function Pricing() {
               </li>
             ))}
           </ul>
+          <p className="mx-auto mt-4 max-w-4xl text-[13px] leading-snug text-faint">{CARD_IMAGE_NOTE}</p>
         </Reveal>
 
         <Group title="Einzelkarten" lead="Sie wählen die Farbe: Schwarz oder Weiß." plans={singles} />

@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { ReviewCardFace } from '../components/ReviewCardFace'
 import {
-  COLORS, colorSummary, DASHBOARD_EXTRA_CARD_EUR, DASHBOARD_FIRST_CARD_EUR, DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, formatEuro, KOMBI_SINGLE_EUR, PRODUCT_LABEL, PRODUCT_LIST, PRODUCTS,
+  CARD_IMAGE_NOTE, COLORS, colorSummary, DASHBOARD_EXTRA_CARD_EUR, DASHBOARD_FIRST_CARD_EUR, DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, formatEuro, KOMBI_SINGLE_EUR, PRODUCT_LABEL, PRODUCT_LIST, PRODUCTS,
   priceLines, qtyMaxFor, QTY_MIN, quantityText, PAYMENT_NOTE, SHIPPING_EUR, subtotal, total, unitWord, VAT_NOTE, shippingText, type ColorId, type Product,
 } from './catalog'
 import { CheckboxField, ErrorSummary, FieldError, Fieldset, RequiredLegend, TextField, type FormCtx } from './fields'
@@ -144,6 +144,7 @@ function ColorSection({ ctx, qty }: { ctx: FormCtx; qty: number }) {
             </li>
           ))}
         </ul>
+        <p className="mt-3 text-[13px] leading-snug text-faint">{CARD_IMAGE_NOTE}</p>
       </section>
     )
   }
@@ -151,7 +152,7 @@ function ColorSection({ ctx, qty }: { ctx: FormCtx; qty: number }) {
   return (
     <Fieldset legend={<>Farbe{qty > 1 ? ' je Karte' : ''}<span aria-hidden className="ml-0.5 text-mint"> *</span></>}>
       <p id="f-colors-hint" className="mb-3 text-sm text-muted">
-        Die Acrylkarte gibt es in Schwarz und Weiß. {qty > 1 ? 'Wählen Sie für jede Karte eine Farbe.' : 'Wählen Sie die Farbe Ihrer Karte.'}
+        Die Acrylkarte gibt es in Schwarz und Weiß. {CARD_IMAGE_NOTE} {qty > 1 ? 'Wählen Sie für jede Karte eine Farbe.' : 'Wählen Sie die Farbe Ihrer Karte.'}
       </p>
       <div className="space-y-3">
         {list.map((sel, i) => (

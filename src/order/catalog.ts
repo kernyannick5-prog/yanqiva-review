@@ -160,6 +160,8 @@ export const PRODUCT_LIST: readonly Product[] = [PRODUCTS['review-klassik'], PRO
 
 /** Die einzige Ausführung: quadratische Acrylkarte im Standarddesign (Farbe Schwarz oder Weiß). */
 export const PRODUCT_LABEL = 'NFC-Bewertungskarte (Acryl, 12 × 12 cm)'
+/** Hinweis zu allen Kartenabbildungen: Die Website zeigt bewusst kein Google-Logo, die gelieferte Karte schon. */
+export const CARD_IMAGE_NOTE = 'Beispieldarstellung: Die gelieferte Karte trägt das Google-Logo statt des hier gezeigten Stern-Symbols.'
 
 export const isProductId = (v: unknown): v is ProductId => typeof v === 'string' && Object.prototype.hasOwnProperty.call(PRODUCTS, v)
 

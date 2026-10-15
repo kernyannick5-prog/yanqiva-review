@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { LinkButton } from '../components/Button'
 import { MotionToggle } from '../components/MotionToggle'
 import { ReviewCardFace } from '../components/ReviewCardFace'
+import { CARD_IMAGE_NOTE } from '../order/catalog'
 import { useLowPower } from '../lib/lowPower'
 import { useReduceMotion } from '../lib/useReduceMotion'
 import { useLoopVisible } from '../lib/useLoopVisible'
@@ -153,6 +154,7 @@ export function Hero() {
               <span className="text-muted">Ø Bewertung</span>
             </m.div>
           </div>
+          <p className="relative mt-3 text-center text-[13px] leading-snug text-faint sm:absolute sm:inset-x-6 sm:-bottom-14 sm:mt-0">{CARD_IMAGE_NOTE}</p>
         </m.div>
       </Container>
     </section>

@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useInView, useMotionValue, useScroll, useSpring } from 'framer-motion'
 import { Button } from '../components/Button'
 import { Reveal } from '../components/Reveal'
+import { CARD_IMAGE_NOTE } from '../order/catalog'
 import { useLowPower } from '../lib/lowPower'
 import { useMotionPaused } from '../lib/motionPause'
 import { useTouchLayout } from '../lib/useTouchLayout'
@@ -180,6 +181,7 @@ function TouchShowcase() {
         <div className="flex flex-col items-center gap-1.5">
           <PlayButton status={pb.status} onClick={pb.toggle} />
           <p className="text-center text-[13px] leading-snug text-faint">Tippen Sie auf die Szene, um es nochmal zu sehen.</p>
+          <p className="text-center text-[13px] leading-snug text-faint">{CARD_IMAGE_NOTE}</p>
         </div>
         <Captions p={pb.p} />
         <StepList p={pb.p} active={step} onSelect={pb.goStep} />
