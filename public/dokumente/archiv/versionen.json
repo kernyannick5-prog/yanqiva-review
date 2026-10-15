@@ -130,6 +130,19 @@
     "note": "Erinnerungen 14 und 3 Tage (statt 30 und 7 Tage) vor Ablauf des Dashboard-Zugangs; Hinweis auf das Archiv früherer Fassungen."
   },
   {
+    "doc": "agb",
+    "id": "agb-2026-10-15-f1",
+    "file": "agb-2026-10-15-f1.pdf",
+    "date": "2026-10-15",
+    "fassung": 1,
+    "from": "2026-10-15T20:22:43.000Z",
+    "stand": "Stand: 15. Oktober 2026",
+    "commit": "ae19076",
+    "hash": "00768f95baf2db028bbe6767b8fc6d1e52790230973ad6779a134d9055730921",
+    "pages": 7,
+    "note": "Farbwahl (Schwarz oder Weiß), Kombi-Paket (75 €, mit Dashboard 139 €), Dashboard-Staffel (99 € erste Karte, jede weitere 40 €); Verlängerung 15 € pro Monat je Standort."
+  },
+  {
     "doc": "datenschutz",
     "id": "datenschutz-2026-10-09-f1",
     "file": "datenschutz-2026-10-09-f1.pdf",

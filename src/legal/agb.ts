@@ -10,7 +10,7 @@ import type { LegalDoc } from './types'
 export const agb: LegalDoc = {
   title: 'Allgemeine Geschäftsbedingungen',
   badge: 'Rechtliches',
-  updated: 'Stand: 15. Oktober 2026',
+  updated: 'Stand: 15. Oktober 2026 (Fassung 2)',
   pdf: 'agb.pdf',
   archive: 'dokumente/archiv/#agb',
   callouts: [
@@ -142,7 +142,7 @@ export const agb: LegalDoc = {
           p: 'Die Produkte werden ohne Versandverpackung übergeben. Die Gefahr des zufälligen Untergangs und der zufälligen Verschlechterung der Ware geht mit der Übergabe an den Kunden oder an eine von ihm benannte Person am vereinbarten Ort über. Kann die Übergabe aus Gründen, die der Kunde zu vertreten hat, nicht stattfinden, vereinbaren wir einen neuen Termin; die gesetzlichen Regeln zum Annahmeverzug bleiben unberührt. Äußerlich erkennbare Schäden soll der Kunde bei der Übergabe anzeigen.',
         },
         {
-          p: 'Bei der Variante Dashboard schalten wir mit der Übergabe den Zugang zum Dashboard für die E-Mail-Adresse der Ansprechperson frei und teilen dem Kunden das per E-Mail mit. Die Anmeldung erfolgt ohne Passwort über einen Anmeldelink, den der Kunde unter yanqiva-bewertung.de/dashboard/ anfordert.',
+          p: 'Bei den Varianten Dashboard und Kombi mit Dashboard schalten wir mit der Übergabe den Zugang zum Dashboard für die E-Mail-Adresse der Ansprechperson frei und teilen dem Kunden das per E-Mail mit. Die Anmeldung erfolgt ohne Passwort über einen Anmeldelink, den der Kunde unter yanqiva-bewertung.de/dashboard/ anfordert.',
         },
       ],
     },
@@ -160,7 +160,7 @@ export const agb: LegalDoc = {
       heading: '8. Dashboard: Laufzeit, Verlängerung und Verfügbarkeit',
       blocks: [
         {
-          p: 'Bei der Variante Dashboard ist der Zugang zum Dashboard für 2 Monate im einmaligen Preis enthalten. Die 2 Monate beginnen mit dem Tag der Übergabe, an dem wir den Zugang freischalten (Ziffer 6). Der Zugang gilt für den Standort und das Google-Unternehmensprofil der Bestellung und für die mit der Bestellung gelieferten Produkte.',
+          p: 'Bei den Varianten Dashboard und Kombi mit Dashboard ist der Zugang zum Dashboard für 2 Monate im einmaligen Preis enthalten. Die 2 Monate beginnen mit dem Tag der Übergabe, an dem wir den Zugang freischalten (Ziffer 6). Der Zugang gilt für den Standort und das Google-Unternehmensprofil der Bestellung und für die mit der Bestellung gelieferten Produkte.',
         },
         {
           p: `Nach Ablauf der 2 Monate endet der Zugang automatisch, ohne dass es einer Kündigung bedarf. Es gibt keine automatische Verlängerung und kein automatisches Abonnement; ohne aktive Verlängerung auf Wunsch des Kunden entstehen keine weiteren Kosten. ${REMINDER_DAYS_TEXT} vor Ablauf erinnern wir den Kunden per E-Mail an das Ende und die Möglichkeit der Verlängerung.`,
@@ -193,7 +193,7 @@ export const agb: LegalDoc = {
           p: 'Auf dem NFC-Chip und im QR-Code der Produkte ist nicht der Google-Link selbst gespeichert, sondern eine Weiterleitungsadresse von uns (unter der Domain yanqiva-bewertung.de im Pfad /r/ mit einer Kennung des Produkts). Wir leiten Aufrufe dieser Adresse an das hinterlegte Ziel weiter. So kann das Ziel geändert werden, ohne das Produkt neu zu beschreiben.',
         },
         {
-          p: 'Die Weiterleitung ist bei beiden Varianten im einmaligen Preis enthalten und verursacht keine laufenden Kosten. Wir betreiben sie unabhängig davon, ob ein Dashboard gebucht oder verlängert ist.',
+          p: 'Die Weiterleitung ist bei allen Varianten im einmaligen Preis enthalten und verursacht keine laufenden Kosten. Wir betreiben sie unabhängig davon, ob ein Dashboard gebucht oder verlängert ist.',
         },
         {
           p: 'Wir betreiben die Weiterleitung, solange wir YANQIVA REVIEW anbieten, mindestens jedoch 24 Monate ab Lieferung. Eine zeitlich unbegrenzte Funktion können wir nicht zusagen, weil sie vom Betrieb unserer Systeme, der Domain und von technischen Dienstleistern abhängt. Stellen wir den Betrieb der Weiterleitung ein, kündigen wir das dem Kunden mindestens sechs Monate vorher per E-Mail an und teilen ihm den direkten Link zu seinem Google-Bewertungsformular mit, damit er ihn weiter nutzen kann, zum Beispiel in einem eigenen QR-Code. Für die Verfügbarkeit der Weiterleitung gilt die Regelung zur Verfügbarkeit des Dashboards in Ziffer 8 entsprechend.',

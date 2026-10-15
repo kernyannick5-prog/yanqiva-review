@@ -59,7 +59,7 @@ function CardSwatch({ color }: { color: ColorId }) {
 /** Preisunterzeile je Paket (Staffel bzw. Vergleich offen ausweisen). */
 function priceCaption(p: Product): string {
   if (p.combo && p.dashboard) return `einmalig für 2 Karten (${formatEuro(DASHBOARD_FIRST_CARD_EUR)} + ${formatEuro(DASHBOARD_EXTRA_CARD_EUR)})`
-  if (p.combo) return `einmalig für 2 Karten (einzeln ${formatEuro(KOMBI_SINGLE_EUR)})`
+  if (p.combo) return `einmalig für 2 Karten (zwei Klassik-Karten einzeln ${formatEuro(KOMBI_SINGLE_EUR)})`
   if (p.dashboard) return `für die erste Karte, jede weitere ${formatEuro(DASHBOARD_EXTRA_CARD_EUR)}`
   return 'einmalig je Karte'
 }

@@ -128,7 +128,7 @@ export function LoginView({ notice }: { notice?: string }) {
         </p>
       </form>
       <p className="mt-6 text-[13px] leading-snug text-faint">
-        Sie haben noch keinen Zugang? Das Dashboard gehört zur Variante Dashboard von YANQIVA REVIEW. Fragen: <a href="mailto:support@yanqiva.de" className="underline underline-offset-2">support@yanqiva.de</a>
+        Sie haben noch keinen Zugang? Das Dashboard gehört zu den Varianten Dashboard und Kombi mit Dashboard von YANQIVA REVIEW. Fragen: <a href="mailto:support@yanqiva.de" className="underline underline-offset-2">support@yanqiva.de</a>
       </p>
     </div>
   )
