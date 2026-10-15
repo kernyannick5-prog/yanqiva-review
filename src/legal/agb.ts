@@ -10,7 +10,7 @@ import type { LegalDoc } from './types'
 export const agb: LegalDoc = {
   title: 'Allgemeine Geschäftsbedingungen',
   badge: 'Rechtliches',
-  updated: 'Stand: 15. Oktober 2026 (Fassung 2)',
+  updated: 'Stand: 15. Oktober 2026 (Fassung 3)',
   pdf: 'agb.pdf',
   archive: 'dokumente/archiv/#agb',
   callouts: [
@@ -70,7 +70,7 @@ export const agb: LegalDoc = {
         {
           list: [
             'YANQIVA REVIEW Klassik: Lieferung und Einrichtung der Produkte mit Weiterleitung zum Google-Bewertungsformular. Laufende Kosten fallen nicht an.',
-            'YANQIVA REVIEW Dashboard: Leistungen wie Klassik und zusätzlich ein Zugang zu einem Online-Dashboard für 2 Monate (Ziffer 8). Das Dashboard zeigt Statistiken zur Zahl der Aufrufe der Weiterleitung über NFC und QR-Code und ermöglicht es dem Kunden, das Ziel der Weiterleitung selbst zu ändern. Ein Google-Bewertungslink als Ziel wird sofort übernommen; ein anderes https-Ziel wird erst nach Freigabe durch uns wirksam (Ziffer 8). Technisch bedingt wirken Änderungen in der Regel innerhalb einer Minute.',
+            'YANQIVA REVIEW Dashboard: Leistungen wie Klassik und zusätzlich ein Zugang zu einem Online-Dashboard für 6 Monate (Ziffer 8). Das Dashboard zeigt Statistiken zur Zahl der Aufrufe der Weiterleitung über NFC und QR-Code und ermöglicht es dem Kunden, das Ziel der Weiterleitung selbst zu ändern. Ein Google-Bewertungslink als Ziel wird sofort übernommen; ein anderes https-Ziel wird erst nach Freigabe durch uns wirksam (Ziffer 8). Technisch bedingt wirken Änderungen in der Regel innerhalb einer Minute.',
             'YANQIVA REVIEW Kombi: je eine schwarze und eine weiße Karte; Leistungen wie Klassik.',
             'YANQIVA REVIEW Kombi mit Dashboard: je eine schwarze und eine weiße Karte; Leistungen wie Dashboard.',
           ],
@@ -160,10 +160,10 @@ export const agb: LegalDoc = {
       heading: '8. Dashboard: Laufzeit, Verlängerung und Verfügbarkeit',
       blocks: [
         {
-          p: 'Bei den Varianten Dashboard und Kombi mit Dashboard ist der Zugang zum Dashboard für 2 Monate im einmaligen Preis enthalten. Die 2 Monate beginnen mit dem Tag der Übergabe, an dem wir den Zugang freischalten (Ziffer 6). Der Zugang gilt für den Standort und das Google-Unternehmensprofil der Bestellung und für die mit der Bestellung gelieferten Produkte.',
+          p: 'Bei den Varianten Dashboard und Kombi mit Dashboard ist der Zugang zum Dashboard für 6 Monate im einmaligen Preis enthalten. Die 6 Monate beginnen mit dem Tag der Übergabe, an dem wir den Zugang freischalten (Ziffer 6). Der Zugang gilt für den Standort und das Google-Unternehmensprofil der Bestellung und für die mit der Bestellung gelieferten Produkte. Alle Karten der Varianten Dashboard und Kombi mit Dashboard, die für denselben Standort geliefert werden, auch aus späteren Bestellungen, teilen sich einen Zugang und eine gemeinsame Verlängerung. Für jede später bestellte Dashboard-Karte gelten die im Preis enthaltenen 6 Monate ab ihrer Übergabe; eine Verlängerung umfasst alle Dashboard-Karten des Standorts. Karten der Varianten Klassik und Kombi sind nicht im Dashboard enthalten; für sie werden keine Statistiken angezeigt.',
         },
         {
-          p: `Nach Ablauf der 2 Monate endet der Zugang automatisch, ohne dass es einer Kündigung bedarf. Es gibt keine automatische Verlängerung und kein automatisches Abonnement; ohne aktive Verlängerung auf Wunsch des Kunden entstehen keine weiteren Kosten. ${REMINDER_DAYS_TEXT} vor Ablauf erinnern wir den Kunden per E-Mail an das Ende und die Möglichkeit der Verlängerung.`,
+          p: `Nach Ablauf der 6 Monate endet der Zugang automatisch, ohne dass es einer Kündigung bedarf. Es gibt keine automatische Verlängerung und kein automatisches Abonnement; ohne aktive Verlängerung auf Wunsch des Kunden entstehen keine weiteren Kosten. ${REMINDER_DAYS_TEXT} vor Ablauf erinnern wir den Kunden per E-Mail an das Ende und die Möglichkeit der Verlängerung.`,
         },
         {
           p: 'Ohne Verlängerung funktionieren die Produkte weiter: Die Weiterleitung führt dann wie bei der Variante Klassik direkt zum zuletzt eingestellten Google-Bewertungsformular. Ein eigenes Ziel, das kein Google-Bewertungslink ist, wird nicht mehr verwendet. Statistiken und die Änderung des Ziels im Dashboard stehen nicht mehr zur Verfügung; Änderungen des Ziels nehmen wir dann auf Anfrage nach Ziffer 9 vor. Bis 90 Tage nach dem Ende kann sich der Kunde noch anmelden und eine Verlängerung anfragen; danach löschen wir die Nutzerkonten, die Statistiken und ein eigenes Ziel.',

@@ -44,7 +44,7 @@ export const QTY_MIN = 1
 export const QTY_MAX = 10
 export const SHIPPING_EUR = 0
 /** Im Paketpreis enthaltene Dashboard-Laufzeit in Monaten. Muss zu AGB Ziffer 8 und zum Worker (zugangsklar: DASHBOARD_INCLUDED_MONTHS) passen. */
-export const DASHBOARD_INCLUDED_MONTHS = 2
+export const DASHBOARD_INCLUDED_MONTHS = 6
 /** Verlängerung nur auf Wunsch: Euro je Monat und Standort, monatlich kündbar, keine automatische Verlängerung. */
 export const DASHBOARD_RENEWAL_EUR = 15
 /** Dashboard-Paket: erste Karte und jede weitere Karte. Muss zum Worker passen (zugangsklar: DASHBOARD_FIRST_CARD_EUR / DASHBOARD_EXTRA_CARD_EUR; Sync-Test). */

@@ -130,7 +130,7 @@ function Group({ title, lead, plans }: { title: string; lead: string; plans: Pla
   )
 }
 
-/** Preise (Endpreise, Kleinunternehmer; Dashboard 2 Monate inklusive, danach optional; Dashboard-Staffel; Kombi aus schwarzer und weißer Karte). */
+/** Preise (Endpreise, Kleinunternehmer; Dashboard 6 Monate inklusive, danach optional; Dashboard-Staffel; Kombi aus schwarzer und weißer Karte). */
 export function Pricing() {
   return (
     <section id="preise" className="section-y section-tint relative overflow-hidden" aria-labelledby="preise-title">
