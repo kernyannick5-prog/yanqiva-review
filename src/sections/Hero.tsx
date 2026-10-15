@@ -126,6 +126,8 @@ export function Hero() {
 
           {/* WCAG 2.2.2: Pause-Schalter direkt bei den animierten Bereichen (zusätzlich zum Seitenfuß) */}
           <MotionToggle className="mt-4 min-h-6 rounded text-[13px] text-faint underline underline-offset-2 hover:text-text aria-pressed:text-mint" />
+          {/* Ab lg in der Textspalte: dort kann kein schwebender Chip darüber wandern */}
+          <p className="mt-6 hidden max-w-md text-[13px] leading-snug text-faint lg:block">{CARD_IMAGE_NOTE}</p>
         </div>
 
         <m.div
@@ -154,8 +156,10 @@ export function Hero() {
               <span className="text-muted">Ø Bewertung</span>
             </m.div>
           </div>
-          <p className="relative mt-3 text-center text-[13px] leading-snug text-faint sm:absolute sm:inset-x-6 sm:-bottom-14 sm:mt-0">{CARD_IMAGE_NOTE}</p>
         </m.div>
+
+        {/* Hinweis zur Kartenabbildung: unter lg im Fluss unter der Karte, mit Abstand zu den Parallax-Chips */}
+        <p className="-mt-2 text-center text-[13px] leading-snug text-faint sm:mt-6 lg:hidden">{CARD_IMAGE_NOTE}</p>
       </Container>
     </section>
   )
