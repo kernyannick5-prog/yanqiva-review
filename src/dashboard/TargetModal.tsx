@@ -24,7 +24,7 @@ const isHttps = (v: string) => {
   }
 }
 
-/** Ziel einer Karte ändern: Google-Links sofort, andere https-Ziele nach Freigabe (Status „pending“). */
+/** Ziel einer Karte ändern: Google-Links ohne Freigabe, andere https-Ziele nach Freigabe (Status „pending“). */
 export function TargetModal({ card, token, onClose, onDone, onExpired }: TargetModalProps) {
   const [value, setValue] = useState(card.customStatus === 'pending' && card.customUrl ? card.customUrl : (card.effectiveTarget ?? card.googleUrl))
   const [submitted, setSubmitted] = useState(false)
@@ -38,7 +38,7 @@ export function TargetModal({ card, token, onClose, onDone, onExpired }: TargetM
   const hint = !trimmed
     ? 'Zum Beispiel der Google-Bewertungslink Ihres Unternehmens.'
     : google
-      ? 'Google-Bewertungslink erkannt: wird sofort aktiv (in der Regel innerhalb einer Minute).'
+      ? 'Google-Bewertungslink erkannt: wird direkt übernommen (in der Regel innerhalb einer Minute).'
       : isHttps(trimmed)
         ? 'Kein Google-Bewertungslink: YANQIVA prüft das Ziel zuerst. Bis zur Freigabe bleibt das bisherige Ziel aktiv.'
         : undefined
@@ -90,7 +90,7 @@ export function TargetModal({ card, token, onClose, onDone, onExpired }: TargetM
       <form onSubmit={submit} noValidate className="space-y-4">
         <div className="rounded-xl border border-line bg-white/[0.03] p-3 text-[13px] leading-relaxed text-muted">
           <p>
-            <strong className="text-text">Google-Bewertungslinks</strong> sind sofort aktiv.
+            <strong className="text-text">Google-Bewertungslinks</strong> sind in der Regel innerhalb einer Minute aktiv.
           </p>
           <p className="mt-1.5">
             <strong className="text-text">Andere https-Adressen</strong> (z. B. eine eigene Seite Ihres Unternehmens) prüft YANQIVA zuerst. Bis zur Freigabe bleibt das bisherige Ziel aktiv (Status „wartet auf Freigabe“).

@@ -114,7 +114,7 @@ export function Captions({ p, className = "" }: { p: MotionValue<number>; classN
         Ein Tipp mit dem Smartphone genügt.
       </Fade>
       <Fade p={p} win={[0.64, 0.7, 0.82, 0.86]}>
-        Die Bewertungsseite öffnet sich sofort. Ohne App, ohne Suchen.
+        Die Bewertungsseite öffnet sich direkt. Ohne App, ohne Suchen.
       </Fade>
       <Fade p={p} win={[0.84, 0.9, 1, 1]}>
         <span className="text-gradient">Fertig. In wenigen Sekunden.</span>

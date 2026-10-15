@@ -10,7 +10,7 @@ import type { LegalDoc } from './types'
 export const agb: LegalDoc = {
   title: 'Allgemeine Geschäftsbedingungen',
   badge: 'Rechtliches',
-  updated: 'Stand: 15. Oktober 2026 (Fassung 3)',
+  updated: 'Stand: 16. Oktober 2026',
   pdf: 'agb.pdf',
   archive: 'dokumente/archiv/#agb',
   callouts: [
@@ -47,7 +47,7 @@ export const agb: LegalDoc = {
           p: 'Technischer Ablauf: Im Bestellformular wählt der Kunde Variante und Menge, macht die Angaben zur Einrichtung sowie seine Kontakt- und Adressdaten. Im letzten Schritt zeigt das Formular eine Übersicht aller Angaben und Preise. Bis zum Absenden kann der Kunde jeden Schritt über „Ändern“ oder die Zurück-Funktion erneut aufrufen und seine Eingaben korrigieren; Pflichtfelder werden vor dem Absenden auf Vollständigkeit geprüft. Mit Klick auf die Schaltfläche „Zahlungspflichtig bestellen“ gibt der Kunde ein verbindliches Angebot zum Kauf der gewählten Produkte ab (Bestellung).',
         },
         {
-          p: 'Den Eingang der Bestellung bestätigen wir unverzüglich automatisch per E-Mail (Eingangsbestätigung). Die Eingangsbestätigung ist noch keine Annahme der Bestellung.',
+          p: 'Den Eingang der Bestellung bestätigen wir in der Regel unverzüglich automatisch per E-Mail (Eingangsbestätigung); erhalten Sie keine Bestätigung, wenden Sie sich bitte an support@yanqiva.de. Die Eingangsbestätigung ist noch keine Annahme der Bestellung.',
         },
         {
           p: 'Der Vertrag kommt erst zustande, wenn wir die Bestellung durch eine Auftragsbestätigung per E-Mail annehmen. Mit der Auftragsbestätigung erhält der Kunde eine Rechnung oder eine Zahlungsaufforderung (Ziffer 5). In der Regel senden wir die Auftragsbestätigung innerhalb eines Werktags. An seine Bestellung ist der Kunde bis zum Ablauf von fünf Werktagen nach dem Absenden gebunden; nehmen wir sie bis dahin nicht an, ist er nicht mehr gebunden. Lässt sich das angegebene Google-Unternehmensprofil nicht eindeutig zuordnen oder sind Angaben unklar, fragen wir vor der Auftragsbestätigung nach.',
@@ -70,7 +70,7 @@ export const agb: LegalDoc = {
         {
           list: [
             'YANQIVA REVIEW Klassik: Lieferung und Einrichtung der Produkte mit Weiterleitung zum Google-Bewertungsformular. Laufende Kosten fallen nicht an.',
-            'YANQIVA REVIEW Dashboard: Leistungen wie Klassik und zusätzlich ein Zugang zu einem Online-Dashboard für 6 Monate (Ziffer 8). Das Dashboard zeigt Statistiken zur Zahl der Aufrufe der Weiterleitung über NFC und QR-Code und ermöglicht es dem Kunden, das Ziel der Weiterleitung selbst zu ändern. Ein Google-Bewertungslink als Ziel wird sofort übernommen; ein anderes https-Ziel wird erst nach Freigabe durch uns wirksam (Ziffer 8). Technisch bedingt wirken Änderungen in der Regel innerhalb einer Minute.',
+            'YANQIVA REVIEW Dashboard: Leistungen wie Klassik und zusätzlich ein Zugang zu einem Online-Dashboard für 6 Monate (Ziffer 8). Das Dashboard zeigt Statistiken zur Zahl der Aufrufe der Weiterleitung über NFC und QR-Code und ermöglicht es dem Kunden, das Ziel der Weiterleitung selbst zu ändern. Ein Google-Bewertungslink als Ziel wird ohne Freigabe übernommen; ein anderes https-Ziel wird erst nach Freigabe durch uns wirksam (Ziffer 8). Technisch bedingt wirken Änderungen in der Regel innerhalb einer Minute.',
             'YANQIVA REVIEW Kombi: je eine schwarze und eine weiße Karte; Leistungen wie Klassik.',
             'YANQIVA REVIEW Kombi mit Dashboard: je eine schwarze und eine weiße Karte; Leistungen wie Dashboard.',
           ],
@@ -160,7 +160,7 @@ export const agb: LegalDoc = {
       heading: '8. Dashboard: Laufzeit, Verlängerung und Verfügbarkeit',
       blocks: [
         {
-          p: 'Bei den Varianten Dashboard und Kombi mit Dashboard ist der Zugang zum Dashboard für 6 Monate im einmaligen Preis enthalten. Die 6 Monate beginnen mit dem Tag der Übergabe, an dem wir den Zugang freischalten (Ziffer 6). Der Zugang gilt für den Standort und das Google-Unternehmensprofil der Bestellung und für die mit der Bestellung gelieferten Produkte. Alle Karten der Varianten Dashboard und Kombi mit Dashboard, die für denselben Standort geliefert werden, auch aus späteren Bestellungen, teilen sich einen Zugang und eine gemeinsame Verlängerung. Für jede später bestellte Dashboard-Karte gelten die im Preis enthaltenen 6 Monate ab ihrer Übergabe; eine Verlängerung umfasst alle Dashboard-Karten des Standorts. Karten der Varianten Klassik und Kombi sind nicht im Dashboard enthalten; für sie werden keine Statistiken angezeigt.',
+          p: 'Bei den Varianten Dashboard und Kombi mit Dashboard ist der Zugang zum Dashboard für 6 Monate im einmaligen Preis enthalten. Die 6 Monate beginnen mit dem Tag der Übergabe, an dem wir den Zugang freischalten (Ziffer 6). Der Zugang gilt für den Standort und das Google-Unternehmensprofil der Bestellung und für die mit der Bestellung gelieferten Produkte. Alle Karten der Varianten Dashboard und Kombi mit Dashboard, die für denselben Standort geliefert werden, auch aus späteren Bestellungen, teilen sich einen Zugang und eine gemeinsame Verlängerung. Für jede später bestellte Dashboard-Karte gelten die im Preis enthaltenen 6 Monate ab ihrer Übergabe; eine Verlängerung umfasst alle Dashboard-Karten des Standorts. Der gemeinsame Zugang endet mit dem spätesten Laufzeitende der Dashboard-Karten des Standorts; eine Verlängerung beginnt erst danach. Karten der Varianten Klassik und Kombi sind nicht im Dashboard enthalten; für sie werden keine Statistiken angezeigt.',
         },
         {
           p: `Nach Ablauf der 6 Monate endet der Zugang automatisch, ohne dass es einer Kündigung bedarf. Es gibt keine automatische Verlängerung und kein automatisches Abonnement; ohne aktive Verlängerung auf Wunsch des Kunden entstehen keine weiteren Kosten. ${REMINDER_DAYS_TEXT} vor Ablauf erinnern wir den Kunden per E-Mail an das Ende und die Möglichkeit der Verlängerung.`,
@@ -169,7 +169,7 @@ export const agb: LegalDoc = {
           p: 'Ohne Verlängerung funktionieren die Produkte weiter: Die Weiterleitung führt dann wie bei der Variante Klassik direkt zum zuletzt eingestellten Google-Bewertungsformular. Ein eigenes Ziel, das kein Google-Bewertungslink ist, wird nicht mehr verwendet. Statistiken und die Änderung des Ziels im Dashboard stehen nicht mehr zur Verfügung; Änderungen des Ziels nehmen wir dann auf Anfrage nach Ziffer 9 vor. Bis 90 Tage nach dem Ende kann sich der Kunde noch anmelden und eine Verlängerung anfragen; danach löschen wir die Nutzerkonten, die Statistiken und ein eigenes Ziel.',
         },
         {
-          p: 'Verlängerung: Der Kunde kann das Dashboard verlängern, indem er die Verlängerung ausdrücklich in Textform (zum Beispiel per E-Mail oder über „Verlängerung anfragen“ im Dashboard) beauftragt und wir sie bestätigen. Erst mit unserer Bestätigung kommt die Verlängerung zustande. Sie schließt an das Ende des laufenden Zugangs an; ist der Zugang bereits beendet, beginnt sie mit unserer Bestätigung. Die Verlängerung kostet 15 € pro Monat je Standort, unabhängig davon, wie viele Karten für den Standort geliefert wurden (Endpreis, keine Umsatzsteuer nach § 19 UStG, vorbehaltlich Ziffer 5) und wird monatlich im Voraus in Rechnung gestellt; Zahlungsziel sind 14 Tage. Sie läuft auf unbestimmte Zeit und kann von beiden Seiten jederzeit zum Ende des laufenden Kalendermonats gekündigt werden. Kündigungen bedürfen der Textform; eine E-Mail genügt. Das Recht zur Kündigung aus wichtigem Grund bleibt unberührt.',
+          p: 'Verlängerung: Der Kunde kann das Dashboard verlängern, indem er die Verlängerung ausdrücklich in Textform (zum Beispiel per E-Mail oder über „Verlängerung anfragen“ im Dashboard) beauftragt und wir sie bestätigen. Erst mit unserer Bestätigung kommt die Verlängerung zustande. Sie schließt an das Ende des laufenden Zugangs an; ist der Zugang bereits beendet, beginnt sie mit unserer Bestätigung. Der erste Verlängerungsmonat läuft bis zum Ende des Kalendermonats und wird tagesgenau anteilig berechnet; danach wird je Kalendermonat abgerechnet. Die Verlängerung kostet 15 € pro Monat je Standort, unabhängig davon, wie viele Karten für den Standort geliefert wurden (Endpreis, keine Umsatzsteuer nach § 19 UStG, vorbehaltlich Ziffer 5) und wird monatlich im Voraus in Rechnung gestellt; Zahlungsziel sind 14 Tage. Sie läuft auf unbestimmte Zeit und kann von beiden Seiten jederzeit zum Ende des laufenden Kalendermonats gekündigt werden. Kündigungen bedürfen der Textform; eine E-Mail genügt. Das Recht zur Kündigung aus wichtigem Grund bleibt unberührt.',
         },
         {
           p: 'Ändern wir den Preis der Verlängerung, teilen wir das dem Kunden mindestens einen Monat vor Wirksamwerden in Textform mit. Der Kunde kann die Verlängerung bis dahin zum Ende des Kalendermonats kündigen, in dem die Änderung wirksam wird.',
@@ -181,7 +181,7 @@ export const agb: LegalDoc = {
           p: 'Auf Wunsch des Kunden schalten wir weitere E-Mail-Adressen für das Dashboard frei. Der Kunde schützt die freigeschalteten E-Mail-Postfächer vor unbefugtem Zugriff, gibt Anmeldelinks nicht weiter und teilt uns unverzüglich mit, wenn eine Person keinen Zugang mehr haben soll. Über jede Änderung eines Ziels informieren wir alle Nutzer des Kunden per E-Mail.',
         },
         {
-          p: 'Als Ziel der Weiterleitung darf der Kunde Google-Bewertungslinks einstellen (sofort übernommen) sowie andere https-Seiten, die zu seinem Unternehmen gehören und deren Inhalt rechtmäßig ist. Diese prüfen wir vor der Freigabe; bis dahin bleibt das bisherige Ziel aktiv. Je Tag sind bis zu 10 Zieländerungen möglich. Ziffer 10 gilt auch für selbst eingestellte Ziele. Leitet ein Ziel offensichtlich auf rechtswidrige Inhalte, Schadsoftware oder Seiten zum Abgreifen von Zugangsdaten, können wir die Weiterleitung bis zur Klärung auf das zuvor eingestellte Ziel zurücksetzen oder vorübergehend sperren; wir informieren den Kunden darüber unverzüglich.',
+          p: 'Als Ziel der Weiterleitung darf der Kunde Google-Bewertungslinks einstellen (ohne Freigabe übernommen) sowie andere https-Seiten, die zu seinem Unternehmen gehören und deren Inhalt rechtmäßig ist. Diese prüfen wir vor der Freigabe; bis dahin bleibt das bisherige Ziel aktiv. Je Tag sind bis zu 10 Zieländerungen möglich. Ziffer 10 gilt auch für selbst eingestellte Ziele. Leitet ein Ziel offensichtlich auf rechtswidrige Inhalte, Schadsoftware oder Seiten zum Abgreifen von Zugangsdaten, können wir die Weiterleitung bis zur Klärung auf das zuvor eingestellte Ziel zurücksetzen oder vorübergehend sperren; wir informieren den Kunden darüber unverzüglich.',
         },
       ],
     },
@@ -199,7 +199,7 @@ export const agb: LegalDoc = {
           p: 'Wir betreiben die Weiterleitung, solange wir YANQIVA REVIEW anbieten, mindestens jedoch 24 Monate ab Lieferung. Eine zeitlich unbegrenzte Funktion können wir nicht zusagen, weil sie vom Betrieb unserer Systeme, der Domain und von technischen Dienstleistern abhängt. Stellen wir den Betrieb der Weiterleitung ein, kündigen wir das dem Kunden mindestens sechs Monate vorher per E-Mail an und teilen ihm den direkten Link zu seinem Google-Bewertungsformular mit, damit er ihn weiter nutzen kann, zum Beispiel in einem eigenen QR-Code. Für die Verfügbarkeit der Weiterleitung gilt die Regelung zur Verfügbarkeit des Dashboards in Ziffer 8 entsprechend.',
         },
         {
-          p: 'Ist unser Weiterleitungsdienst gestört, leiten Ersatzseiten zum zuletzt bekannten Google-Bewertungslink weiter. In dieser Zeit wirkt ein eigenes Ziel nicht, und Aufrufe werden nicht gezählt. Die Ersatzseiten aktualisieren wir in der Regel täglich; kurz nach einer Änderung kann daher vorübergehend ein älterer Google-Link greifen.',
+          p: 'Ist unser Weiterleitungsdienst gestört, zeigt die Weiterleitungsadresse vorübergehend einen Hinweis und versucht es automatisch erneut; eine Weiterleitung findet in dieser Zeit nicht statt, und Aufrufe werden nicht gezählt. Störungen beheben wir nach Ziffer 8 in angemessener Frist.',
         },
         {
           p: 'Ändert sich das Google-Unternehmensprofil des Kunden oder der Bewertungslink, passen wir das Ziel auf Anfrage per E-Mail an support@yanqiva.de in angemessener Frist an. Kunden mit aktivem Dashboard können das Ziel selbst ändern.',
@@ -223,6 +223,8 @@ export const agb: LegalDoc = {
           list: [
             'bietet er keine Gegenleistung für Bewertungen an, zum Beispiel Rabatte, Gutscheine, Geschenke oder Teilnahme an Gewinnspielen,',
             'bittet er nicht selektiv nur zufriedene Kunden um Bewertungen und filtert Bewertungen nicht vor (kein sogenanntes Review-Gating), zum Beispiel durch eine vorgeschaltete Zufriedenheitsabfrage, die nur zufriedene Kunden zu Google weiterleitet,',
+            'setzt er Kunden vor Ort nicht unter Druck, eine Bewertung abzugeben, und bittet nicht um bestimmte Inhalte (etwa die Nennung von Mitarbeitenden),',
+            'gibt er Mitarbeitenden keine Zielvorgaben für die Zahl oder den Inhalt von Bewertungen,',
             'gibt er keine Bewertungen über sein eigenes Unternehmen ab, lässt keine durch Mitarbeitende oder beauftragte Dritte abgeben und kauft keine Bewertungen,',
             'stellt er Bewertungen in seiner Werbung nicht falsch oder irreführend dar.',
           ],

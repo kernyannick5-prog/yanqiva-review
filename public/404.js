@@ -1,6 +1,6 @@
-// Notfall-Fallback für /r/<slug>: GitHub Pages liefert 404.html für jeden unbekannten Pfad. Produktionskarten laufen über
+// Störungs-Hinweis für /r/<slug>: GitHub Pages liefert 404.html für jeden unbekannten Pfad. Produktionskarten laufen über
 // den Worker (yanqiva-redirect, Route "Fail open"); landet ein Scan hier, ist der Worker gerade nicht erreichbar.
-// Dann zeigen wir statt "Seite nicht gefunden" eine freundliche Wiederholungs-Seite mit höchstens 3 automatischen
+// Es findet keine Weiterleitung statt (kein Karten-Snapshot im Build). Wir zeigen statt "Seite nicht gefunden" eine Hinweis-Seite mit höchstens 3 automatischen
 // Neuversuchen (je 5 s). Zähler im URL-Fragment (#t1..#t3): wird nie an einen Server gesendet, kein Browser-Speicher.
 // Alle anderen Pfade zeigen unverändert die normale 404.
 (function () {

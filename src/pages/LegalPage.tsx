@@ -3,13 +3,24 @@ import type { LegalCallout, LegalDoc } from '../legal/types'
 import { Footer } from '../sections/Footer'
 
 const BASE = import.meta.env.BASE_URL
-const PLACEHOLDER = /(\[[^\]]+\])/g
+// Platzhalter in eckigen Klammern sowie die Kontaktangaben (E-Mail-Adresse, Kontaktformular), die als Link dargestellt werden
+const PLACEHOLDER = /(\[[^\]]+\]|support@yanqiva\.de|yanqiva\.de\/kontakt)/g
+const LINK_CLASS = 'text-mint underline underline-offset-2'
 const PLACEHOLDER_HINT = 'Platzhalter – vor Produktivbetrieb ergänzen'
 
-/** Hebt jede [Platzhalter]-Stelle als <mark> hervor. */
+/** Hebt jede [Platzhalter]-Stelle als <mark> hervor und verlinkt die E-Mail-Adresse und das Kontaktformular von yanqiva.de. */
 function renderText(text: string): ReactNode[] {
   return text.split(PLACEHOLDER).map((part, i) =>
-    /^\[[^\]]+\]$/.test(part) ? (
+    part === 'support@yanqiva.de' ? (
+      <a key={i} href="mailto:support@yanqiva.de" className={LINK_CLASS}>
+        {part}
+      </a>
+    ) : part === 'yanqiva.de/kontakt' ? (
+      <a key={i} href="https://yanqiva.de/kontakt" target="_blank" rel="noopener noreferrer" className={LINK_CLASS}>
+        {part}
+        <span className="sr-only"> (öffnet in neuem Tab)</span>
+      </a>
+    ) : /^\[[^\]]+\]$/.test(part) ? (
       <mark
         key={i}
         title={PLACEHOLDER_HINT}

@@ -1,1 +1,54 @@
-[]
+[
+  {
+    "doc": "agb",
+    "id": "agb-2026-10-15-f1",
+    "file": "agb-2026-10-15-f1.pdf",
+    "date": "2026-10-15",
+    "fassung": 1,
+    "from": "2026-10-15T20:22:43.000Z",
+    "stand": "Stand: 15. Oktober 2026",
+    "commit": "ae19076",
+    "hash": "00768f95baf2db028bbe6767b8fc6d1e52790230973ad6779a134d9055730921",
+    "pages": 7,
+    "note": "Farbwahl (Schwarz oder Weiß), Kombi-Paket (75 €, mit Dashboard 139 €), Dashboard-Staffel (99 € erste Karte, jede weitere 40 €); Verlängerung 15 € pro Monat je Standort."
+  },
+  {
+    "doc": "agb",
+    "id": "agb-2026-10-15-f2",
+    "file": "agb-2026-10-15-f2.pdf",
+    "date": "2026-10-15",
+    "fassung": 2,
+    "from": "2026-10-15T20:27:44.000Z",
+    "stand": "Stand: 15. Oktober 2026 (Fassung 2)",
+    "commit": "bdb1dfb",
+    "hash": "67307de6d6a71adf7f28ef19881c1018ac833e7a2f1b3c8326ccf38b2f4b579c",
+    "pages": 7,
+    "note": "Ziffern 6, 8 und 9 gelten für alle vier Varianten."
+  },
+  {
+    "doc": "agb",
+    "id": "agb-2026-10-15-f3",
+    "file": "agb-2026-10-15-f3.pdf",
+    "date": "2026-10-15",
+    "fassung": 3,
+    "from": "2026-10-15T21:12:39.000Z",
+    "stand": "Stand: 15. Oktober 2026 (Fassung 3)",
+    "commit": "50d5716",
+    "hash": "191eb3e0e28e2a0fcfd055a15ef4432c9de846e8618bbe74a6d083a31aa3b942",
+    "pages": 7,
+    "note": "Dashboard 6 Monate inklusive; Dashboard-Karten eines Standorts teilen Zugang und Verlängerung, Klassik nicht enthalten."
+  },
+  {
+    "doc": "datenschutz",
+    "id": "datenschutz-2026-10-15-f1",
+    "file": "datenschutz-2026-10-15-f1.pdf",
+    "date": "2026-10-15",
+    "fassung": 1,
+    "from": "2026-10-15T20:22:43.000Z",
+    "stand": "Stand: 15. Oktober 2026",
+    "commit": "a85e809",
+    "hash": "7caa1a4cb12dabb3e63d14b0a3c6d774c9051092cf6960cd062b48228e30ada6",
+    "pages": 8,
+    "note": "Vorfassung der Überarbeitung vom 16.10.2026 (u. a. Auftragsmodul, Hinweisseite bei Störungen, NEL-Rechtsgrundlage)."
+  }
+]

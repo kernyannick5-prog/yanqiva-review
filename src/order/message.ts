@@ -1,4 +1,5 @@
 import { PRODUCT_LABEL, colorSummary, formatEuro, priceLines, PRODUCTS, quantityText, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
+import { AGB_VERSION } from '../config/terms'
 import { colorCounts, colorsWire, productOf, qtyOf, trimmed, type OrderForm } from './state'
 
 export const MESSAGE_MAX = 3500
@@ -80,6 +81,10 @@ export function buildFields(input: OrderForm): Record<string, string> {
     profileQuery: f.profileQuery,
     notes: f.notes,
     orderKey: f.orderKey,
+    // Bestätigungen aus dem letzten Schritt; der Worker lehnt Bestellungen ohne sie ab (agbVersion = Fassung der AGB, die angezeigt wurde)
+    b2b: f.confirmB2B ? 'ja' : '',
+    agbAccepted: f.acceptAgb ? 'ja' : '',
+    agbVersion: f.confirmB2B && f.acceptAgb ? AGB_VERSION : '',
   }
   for (const k of Object.keys(out)) if (out[k] === '') delete out[k]
   return out

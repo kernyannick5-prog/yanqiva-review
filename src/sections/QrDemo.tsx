@@ -84,7 +84,7 @@ export function QrDemo() {
 
           <Reveal delay={0.15} className="mt-5">
             <p className="max-w-[65ch] text-[15px] leading-relaxed text-muted sm:text-base">
-              Auf der Karte steht nur die Redirect-URL. Das Ziel lässt sich ändern, ohne die Karte neu zu programmieren: mit aktivem Dashboard selbst (Google-Links sofort, andere Ziele nach unserer Freigabe), sonst auf Anfrage per E-Mail.
+              Auf der Karte steht nur die Redirect-URL. Das Ziel lässt sich ändern, ohne die Karte neu zu programmieren: mit aktivem Dashboard selbst (Google-Links ohne Freigabe, andere Ziele nach unserer Freigabe), sonst auf Anfrage per E-Mail.
             </p>
             <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center [&>a]:w-full sm:[&>a]:w-auto">
               <LinkButton href={demoUrl} target="_blank" rel="noopener">

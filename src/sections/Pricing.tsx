@@ -84,7 +84,7 @@ function PlanCard({ plan, delay }: { plan: Plan; delay: number }) {
         <div className={`relative flex h-full flex-col rounded-3xl p-6 sm:p-8 ${plan.accent ? 'glass-accent' : 'glass'}`}>
           {plan.popular && (
             <span className="absolute right-6 top-0 -translate-y-1/2 rounded-full bg-gradient-to-b from-[#7ff0dc] to-mint px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink-950 shadow-[0_6px_18px_-6px_rgb(94_234_212/0.7)]">
-              Beliebt
+              Empfehlung
             </span>
           )}
           <h4 className="font-display text-lg font-semibold uppercase tracking-[0.16em] text-muted">{plan.name}</h4>

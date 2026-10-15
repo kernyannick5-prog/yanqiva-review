@@ -7,7 +7,7 @@ import type { LegalDoc } from './types'
 export const impressum: LegalDoc = {
   title: 'Impressum',
   badge: 'Rechtliches',
-  updated: 'Stand: 8. Oktober 2026',
+  updated: 'Stand: 16. Oktober 2026',
   callouts: [],
   sections: [
     {
