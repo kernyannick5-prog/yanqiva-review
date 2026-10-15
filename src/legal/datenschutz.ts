@@ -10,14 +10,14 @@ import type { LegalDoc } from './types'
 export const datenschutz: LegalDoc = {
   title: 'Datenschutzerklärung',
   badge: 'Rechtliches',
-  updated: 'Stand: 14. Oktober 2026 (Fassung 2)',
+  updated: 'Stand: 15. Oktober 2026',
   pdf: 'datenschutz.pdf',
   archive: 'dokumente/archiv/#datenschutz',
   callouts: [
     {
       tone: 'info',
       title: 'Kurz zusammengefasst',
-      text: 'Diese Website setzt keine Tracking- oder Analyse-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein. Das einzige Formular für Besucher, das Daten versendet, ist das Bestellformular (Abschnitt 5); Kunden mit der Variante Dashboard melden sich zusätzlich im Dashboard an (Abschnitt 8). Beim Aufruf verarbeiten unsere Dienstleister für Auslieferung und Hosting (Cloudflare, GitHub Pages) technisch notwendige Verbindungsdaten wie Ihre IP-Adresse. Wir selbst speichern keine Zugriffsprotokolle. Das Dashboard auf der Startseite ist eine Demo mit erfundenen Beispieldaten; Weiterleitungen der Demo-Karten werden nicht gezählt oder gespeichert. Bei Karten mit aktivem Dashboard zählen wir beim Antippen nur die Zahl der Aufrufe je Tag, ohne Personenbezug (Abschnitt 7).',
+      text: 'Diese Website setzt keine Tracking- oder Analyse-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein. Das einzige Formular für Besucher, das Daten versendet, ist das Bestellformular (Abschnitt 5); Kunden mit einer Variante mit Dashboard melden sich zusätzlich im Dashboard an (Abschnitt 8). Beim Aufruf verarbeiten unsere Dienstleister für Auslieferung und Hosting (Cloudflare, GitHub Pages) technisch notwendige Verbindungsdaten wie Ihre IP-Adresse. Wir selbst speichern keine Zugriffsprotokolle. Das Dashboard auf der Startseite ist eine Demo mit erfundenen Beispieldaten; Weiterleitungen der Demo-Karten werden nicht gezählt oder gespeichert. Bei Karten mit aktivem Dashboard zählen wir beim Antippen nur die Zahl der Aufrufe je Tag, ohne Personenbezug (Abschnitt 7).',
     },
   ],
   sections: [
@@ -41,10 +41,10 @@ export const datenschutz: LegalDoc = {
       heading: '2. Überblick',
       blocks: [
         {
-          p: 'Auf dieser Website stellen wir das Produkt „YANQIVA REVIEW“ (NFC-Karten und QR-Codes, die zur Google-Bewertungsseite eines Unternehmens führen) vor und bieten es Unternehmern über ein Bestellformular zum Kauf an (Abschnitt 5). Das Dashboard auf der Startseite ist eine Demo: Die Statistiken und Unternehmensnamen darin sind erfundene Beispieldaten. In der Demo werden keine echten Kundendaten angezeigt oder verarbeitet. Das echte Dashboard für Kunden der Variante Dashboard beschreiben wir in Abschnitt 8.',
+          p: 'Auf dieser Website stellen wir das Produkt „YANQIVA REVIEW“ (NFC-Karten und QR-Codes, die zur Google-Bewertungsseite eines Unternehmens führen) vor und bieten es Unternehmern über ein Bestellformular zum Kauf an (Abschnitt 5). Das Dashboard auf der Startseite ist eine Demo: Die Statistiken und Unternehmensnamen darin sind erfundene Beispieldaten. In der Demo werden keine echten Kundendaten angezeigt oder verarbeitet. Das echte Dashboard für Kunden einer Variante mit Dashboard (Dashboard oder Kombi mit Dashboard) beschreiben wir in Abschnitt 8.',
         },
         {
-          p: 'Wir setzen auf den Seiten für Besucher keine Cookies (Ausnahme: das technisch notwendige Cookie der Cloudflare-Sicherheitsabfrage, Abschnitt 3), keine Analyse- oder Tracking-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein; alle Schriften werden von dieser Website selbst ausgeliefert. Außer dem Bestellformular (Abschnitt 5) gibt es für Besucher keine Formulare, die Daten an uns oder Dritte senden; es gibt keinen Newsletter. Ein Login gibt es nur für Kunden der Variante Dashboard (Abschnitt 8). Zur Auslieferung und zum Schutz der Website nutzen wir Dienstleister (siehe Abschnitt 3); zu einer möglichen Sicherheitsabfrage durch Cloudflare siehe ebenfalls Abschnitt 3. Personenbezogene Daten verarbeiten wir nur in den unten beschriebenen Fällen.',
+          p: 'Wir setzen auf den Seiten für Besucher keine Cookies (Ausnahme: das technisch notwendige Cookie der Cloudflare-Sicherheitsabfrage, Abschnitt 3), keine Analyse- oder Tracking-Werkzeuge und keine externen Schriftarten oder Skripte von Drittanbietern ein; alle Schriften werden von dieser Website selbst ausgeliefert. Außer dem Bestellformular (Abschnitt 5) gibt es für Besucher keine Formulare, die Daten an uns oder Dritte senden; es gibt keinen Newsletter. Ein Login gibt es nur für Kunden einer Variante mit Dashboard (Abschnitt 8). Zur Auslieferung und zum Schutz der Website nutzen wir Dienstleister (siehe Abschnitt 3); zu einer möglichen Sicherheitsabfrage durch Cloudflare siehe ebenfalls Abschnitt 3. Personenbezogene Daten verarbeiten wir nur in den unten beschriebenen Fällen.',
         },
         {
           p: 'Website und Produkt sind nach den Grundsätzen der Datenminimierung (Art. 5 Abs. 1 lit. c DSGVO) und des Datenschutzes durch Technikgestaltung (Art. 25 DSGVO) konzipiert: Personen, die eine Karte antippen oder einen QR-Code scannen, sollen nicht identifiziert, nicht wiedererkannt und nicht über Websites hinweg verfolgt werden. Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne von Art. 22 DSGVO findet nicht statt.',
@@ -107,7 +107,7 @@ export const datenschutz: LegalDoc = {
           table: {
             head: ['Daten', 'Zweck'],
             rows: [
-              ['Gewählte Variante (Klassik oder Dashboard), Menge', 'Bestellung, Preisberechnung, Herstellung'],
+              ['Gewählte Variante (Klassik, Dashboard, Kombi oder Kombi mit Dashboard), Farbe der Karten (Schwarz oder Weiß), Menge', 'Bestellung, Preisberechnung, Herstellung'],
               ['Freiwillige Bezeichnung des Standorts, Google-Bewertungslink oder Name und Ort des Unternehmens laut Google, freiwillige Hinweise', 'Einrichtung der Weiterleitung und Zuordnung im Dashboard'],
               ['Firma, Vor- und Nachname der Ansprechperson, E-Mail-Adresse', 'Vertragsabwicklung, Eingangs- und Auftragsbestätigung, Rechnung, Rückfragen'],
               ['Telefonnummer (freiwillig)', 'Rückfragen zur Lieferung'],
@@ -123,7 +123,7 @@ export const datenschutz: LegalDoc = {
           p: 'Übermittlung und Speicherung (Cloudflare): Beim Absenden übermittelt Ihr Browser die Angaben verschlüsselt an unsere Schnittstelle (API) unter yanqiva-api.yanqiva-api.workers.dev, die auf Cloudflare Workers läuft. Die Bestellung speichern wir im Speicherdienst Cloudflare Workers KV. Anbieter ist Cloudflare, Inc. (siehe Abschnitt 3). Cloudflare verarbeitet die Daten in unserem Auftrag (Art. 28 DSGVO) und beim Aufruf der API technisch notwendige Verbindungsdaten wie Ihre IP-Adresse. Eine Übermittlung in die USA kann stattfinden. Sie stützt sich auf den Angemessenheitsbeschluss zum EU-US Data Privacy Framework (Art. 45 DSGVO), nach dem Cloudflare zertifiziert ist, und ergänzend auf Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO). Dieselbe Schnittstelle nutzen wir auch für yanqiva.de.',
         },
         {
-          p: 'Eingangsbestätigung und interne Benachrichtigung (Resend): Nach dem Absenden senden wir Ihnen automatisch eine Eingangsbestätigung an die angegebene E-Mail-Adresse. Sie gibt Ihre Bestellung wieder (Variante, Menge, Preise, Angaben zur Einrichtung sowie Kontakt- und Adressdaten), nennt die Bestellnummer und den Zeitpunkt des Eingangs, verlinkt unsere AGB und diese Datenschutzerklärung und hängt beide als PDF an. Die PDF-Dateien lädt der Versanddienst Resend dafür beim Versand von unserer Website herunter. Zusätzlich benachrichtigt uns das System per E-Mail an support@yanqiva.de mit allen Angaben der Bestellung, damit keine Bestellung unbemerkt bleibt. Den Versand beider E-Mails übernimmt Resend als Auftragsverarbeiter (Art. 28 DSGVO). Anbieter ist Plus Five Five, Inc. (Resend), 2261 Market Street #5039, San Francisco, CA 94114, USA. Resend verarbeitet dabei Empfängeradresse, Betreff, Inhalt und Zustelldaten (Zeitpunkt, Zustellstatus) und speichert diese Daten in den USA. Die Übermittlung stützt sich auf den Angemessenheitsbeschluss zum EU-US Data Privacy Framework, nach dem Resend zertifiziert ist, und ergänzend auf die Standardvertragsklauseln im Auftragsverarbeitungsvertrag von Resend. Rechtsgrundlage für die Eingangsbestätigung ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) in Verbindung mit unserer gesetzlichen Pflicht aus § 312i BGB (Art. 6 Abs. 1 lit. c DSGVO); für die interne Benachrichtigung unser berechtigtes Interesse an der zeitnahen Bearbeitung von Bestellungen (Art. 6 Abs. 1 lit. f DSGVO). Zum Schutz vor Missbrauch begrenzen wir den Versand an dieselbe Adresse auf wenige E-Mails pro Tag; dafür speichern wir höchstens 24 Stunden lang einen Zähler zu einem Hash der Adresse (nicht die Adresse selbst). Weitere Informationen: Datenschutzerklärung von Resend (https://resend.com/legal/privacy-policy).',
+          p: 'Eingangsbestätigung und interne Benachrichtigung (Resend): Nach dem Absenden senden wir Ihnen automatisch eine Eingangsbestätigung an die angegebene E-Mail-Adresse. Sie gibt Ihre Bestellung wieder (Variante, Farben, Menge, Preise, Angaben zur Einrichtung sowie Kontakt- und Adressdaten), nennt die Bestellnummer und den Zeitpunkt des Eingangs, verlinkt unsere AGB und diese Datenschutzerklärung und hängt beide als PDF an. Die PDF-Dateien lädt der Versanddienst Resend dafür beim Versand von unserer Website herunter. Zusätzlich benachrichtigt uns das System per E-Mail an support@yanqiva.de mit allen Angaben der Bestellung, damit keine Bestellung unbemerkt bleibt. Den Versand beider E-Mails übernimmt Resend als Auftragsverarbeiter (Art. 28 DSGVO). Anbieter ist Plus Five Five, Inc. (Resend), 2261 Market Street #5039, San Francisco, CA 94114, USA. Resend verarbeitet dabei Empfängeradresse, Betreff, Inhalt und Zustelldaten (Zeitpunkt, Zustellstatus) und speichert diese Daten in den USA. Die Übermittlung stützt sich auf den Angemessenheitsbeschluss zum EU-US Data Privacy Framework, nach dem Resend zertifiziert ist, und ergänzend auf die Standardvertragsklauseln im Auftragsverarbeitungsvertrag von Resend. Rechtsgrundlage für die Eingangsbestätigung ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) in Verbindung mit unserer gesetzlichen Pflicht aus § 312i BGB (Art. 6 Abs. 1 lit. c DSGVO); für die interne Benachrichtigung unser berechtigtes Interesse an der zeitnahen Bearbeitung von Bestellungen (Art. 6 Abs. 1 lit. f DSGVO). Zum Schutz vor Missbrauch begrenzen wir den Versand an dieselbe Adresse auf wenige E-Mails pro Tag; dafür speichern wir höchstens 24 Stunden lang einen Zähler zu einem Hash der Adresse (nicht die Adresse selbst). Weitere Informationen: Datenschutzerklärung von Resend (https://resend.com/legal/privacy-policy).',
         },
         {
           p: 'Auftragsbestätigung, Rechnung und Zahlung: Auftragsbestätigung, Rechnung oder Zahlungsaufforderung, gegebenenfalls die Mitteilung über die Freischaltung des Dashboards und Rückfragen senden wir von support@yanqiva.de über den E-Mail-Dienst der IONOS SE (siehe Abschnitt 4). Ihre Zahlung per Überweisung wickeln die beteiligten Kreditinstitute ab; wir erhalten dabei die Angaben der Überweisung (Name des Kontoinhabers, IBAN, Betrag, Verwendungszweck).',
@@ -192,16 +192,16 @@ export const datenschutz: LegalDoc = {
     },
     {
       id: 'dashboard',
-      heading: '8. Kundendaten und Dashboard für Kunden (Variante Dashboard)',
+      heading: '8. Kundendaten und Dashboard für Kunden (Varianten mit Dashboard)',
       blocks: [
         {
-          p: 'Für die Weiterleitung (Abschnitt 7) speichern wir bei beiden Varianten Angaben zum Kunden und zu seinen Karten. Kunden der Variante Dashboard erhalten zusätzlich Zugang zu einem geschützten Bereich unter yanqiva-bewertung.de/dashboard/, in dem sie die Aufrufe je Karte sehen und das Ziel der Weiterleitung ändern können. Betroffen sind die Ansprechpersonen und weitere Nutzer, die der Kunde für den Zugang benennt. Wir verarbeiten:',
+          p: 'Für die Weiterleitung (Abschnitt 7) speichern wir bei allen Varianten Angaben zum Kunden und zu seinen Karten. Kunden einer Variante mit Dashboard erhalten zusätzlich Zugang zu einem geschützten Bereich unter yanqiva-bewertung.de/dashboard/, in dem sie die Aufrufe je Karte sehen und das Ziel der Weiterleitung ändern können. Betroffen sind die Ansprechpersonen und weitere Nutzer, die der Kunde für den Zugang benennt. Wir verarbeiten:',
         },
         {
           list: [
             'Kunde: Firma, Bestellnummer und eine interne Notiz zur Vertragsabwicklung,',
             'Karten: Kennung, Bezeichnung, Google-Bewertungslink, gegebenenfalls ein eigenes Ziel mit Freigabestatus, Variante und Ende des Dashboard-Zugangs,',
-            'Nutzer (nur Variante Dashboard): E-Mail-Adresse und, falls angegeben, Name,',
+            'Nutzer (nur Varianten mit Dashboard): E-Mail-Adresse und, falls angegeben, Name,',
             'Anmeldelinks und Sitzungen: nur als nicht umkehrbarer Hashwert mit Ablaufzeitpunkt,',
             'Tageszähler: je Karte und Tag die Zahl der Aufrufe über NFC und über QR-Code, ohne Bezug zu den aufrufenden Personen (Abschnitt 7),',
             'Änderungsprotokoll: Zeitpunkt, Aktion, Kennung des handelnden Nutzers sowie bisheriges und neues Ziel, aber keine E-Mail-Adressen. IP-Adressen speichern wir dabei nicht,',

@@ -10,7 +10,7 @@ import type { LegalDoc } from './types'
 export const agb: LegalDoc = {
   title: 'Allgemeine Geschäftsbedingungen',
   badge: 'Rechtliches',
-  updated: 'Stand: 14. Oktober 2026',
+  updated: 'Stand: 15. Oktober 2026',
   pdf: 'agb.pdf',
   archive: 'dokumente/archiv/#agb',
   callouts: [
@@ -65,19 +65,27 @@ export const agb: LegalDoc = {
       heading: '3. Leistungsumfang',
       blocks: [
         {
-          p: 'Wir liefern die bestellte Anzahl NFC-Bewertungskarten (Lieferung nur im Liefergebiet nach Ziffer 6) als quadratische Acrylkarte im Format 12 × 12 cm, jeweils mit NFC-Chip und einem QR-Code auf der Vorderseite der Karte, und richten sie ein. Tippt eine Person die Karte mit einem Smartphone an oder scannt sie den QR-Code, wird sie über eine Weiterleitungsadresse von uns (Ziffer 9) zum Google-Bewertungsformular des Unternehmensprofils des Kunden geleitet. Es gibt zwei Varianten:',
+          p: 'Wir liefern die bestellte Anzahl NFC-Bewertungskarten (Lieferung nur im Liefergebiet nach Ziffer 6) als quadratische Acrylkarte im Format 12 × 12 cm, jeweils mit NFC-Chip und einem QR-Code auf der Vorderseite der Karte, und richten sie ein. Tippt eine Person die Karte mit einem Smartphone an oder scannt sie den QR-Code, wird sie über eine Weiterleitungsadresse von uns (Ziffer 9) zum Google-Bewertungsformular des Unternehmensprofils des Kunden geleitet. Es gibt vier Varianten:',
         },
         {
           list: [
             'YANQIVA REVIEW Klassik: Lieferung und Einrichtung der Produkte mit Weiterleitung zum Google-Bewertungsformular. Laufende Kosten fallen nicht an.',
             'YANQIVA REVIEW Dashboard: Leistungen wie Klassik und zusätzlich ein Zugang zu einem Online-Dashboard für 2 Monate (Ziffer 8). Das Dashboard zeigt Statistiken zur Zahl der Aufrufe der Weiterleitung über NFC und QR-Code und ermöglicht es dem Kunden, das Ziel der Weiterleitung selbst zu ändern. Ein Google-Bewertungslink als Ziel wird sofort übernommen; ein anderes https-Ziel wird erst nach Freigabe durch uns wirksam (Ziffer 8). Technisch bedingt wirken Änderungen in der Regel innerhalb einer Minute.',
+            'YANQIVA REVIEW Kombi: je eine schwarze und eine weiße Karte; Leistungen wie Klassik.',
+            'YANQIVA REVIEW Kombi mit Dashboard: je eine schwarze und eine weiße Karte; Leistungen wie Dashboard.',
           ],
         },
         {
-          p: 'Je Bestellung können 1 bis 10 Stück bestellt werden. Alle Stücke einer Bestellung sind für einen Standort und ein Google-Unternehmensprofil bestimmt. Größere Mengen und mehrere Standorte bieten wir auf Anfrage an support@yanqiva.de gesondert an.',
+          p: 'Wo diese AGB die Variante Klassik oder die Variante Dashboard nennen, gilt das entsprechend für die Kombi (wie Klassik) bzw. für die Kombi mit Dashboard (wie Dashboard).',
         },
         {
-          p: 'Die Produkte werden in unserem Standarddesign geliefert, einer quadratischen Acrylkarte im Format 12 × 12 cm. Einen individuellen Aufdruck, etwa mit Namen, Logo oder Gestaltungswünschen des Kunden, bieten wir nicht an. Handelsübliche, geringfügige Abweichungen in Farbe, Material und Druckbild gegenüber Abbildungen auf der Website bleiben vorbehalten, soweit sie für den Kunden zumutbar sind.',
+          p: 'Je Bestellung können bei den Varianten Klassik und Dashboard 1 bis 10 Karten und bei den Varianten Kombi und Kombi mit Dashboard 1 bis 5 Kombis bestellt werden (eine Kombi besteht aus 2 Karten, je Bestellung also höchstens 10 Karten). Alle Karten einer Bestellung sind für einen Standort und ein Google-Unternehmensprofil bestimmt. Größere Mengen und mehrere Standorte bieten wir auf Anfrage an support@yanqiva.de gesondert an.',
+        },
+        {
+          p: 'Die Karten gibt es in den Farben Schwarz und Weiß. Bei den Varianten Klassik und Dashboard wählt der Kunde in der Bestellung für jede Karte die Farbe. Eine Kombi besteht aus einer schwarzen und einer weißen Karte; eine Farbwahl entfällt. Wir liefern die in der Bestellung gewählten Farben. Eine Änderung der Farbwahl nach Absenden der Bestellung ist nur mit unserer Zustimmung möglich.',
+        },
+        {
+          p: 'Die Produkte werden in unserem Standarddesign geliefert, einer quadratischen Acrylkarte im Format 12 × 12 cm in Schwarz oder Weiß. Einen individuellen Aufdruck, etwa mit Namen, Logo oder Gestaltungswünschen des Kunden, bieten wir nicht an. Handelsübliche, geringfügige Abweichungen in Farbe, Material und Druckbild gegenüber Abbildungen auf der Website bleiben vorbehalten, soweit sie für den Kunden zumutbar sind.',
         },
         {
           p: 'NFC funktioniert nur mit Smartphones, die NFC unterstützen und bei denen die Funktion eingeschaltet ist; für alle anderen Geräte trägt jedes Produkt den QR-Code. Eine Funktion mit jedem Endgerät schulden wir nicht.',
@@ -107,7 +115,7 @@ export const agb: LegalDoc = {
       heading: '5. Preise und Zahlung',
       blocks: [
         {
-          p: 'Es gelten die zum Zeitpunkt der Bestellung im Bestellformular genannten Preise. Alle Preise sind Endpreise in Euro je Stück; der Gesamtbetrag ergibt sich aus dem Preis je Stück und der Menge. Lieferung und Übergabe vor Ort im Liefergebiet (Ziffer 6) sind im Preis enthalten. Weitere Kosten fallen für die Bestellung nicht an; zur optionalen Verlängerung des Dashboards siehe Ziffer 8.',
+          p: 'Es gelten die zum Zeitpunkt der Bestellung im Bestellformular genannten Preise. Alle Preise sind Endpreise in Euro. Es gelten folgende Preise: Klassik 60 € je Karte. Dashboard 99 € für die erste Karte und 40 € für jede weitere Karte derselben Bestellung (2 Karten 139 €, 3 Karten 179 €). Kombi 75 € je Kombi. Kombi mit Dashboard 139 € für die erste Kombi (99 € für die erste Karte und 40 € für die zweite Karte) und 80 € für jede weitere Kombi (2 × 40 €). Der Gesamtbetrag ergibt sich aus der gewählten Variante, der Menge und diesen Preisen; das Bestellformular zeigt ihn vor dem Absenden an. Lieferung und Übergabe vor Ort im Liefergebiet (Ziffer 6) sind im Preis enthalten. Weitere Kosten fallen für die Bestellung nicht an; zur optionalen Verlängerung des Dashboards siehe Ziffer 8.',
         },
         {
           p: 'Wir sind Kleinunternehmer im Sinne von § 19 UStG. Es wird keine Umsatzsteuer berechnet und in Rechnungen keine Umsatzsteuer ausgewiesen. Entfallen die Voraussetzungen der Kleinunternehmerregelung, können wir für Verlängerungszeiträume des Dashboards, die danach beginnen, die gesetzliche Umsatzsteuer zusätzlich berechnen. Wir informieren den Kunden darüber mindestens einen Monat vorher in Textform.',
@@ -128,7 +136,7 @@ export const agb: LegalDoc = {
           p: 'Wir liefern ausschließlich lokal an Unternehmen im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße (Liefergebiet). Die Übergabe und Einrichtung erfolgen persönlich vor Ort; einen Postversand gibt es nicht. Maßgeblich ist die Postleitzahl der Lieferadresse, also der Rechnungsadresse oder der in der Bestellung angegebenen abweichenden Lieferadresse. Sie wird im Bestellformular geprüft. Bestellungen mit einer Lieferadresse außerhalb des Liefergebiets nehmen wir nicht an. Auf Anfrage an support@yanqiva.de prüfen wir im Einzelfall, ob eine Lieferung möglich ist.',
         },
         {
-          p: 'Wir übergeben die Produkte in der Regel innerhalb von 2 bis 5 Werktagen (Variante Klassik) bzw. innerhalb von 7 Werktagen (Variante Dashboard, einschließlich Einrichtung des Dashboards) nach Zahlungseingang. Den Übergabetermin vereinbaren wir mit dem Kunden. Die voraussichtliche Lieferzeit bestätigen wir zusätzlich in der Auftragsbestätigung. Sie beginnt mit dem Zahlungseingang, frühestens jedoch mit der Auftragsbestätigung (Ziffer 2) und frühestens, wenn Rückfragen zur Einrichtung (Ziffer 4) geklärt sind. Verbindlich ist ein Liefertermin nur, wenn er ausdrücklich als verbindlich vereinbart ist. Überschreiten wir die genannte Lieferzeit, kann der Kunde uns eine angemessene Nachfrist setzen; seine gesetzlichen Rechte bleiben unberührt.',
+          p: 'Wir übergeben die Produkte in der Regel innerhalb von 2 bis 5 Werktagen (Varianten Klassik und Kombi) bzw. innerhalb von 7 Werktagen (Varianten Dashboard und Kombi mit Dashboard, einschließlich Einrichtung des Dashboards) nach Zahlungseingang. Den Übergabetermin vereinbaren wir mit dem Kunden. Die voraussichtliche Lieferzeit bestätigen wir zusätzlich in der Auftragsbestätigung. Sie beginnt mit dem Zahlungseingang, frühestens jedoch mit der Auftragsbestätigung (Ziffer 2) und frühestens, wenn Rückfragen zur Einrichtung (Ziffer 4) geklärt sind. Verbindlich ist ein Liefertermin nur, wenn er ausdrücklich als verbindlich vereinbart ist. Überschreiten wir die genannte Lieferzeit, kann der Kunde uns eine angemessene Nachfrist setzen; seine gesetzlichen Rechte bleiben unberührt.',
         },
         {
           p: 'Die Produkte werden ohne Versandverpackung übergeben. Die Gefahr des zufälligen Untergangs und der zufälligen Verschlechterung der Ware geht mit der Übergabe an den Kunden oder an eine von ihm benannte Person am vereinbarten Ort über. Kann die Übergabe aus Gründen, die der Kunde zu vertreten hat, nicht stattfinden, vereinbaren wir einen neuen Termin; die gesetzlichen Regeln zum Annahmeverzug bleiben unberührt. Äußerlich erkennbare Schäden soll der Kunde bei der Übergabe anzeigen.',
@@ -161,7 +169,7 @@ export const agb: LegalDoc = {
           p: 'Ohne Verlängerung funktionieren die Produkte weiter: Die Weiterleitung führt dann wie bei der Variante Klassik direkt zum zuletzt eingestellten Google-Bewertungsformular. Ein eigenes Ziel, das kein Google-Bewertungslink ist, wird nicht mehr verwendet. Statistiken und die Änderung des Ziels im Dashboard stehen nicht mehr zur Verfügung; Änderungen des Ziels nehmen wir dann auf Anfrage nach Ziffer 9 vor. Bis 90 Tage nach dem Ende kann sich der Kunde noch anmelden und eine Verlängerung anfragen; danach löschen wir die Nutzerkonten, die Statistiken und ein eigenes Ziel.',
         },
         {
-          p: 'Verlängerung: Der Kunde kann das Dashboard verlängern, indem er die Verlängerung ausdrücklich in Textform (zum Beispiel per E-Mail oder über „Verlängerung anfragen“ im Dashboard) beauftragt und wir sie bestätigen. Erst mit unserer Bestätigung kommt die Verlängerung zustande. Sie schließt an das Ende des laufenden Zugangs an; ist der Zugang bereits beendet, beginnt sie mit unserer Bestätigung. Die Verlängerung kostet 15 € pro Monat je Standort (Endpreis, keine Umsatzsteuer nach § 19 UStG, vorbehaltlich Ziffer 5) und wird monatlich im Voraus in Rechnung gestellt; Zahlungsziel sind 14 Tage. Sie läuft auf unbestimmte Zeit und kann von beiden Seiten jederzeit zum Ende des laufenden Kalendermonats gekündigt werden. Kündigungen bedürfen der Textform; eine E-Mail genügt. Das Recht zur Kündigung aus wichtigem Grund bleibt unberührt.',
+          p: 'Verlängerung: Der Kunde kann das Dashboard verlängern, indem er die Verlängerung ausdrücklich in Textform (zum Beispiel per E-Mail oder über „Verlängerung anfragen“ im Dashboard) beauftragt und wir sie bestätigen. Erst mit unserer Bestätigung kommt die Verlängerung zustande. Sie schließt an das Ende des laufenden Zugangs an; ist der Zugang bereits beendet, beginnt sie mit unserer Bestätigung. Die Verlängerung kostet 15 € pro Monat je Standort, unabhängig davon, wie viele Karten für den Standort geliefert wurden (Endpreis, keine Umsatzsteuer nach § 19 UStG, vorbehaltlich Ziffer 5) und wird monatlich im Voraus in Rechnung gestellt; Zahlungsziel sind 14 Tage. Sie läuft auf unbestimmte Zeit und kann von beiden Seiten jederzeit zum Ende des laufenden Kalendermonats gekündigt werden. Kündigungen bedürfen der Textform; eine E-Mail genügt. Das Recht zur Kündigung aus wichtigem Grund bleibt unberührt.',
         },
         {
           p: 'Ändern wir den Preis der Verlängerung, teilen wir das dem Kunden mindestens einen Monat vor Wirksamwerden in Textform mit. Der Kunde kann die Verlängerung bis dahin zum Ende des Kalendermonats kündigen, in dem die Änderung wirksam wird.',

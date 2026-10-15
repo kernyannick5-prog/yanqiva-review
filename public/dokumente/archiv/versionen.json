@@ -117,6 +117,19 @@
     "note": "Nur noch die quadratische NFC-Acrylkarte 12 x 12 cm; Aufsteller und Ausführungswahl entfallen. Dashboard 2 Monate inklusive."
   },
   {
+    "doc": "agb",
+    "id": "agb-2026-10-14-f2",
+    "file": "agb-2026-10-14-f2.pdf",
+    "date": "2026-10-14",
+    "fassung": 2,
+    "from": "2026-10-13T22:05:31.000Z",
+    "stand": "Stand: 14. Oktober 2026",
+    "commit": "06de8c6",
+    "hash": "d9684daa5ea8acecf4be6637096b0195e4f6459c7a438e89218b742cf0d3b551",
+    "pages": 7,
+    "note": "Erinnerungen 14 und 3 Tage (statt 30 und 7 Tage) vor Ablauf des Dashboard-Zugangs; Hinweis auf das Archiv früherer Fassungen."
+  },
+  {
     "doc": "datenschutz",
     "id": "datenschutz-2026-10-09-f1",
     "file": "datenschutz-2026-10-09-f1.pdf",
@@ -219,5 +232,18 @@
     "hash": "d36096d606dbf22fe0108e0c6dbd8762a6c75da88a70fd9a374a9fb27cf4c2e2",
     "pages": 8,
     "note": "Erinnerungs-E-Mails 14 und 3 Tage vor Ablauf des Dashboard-Zugangs; Hinweis zu den PDF-Anhängen (AGB, Datenschutzerklärung) der Eingangsbestätigung."
+  },
+  {
+    "doc": "datenschutz",
+    "id": "datenschutz-2026-10-14-f3",
+    "file": "datenschutz-2026-10-14-f3.pdf",
+    "date": "2026-10-14",
+    "fassung": 3,
+    "from": "2026-10-14T21:24:42.000Z",
+    "stand": "Stand: 14. Oktober 2026 (Fassung 2)",
+    "commit": "06de8c6",
+    "hash": "1b59d42670c279c94a045c6a672cded5f34979fc537771ea14dd4f734a90832c",
+    "pages": 8,
+    "note": "Abschnitt 6: Die Demo speichert nichts im Browser."
   }
 ]

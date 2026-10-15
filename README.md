@@ -18,7 +18,7 @@ Marketing-Website mit interaktiver SaaS-Dashboard-Demo für YANQIVA REVIEW: ein 
   - Karten-Management: Link bearbeiten, Statistik, QR-Code (kein „Neue Karte“: das echte Dashboard hat diese Funktion nicht)
 - **QR-Code-Demo** mit echtem, scanbarem QR-Code auf eine funktionierende Redirect-URL
 - **Redirect-Demo** `/r/demo-baeckerei` und `/r/demo-barbershop` → simulierte Bewertungsseite
-- Vorteile, Preise (Klassik 60 €, Dashboard 99 € einmalig inkl. 2 Monate Dashboard, danach optional 15 €/Monat), Call-to-Action, Footer
+- Vorteile, Preise (Karte in Schwarz oder Weiß: Klassik 60 €; Dashboard 99 € für die erste Karte, jede weitere 40 €, inkl. 2 Monate Dashboard, danach optional 15 €/Monat je Standort; Kombi aus schwarzer und weißer Karte 75 €, Kombi mit Dashboard 139 €), Call-to-Action, Footer
 - Responsive (360 px bis Desktop), Tastatur- und Screenreader-freundlich, `prefers-reduced-motion`
 
 ## Tech Stack
@@ -101,7 +101,7 @@ Auf der physischen Karte steht **nur die Redirect-URL**, nie der Google-Link. Da
 | Dashboard-Daten, Statistiken, Bewertungen | Demo-Daten |
 | Link-Änderungen | nur im Arbeitsspeicher der Seite, nichts wird im Browser gespeichert |
 | Login, Zahlung, echte NFC-Zählung | nicht enthalten |
-| Preise | Klassik 60 € einmalig / Dashboard 99 € einmalig inkl. 2 Monate Dashboard, danach optional 15 €/Monat, monatlich kündbar (Karte/QR funktioniert auch ohne Dashboard weiter); Bestellung nicht angebunden |
+| Preise | Klassik 60 € je Karte / Dashboard 99 € für die erste Karte, jede weitere 40 €, inkl. 2 Monate Dashboard, danach optional 15 €/Monat je Standort, monatlich kündbar (Karte/QR funktioniert auch ohne Dashboard weiter) / Kombi (je eine schwarze und eine weiße Karte) 75 €, Kombi mit Dashboard 139 €; Karten in Schwarz oder Weiß. Quelle: src/order/catalog.ts, der Worker rechnet nach |
 
 ## Datenschutz (Privacy by Design)
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { LinkButton } from '../components/Button'
-import { CONTACT_EMAIL, PRODUCT_LABEL, formatEuro, PRODUCTS, total, VAT_NOTE } from './catalog'
-import { effectiveQuantity, productOf, trimmed, type OrderForm } from './state'
+import { CONTACT_EMAIL, PRODUCT_LABEL, colorSummary, formatEuro, PRODUCTS, quantityText, total, VAT_NOTE } from './catalog'
+import { colorCounts, productOf, qtyOf, trimmed, type OrderForm } from './state'
 import { NextSteps } from './steps'
 
 const BASE = import.meta.env.BASE_URL
@@ -19,7 +19,7 @@ export function Confirmation({ orderId, form }: Props) {
     heading.current?.focus({ preventScroll: true })
   }, [])
   const f = trimmed(form)
-  const qty = effectiveQuantity(f.quantity)
+  const qty = qtyOf(f)
   const pid = productOf(f)
   const p = PRODUCTS[pid]
   return (
@@ -44,8 +44,12 @@ export function Confirmation({ orderId, form }: Props) {
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Bestellung</dt>
             <dd className="text-right text-text">
-              {qty} × {p.name}, {PRODUCT_LABEL}
+              {quantityText(pid, qty)} {p.name}, {PRODUCT_LABEL}
             </dd>
+          </div>
+          <div className="flex justify-between gap-4">
+            <dt className="text-muted">Farbe</dt>
+            <dd className="text-right text-text">{colorSummary(colorCounts(f))}</dd>
           </div>
           <div className="flex items-baseline justify-between gap-4">
             <dt className="text-muted">Gesamtbetrag einmalig</dt>
@@ -55,7 +59,7 @@ export function Confirmation({ orderId, form }: Props) {
         <p className="mt-2 text-[13px] text-muted">{VAT_NOTE}</p>
       </div>
 
-      <NextSteps dashboard={f.product === 'review-dashboard'} done />
+      <NextSteps dashboard={p.dashboard} done />
 
       <p className="text-[15px] leading-relaxed text-muted">
         Fragen zur Bestellung? Schreiben Sie uns an{' '}

@@ -1,5 +1,5 @@
-import { PRODUCT_LABEL, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
-import { effectiveQuantity, productOf, trimmed, type OrderForm } from './state'
+import { PRODUCT_LABEL, colorSummary, formatEuro, priceLines, PRODUCTS, quantityText, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
+import { colorCounts, colorsWire, productOf, qtyOf, trimmed, type OrderForm } from './state'
 
 export const MESSAGE_MAX = 3500
 
@@ -12,7 +12,7 @@ export function truncateCodePoints(text: string, max: number): string {
 /** Lesbare deutsche Zusammenfassung der Bestellung (höchstens 3500 Zeichen) für `message` und den mailto-Rückfall. */
 export function buildMessage(input: OrderForm): string {
   const f = trimmed(input)
-  const qty = effectiveQuantity(f.quantity)
+  const qty = qtyOf(f)
   const pid = productOf(f)
   const p = PRODUCTS[pid]
   const lines: string[] = [
@@ -21,8 +21,9 @@ export function buildMessage(input: OrderForm): string {
     'BESTELLUNG',
     `Produkt: ${p.name}`,
     `Ausführung: ${PRODUCT_LABEL}`,
-    `Menge: ${qty}`,
-    `Einzelpreis: ${formatEuro(p.unitPrice)}`,
+    `Farbe(n): ${colorSummary(colorCounts(f))}`,
+    `Menge: ${quantityText(pid, qty)}`,
+    ...priceLines(pid, qty).map((l) => `Preis ${l.label}: ${formatEuro(l.amount)}`),
     `Zwischensumme: ${formatEuro(subtotal(pid, qty))}`,
     `Lieferung und Übergabe vor Ort (Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße): ${formatEuro(SHIPPING_EUR)} (inklusive)`,
     `Gesamtbetrag einmalig: ${formatEuro(total(pid, qty))}`,
@@ -60,7 +61,8 @@ export function buildFields(input: OrderForm): Record<string, string> {
   const f = trimmed(input)
   const out: Record<string, string> = {
     product: f.product,
-    quantity: String(effectiveQuantity(f.quantity)),
+    quantity: String(qtyOf(f)),
+    colors: colorsWire(f),
     company: f.company,
     firstName: f.firstName,
     lastName: f.lastName,
@@ -90,11 +92,11 @@ const MAIL_BUDGET = 1200
 /** Kompakter Text für den mailto-Rückfall: nur die wichtigsten Angaben, höchstens ca. 1200 Zeichen nach dem Kodieren. */
 export function buildMailBody(input: OrderForm): string {
   const f = trimmed(input)
-  const qty = effectiveQuantity(f.quantity)
+  const qty = qtyOf(f)
   const pid = productOf(f)
   const p = PRODUCTS[pid]
   const lines = [
-    `Bestellung: ${qty} x ${p.shortName}, ${PRODUCT_LABEL}, gesamt ${formatEuro(total(pid, qty))}`,
+    `Bestellung: ${quantityText(pid, qty)} ${p.shortName}, ${PRODUCT_LABEL}, Farbe(n): ${colorSummary(colorCounts(f))}, gesamt ${formatEuro(total(pid, qty))}`,
     'Bestätigt: Unternehmer (§ 14 BGB), AGB (yanqiva-bewertung.de/agb/) akzeptiert.',
     `Firma: ${f.company}`,
     `Kontakt: ${f.firstName} ${f.lastName}, ${f.email}${f.phone ? `, ${f.phone}` : ''}`,

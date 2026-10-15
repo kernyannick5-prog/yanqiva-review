@@ -45,7 +45,7 @@ const SECTION_PAGES = {
   ablauf: ['So funktioniert’s – YANQIVA REVIEW', 'So funktioniert YANQIVA REVIEW: NFC-Karte oder QR-Code antippen und Kunden landen direkt auf Ihrer Google-Bewertungsseite.'],
   demo: ['Dashboard-Demo – YANQIVA REVIEW', 'Klicken Sie sich durch die Dashboard-Demo: Aufrufe Ihrer NFC-Karten und QR-Codes ansehen und den Ziel-Link ändern.'],
   qr: ['QR-Code und NFC ausprobieren – YANQIVA REVIEW', 'Scannen Sie den QR-Code oder tippen Sie mit dem Smartphone auf die NFC-Karte und sehen Sie, wie die Weiterleitung zu Google funktioniert.'],
-  preise: ['Preise – YANQIVA REVIEW', 'YANQIVA REVIEW Klassik ab 60 € oder mit Dashboard für 99 €. Endpreise, Einrichtung inklusive, Lieferung im Raum Speyer bis Karlsruhe.'],
+  preise: ['Preise – YANQIVA REVIEW', 'Schwarz oder Weiß: Klassik 60 €, Dashboard 99 € (jede weitere Karte 40 €), Kombi 75 €. Endpreise, Lieferung im Raum Speyer bis Karlsruhe.'],
   loslegen: ['Jetzt loslegen – YANQIVA REVIEW', 'Jetzt YANQIVA REVIEW bestellen: Google-Bewertungen einfacher sammeln per NFC-Karte und QR-Code, mit Einrichtung vor Ort im Raum Speyer bis Karlsruhe.'],
 }
 const attr = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')

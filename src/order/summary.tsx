@@ -1,10 +1,10 @@
 import { useEffect, useRef, type ReactNode } from 'react'
-import { DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, PRODUCT_LABEL, formatEuro, PRODUCTS, SHIPPING_EUR, subtotal, total, shippingText, VAT_NOTE } from './catalog'
-import { effectiveQuantity, type OrderForm } from './state'
+import { DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, PRODUCT_LABEL, colorSummary, formatEuro, priceLines, PRODUCTS, quantityText, SHIPPING_EUR, total, shippingText, VAT_NOTE } from './catalog'
+import { colorCounts, qtyOf, type OrderForm } from './state'
 
 /** Sticky Bestellübersicht (Desktop-Seitenleiste). */
 export function OrderSidebar({ form }: { form: OrderForm }) {
-  const qty = effectiveQuantity(form.quantity)
+  const qty = qtyOf(form)
   const pid = form.product || null
   const p = pid ? PRODUCTS[pid] : null
   return (
@@ -13,9 +13,13 @@ export function OrderSidebar({ form }: { form: OrderForm }) {
         Ihre Bestellung
       </h2>
       <p className="mt-3 font-display text-lg font-semibold text-text">{p ? p.name : 'Noch keine Variante gewählt'}</p>
-      <p className="text-sm text-muted">{PRODUCT_LABEL}</p>
+      <p className="text-sm text-muted">
+        {PRODUCT_LABEL}
+        {pid ? `, ${quantityText(pid, qty)}` : ''}
+      </p>
+      {pid && <p className="text-sm text-muted">Farbe: {colorSummary(colorCounts(form)) || 'noch nicht gewählt'}</p>}
       <dl className="mt-4 space-y-2 border-t border-line pt-4 text-[15px]">
-        <Line k={p ? `${qty} × ${formatEuro(p.unitPrice)}` : `${qty} ×`} v={pid ? formatEuro(subtotal(pid, qty)) : '–'} />
+        {pid ? priceLines(pid, qty).map((l) => <Line key={l.label} k={l.label} v={formatEuro(l.amount)} />) : <Line k="Preis" v="–" />}
         <Line k="Lieferung vor Ort" v={`${formatEuro(SHIPPING_EUR)} (inklusive)`} />
         <div className="flex items-baseline justify-between gap-3 border-t border-line pt-3">
           <dt className="font-display font-semibold text-text">Gesamt einmalig</dt>
@@ -28,7 +32,7 @@ export function OrderSidebar({ form }: { form: OrderForm }) {
       {pid && (
         <p className="mt-4 rounded-xl bg-white/[0.04] px-3 py-2.5 text-[13px] leading-snug text-muted">
           <span className="font-semibold text-text">Laufende Kosten: </span>
-          {pid === 'review-dashboard' ? `Dashboard ${DASHBOARD_INCLUDED_MONTHS} Monate inklusive, danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar. Kein automatisches Abo.` : 'keine.'}
+          {p?.dashboard ? `Dashboard ${DASHBOARD_INCLUDED_MONTHS} Monate inklusive, danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar. Kein automatisches Abo.` : 'keine.'}
         </p>
       )}
       {p && <p className="mt-3 text-[13px] text-muted">Lieferzeit: {shippingText(p)}.</p>}
@@ -49,7 +53,7 @@ function Line({ k, v }: { k: ReactNode; v: ReactNode }) {
 
 /** Fixierte Leiste unten auf Mobilgeräten: Gesamtpreis plus Hauptaktion (Button wird von der Seite übergeben). */
 export function MobileBar({ form, children }: { form: OrderForm; children: ReactNode }) {
-  const qty = effectiveQuantity(form.quantity)
+  const qty = qtyOf(form)
   const ref = useRef<HTMLElement>(null)
   // WCAG 2.4.11: Die Leiste verdeckt sonst fokussierte Felder. scroll-padding-bottom (Höhe der Leiste + Luft)
   // sorgt dafür, dass der Browser Fokusziele oberhalb der Leiste einscrollt. Auf Desktop ist die Leiste ausgeblendet (Höhe 0).

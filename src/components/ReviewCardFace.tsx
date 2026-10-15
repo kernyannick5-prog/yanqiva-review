@@ -77,14 +77,18 @@ function NfcPictogram({ ink, bg }: { ink: string; bg: string }) {
   )
 }
 
-export function ReviewCardFace({ variant = 'weiss', className = '' }: { variant?: Variant; className?: string }) {
+export function ReviewCardFace({ variant = 'weiss', className = '', decorative = false }: { variant?: Variant; className?: string; decorative?: boolean }) {
   const arcId = useId().replace(/:/g, '')
   const dark = variant === 'schwarz'
   const head = dark ? '#0a0a0a' : BLUE
   const body = dark ? '#0a0a0a' : '#ffffff'
   const ink = dark ? '#ffffff' : '#111111'
   return (
-    <svg viewBox="0 0 1200 1200" className={className} role="img" aria-label="NFC-Bewertungskarte: Bewerte uns auf Google, Handy kurz dranhalten oder QR-Code scannen">
+    <svg
+      viewBox="0 0 1200 1200"
+      className={className}
+      {...(decorative ? { 'aria-hidden': true } : { role: 'img', 'aria-label': `NFC-Bewertungskarte${dark ? ' in Schwarz' : ''}: Bewerte uns auf Google, Handy kurz dranhalten oder QR-Code scannen` })}
+    >
       <rect width={1200} height={1200} rx={64} fill={body} />
       <path d={HEADER} fill={head} />
       {dark ? (

@@ -1,4 +1,4 @@
-import { isProductId, QTY_MAX, QTY_MIN, type ProductId } from './catalog'
+import { COLORS, isColorId, isProductId, QTY_MAX, QTY_MIN, qtyMaxFor, PRODUCTS, type ColorId, type ProductId } from './catalog'
 import { inDeliveryArea, OUT_OF_AREA_MESSAGE } from './deliveryArea'
 import googleRules from './googleLinkRules.json'
 
@@ -14,7 +14,10 @@ export const STEPS: readonly { id: StepId; label: string; title: string }[] = [
 export interface OrderForm {
   /** Leer, bis die Kundin oder der Kunde aktiv eine Variante wählt (oder ?paket= gesetzt ist). */
   product: ProductId | ''
+  /** Menge: bei Einzelkarten die Zahl der Karten (1 bis 10), bei Kombi die Zahl der Kombis (1 bis 5). */
   quantity: string
+  /** Farbe je Karte (nur Klassik und Dashboard): kommagetrennt, z. B. "schwarz,weiss" ("" = noch nicht gewählt). Bei Kombi nicht verwendet (je Kombi eine schwarze und eine weiße). */
+  colors: string
   displayName: string
   reviewLink: string
   profileQuery: string
@@ -72,6 +75,7 @@ export function newOrderKey(): string {
 export const initialForm = (): OrderForm => ({
   product: '',
   quantity: '1',
+  colors: '',
   displayName: '',
   reviewLink: '',
   profileQuery: '',
@@ -94,18 +98,49 @@ export const initialForm = (): OrderForm => ({
   orderKey: newOrderKey(),
 })
 
-/** Menge als gültige ganze Zahl 1 bis 10, sonst null. */
-export function parseQuantity(raw: string): number | null {
+/** Menge als gültige ganze Zahl von 1 bis max (Standard 10), sonst null. */
+export function parseQuantity(raw: string, max: number = QTY_MAX): number | null {
   const t = raw.trim()
   if (!/^\d{1,3}$/.test(t)) return null
   const n = Number(t)
-  return n >= QTY_MIN && n <= QTY_MAX ? n : null
+  return n >= QTY_MIN && n <= max ? n : null
 }
 
 /** Für die Preisanzeige: ungültige Menge fällt auf den nächstliegenden gültigen Wert. */
-export const effectiveQuantity = (raw: string): number => {
+export const effectiveQuantity = (raw: string, max: number = QTY_MAX): number => {
   const n = Number.parseInt(raw, 10)
-  return Number.isFinite(n) ? Math.min(QTY_MAX, Math.max(QTY_MIN, n)) : QTY_MIN
+  return Number.isFinite(n) ? Math.min(max, Math.max(QTY_MIN, n)) : QTY_MIN
+}
+
+/** Wirksame Menge der Bestellung (Kombi höchstens 5). */
+export const qtyOf = (f: Pick<OrderForm, 'quantity' | 'product'>): number => effectiveQuantity(f.quantity, qtyMaxFor(f.product))
+
+/** Farbe je Karte als Liste der Länge n ("" = nicht gewählt). */
+export function cardColorList(colors: string, n: number): (ColorId | '')[] {
+  const parts = colors.split(',')
+  return Array.from({ length: n }, (_, i) => (isColorId(parts[i]) ? parts[i] : ''))
+}
+
+/** Setzt die Farbe der Karte index (0-basiert); bestehende Auswahl der übrigen Karten bleibt erhalten. */
+export function withCardColor(colors: string, index: number, color: ColorId, n: number): string {
+  const list = cardColorList(colors, Math.max(n, index + 1))
+  list[index] = color
+  return list.join(',')
+}
+
+/** Anzahl je Farbe: Kombi immer je Kombi eine schwarze und eine weiße; sonst nach Auswahl je Karte. */
+export function colorCounts(f: Pick<OrderForm, 'quantity' | 'product' | 'colors'>): Record<ColorId, number> {
+  const q = qtyOf(f)
+  if (f.product !== '' && PRODUCTS[f.product].combo) return { schwarz: q, weiss: q }
+  const out: Record<ColorId, number> = { schwarz: 0, weiss: 0 }
+  for (const c of cardColorList(f.colors, q)) if (c) out[c]++
+  return out
+}
+
+/** Draht-Format für den Worker: "schwarz:2,weiss:1" (nur gewählte Farben, feste Reihenfolge). */
+export const colorsWire = (f: Pick<OrderForm, 'quantity' | 'product' | 'colors'>): string => {
+  const c = colorCounts(f)
+  return COLORS.filter((x) => c[x.id] > 0).map((x) => `${x.id}:${c[x.id]}`).join(',')
 }
 
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$/i
@@ -153,10 +188,18 @@ export function emailProblem(email: string): string | null {
 const v = (s: string) => s.trim()
 
 function validateStep1(f: OrderForm, e: Errors) {
-  if (!f.product) e.product = 'Bitte wählen Sie eine Variante (Klassik oder Dashboard).'
-  if (v(f.quantity) === '') e.quantity = `Bitte geben Sie die Stückzahl an (${QTY_MIN} bis ${QTY_MAX}).`
-  else if (parseQuantity(f.quantity) === null) {
-    e.quantity = `Bitte geben Sie eine ganze Zahl von ${QTY_MIN} bis ${QTY_MAX} ein. Für mehr Stück schreiben Sie uns bitte an support@yanqiva.de.`
+  if (!f.product) e.product = 'Bitte wählen Sie eine Variante (Klassik, Dashboard, Kombi oder Kombi mit Dashboard).'
+  const max = qtyMaxFor(f.product)
+  const what = f.product && PRODUCTS[f.product].combo ? 'Kombis' : 'Stück'
+  if (v(f.quantity) === '') e.quantity = `Bitte geben Sie die Anzahl an (${QTY_MIN} bis ${max} ${what}).`
+  else if (parseQuantity(f.quantity, max) === null) {
+    e.quantity = `Bitte geben Sie eine ganze Zahl von ${QTY_MIN} bis ${max} ein. Für mehr ${what} schreiben Sie uns bitte an support@yanqiva.de.`
+  }
+  if (f.product && !PRODUCTS[f.product].combo && parseQuantity(f.quantity, max) !== null) {
+    const n = effectiveQuantity(f.quantity, max)
+    if (cardColorList(f.colors, n).some((c) => c === '')) {
+      e.colors = n === 1 ? 'Bitte wählen Sie die Farbe der Karte: Schwarz oder Weiß.' : 'Bitte wählen Sie für jede Karte eine Farbe: Schwarz oder Weiß.'
+    }
   }
 }
 
@@ -227,7 +270,7 @@ export function firstIncompleteStep(f: OrderForm): StepId {
 
 /** Reihenfolge der Felder auf der Seite (für Fehlerzusammenfassung und Fokus). */
 export const FIELD_ORDER: readonly FieldKey[] = [
-  'product', 'quantity', 'displayName', 'reviewLink', 'profileQuery', 'notes',
+  'product', 'quantity', 'colors', 'displayName', 'reviewLink', 'profileQuery', 'notes',
   'company', 'firstName', 'lastName', 'email', 'phone',
   'billingStreet', 'billingZip', 'billingCity', 'shipName', 'shipStreet', 'shipZip', 'shipCity',
   'confirmB2B', 'acceptAgb',
@@ -235,7 +278,8 @@ export const FIELD_ORDER: readonly FieldKey[] = [
 
 export const FIELD_LABELS: Partial<Record<FieldKey, string>> = {
   product: 'Variante',
-  quantity: 'Stückzahl',
+  quantity: 'Anzahl',
+  colors: 'Farbe',
   displayName: 'Bezeichnung des Standorts',
   reviewLink: 'Google-Bewertungslink',
   profileQuery: 'Name und Ort Ihres Unternehmens',
@@ -327,6 +371,7 @@ export const stepUrl = (step: StepId): string => `${window.location.pathname}?sc
 const FIELD_STEP: Partial<Record<FieldKey, StepId>> = {
   product: 1,
   quantity: 1,
+  colors: 1,
   displayName: 2, reviewLink: 2, profileQuery: 2, notes: 2,
   company: 3, firstName: 3, lastName: 3, email: 3, phone: 3,
   billingStreet: 3, billingZip: 3, billingCity: 3, shipName: 3, shipStreet: 3, shipZip: 3, shipCity: 3,
@@ -339,6 +384,8 @@ const CODE_FIELD: Record<string, FieldKey> = {
   invalid_billing_zip: 'billingZip',
   invalid_ship_zip: 'shipZip',
   invalid_quantity: 'quantity',
+  missing_colors: 'colors',
+  invalid_colors: 'colors',
   invalid_product: 'product',
 }
 

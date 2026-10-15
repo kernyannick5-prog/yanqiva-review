@@ -9,7 +9,7 @@ import type { LegalDoc } from './types'
 export const barrierefreiheit: LegalDoc = {
   title: 'Erklärung zur Barrierefreiheit',
   badge: 'Rechtliches',
-  updated: 'Stand: 14. Oktober 2026',
+  updated: 'Stand: 15. Oktober 2026',
   callouts: [
     {
       tone: 'info',
@@ -43,7 +43,7 @@ export const barrierefreiheit: LegalDoc = {
             'die Startseite mit allen Abschnitten, einschließlich der interaktiven Dashboard-Demo (Übersicht, Karten, Statistiken, Einstellungen)',
             'die Seiten Impressum, Datenschutz, AGB und diese Erklärung',
             'den Bestellprozess unter /bestellen/ (siehe Abschnitt 8)',
-            'den Kundenbereich unter /dashboard/ mit Anmeldung und Dashboard für Kunden der Variante Dashboard (siehe Abschnitt 8)',
+            'den Kundenbereich unter /dashboard/ mit Anmeldung und Dashboard für Kunden einer Variante mit Dashboard (siehe Abschnitt 8)',
             'die Demo-Weiterleitungen unter /r/… und die simulierte Bewertungsseite (/review-demo/), zu der sie führen',
             'die Fehlerseite „Seite nicht gefunden“',
           ],
@@ -139,7 +139,7 @@ export const barrierefreiheit: LegalDoc = {
         },
         {
           list: [
-            'Jedes Feld hat eine sichtbare Beschriftung. Pflichtfelder sind mit * und im Quelltext als Pflichtfeld gekennzeichnet, freiwillige Angaben mit „(freiwillig)“. Zusammengehörende Auswahlmöglichkeiten (Variante, Adressen) sind als Gruppe mit Überschrift ausgezeichnet. Ihr Browser kann Name, E-Mail, Telefon und Adresse automatisch ausfüllen. Die Produktvariante ist nicht vorausgewählt, Sie wählen sie selbst.',
+            'Jedes Feld hat eine sichtbare Beschriftung. Pflichtfelder sind mit * und im Quelltext als Pflichtfeld gekennzeichnet, freiwillige Angaben mit „(freiwillig)“. Zusammengehörende Auswahlmöglichkeiten (Variante, Farbe je Karte, Adressen) sind als Gruppe mit Überschrift ausgezeichnet. Ihr Browser kann Name, E-Mail, Telefon und Adresse automatisch ausfüllen. Die Produktvariante und die Farbe der Karten sind nicht vorausgewählt, Sie wählen sie selbst. Die Farbe (Schwarz oder Weiß) steht immer auch als Text neben der kleinen Kartenvorschau.',
             'Eine Fortschrittsanzeige nennt den aktuellen Schritt auch als Text („Schritt 2 von 4“). Bei jedem Schrittwechsel setzt die Seite den Tastaturfokus auf die Überschrift des neuen Schritts. Der Seitentitel nennt den Schritt.',
             'Wenn Angaben fehlen oder nicht stimmen, nennt eine Zusammenfassung oben alle Fehler mit Links zu den Feldern. Der Fokus springt zum ersten fehlerhaften Feld, und jede Fehlermeldung steht als Text direkt am Feld und ist nicht nur durch Farbe erkennbar.',
             'Vor dem verbindlichen Absenden sehen Sie eine Übersicht aller Angaben mit „Ändern“-Links. Ihre Eingaben bleiben beim Zurückgehen und beim Neuladen der Seite in dieser Sitzung erhalten. Mit der Zurück-Taste des Browsers kommen Sie zum vorigen Schritt.',
@@ -154,7 +154,7 @@ export const barrierefreiheit: LegalDoc = {
           p: 'Wenn Sie beim Bestellen oder im Kundenbereich auf eine Barriere stoßen, schreiben Sie uns an support@yanqiva.de. Wir nehmen Ihre Bestellung dann auch gern per E-Mail entgegen und senden Ihnen Statistiken oder ändern Ziele auf Wunsch per E-Mail.',
         },
         {
-          p: 'Kundenbereich (/dashboard/): Kunden der Variante Dashboard melden sich ohne Passwort und ohne Rätsel an: Kunden geben ihre E-Mail-Adresse ein und erhalten einen Anmeldelink, der 15 Minuten gültig ist; einen neuen Link können sie jederzeit anfordern. Die Sicherheitsprüfung läuft unsichtbar im Browser. Wir haben Anmeldung und Dashboard am 9. Oktober 2026 selbst geprüft: axe-core meldete keine Verstöße, die Bedienung nur mit der Tastatur funktionierte, und bei 320 Pixel Breite ist kein waagerechtes Scrollen nötig. Mit echten Screenreadern haben wir den Kundenbereich nicht geprüft (siehe Abschnitt 6).',
+          p: 'Kundenbereich (/dashboard/): Kunden einer Variante mit Dashboard melden sich ohne Passwort und ohne Rätsel an: Kunden geben ihre E-Mail-Adresse ein und erhalten einen Anmeldelink, der 15 Minuten gültig ist; einen neuen Link können sie jederzeit anfordern. Die Sicherheitsprüfung läuft unsichtbar im Browser. Wir haben Anmeldung und Dashboard am 9. Oktober 2026 selbst geprüft: axe-core meldete keine Verstöße, die Bedienung nur mit der Tastatur funktionierte, und bei 320 Pixel Breite ist kein waagerechtes Scrollen nötig. Mit echten Screenreadern haben wir den Kundenbereich nicht geprüft (siehe Abschnitt 6).',
         },
         {
           p: 'Ein Video gibt es auf dieser Website nicht.',
@@ -200,7 +200,7 @@ export const barrierefreiheit: LegalDoc = {
       heading: '11. Erstellung dieser Erklärung',
       blocks: [
         {
-          p: 'Diese Erklärung wurde am 9. Oktober 2026 erstellt und am 14. Oktober 2026 überarbeitet (Dashboard-Demo ohne das Formular „Neue Karte hinzufügen“, Führung des Tastaturfokus auf der Startseite). Grundlage ist die oben beschriebene Selbstbewertung vom 8. und 9. Oktober 2026, ergänzt um eine erneute Tastaturprüfung der Startseite am 14. Oktober 2026. Wir überprüfen die Erklärung, wenn sich die Website wesentlich ändert, und erneuern dann das Datum.',
+          p: 'Diese Erklärung wurde am 9. Oktober 2026 erstellt und am 14. Oktober 2026 überarbeitet (Dashboard-Demo ohne das Formular „Neue Karte hinzufügen“, Führung des Tastaturfokus auf der Startseite). Am 15. Oktober 2026 haben wir sie um die Farbwahl und das Kombi-Paket im Preisbereich und im Bestellprozess ergänzt. Grundlage ist die oben beschriebene Selbstbewertung vom 8. und 9. Oktober 2026, ergänzt um eine erneute Tastaturprüfung der Startseite am 14. Oktober 2026 und des ersten Bestellschritts mit der Farbwahl am 15. Oktober 2026 (nur von Hand, nicht erneut mit dem Prüfwerkzeug). Wir überprüfen die Erklärung, wenn sich die Website wesentlich ändert, und erneuern dann das Datum.',
         },
       ],
     },

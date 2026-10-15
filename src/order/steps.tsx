@@ -1,12 +1,13 @@
 import { useEffect, useState, type ReactNode } from 'react'
+import { ReviewCardFace } from '../components/ReviewCardFace'
 import {
-  DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, formatEuro, PRODUCT_LABEL, PRODUCT_LIST, PRODUCTS, QTY_MAX, QTY_MIN, PAYMENT_NOTE, SHIPPING_EUR, subtotal, total, VAT_NOTE,
-  shippingText,
+  COLORS, colorSummary, DASHBOARD_EXTRA_CARD_EUR, DASHBOARD_FIRST_CARD_EUR, DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, formatEuro, KOMBI_SINGLE_EUR, PRODUCT_LABEL, PRODUCT_LIST, PRODUCTS,
+  priceLines, qtyMaxFor, QTY_MIN, quantityText, PAYMENT_NOTE, SHIPPING_EUR, subtotal, total, unitWord, VAT_NOTE, shippingText, type ColorId, type Product,
 } from './catalog'
 import { CheckboxField, ErrorSummary, FieldError, Fieldset, RequiredLegend, TextField, type FormCtx } from './fields'
 import { errId, fieldId } from './ids'
 import { DeliveryAreaCheck, ZipAreaNote } from './notices'
-import { effectiveQuantity, MAX, parseQuantity, productOf, trimmed, type FieldKey, type StepId } from './state'
+import { cardColorList, colorCounts, effectiveQuantity, MAX, parseQuantity, productOf, qtyOf, trimmed, withCardColor, type FieldKey, type StepId } from './state'
 
 const BASE = import.meta.env.BASE_URL
 
@@ -47,89 +48,197 @@ function useDebounced<T>(value: T, ms: number): T {
   return v
 }
 
+const colorCardBase =
+  'relative flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border p-3 transition-colors has-[:checked]:border-mint/70 has-[:checked]:bg-mint/[0.07] has-[:checked]:shadow-[0_0_0_1px_rgb(94_234_212/0.45)] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-mint hover:border-mint/60 border-white/50 bg-white/[0.03]'
+
+/** Kleine Kartenvorschau in der gewählten Farbe (dekorativ, die Farbe steht immer auch als Text daneben). */
+function CardSwatch({ color }: { color: ColorId }) {
+  return <ReviewCardFace variant={color} decorative className="block size-12 shrink-0 rounded-lg ring-1 ring-white/40" />
+}
+
+/** Preisunterzeile je Paket (Staffel bzw. Vergleich offen ausweisen). */
+function priceCaption(p: Product): string {
+  if (p.combo && p.dashboard) return `einmalig für 2 Karten (${formatEuro(DASHBOARD_FIRST_CARD_EUR)} + ${formatEuro(DASHBOARD_EXTRA_CARD_EUR)})`
+  if (p.combo) return `einmalig für 2 Karten (einzeln ${formatEuro(KOMBI_SINGLE_EUR)})`
+  if (p.dashboard) return `für die erste Karte, jede weitere ${formatEuro(DASHBOARD_EXTRA_CARD_EUR)}`
+  return 'einmalig je Karte'
+}
+
+function ProductOption({ p, index, ctx, error }: { p: Product; index: number; ctx: FormCtx; error?: string }) {
+  const { form } = ctx
+  const choose = () => {
+    ctx.set('product', p.id)
+    // Kombi: höchstens 5 Kombis (10 Karten); zu große Menge sinnvoll zurücksetzen
+    const n = Number.parseInt(form.quantity, 10)
+    if (Number.isFinite(n) && n > p.qtyMax) ctx.set('quantity', String(p.qtyMax))
+  }
+  return (
+    <label className={cardBase}>
+      <input
+        type="radio"
+        id={index === 0 ? fieldId('product') : undefined}
+        name="product"
+        required
+        value={p.id}
+        checked={form.product === p.id}
+        onChange={choose}
+        aria-labelledby={`prod-${p.id}-n`}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={`prod-${p.id}-d prod-${p.id}-r${error ? ` ${errId('product')}` : ''}`}
+        className="peer sr-only"
+      />
+      <RadioDot />
+      <span className="min-w-0 flex-1">
+        <span className="flex items-baseline justify-between gap-3">
+          <span id={`prod-${p.id}-n`} className="font-display text-lg font-semibold text-text">{p.shortName}</span>
+          <span id={`prod-${p.id}-d`} className="shrink-0 text-right font-display text-xl font-semibold text-text">
+            {formatEuro(p.unitPrice)}
+            <span className="block max-w-[22ch] text-[13px] font-normal leading-snug text-muted">{priceCaption(p)}</span>
+          </span>
+        </span>
+        <span id={`prod-${p.id}-t`} className="mt-0.5 block text-sm text-muted">{p.tagline}</span>
+        <span id={`prod-${p.id}-f`} className="mt-3 block space-y-1.5">
+          {p.features.map((f) => (
+            <span key={f} className="flex items-start gap-2 text-sm leading-snug text-text">
+              <Check />
+              <span>{f}</span>
+            </span>
+          ))}
+        </span>
+        <span id={`prod-${p.id}-r`} className="mt-3 block rounded-lg bg-white/[0.04] px-3 py-2 text-[13px] leading-snug text-muted">
+          <span className="font-semibold text-text">Laufende Kosten: </span>
+          {p.running}
+          <span className="mt-1.5 block">{p.redirectNote}</span>
+        </span>
+        <span className="mt-2 block text-[13px] leading-snug text-muted">
+          <span className="font-semibold text-text">Lieferzeit: </span>
+          {shippingText(p)}
+          {p.dashboard ? ' (inklusive Einrichtung des Dashboards)' : ''}.
+        </span>
+      </span>
+    </label>
+  )
+}
+
+/** Farbwahl: je Karte eine Radiogruppe (Schwarz/Weiß) mit Kartenvorschau; bei Kombi nur die Anzeige der enthaltenen Farben. */
+function ColorSection({ ctx, qty }: { ctx: FormCtx; qty: number }) {
+  const { form, errors } = ctx
+  const pid = form.product || null
+  if (!pid) return null
+  const p = PRODUCTS[pid]
+  const error = errors.colors
+  if (p.combo) {
+    return (
+      <section aria-labelledby="color-h" className="rounded-2xl border border-line bg-white/[0.03] p-4 sm:p-5">
+        <h3 id="color-h" className="font-display text-lg font-semibold text-text">Farben</h3>
+        <p className="mt-1 text-sm text-muted">
+          Im Kombi-Paket erhalten Sie je Kombi eine schwarze und eine weiße Karte. Eine Auswahl ist nicht nötig.
+        </p>
+        <ul className="mt-4 flex flex-wrap gap-4">
+          {COLORS.map((c) => (
+            <li key={c.id} className="flex items-center gap-3">
+              <CardSwatch color={c.id} />
+              <span className="text-[15px] text-text">
+                {qty} × {c.label}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+  const list = cardColorList(form.colors, qty)
+  return (
+    <Fieldset legend={<>Farbe{qty > 1 ? ' je Karte' : ''}<span aria-hidden className="ml-0.5 text-mint"> *</span></>}>
+      <p id="f-colors-hint" className="mb-3 text-sm text-muted">
+        Die Acrylkarte gibt es in Schwarz und Weiß. {qty > 1 ? 'Wählen Sie für jede Karte eine Farbe.' : 'Wählen Sie die Farbe Ihrer Karte.'}
+      </p>
+      <div className="space-y-3">
+        {list.map((sel, i) => (
+          <fieldset key={i} className="min-w-0 rounded-2xl border border-line p-3 sm:p-4">
+            <legend className="px-1 text-[15px] font-semibold text-text">{qty > 1 ? `Karte ${i + 1}` : 'Farbe der Karte'}</legend>
+            <div className="grid gap-3 min-[420px]:grid-cols-2">
+              {COLORS.map((c, ci) => (
+                <label key={c.id} className={colorCardBase}>
+                  <input
+                    type="radio"
+                    id={i === 0 && ci === 0 ? fieldId('colors') : undefined}
+                    name={`color-${i}`}
+                    required
+                    value={c.id}
+                    checked={sel === c.id}
+                    onChange={() => ctx.set('colors', withCardColor(form.colors, i, c.id, qty))}
+                    aria-invalid={error && sel === '' ? true : undefined}
+                    aria-describedby={`f-colors-hint${error ? ` ${errId('colors')}` : ''}`}
+                    className="peer sr-only"
+                  />
+                  <RadioDot />
+                  <CardSwatch color={c.id} />
+                  <span className="text-[15px] font-semibold text-text">{c.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ))}
+      </div>
+      <FieldError id={errId('colors')} message={error} />
+    </Fieldset>
+  )
+}
+
 export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
   const { form, errors } = ctx
-  const qty = parseQuantity(form.quantity)
-  const qtyEff = effectiveQuantity(form.quantity)
-  const bump = (d: number) => ctx.set('quantity', String(Math.min(QTY_MAX, Math.max(QTY_MIN, (qty ?? qtyEff) + d))))
+  const pid = form.product || null
+  const max = qtyMaxFor(form.product)
+  const combo = pid ? PRODUCTS[pid].combo : false
+  const qty = parseQuantity(form.quantity, max)
+  const qtyEff = effectiveQuantity(form.quantity, max)
+  const bump = (d: number) => ctx.set('quantity', String(Math.min(max, Math.max(QTY_MIN, (qty ?? qtyEff) + d))))
   const qtyError = errors.quantity
   const prodError = errors.product
-  const pid = form.product || null
+  const unit = (n: number) => unitWord(form.product, n)
   const sumText = pid
-    ? `${qtyEff} × ${PRODUCTS[pid].shortName} (${PRODUCT_LABEL}), Zwischensumme ${formatEuro(subtotal(pid, qtyEff))}`
+    ? `${quantityText(pid, qtyEff)} ${PRODUCTS[pid].shortName} (${PRODUCT_LABEL}), Zwischensumme ${formatEuro(subtotal(pid, qtyEff))}`
     : 'Bitte wählen Sie eine Variante, um den Preis zu sehen.'
   const announced = useDebounced(sumText, 600)
+  const singles = PRODUCT_LIST.filter((p) => !p.combo)
+  const combos = PRODUCT_LIST.filter((p) => p.combo)
   return (
     <div className="space-y-9">
       <Summary ctx={ctx} summaryKeys={summaryKeys} onJump={onJump} />
       <RequiredLegend />
       <Fieldset legend={<>Variante<span aria-hidden className="ml-0.5 text-mint"> *</span></>}>
+        <p className="mb-3 text-sm text-muted">Einzelkarten: Sie wählen die Farbe (Schwarz oder Weiß). Kombi: je eine schwarze und eine weiße Karte.</p>
         <div className="grid gap-3.5">
-          {PRODUCT_LIST.map((p, i) => (
-            <label key={p.id} className={cardBase}>
-              <input
-                type="radio"
-                id={i === 0 ? fieldId('product') : undefined}
-                name="product"
-                required
-                value={p.id}
-                checked={form.product === p.id}
-                onChange={() => ctx.set('product', p.id)}
-                aria-labelledby={`prod-${p.id}-n`}
-                aria-invalid={prodError ? true : undefined}
-                aria-describedby={`prod-${p.id}-d prod-${p.id}-r${prodError ? ` ${errId('product')}` : ''}`}
-                className="peer sr-only"
-              />
-              <RadioDot />
-              <span className="min-w-0 flex-1">
-                <span className="flex items-baseline justify-between gap-3">
-                  <span id={`prod-${p.id}-n`} className="font-display text-lg font-semibold text-text">{p.shortName}</span>
-                  <span id={`prod-${p.id}-d`} className="shrink-0 text-right font-display text-xl font-semibold text-text">
-                    {formatEuro(p.unitPrice)}
-                    <span className="block text-[13px] font-normal text-muted">einmalig je Stück</span>
-                  </span>
-                </span>
-                <span id={`prod-${p.id}-t`} className="mt-0.5 block text-sm text-muted">{p.tagline}</span>
-                <span id={`prod-${p.id}-f`} className="mt-3 block space-y-1.5">
-                  {p.features.map((f) => (
-                    <span key={f} className="flex items-start gap-2 text-sm leading-snug text-text">
-                      <Check />
-                      <span>{f}</span>
-                    </span>
-                  ))}
-                </span>
-                <span id={`prod-${p.id}-r`} className="mt-3 block rounded-lg bg-white/[0.04] px-3 py-2 text-[13px] leading-snug text-muted">
-                  <span className="font-semibold text-text">Laufende Kosten: </span>
-                  {p.running}
-                  <span className="mt-1.5 block">{p.redirectNote}</span>
-                </span>
-                <span className="mt-2 block text-[13px] leading-snug text-muted">
-                  <span className="font-semibold text-text">Lieferzeit: </span>
-                  {shippingText(p)}
-                  {p.id === 'review-dashboard' ? ' (inklusive Einrichtung des Dashboards)' : ''}.
-                </span>
-              </span>
-            </label>
+          {singles.map((p, i) => (
+            <ProductOption key={p.id} p={p} index={i} ctx={ctx} error={prodError} />
+          ))}
+          <p className="mt-2 font-display text-base font-semibold text-text">Kombi-Paket: eine schwarze und eine weiße Karte</p>
+          {combos.map((p, i) => (
+            <ProductOption key={p.id} p={p} index={singles.length + i} ctx={ctx} error={prodError} />
           ))}
         </div>
         <FieldError id={errId('product')} message={prodError} />
       </Fieldset>
 
       <p className="text-sm text-muted">
-        Geliefert wird die {PRODUCT_LABEL}, 3 mm stark, im Standarddesign ohne individuellen Aufdruck.
+        Geliefert wird die {PRODUCT_LABEL}, 3 mm stark, im Standarddesign ohne individuellen Aufdruck, in Schwarz oder Weiß.
       </p>
 
       <div role="group" aria-labelledby="qty-label">
         <label id="qty-label" htmlFor={fieldId('quantity')} className="mb-1 block font-display text-lg font-semibold text-text">
-          Stückzahl<span aria-hidden className="ml-0.5 text-mint"> *</span>
+          {combo ? 'Anzahl Kombis' : 'Stückzahl'}<span aria-hidden className="ml-0.5 text-mint"> *</span>
         </label>
         <p id="f-quantity-hint" className="mb-3 text-sm text-muted">
-          {QTY_MIN} bis {QTY_MAX} Stück je Bestellung, alle für einen Standort. Mehr Stück oder mehrere Filialen? Schreiben Sie uns an support@yanqiva.de.
+          {combo
+            ? `${QTY_MIN} bis ${max} Kombis je Bestellung (je Kombi eine schwarze und eine weiße Karte), alle für einen Standort. `
+            : `${QTY_MIN} bis ${max} Karten je Bestellung, alle für einen Standort. `}
+          Mehr oder mehrere Filialen? Schreiben Sie uns an support@yanqiva.de.
         </p>
         <div className="flex items-center gap-2">
           <button
             type="button"
-            aria-label="Eine Karte weniger"
+            aria-label={`Eine ${unit(1)} weniger`}
             aria-disabled={qty !== null && qty <= QTY_MIN}
             onClick={() => bump(-1)}
             className="grid size-12 shrink-0 place-items-center rounded-xl border border-white/50 bg-white/[0.05] text-2xl leading-none text-text transition-colors hover:border-mint/60 active:bg-white/[0.12] aria-disabled:cursor-not-allowed aria-disabled:opacity-40"
@@ -153,8 +262,8 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
           />
           <button
             type="button"
-            aria-label="Eine Karte mehr"
-            aria-disabled={qty !== null && qty >= QTY_MAX}
+            aria-label={`Eine ${unit(1)} mehr`}
+            aria-disabled={qty !== null && qty >= max}
             onClick={() => bump(1)}
             className="grid size-12 shrink-0 place-items-center rounded-xl border border-white/50 bg-white/[0.05] text-2xl leading-none text-text transition-colors hover:border-mint/60 active:bg-white/[0.12] aria-disabled:cursor-not-allowed aria-disabled:opacity-40"
           >
@@ -162,11 +271,34 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
           </button>
         </div>
         <FieldError id="f-quantity-err" message={qtyError} />
-        <div className="glass mt-5 rounded-2xl p-4 sm:p-5">
-          <p className="flex items-baseline justify-between gap-3 text-[15px] text-muted">
-            <span>{pid ? `${qtyEff} × ${PRODUCTS[pid].shortName} (${PRODUCT_LABEL}) à ${formatEuro(PRODUCTS[pid].unitPrice)}` : 'Noch keine Variante gewählt'}</span>
-            <span className="shrink-0 font-display text-xl font-semibold text-text">{pid ? formatEuro(subtotal(pid, qtyEff)) : '–'}</span>
-          </p>
+      </div>
+
+      <ColorSection ctx={ctx} qty={qtyEff} />
+
+      <div>
+        <div className="glass rounded-2xl p-4 sm:p-5">
+          {pid ? (
+            <>
+              <p className="text-[15px] text-muted">{quantityText(pid, qtyEff)} {PRODUCTS[pid].shortName}</p>
+              <ul className="mt-2 space-y-1.5">
+                {priceLines(pid, qtyEff).map((l) => (
+                  <li key={l.label} className="flex items-baseline justify-between gap-3 text-[15px] text-muted">
+                    <span>{l.label}</span>
+                    <span className="shrink-0 text-text">{formatEuro(l.amount)}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 flex items-baseline justify-between gap-3 border-t border-line pt-3 text-[15px] text-muted">
+                <span>Zwischensumme</span>
+                <span className="shrink-0 font-display text-xl font-semibold text-text">{formatEuro(subtotal(pid, qtyEff))}</span>
+              </p>
+            </>
+          ) : (
+            <p className="flex items-baseline justify-between gap-3 text-[15px] text-muted">
+              <span>Noch keine Variante gewählt</span>
+              <span className="shrink-0 font-display text-xl font-semibold text-text">–</span>
+            </p>
+          )}
           <p className="mt-1.5 text-[13px] text-muted">Lieferung und Übergabe vor Ort im Raum Speyer, Ludwigshafen, Mannheim und Karlsruhe sowie in der Umgebung von Germersheim, Edenkoben und Neustadt an der Weinstraße inklusive. {VAT_NOTE}</p>
         </div>
         {/* Verzögerte Ansage der Zwischensumme (nicht bei jedem Tastendruck) */}
@@ -177,7 +309,7 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
 
       <DeliveryAreaCheck />
 
-      <NextSteps dashboard={form.product === '' ? undefined : form.product === 'review-dashboard'} />
+      <NextSteps dashboard={form.product === '' ? undefined : PRODUCTS[form.product].dashboard} />
     </div>
   )
 }
@@ -188,7 +320,7 @@ export function NextSteps({ dashboard, done = false }: { dashboard?: boolean; do
     'Sie erhalten eine Eingangsbestätigung per E-Mail. Das ist noch keine Annahme.',
     'Mit der Auftragsbestätigung per E-Mail, in der Regel innerhalb eines Werktags, kommt der Vertrag zustande. Mit ihr erhalten Sie eine Rechnung oder eine Zahlungsaufforderung (keine Rechnung; diese folgt dann gesondert).',
     'Sie zahlen per Vorkasse: Sie überweisen den Betrag innerhalb von 14 Tagen.',
-    `Nach Zahlungseingang richten wir Ihre Karte mit Ihrem Google-Link ein, produzieren sie und übergeben sie Ihnen persönlich vor Ort, ${dashboard === undefined ? 'in der Regel innerhalb von 2–5 Werktagen (Klassik) bzw. 7 Werktagen (Dashboard).' : dashboard ? 'in der Regel innerhalb von 7 Werktagen. Den Dashboard-Zugang erhalten Sie per E-Mail mit der Übergabe.' : 'in der Regel innerhalb von 2–5 Werktagen.'}`,
+    `Nach Zahlungseingang richten wir Ihre Karte mit Ihrem Google-Link ein, produzieren sie und übergeben sie Ihnen persönlich vor Ort, ${dashboard === undefined ? 'in der Regel innerhalb von 2–5 Werktagen (Klassik und Kombi) bzw. 7 Werktagen (Dashboard, auch als Kombi).' : dashboard ? 'in der Regel innerhalb von 7 Werktagen. Den Dashboard-Zugang erhalten Sie per E-Mail mit der Übergabe.' : 'in der Regel innerhalb von 2–5 Werktagen.'}`,
   ]
   const items = done ? all.slice(1) : all
   return (
@@ -362,7 +494,7 @@ const Row = ({ k, children }: { k: string; children: ReactNode }) => (
 
 export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { onEdit: (s: StepId) => void }) {
   const f = trimmed(ctx.form)
-  const qty = effectiveQuantity(f.quantity)
+  const qty = qtyOf(f)
   const pid = productOf(f)
   const p = PRODUCTS[pid]
   return (
@@ -392,11 +524,19 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
             <dd className="text-right text-text">{PRODUCT_LABEL}</dd>
           </div>
           <div className="flex justify-between gap-4">
-            <dt className="text-muted">Menge</dt>
-            <dd className="text-right text-text">
-              {qty} × {formatEuro(p.unitPrice)}
-            </dd>
+            <dt className="text-muted">Farbe</dt>
+            <dd className="text-right text-text">{colorSummary(colorCounts(f))}</dd>
           </div>
+          <div className="flex justify-between gap-4">
+            <dt className="text-muted">Menge</dt>
+            <dd className="text-right text-text">{quantityText(pid, qty)}</dd>
+          </div>
+          {priceLines(pid, qty).map((l) => (
+            <div key={l.label} className="flex justify-between gap-4">
+              <dt className="max-w-[26ch] text-muted sm:max-w-[40ch]">{l.label}</dt>
+              <dd className="text-right text-text">{formatEuro(l.amount)}</dd>
+            </div>
+          ))}
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Zwischensumme</dt>
             <dd className="text-right text-text">{formatEuro(subtotal(pid, qty))}</dd>
@@ -416,7 +556,7 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Laufende Kosten</dt>
             <dd className="max-w-[26ch] text-right text-text sm:max-w-[40ch]">
-              {f.product === 'review-dashboard' ? `Keine in den ersten ${DASHBOARD_INCLUDED_MONTHS} Monaten (Dashboard inklusive). Danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar.` : 'Keine'}
+              {p.dashboard ? `Keine in den ersten ${DASHBOARD_INCLUDED_MONTHS} Monaten (Dashboard inklusive). Danach optional ${DASHBOARD_RENEWAL_EUR} € pro Monat je Standort, monatlich kündbar.` : 'Keine'}
             </dd>
           </div>
           <div className="flex justify-between gap-4">
