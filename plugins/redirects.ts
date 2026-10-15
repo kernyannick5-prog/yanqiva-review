@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
 import { createHash } from 'node:crypto'
 import { buildCsp } from './csp.ts'
-import { redirects, snapshotEntries, type RedirectEntry } from '../src/config/redirects.ts'
+import { redirects, type RedirectEntry } from '../src/config/redirects.ts'
 
 const escapeHtml = (s: string) =>
   s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!)
@@ -37,52 +37,20 @@ function redirectPage(base: string, target: string, business: string): string {
 }
 
 /**
- * Holt optional den Snapshot der Produktionskarten (FALLBACK_EXPORT_URL + FALLBACK_EXPORT_TOKEN aus der Umgebung/den GitHub-Secrets).
- * Ohne beide Variablen: leer. Ist der Export konfiguriert, aber nicht abrufbar, schlägt der Build FEHL (die zuletzt veröffentlichte
- * Version bleibt dann online, statt Karten ohne Notnetz zu veröffentlichen). Geloggt wird nur die Anzahl, nie Slug oder Ziel
- * (öffentliches Repo, öffentliche Actions-Logs).
- */
-export async function fetchSnapshot(env: NodeJS.ProcessEnv = process.env, fetchImpl: typeof fetch = fetch): Promise<RedirectEntry[]> {
-  const url = env.FALLBACK_EXPORT_URL?.trim()
-  const token = env.FALLBACK_EXPORT_TOKEN?.trim()
-  if (!url && !token) return []
-  if (!url || !token) throw new Error('Fallback-Export: FALLBACK_EXPORT_URL und FALLBACK_EXPORT_TOKEN müssen beide gesetzt sein')
-  const u = new URL(url)
-  if (u.protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(u.hostname)) throw new Error('Fallback-Export: FALLBACK_EXPORT_URL muss https sein')
-  let lastError = 'unbekannt'
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    try {
-      const res = await fetchImpl(u, { headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }, signal: AbortSignal.timeout(15_000), redirect: 'error' })
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
-      const { entries, skipped } = snapshotEntries(await res.json())
-      console.log(`Fallback-Export: ${entries.length} Karten übernommen${skipped ? `, ${skipped} ungültige übersprungen` : ''}`)
-      return entries
-    } catch (e) {
-      lastError = e instanceof Error ? e.message : String(e)
-      if (attempt < 3) await new Promise((r) => setTimeout(r, attempt * 2000))
-    }
-  }
-  throw new Error(`Fallback-Export nicht abrufbar (${lastError}). Build abgebrochen.`)
-}
-
-/**
  * Erzeugt für jeden Eintrag in src/config/redirects.ts eine Seite unter
  * /r/<slug>/index.html (Build) und bedient /r/<slug> im Dev-Server.
+ * Es entstehen bewusst NUR die Demo-Einträge: Produktionskarten (Slug -> Google-Link) dürfen nie in Repo, Build-Artefakt
+ * oder Log landen (öffentliches Repo, Artefakte sind für jeden GitHub-Nutzer abrufbar). Bei einem Worker-Ausfall fängt
+ * public/404.html (+ 404.js) unbekannte /r/<slug> mit einer freundlichen Wiederholungs-Seite ab.
  */
 export function yanqivaRedirects(): Plugin {
   let base = '/'
   const demo: RedirectEntry[] = redirects.filter((r) => r.active)
-  let entries: RedirectEntry[] = demo
+  const entries: RedirectEntry[] = demo
   return {
     name: 'yanqiva-redirects',
     configResolved(config) {
       base = config.base
-    },
-    async buildStart() {
-      // Nur im Build (nicht im Dev-Server): Snapshot der Produktionskarten. Demo-Einträge haben Vorrang bei gleichem Slug.
-      if (this.environment?.mode === 'dev') return
-      const known = new Set(demo.map((r) => r.slug))
-      entries = [...demo, ...(await fetchSnapshot()).filter((r) => !known.has(r.slug))]
     },
     configureServer(server) {
       server.middlewares.use((req, res, next) => {

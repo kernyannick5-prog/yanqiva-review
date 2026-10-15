@@ -16,11 +16,19 @@
 <link rel="stylesheet" href="/404.css">
 </head>
 <body>
-<main>
+<main id="notfound">
 <p class="code">FEHLER 404</p>
 <h1>Diese Seite gibt es nicht.</h1>
 <p>Vielleicht wurde der Link falsch abgetippt oder die Karte ist nicht mehr aktiv.</p>
 <a href="/">Zur Startseite</a>
 </main>
+<main id="retry" hidden>
+<p class="code">KURZ NICHT ERREICHBAR</p>
+<h1>Die Karte ist gerade nicht erreichbar.</h1>
+<p>Bitte scannen Sie die Karte in einer Minute erneut oder halten Sie Ihr Handy noch einmal an die Karte. Ihre Karte ist in Ordnung.</p>
+<p id="retry-status" role="status" aria-live="polite"></p>
+<a href="" id="retry-now">Jetzt erneut versuchen</a>
+</main>
+<script src="/404.js" defer></script>
 </body>
 </html>
