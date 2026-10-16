@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react'
-import { DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, PRODUCT_LABEL, colorSummary, formatEuro, priceLines, PRODUCTS, quantityText, SHIPPING_EUR, total, shippingText, VAT_NOTE } from './catalog'
+import { DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, PRODUCT_LABEL, colorSummary, formatEuro, keepTogether, priceLines, PRODUCTS, quantityText, SHIPPING_EUR, total, shippingText, VAT_NOTE } from './catalog'
 import { colorCounts, qtyOf, type OrderForm } from './state'
 
 /** Sticky Bestellübersicht (Desktop-Seitenleiste). */
@@ -19,11 +19,11 @@ export function OrderSidebar({ form }: { form: OrderForm }) {
       </p>
       {pid && <p className="text-sm text-muted">Farbe: {colorSummary(colorCounts(form)) || 'noch nicht gewählt'}</p>}
       <dl className="mt-4 space-y-2 border-t border-line pt-4 text-[15px]">
-        {pid ? priceLines(pid, qty).map((l) => <Line key={l.label} k={l.label} v={formatEuro(l.amount)} />) : <Line k="Preis" v="–" />}
+        {pid ? priceLines(pid, qty).map((l) => <Line key={l.label} k={keepTogether(l.label)} v={formatEuro(l.amount)} />) : <Line k="Preis" v="–" />}
         <Line k="Lieferung vor Ort" v={`${formatEuro(SHIPPING_EUR)} (inklusive)`} />
         <div className="flex items-baseline justify-between gap-3 border-t border-line pt-3">
-          <dt className="font-display font-semibold text-text">Gesamt einmalig</dt>
-          <dd className="font-display text-3xl font-semibold text-mint">
+          <dt className="min-w-0 font-display font-semibold text-text">Gesamt einmalig</dt>
+          <dd className="shrink-0 whitespace-nowrap font-display text-3xl font-semibold tabular-nums text-mint">
             {pid ? formatEuro(total(pid, qty)) : '–'}
           </dd>
         </div>
@@ -45,8 +45,8 @@ export function OrderSidebar({ form }: { form: OrderForm }) {
 function Line({ k, v }: { k: ReactNode; v: ReactNode }) {
   return (
     <div className="flex justify-between gap-3">
-      <dt className="text-muted">{k}</dt>
-      <dd className="text-right text-text">{v}</dd>
+      <dt className="min-w-0 text-muted">{k}</dt>
+      <dd className="shrink-0 whitespace-nowrap text-right tabular-nums text-text">{v}</dd>
     </div>
   )
 }
@@ -78,7 +78,7 @@ export function MobileBar({ form, children }: { form: OrderForm; children: React
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
         <div className="min-w-0 shrink-0">
           <p className="text-[13px] leading-tight text-muted">Gesamt einmalig</p>
-          <p className="font-display text-xl font-semibold leading-tight text-text">
+          <p className="font-display text-xl font-semibold leading-tight tabular-nums text-text">
             {form.product ? formatEuro(total(form.product, qty)) : '–'}
           </p>
           <p className="text-[13px] leading-tight text-muted">Endpreis, keine USt.</p>

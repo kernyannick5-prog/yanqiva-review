@@ -53,7 +53,7 @@ export function Confirmation({ orderId, form }: Props) {
           </div>
           <div className="flex items-baseline justify-between gap-4">
             <dt className="text-muted">Gesamtbetrag einmalig</dt>
-            <dd className="font-display text-2xl font-semibold text-mint">{formatEuro(total(pid, qty))}</dd>
+            <dd className="shrink-0 whitespace-nowrap font-display text-2xl font-semibold tabular-nums text-mint">{formatEuro(total(pid, qty))}</dd>
           </div>
         </dl>
         <p className="mt-2 text-[13px] text-muted">{VAT_NOTE}</p>

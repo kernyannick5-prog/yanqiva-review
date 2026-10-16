@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { ReviewCardFace } from '../components/ReviewCardFace'
 import {
-  CARD_IMAGE_NOTE, COLORS, colorSummary, DASHBOARD_EXTRA_CARD_EUR, DASHBOARD_FIRST_CARD_EUR, DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, formatEuro, KOMBI_SINGLE_EUR, PRODUCT_LABEL, PRODUCT_LIST, PRODUCTS,
+  CARD_IMAGE_NOTE, COLORS, colorSummary, DASHBOARD_EXTRA_CARD_EUR, DASHBOARD_FIRST_CARD_EUR, DASHBOARD_INCLUDED_MONTHS, DASHBOARD_RENEWAL_EUR, formatEuro, keepTogether, KOMBI_SINGLE_EUR, PRODUCT_LABEL, PRODUCT_LIST, PRODUCTS,
   priceLines, qtyMaxFor, QTY_MIN, quantityText, PAYMENT_NOTE, SHIPPING_EUR, subtotal, total, unitWord, VAT_NOTE, shippingText, type ColorId, type Product,
 } from './catalog'
 import { CheckboxField, ErrorSummary, FieldError, Fieldset, RequiredLegend, TextField, type FormCtx } from './fields'
@@ -89,11 +89,11 @@ function ProductOption({ p, index, ctx, error }: { p: Product; index: number; ct
       />
       <RadioDot />
       <span className="min-w-0 flex-1">
-        <span className="flex items-baseline justify-between gap-3">
-          <span id={`prod-${p.id}-n`} className="font-display text-lg font-semibold text-text">{p.shortName}</span>
-          <span id={`prod-${p.id}-d`} className="shrink-0 text-right font-display text-xl font-semibold text-text">
+        <span className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+          <span id={`prod-${p.id}-n`} className="min-w-0 font-display text-lg font-semibold text-text">{p.shortName}</span>
+          <span id={`prod-${p.id}-d`} className="ml-auto whitespace-nowrap text-right font-display text-xl font-semibold tabular-nums text-text">
             {formatEuro(p.unitPrice)}
-            <span className="block max-w-[22ch] text-[13px] font-normal leading-snug text-muted">{priceCaption(p)}</span>
+            <span className="ml-auto block max-w-[22ch] whitespace-normal text-[13px] font-normal leading-snug tabular-nums text-muted">{keepTogether(priceCaption(p))}</span>
           </span>
         </span>
         <span id={`prod-${p.id}-t`} className="mt-0.5 block text-sm text-muted">{p.tagline}</span>
@@ -284,14 +284,14 @@ export function StepProduct({ ctx, summaryKeys, onJump }: StepProps) {
               <ul className="mt-2 space-y-1.5">
                 {priceLines(pid, qtyEff).map((l) => (
                   <li key={l.label} className="flex items-baseline justify-between gap-3 text-[15px] text-muted">
-                    <span>{l.label}</span>
-                    <span className="shrink-0 text-text">{formatEuro(l.amount)}</span>
+                    <span className="min-w-0">{keepTogether(l.label)}</span>
+                    <span className="shrink-0 whitespace-nowrap tabular-nums text-text">{formatEuro(l.amount)}</span>
                   </li>
                 ))}
               </ul>
               <p className="mt-3 flex items-baseline justify-between gap-3 border-t border-line pt-3 text-[15px] text-muted">
                 <span>Zwischensumme</span>
-                <span className="shrink-0 font-display text-xl font-semibold text-text">{formatEuro(subtotal(pid, qtyEff))}</span>
+                <span className="shrink-0 whitespace-nowrap font-display text-xl font-semibold tabular-nums text-text">{formatEuro(subtotal(pid, qtyEff))}</span>
               </p>
             </>
           ) : (
@@ -534,17 +534,17 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
           </div>
           {priceLines(pid, qty).map((l) => (
             <div key={l.label} className="flex justify-between gap-4">
-              <dt className="max-w-[26ch] text-muted sm:max-w-[40ch]">{l.label}</dt>
-              <dd className="text-right text-text">{formatEuro(l.amount)}</dd>
+              <dt className="min-w-0 max-w-[26ch] text-muted sm:max-w-[40ch]">{keepTogether(l.label)}</dt>
+              <dd className="shrink-0 whitespace-nowrap text-right tabular-nums text-text">{formatEuro(l.amount)}</dd>
             </div>
           ))}
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Zwischensumme</dt>
-            <dd className="text-right text-text">{formatEuro(subtotal(pid, qty))}</dd>
+            <dd className="shrink-0 whitespace-nowrap text-right tabular-nums text-text">{formatEuro(subtotal(pid, qty))}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Lieferung vor Ort</dt>
-            <dd className="text-right text-text">{formatEuro(SHIPPING_EUR)} (inklusive)</dd>
+            <dd className="shrink-0 whitespace-nowrap text-right tabular-nums text-text">{formatEuro(SHIPPING_EUR)} (inklusive)</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Lieferzeit</dt>
@@ -552,7 +552,7 @@ export function StepReview({ ctx, summaryKeys, onJump, onEdit }: StepProps & { o
           </div>
           <div className="flex items-baseline justify-between gap-4 border-t border-line pt-3">
             <dt className="font-display text-base font-semibold text-text">Gesamtbetrag einmalig</dt>
-            <dd className="font-display text-2xl font-semibold text-mint">{formatEuro(total(pid, qty))}</dd>
+            <dd className="shrink-0 whitespace-nowrap font-display text-2xl font-semibold tabular-nums text-mint">{formatEuro(total(pid, qty))}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-muted">Laufende Kosten</dt>

@@ -181,6 +181,9 @@ const euro = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR'
 /** "198 €" (mit geschütztem Leerzeichen, wie Intl es liefert). */
 export const formatEuro = (n: number): string => euro.format(n)
 
+/** Verhindert Zeilenumbrüche vor und nach "+" und "×" in Positionstexten ("99 € + 40 €" bleibt zusammen). */
+export const keepTogether = (s: string): string => s.replace(/ ([+×]) /g, ' $1 ')
+
 /** Preiszeilen der Übersicht: transparent mit Staffel (erste Karte, weitere Karten). */
 export function priceLines(id: ProductId, qty: number): { label: string; amount: number }[] {
   const p = PRODUCTS[id]
