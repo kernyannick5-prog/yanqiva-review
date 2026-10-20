@@ -10,7 +10,7 @@ import type { LegalDoc } from './types'
 export const datenschutz: LegalDoc = {
   title: 'Datenschutzerklärung',
   badge: 'Rechtliches',
-  updated: 'Stand: 16. Oktober 2026',
+  updated: 'Stand: 20. Oktober 2026',
   pdf: 'datenschutz.pdf',
   archive: 'dokumente/archiv/#datenschutz',
   callouts: [
@@ -93,6 +93,24 @@ export const datenschutz: LegalDoc = {
         },
         {
           p: 'Für das Kontaktformular auf yanqiva.de gilt die Datenschutzerklärung unter yanqiva.de/datenschutz.',
+        },
+      ],
+    },
+    {
+      id: 'whatsapp',
+      heading: '4a. Kontakt über WhatsApp',
+      blocks: [
+        {
+          p: 'Auf dieser Website finden Sie einen Link „Per WhatsApp schreiben“ (schwebender Button und Kontaktbereiche). Es handelt sich um einen normalen Link auf wa.me; die Website lädt dafür weder ein Skript noch ein Plug-in von WhatsApp nach und setzt keine Cookies. Eine Datenübermittlung an WhatsApp findet erst statt, wenn Sie den Link anklicken und WhatsApp öffnen bzw. dort eine Nachricht senden. Der Link öffnet WhatsApp in einem neuen Tab oder in der WhatsApp-App und füllt eine Textvorlage vor, die Sie vor dem Absenden ändern können.',
+        },
+        {
+          p: 'Wenn Sie uns über WhatsApp schreiben, verarbeiten wir Ihre Telefonnummer, Ihren WhatsApp-Profilnamen (falls sichtbar) sowie den Inhalt und Zeitpunkt Ihrer Nachricht, um Ihre Anfrage zu beantworten. Bitte senden Sie uns über WhatsApp keine sensiblen Daten (zum Beispiel Gesundheits- oder Zahlungsdaten, Passwörter) und keine Bestelldaten, die Sie nicht übermitteln möchten. Für die Bestellung nutzen Sie bitte das Bestellformular.',
+        },
+        {
+          p: 'Anbieter des Dienstes für Nutzer im Europäischen Wirtschaftsraum ist die WhatsApp Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Irland (ein Unternehmen der Meta-Gruppe). Nachrichteninhalte sind nach Angaben von WhatsApp Ende-zu-Ende-verschlüsselt. WhatsApp verarbeitet nach eigenen Angaben aber Metadaten (zum Beispiel Telefonnummer, Zeitpunkte, Geräte- und Verbindungsdaten) auch als eigener Verantwortlicher für eigene Zwecke; darauf haben wir keinen Einfluss. Dabei kann eine Übermittlung von Daten in die USA und andere Drittländer stattfinden, insbesondere an Meta Platforms, Inc. Sie stützt sich auf den Angemessenheitsbeschluss der EU-Kommission zum EU-US Data Privacy Framework (Art. 45 DSGVO), soweit der Empfänger danach zertifiziert ist, im Übrigen auf Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO). Näheres in der Datenschutzrichtlinie von WhatsApp (https://www.whatsapp.com/legal/privacy-policy-eea).',
+        },
+        {
+          p: 'Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit Ihre Anfrage auf einen Vertragsschluss gerichtet ist, im Übrigen Art. 6 Abs. 1 lit. f DSGVO (unser berechtigtes Interesse, Anfragen auf einem von vielen Interessenten gewünschten, schnellen Weg zu beantworten). Wir löschen Ihren Chatverlauf, sobald Ihr Anliegen abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen; Anfragen ohne Vertragsschluss spätestens nach 12 Monaten. Das Nutzen von WhatsApp ist freiwillig: Sie erreichen uns jederzeit auch per E-Mail an support@yanqiva.de (Abschnitt 4) oder über das Kontaktformular unter yanqiva.de/kontakt.',
         },
       ],
     },

@@ -1,6 +1,7 @@
 import { sectionHref } from '../lib/sectionRoutes'
 import { LinkButton } from '../components/Button'
 import { Reveal } from '../components/Reveal'
+import { WhatsAppButton, WhatsAppNote } from '../components/WhatsApp'
 import { useLoopVisible } from '../lib/useLoopVisible'
 import { Container, Eyebrow } from './ui'
 
@@ -30,6 +31,11 @@ export function FinalCta() {
           <div className="relative mt-8 flex flex-col justify-center gap-3 sm:mt-10 sm:flex-row">
             <LinkButton href={`${import.meta.env.BASE_URL}bestellen/`}>Jetzt bestellen</LinkButton>
             <LinkButton href={sectionHref('demo')} variant="ghost">Demo öffnen</LinkButton>
+          </div>
+          <div className="relative mt-8 flex flex-col items-center gap-2.5 border-t border-white/10 pt-6">
+            <p className="text-sm text-muted">Noch Fragen? Schreiben Sie uns direkt.</p>
+            <WhatsAppButton />
+            <WhatsAppNote className="max-w-xs text-faint" />
           </div>
         </div>
         </Reveal>

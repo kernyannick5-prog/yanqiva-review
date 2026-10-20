@@ -1,3 +1,4 @@
+import { WhatsAppButton, WhatsAppNote } from '../components/WhatsApp'
 import { LinkButton } from '../components/Button'
 import { ReviewCardFace } from '../components/ReviewCardFace'
 import { DELIVERY_SHORT } from '../order/deliveryArea'
@@ -163,6 +164,12 @@ export function Pricing() {
 
         <Group title="Einzelkarten" lead="Sie wählen die Farbe: Schwarz oder Weiß." plans={singles} />
         <Group title="Kombi-Paket" lead="Je eine schwarze und eine weiße Karte zusammen." plans={combos} />
+
+        <div className="mx-auto mt-10 flex max-w-3xl flex-col items-center gap-2.5 text-center">
+          <p className="text-[15px] text-muted">Fragen zu den Paketen? Schreiben Sie uns kurz.</p>
+          <WhatsAppButton />
+          <WhatsAppNote className="text-faint" />
+        </div>
 
         <p className="mx-auto mt-8 max-w-3xl text-center text-[13px] text-faint">
           Weiterleitung: Wir betreiben die Weiterleitung, solange wir YANQIVA REVIEW anbieten, mindestens jedoch 24 Monate ab Lieferung (<a href={`${import.meta.env.BASE_URL}agb/#weiterleitung`} className="underline underline-offset-2 hover:text-text">AGB Ziffer 9</a>).

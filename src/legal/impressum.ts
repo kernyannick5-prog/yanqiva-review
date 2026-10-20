@@ -7,7 +7,7 @@ import type { LegalDoc } from './types'
 export const impressum: LegalDoc = {
   title: 'Impressum',
   badge: 'Rechtliches',
-  updated: 'Stand: 16. Oktober 2026',
+  updated: 'Stand: 20. Oktober 2026',
   callouts: [],
   sections: [
     {
@@ -29,6 +29,7 @@ export const impressum: LegalDoc = {
         {
           list: [
             'E-Mail: support@yanqiva.de',
+            'Telefon und WhatsApp: +49 15567 455901',
             'Weitere Kontaktmöglichkeit: Kontaktformular unter yanqiva.de/kontakt',
           ],
         },

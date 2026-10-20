@@ -9,6 +9,7 @@ import { Benefits } from './sections/Benefits'
 import { Pricing } from './sections/Pricing'
 import { FinalCta } from './sections/FinalCta'
 import { Footer } from './sections/Footer'
+import { WhatsAppFab } from './components/WhatsApp'
 import { Background } from './sections/Background'
 import { loadMotionFeatures } from './lib/loadMotionFeatures'
 import { useLowPower } from './lib/lowPower'
@@ -250,6 +251,7 @@ export default function App() {
         <FinalCta />
       </main>
       <Footer />
+      <WhatsAppFab />
     </LazyMotion>
   )
 }

@@ -1,5 +1,6 @@
 import { MotionToggle } from '../components/MotionToggle'
 import { Container } from './ui'
+import { whatsappHref } from '../config/whatsapp'
 import { sectionHref, type SectionName } from '../lib/sectionRoutes'
 
 const BASE = import.meta.env.BASE_URL
@@ -9,9 +10,10 @@ const internal: { section: SectionName; label: string }[] = [
   { section: 'preise', label: 'Preise' },
   { section: 'demo', label: 'Dashboard' },
 ]
-const external = [
+const external: { href: string; label: string; blank?: boolean }[] = [
   { href: `${BASE}bestellen/`, label: 'Bestellen' },
   { href: 'mailto:support@yanqiva.de', label: 'Kontakt' },
+  { href: whatsappHref(), label: 'WhatsApp', blank: true },
   { href: `${BASE}impressum/`, label: 'Impressum' },
   { href: `${BASE}datenschutz/`, label: 'Datenschutz' },
   { href: `${BASE}agb/`, label: 'AGB' },
@@ -45,7 +47,7 @@ export function Footer({ onLegalPage = false }: { onLegalPage?: boolean }) {
               ))}
               {external.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className={linkClass}>{l.label}</a>
+                  <a href={l.href} className={linkClass} {...(l.blank ? { target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'Per WhatsApp schreiben (öffnet WhatsApp)' } : {})}>{l.label}</a>
                 </li>
               ))}
               {!onLegalPage && (

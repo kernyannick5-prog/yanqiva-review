@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import type { LegalCallout, LegalDoc } from '../legal/types'
+import { WhatsAppFab } from '../components/WhatsApp'
 import { Footer } from '../sections/Footer'
 
 const BASE = import.meta.env.BASE_URL
@@ -183,6 +184,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
       </main>
 
       <Footer onLegalPage />
+      <WhatsAppFab />
     </>
   )
 }

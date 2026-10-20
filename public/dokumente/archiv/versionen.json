@@ -76,5 +76,18 @@
     "hash": "3a7d8ffac30e51d3e8784fbd77d302470f9848d1911082e2006c54ad5216cd0a",
     "pages": 8,
     "note": ""
+  },
+  {
+    "doc": "datenschutz",
+    "id": "datenschutz-2026-10-16-f2",
+    "file": "datenschutz-2026-10-16-f2.pdf",
+    "date": "2026-10-16",
+    "fassung": 2,
+    "from": "2026-10-15T23:36:22.000Z",
+    "stand": "Stand: 16. Oktober 2026",
+    "commit": "044b3e4",
+    "hash": "ff02f2cbc8507ef1ea2b9a661ea12f0aa10afecda9eb15e2c1377158db8f8778",
+    "pages": 9,
+    "note": ""
   }
 ]
