@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./fonts.css";
+@import "./led-mask.css";
 
 /* YANQIVA REVIEW – Design-Tokens */
 @theme {
@@ -354,7 +355,9 @@ body {
 .yq-scan       { transform: translateY(-100%); animation: yq-scan 3.2s ease-in-out infinite; }
 .yq-dot        { opacity: 0; animation: yq-dot 1.6s linear infinite; }
 
-[data-loop='off'], [data-loop='off'] *:not([class*='yq-in-']) { animation-play-state: paused !important; }
+/* Außerhalb des Sichtfelds: Endlos-Animationen ganz entfernen statt nur pausieren. Auch pausierte Animationen kosten pro Bild Style-Arbeit
+   (gemessen: Showcase bei 6x CPU-Drosselung 37 statt 58 Bilder/s). Einblend-Animationen (yq-in-*) bleiben. */
+[data-loop='off']:not([class*='yq-in-']), [data-loop='off'] *:not([class*='yq-in-']), [data-loop='off'] *::before, [data-loop='off'] *::after { animation: none !important; }
 html[data-lowpower] .yq-card-float, html[data-lowpower] .yq-sweep, html[data-lowpower] .yq-wave,
 html[data-lowpower] .yq-breathe, html[data-lowpower] .yq-scan, html[data-lowpower] .yq-dot,
 html[data-lowpower] .animate-ping { animation: none !important; }
@@ -462,7 +465,7 @@ footer {
 .yq-led-dots {
   position: absolute; inset: 0; overflow: hidden;
   background: rgb(44 91 217 / 0.26);
-  -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  /* Punktmaske (CSS-Verläufe) steht in led-mask.css, generiert von scripts/gen-led-mask.mjs */
 }
 .yq-led-sweep {
   position: absolute; inset: 0;

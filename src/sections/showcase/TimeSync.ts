@@ -2,50 +2,74 @@ import { POSTER_TIME, VIDEO_DURATION } from './constants'
 
 const DURATION_MS = VIDEO_DURATION * 1000
 
+interface Entry {
+  el: HTMLElement
+  /** transform-Text zur Videozeit t (Sekunden) */
+  f: (t: number) => string
+  anim: Animation | null
+}
+
+/** Keyframes eines Elements, dessen transform aus der Videozeit abgeleitet wird. */
+function sampleKeyframes(f: (t: number) => string, steps: number): Keyframe[] {
+  const frames: Keyframe[] = []
+  for (let i = 0; i <= steps; i++) frames.push({ offset: i / steps, transform: f((i / steps) * VIDEO_DURATION) })
+  return frames
+}
+
 /**
- * Hält kleine Fortschrittsanzeigen (Balken, Griff) als Web-Animationen im Gleichlauf mit der Videozeit.
- * Die Animationen laufen auf dem Compositor; JavaScript synchronisiert nur bei Play, Pause, Sprung und Abweichung,
- * nicht bei jedem Zeitupdate des Videos (das kostete auf schwachen Geräten spürbar Hauptthread-Zeit durch Style-Neuberechnung).
+ * Hält kleine Fortschrittsanzeigen (Balken) im Gleichlauf mit der Videozeit.
+ * - Beim Abspielen laufen sie als Web-Animation auf dem Compositor; JavaScript synchronisiert nur bei Play, Pause, Sprung und Abweichung,
+ *   nicht bei jedem Zeitupdate des Videos (ein React-Render oder Style-Schreiben pro Update kostete auf schwachen Geräten viel Hauptthread-Zeit).
+ * - Im Stillstand gibt es keine Animation, nur einen festen transform-Wert (jede laufende oder pausierte Animation kostet pro Bild Style-Arbeit).
+ * Gemessen wird bewusst sparsam: möglichst wenige gleichzeitig animierte Elemente anmelden.
  */
 export class TimeSync {
-  private anims = new Set<Animation>()
+  private entries = new Set<Entry>()
+  private t = POSTER_TIME
+  private playing = false
+  private at = 0
 
-  /** Meldet ein Element an; gibt eine Abmeldefunktion zurück. Ohne Web-Animations-API bleibt das Element statisch. */
-  add(el: Element | null, keyframes: Keyframe[]): () => void {
-    if (!el || typeof el.animate !== 'function') return () => {}
-    const a = el.animate(keyframes, { duration: DURATION_MS, iterations: Infinity, easing: 'linear', fill: 'both' })
-    a.pause()
-    a.currentTime = POSTER_TIME * 1000
-    this.anims.add(a)
+  /** Aktuelle Videozeit (Sekunden), bei laufendem Video fortgeschrieben. */
+  private now(): number {
+    if (!this.playing) return this.t
+    return (this.t + (performance.now() - this.at) / 1000) % VIDEO_DURATION
+  }
+
+  private apply(e: Entry, t: number, playing: boolean) {
+    if (playing && typeof e.el.animate === 'function') {
+      e.anim?.cancel()
+      e.anim = e.el.animate(sampleKeyframes(e.f, 44), { duration: DURATION_MS, iterations: Infinity, easing: 'linear', fill: 'both' })
+      e.anim.currentTime = t * 1000
+    } else {
+      e.anim?.cancel()
+      e.anim = null
+      e.el.style.transform = e.f(t)
+    }
+  }
+
+  /** Meldet ein Element an (sofort im aktuellen Zustand); gibt eine Abmeldefunktion zurück. */
+  add(el: HTMLElement | null, f: (t: number) => string): () => void {
+    if (!el) return () => {}
+    const e: Entry = { el, f, anim: null }
+    this.entries.add(e)
+    this.apply(e, this.now(), this.playing)
     return () => {
-      a.cancel()
-      this.anims.delete(a)
+      e.anim?.cancel()
+      this.entries.delete(e)
     }
   }
 
   /** Auf Videozeit t (Sekunden) stellen; playing: weiterlaufen lassen, sonst dort anhalten. */
   sync(t: number, playing: boolean) {
-    for (const a of this.anims) {
-      a.currentTime = t * 1000
-      if (playing) a.play()
-      else a.pause()
-    }
+    this.t = t
+    this.playing = playing
+    this.at = performance.now()
+    for (const e of this.entries) this.apply(e, t, playing)
   }
 
-  /** Abweichung (Sekunden) zwischen Animationen und Videozeit; Video-Schleifen werden berücksichtigt. */
+  /** Abweichung (Sekunden) zwischen laufenden Animationen und Videozeit; Video-Schleifen werden berücksichtigt. */
   drift(t: number): number {
-    for (const a of this.anims) {
-      const cur = Number(a.currentTime ?? 0) % DURATION_MS
-      const d = Math.abs(cur - t * 1000)
-      return Math.min(d, DURATION_MS - d) / 1000
-    }
-    return 0
+    const d = Math.abs(this.now() - t)
+    return Math.min(d, VIDEO_DURATION - d)
   }
-}
-
-/** Keyframes für ein Element, dessen transform aus der Videozeit abgeleitet wird (f: Zeit in s → transform-Text). */
-export function sampleKeyframes(f: (t: number) => string, steps = 44): Keyframe[] {
-  const frames: Keyframe[] = []
-  for (let i = 0; i <= steps; i++) frames.push({ offset: i / steps, transform: f((i / steps) * VIDEO_DURATION) })
-  return frames
 }

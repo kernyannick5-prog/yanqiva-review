@@ -1,19 +1,26 @@
 import { LazyMotion } from 'framer-motion'
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState, type ComponentType } from 'react'
 import { Navbar } from './sections/Navbar'
 import { Hero } from './sections/Hero'
-import { ProductShowcase } from './sections/ProductShowcase'
-import { ProblemSolution } from './sections/ProblemSolution'
-import { HowItWorks } from './sections/HowItWorks'
-import { QrDemo } from './sections/QrDemo'
-import { Benefits } from './sections/Benefits'
-import { Pricing } from './sections/Pricing'
-import { FinalCta } from './sections/FinalCta'
-import { Footer } from './sections/Footer'
 import { WhatsAppFab } from './components/WhatsApp'
 import { Background } from './sections/Background'
 import { loadMotionFeatures } from './lib/loadMotionFeatures'
 import { sectionElementId, sectionFromLegacyHash, sectionFromPath, sectionHref, type SectionName } from './lib/sectionRoutes'
+
+/**
+ * Sektionen unterhalb des Hero als eigene Chunks. Der Prerender (react-dom/static) wartet auf alle Suspense-Grenzen, das HTML enthält also
+ * alle Inhalte; der Client hydriert Hero und Navigation sofort und jede Sektion einzeln, sobald ihr Chunk da ist (kurze Aufgaben statt
+ * einer langen Hydration der ganzen Seite: weniger Total Blocking Time, Hero früher bedienbar).
+ */
+const section = <K extends string>(load: () => Promise<Record<K, ComponentType>>, name: K) => lazy(() => load().then((m) => ({ default: m[name] })))
+const ProductShowcase = section(() => import('./sections/ProductShowcase'), 'ProductShowcase')
+const ProblemSolution = section(() => import('./sections/ProblemSolution'), 'ProblemSolution')
+const HowItWorks = section(() => import('./sections/HowItWorks'), 'HowItWorks')
+const QrDemo = section(() => import('./sections/QrDemo'), 'QrDemo')
+const Benefits = section(() => import('./sections/Benefits'), 'Benefits')
+const Pricing = section(() => import('./sections/Pricing'), 'Pricing')
+const FinalCta = section(() => import('./sections/FinalCta'), 'FinalCta')
+const Footer = section(() => import('./sections/Footer'), 'Footer')
 
 // Dashboard-Demo als eigener Chunk, damit der Hero schneller lädt.
 const DashboardDemo = lazy(() => import('./demo/DashboardDemo').then((m) => ({ default: m.DashboardDemo })))
@@ -227,16 +234,16 @@ export default function App() {
       <Navbar onLight />
       <main id="main" tabIndex={-1} className="relative outline-none">
         <Hero />
-        <ProductShowcase />
-        <ProblemSolution />
-        <HowItWorks />
+        <Suspense fallback={null}><ProductShowcase /></Suspense>
+        <Suspense fallback={null}><ProblemSolution /></Suspense>
+        <Suspense fallback={null}><HowItWorks /></Suspense>
         <DemoWhenNear />
-        <QrDemo />
-        <Benefits />
-        <Pricing />
-        <FinalCta />
+        <Suspense fallback={null}><QrDemo /></Suspense>
+        <Suspense fallback={null}><Benefits /></Suspense>
+        <Suspense fallback={null}><Pricing /></Suspense>
+        <Suspense fallback={null}><FinalCta /></Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={null}><Footer /></Suspense>
       <WhatsAppFab />
     </LazyMotion>
   )

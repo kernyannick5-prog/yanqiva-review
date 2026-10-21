@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useImperativeHandle, useRef, useState, type Ref } from 'react'
 import { Button } from '../../components/Button'
 import { useMotionPaused } from '../../lib/motionPause'
+import { guardSmoothness } from '../../lib/perfGuard'
 import { saveDataEnabled, usePrefersReducedMotion } from '../../lib/reducedMotion'
 import { POSTER_TIME, VIDEO_DURATION } from './constants'
-import { sampleKeyframes, type TimeSync } from './TimeSync'
+import type { TimeSync } from './TimeSync'
 
 const MEDIA = `${import.meta.env.BASE_URL}media/`
 const SRC = { desktop: `${MEDIA}showcase-desktop.mp4`, mobile: `${MEDIA}showcase-mobile.mp4` } as const
@@ -48,7 +49,6 @@ export function ShowcasePlayer({ onTime, timeline, ref }: ShowcasePlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const rangeRef = useRef<HTMLInputElement>(null)
   const fillRef = useRef<HTMLDivElement>(null)
-  const thumbRef = useRef<HTMLDivElement>(null)
   const clockRef = useRef<HTMLSpanElement>(null)
   const reduced = usePrefersReducedMotion()
   const motionPaused = useMotionPaused()
@@ -60,7 +60,7 @@ export function ShowcasePlayer({ onTime, timeline, ref }: ShowcasePlayerProps) {
   const [duration, setDuration] = useState(VIDEO_DURATION)
 
   // Zustand, der keine Darstellung ändert, bleibt in einem Ref (kein Re-Render).
-  const s = useRef({ halfVisible: false, userPaused: false, heldByAuto: false, wantPlay: false, pendingSeek: null as number | null, autoOk })
+  const s = useRef({ halfVisible: false, userPaused: false, heldByAuto: false, wantPlay: false, guarded: false, pendingSeek: null as number | null, autoOk })
   useEffect(() => {
     s.current.autoOk = autoOk
   }, [autoOk])
@@ -79,15 +79,8 @@ export function ShowcasePlayer({ onTime, timeline, ref }: ShowcasePlayerProps) {
     [duration],
   )
 
-  // Balken und Griff als Compositor-Animationen im Gleichlauf mit dem Video.
-  useEffect(() => {
-    const offFill = timeline.add(fillRef.current, sampleKeyframes((t) => `scaleX(${Math.min(1, t / VIDEO_DURATION)})`, 88))
-    const offThumb = timeline.add(thumbRef.current, sampleKeyframes((t) => `translateX(${Math.min(100, (t / VIDEO_DURATION) * 100)}%)`, 88))
-    return () => {
-      offFill()
-      offThumb()
-    }
-  }, [timeline])
+  // Fortschrittsbalken: beim Abspielen eine Compositor-Animation im Gleichlauf mit dem Video, im Stillstand ein fester Wert.
+  useEffect(() => timeline.add(fillRef.current, (t) => `scaleX(${Math.min(1, t / VIDEO_DURATION)})`), [timeline])
 
   /** Quelle wählen und laden: breites Video ab 1024 px, sonst das schmale (passt zum CSS-Seitenverhältnis). */
   const arm = useCallback(() => {
@@ -240,6 +233,10 @@ export function ShowcasePlayer({ onTime, timeline, ref }: ShowcasePlayerProps) {
           onPlay={() => setPlaying(true)}
           onPlaying={(e) => {
             setStarted(true)
+            if (!s.current.guarded) {
+              s.current.guarded = true
+              window.setTimeout(() => void guardSmoothness(), 1500) // Läuft das Video zäh, werden die dekorativen Loops abgeschaltet
+            }
             timeline.sync(e.currentTarget.currentTime, true)
           }}
           onWaiting={(e) => timeline.sync(e.currentTarget.currentTime, false)}
@@ -299,12 +296,8 @@ export function ShowcasePlayer({ onTime, timeline, ref }: ShowcasePlayerProps) {
             onChange={(e) => seekTo(Number(e.target.value), !(videoRef.current?.paused ?? true))}
             className="peer absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
           />
-          <div className="absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-edge-weak peer-focus-visible:outline-2 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-mint">
+          <div className="absolute inset-x-0 top-1/2 h-2 -translate-y-1/2 rounded-full bg-edge-weak peer-focus-visible:outline-2 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-mint">
             <div ref={fillRef} className="h-full origin-left rounded-full bg-mint" style={{ transform: `scaleX(${initialFrac})` }} />
-            {/* Griff über transform verschoben (Compositor); eine Animation von left würde jedes Bild ein Layout auslösen. */}
-            <div ref={thumbRef} className="absolute inset-0" style={{ transform: `translateX(${initialFrac * 100}%)` }}>
-              <div className="absolute left-0 top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-mint shadow" />
-            </div>
           </div>
         </div>
         <span aria-hidden className="w-[5.25rem] shrink-0 whitespace-nowrap text-right text-sm tabular-nums text-faint">

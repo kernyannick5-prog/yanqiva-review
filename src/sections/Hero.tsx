@@ -165,7 +165,7 @@ export function Hero() {
           style={{ y: cardY }}
           className="yq-in-pop relative mx-auto w-full max-w-[440px] px-1 py-2 sm:py-8 lg:mx-0 lg:ml-auto"
         >
-          <div aria-hidden className="yq-loop yq-glow-pulse absolute inset-x-6 bottom-0 h-24 rounded-full bg-[radial-gradient(closest-side,rgb(44_91_217/0.4),transparent)] opacity-80" />
+          <div aria-hidden className="absolute inset-x-6 bottom-0 h-24 rounded-full bg-[radial-gradient(closest-side,rgb(44_91_217/0.4),transparent)] opacity-80" />
           <NfcCard reduce={reduce} />
 
           {/* Mobil: Chips in einer Zeile unter der Karte (nichts überdeckt die Karte); ab sm als schwebende Chips */}

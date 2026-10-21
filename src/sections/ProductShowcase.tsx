@@ -5,17 +5,17 @@ import { Container, Eyebrow } from './ui'
 import { ShowcasePlayer, type ShowcasePlayerHandle } from './showcase/ShowcasePlayer'
 import { Captions, StepList } from './showcase/Steps'
 import { POSTER_TIME, STEP_TARGETS, stepAt } from './showcase/constants'
-import { TimeSync, sampleKeyframes } from './showcase/TimeSync'
+import { TimeSync } from './showcase/TimeSync'
 import { SCENE_END, captionAt, progressAt, stepBar, timeAt } from './showcase/timeline'
 
 const titleClass =
   'font-display text-[clamp(1.75rem,1.1rem+3vw,3.4rem)] font-semibold leading-[1.06] tracking-[-0.03em] text-balance'
 
-/** Hintergrund: langsam wandernder Aurora-Farbverlauf (Verläufe, kein Blur-Filter) + dezentes Raster. */
+/** Hintergrund: statischer Aurora-Farbverlauf (das Video davor ist selbst bewegt, jede zusätzliche Endlos-Animation kostet Bildrate) + dezentes Raster. */
 function StageBackdrop() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0">
-      <Aurora />
+      <Aurora still />
       <div className="bg-grid absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
     </div>
   )
@@ -33,14 +33,14 @@ export function ProductShowcase() {
   const [active, setActive] = useState(() => stepAt(initialP))
   const [caption, setCaption] = useState(() => captionAt(initialP))
 
-  // Fortschrittsbalken der Schritte laufen als Compositor-Animationen im Gleichlauf mit dem Video (siehe TimeSync).
+  // Fortschrittsbalken: nur der aktive Schritt wird animiert (Compositor, im Gleichlauf mit dem Video), die übrigen stehen fest auf voll bzw. leer.
   const [timeline] = useState(() => new TimeSync())
   useEffect(() => {
-    const offs = [0, 1, 2].map((i) =>
-      timeline.add(bars.current[i], sampleKeyframes((t) => `scaleX(${stepBar(progressAt(Math.min(t, SCENE_END)), i)})`)),
-    )
-    return () => offs.forEach((off) => off())
-  }, [timeline])
+    bars.current.forEach((el, i) => {
+      if (el && i !== active) el.style.transform = `scaleX(${i < active ? 1 : 0})`
+    })
+    return timeline.add(bars.current[active], (t) => `scaleX(${stepBar(progressAt(Math.min(t, SCENE_END)), active)})`)
+  }, [timeline, active])
 
   const onTime = useCallback((t: number) => {
     const p = progressAt(Math.min(t, SCENE_END))

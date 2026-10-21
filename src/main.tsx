@@ -3,8 +3,10 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { applyLowPowerAttribute } from './lib/lowPower'
+import { guardAfterLoad } from './lib/perfGuard'
 
 applyLowPowerAttribute()
+guardAfterLoad()
 
 // Beim Build vorgerendertes HTML (scripts/prerender.mjs) wird hydriert; im Dev-Server ist #root leer.
 const root = document.getElementById('root')!
