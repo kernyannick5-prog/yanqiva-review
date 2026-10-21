@@ -113,18 +113,34 @@ export function ShowcasePlayer({ onTime, timeline, ref }: ShowcasePlayerProps) {
     }
   }, [])
 
-  // Nahe am Viewport: Video vorladen (nur wenn Autoplay erlaubt ist und kein Datensparmodus aktiv ist).
+  // Nahe am Viewport: Video vorladen (nur wenn Autoplay erlaubt ist und kein Datensparmodus aktiv ist). Erst nach dem Laden der Seite im Leerlauf,
+  // damit die ca. 0,5 bis 0,7 MB nicht mit Schrift, Skripten und Hero um die Leitung konkurrieren (große Desktop-Fenster sehen den Abschnitt sofort).
   useEffect(() => {
     const el = boxRef.current
     if (!el || !autoOk || saveDataEnabled()) return
+    let near = false
+    let timer = 0
+    const armIdle = () => {
+      if (!near) return
+      if (typeof window.requestIdleCallback === 'function') timer = window.requestIdleCallback(arm, { timeout: 2500 })
+      else timer = window.setTimeout(arm, 300)
+    }
+    const onLoad = () => armIdle()
     const io = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) arm()
+        near = e.isIntersecting
+        if (near && document.readyState === 'complete') armIdle()
       },
-      { rootMargin: '300px 0px' },
+      { rootMargin: '150px 0px' },
     )
     io.observe(el)
-    return () => io.disconnect()
+    window.addEventListener('load', onLoad, { once: true })
+    return () => {
+      io.disconnect()
+      window.removeEventListener('load', onLoad)
+      if (typeof window.cancelIdleCallback === 'function') window.cancelIdleCallback(timer)
+      window.clearTimeout(timer)
+    }
   }, [autoOk, arm])
 
   // Ab 50 % sichtbar abspielen, komplett außer Sicht pausieren.
