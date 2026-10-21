@@ -400,3 +400,87 @@ footer {
   content-visibility: auto;
   contain-intrinsic-size: auto 1100px;
 }
+
+/* ------------------------------------------------------------------------------------------------
+   Premium-Motion: Aurora-Verlauf, LED-Spirale, Kantenlicht (Acryl).
+   Dauer-Loops nur transform/opacity. .yq-loop = Marker: im Low-Power-Modus, bei reduzierter Bewegung und beim Nutzerschalter
+   „Animationen anhalten“ ausgeschaltet (statischer Endzustand); offscreen/Tab verborgen pausiert [data-loop='off'] (siehe useLoopVisible).
+   ------------------------------------------------------------------------------------------------ */
+@keyframes yq-spin { to { transform: rotate(360deg); } }
+@keyframes yq-aurora-a {
+  0%, 100% { transform: translate3d(-5%, -3%, 0) scale(1); }
+  50%      { transform: translate3d(9%, 7%, 0) scale(1.18); }
+}
+@keyframes yq-aurora-b {
+  0%, 100% { transform: translate3d(6%, 4%, 0) scale(1.1); }
+  50%      { transform: translate3d(-8%, -6%, 0) scale(0.92); }
+}
+@keyframes yq-aurora-c {
+  0%, 100% { transform: translate3d(0, 5%, 0) scale(0.95); }
+  50%      { transform: translate3d(-6%, -5%, 0) scale(1.15); }
+}
+/* LED-Welle: ein Lichtbogen wickelt sich von innen nach außen durch die Spirale (Skalierung + Drehung), dann Pause */
+@keyframes yq-led-wave {
+  0%       { transform: rotate(0deg) scale(0.5); opacity: 0; }
+  6%       { opacity: 1; }
+  34%      { transform: rotate(190deg) scale(1.12); opacity: 0; }
+  100%     { transform: rotate(190deg) scale(1.12); opacity: 0; }
+}
+@keyframes yq-led-shot {
+  0%   { transform: rotate(0deg) scale(0.46); opacity: 0; }
+  14%  { opacity: 1; }
+  100% { transform: rotate(250deg) scale(1.18); opacity: 0; }
+}
+@keyframes yq-glow-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+
+.yq-aurora-a { animation: yq-aurora-a 24s ease-in-out infinite; }
+.yq-aurora-b { animation: yq-aurora-b 31s ease-in-out infinite; }
+.yq-aurora-c { animation: yq-aurora-c 38s ease-in-out infinite; }
+.yq-spin-slow { animation: yq-spin 70s linear infinite; }
+.yq-spin-led { animation: yq-spin 9s linear infinite; }
+.yq-glow-pulse { animation: yq-glow-pulse 5s ease-in-out infinite; }
+
+/* Acryl-Kantenlicht: 2-px-Ring (Maske) mit umlaufendem Farbverlauf. Eltern braucht border-radius + overflow hidden/relative. */
+.yq-edge {
+  position: absolute; inset: 0; padding: 2px; border-radius: inherit; overflow: hidden; pointer-events: none;
+  background: rgb(255 255 255 / 0.45);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.yq-edge-thin { padding: 1.5px; }
+.yq-edge::before {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 220%; aspect-ratio: 1; margin: -110% 0 0 -110%;
+  background: conic-gradient(from 0deg, transparent 0deg 170deg, rgb(44 91 217 / 0.55) 235deg, #14b8a6 300deg, #7c3aed 345deg, #ffffff 358deg, transparent 360deg);
+  animation: yq-spin 6.5s linear infinite;
+}
+.yq-edge-dark::before {
+  background: conic-gradient(from 0deg, transparent 0deg 170deg, rgb(94 234 212 / 0.4) 235deg, #5eead4 300deg, #a78bfa 345deg, #ffffff 358deg, transparent 360deg);
+}
+
+/* LED-Spirale: dim leuchtende Punkte (Maske) + umlaufender Komet + Welle */
+.yq-led-dots {
+  position: absolute; inset: 0; overflow: hidden;
+  background: rgb(44 91 217 / 0.26);
+  -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+}
+.yq-led-sweep {
+  position: absolute; inset: 0;
+  background: conic-gradient(from 0deg, transparent 0deg 120deg, rgb(44 91 217 / 0.7) 230deg, #14b8a6 310deg, #7c3aed 350deg, transparent 360deg);
+}
+.yq-led-wave {
+  position: absolute; inset: 0; opacity: 0;
+  background: conic-gradient(from 0deg, transparent 0deg 150deg, rgb(20 184 166) 250deg, #2c5bd9 320deg, #7c3aed 352deg, transparent 360deg);
+  -webkit-mask-image: radial-gradient(closest-side, transparent 66%, #000 80%, #000 88%, transparent 100%);
+  mask-image: radial-gradient(closest-side, transparent 66%, #000 80%, #000 88%, transparent 100%);
+}
+.yq-led-wave-loop { animation: yq-led-wave 8s cubic-bezier(0.45, 0, 0.15, 1) 1.4s infinite; }
+.yq-led-shot { animation: yq-led-shot 1.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.yq-led-dark .yq-led-dots { background: rgb(94 234 212 / 0.2); }
+
+@media (prefers-reduced-motion: reduce) { .yq-loop, .yq-edge::before { animation: none !important; } }
+html[data-lowpower] .yq-loop, html[data-lowpower] .yq-edge::before,
+html[data-motion='paused'] .yq-loop, html[data-motion='paused'] .yq-edge::before { animation: none !important; }
+/* statischer Zustand: Komet in fester, ansehnlicher Lage */
+html[data-lowpower] .yq-led-sweep, html[data-motion='paused'] .yq-led-sweep { transform: rotate(40deg); }
+html[data-lowpower] .yq-edge::before, html[data-motion='paused'] .yq-edge::before { transform: rotate(200deg); }

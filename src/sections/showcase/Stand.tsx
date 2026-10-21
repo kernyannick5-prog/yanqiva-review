@@ -1,4 +1,5 @@
 import { m, useTransform, type MotionValue } from 'framer-motion'
+import { EdgeLight } from '../../components/Led'
 import { Box } from './primitives'
 import { P3D } from './constants'
 import { ReviewCardFace } from '../../components/ReviewCardFace'
@@ -70,6 +71,8 @@ interface StandProps {
   rotY: MotionValue<number>
   /** Horizontale Verschiebung des Lichtreflexes (px). */
   glareX: MotionValue<number>
+  /** Deckkraft des umlaufenden Kantenlichts. */
+  edgeOpacity: MotionValue<number>
 }
 
 const edgeAcryl = { style: { background: 'linear-gradient(180deg, rgb(255 255 255 / 0.9), rgb(190 200 245 / 0.7))' } }
@@ -79,7 +82,7 @@ const edgeAcryl = { style: { background: 'linear-gradient(180deg, rgb(255 255 25
  * (blauer Kopf mit Welle, Sterne, NFC-Piktogramm, QR-Feld; markenrechtlich neutral ohne Google-Logo). Kein Fuß: die Platte
  * steht leicht nach hinten geneigt. Es wird bewusst kein Name/Firmenname aufgedruckt.
  */
-export function Stand({ p, rotX, rotY, glareX }: StandProps) {
+export function Stand({ p, rotX, rotY, glareX, edgeOpacity }: StandProps) {
   return (
     <div className="absolute left-0 top-[130px] h-0 w-0" style={{ perspective: 1100, perspectiveOrigin: '0px -150px' }}>
       <m.div className={`absolute left-0 top-0 h-0 w-0 ${P3D}`} style={{ rotateX: rotX, rotateY: rotY }}>
@@ -94,6 +97,7 @@ export function Stand({ p, rotX, rotY, glareX }: StandProps) {
                 children: (
                   <>
                     <ReviewCardFace className="block h-full w-full" />
+                    <EdgeLight className="rounded-[14px]" style={{ opacity: edgeOpacity }} />
                     <NfcPulse p={p} />
                     <QrScan p={p} />
                     {/* Lichtreflex: wandert mit der Rotation */}

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useInView, useMotionValue, useScroll, useSpring } from 'framer-motion'
 import { Button } from '../components/Button'
+import { Aurora } from '../components/Led'
 import { Reveal } from '../components/Reveal'
 import { CARD_IMAGE_NOTE } from '../order/catalog'
 import { useLowPower } from '../lib/lowPower'
@@ -31,18 +32,11 @@ function Heading({ fitHeight = false }: { fitHeight?: boolean }) {
   )
 }
 
-/** Weiche Hintergrund-Glows (statisch, ohne Blur-Filter). */
+/** Hintergrund: langsam wandernder Aurora-Farbverlauf (Verläufe, kein Blur-Filter) + dezentes Raster. */
 function StageBackdrop() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0">
-      <div
-        className="absolute left-1/2 top-[55%] h-[90vmin] w-[90vmin] -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{ background: 'radial-gradient(closest-side, rgb(124 58 237 / 0.1), rgb(124 58 237 / 0))' }}
-      />
-      <div
-        className="absolute right-[8%] top-[30%] h-[50vmin] w-[50vmin] rounded-full"
-        style={{ background: 'radial-gradient(closest-side, rgb(15 118 110 / 0.09), rgb(15 118 110 / 0))' }}
-      />
+      <Aurora />
       <div className="bg-grid absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
     </div>
   )
@@ -54,7 +48,7 @@ function FullShowcase() {
   // Szene nur mounten, wenn die Sektion nahe am Viewport ist.
   const near = useInView(sectionRef, { margin: '100% 0px 100% 0px' })
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] })
-  const p = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.4, restDelta: 0.0005 })
+  const p = useSpring(scrollYProgress, { stiffness: 110, damping: 26, mass: 0.5, restDelta: 0.0005 })
   const active = useActiveStep(p)
 
   const scrollToStep = (i: number) => {

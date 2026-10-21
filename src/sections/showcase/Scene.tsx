@@ -1,6 +1,6 @@
-import { useLayoutEffect, useEffect, useRef } from 'react'
+import { useLayoutEffect, useEffect } from 'react'
 import {
-  easeInOut,
+  cubicBezier,
   m,
   transform,
   useMotionValue,
@@ -8,6 +8,9 @@ import {
   useTransform,
   type MotionValue,
 } from 'framer-motion'
+import { LedSpiral } from '../../components/Led'
+import { useLoopVisible } from '../../lib/useLoopVisible'
+import { useMotionPaused } from '../../lib/motionPause'
 import { Stand } from './Stand'
 import { Phone } from './Phone'
 import {
@@ -26,8 +29,11 @@ interface SceneProps {
   lite?: boolean
 }
 
-const MAP = { ease: easeInOut } as const
-const map = (v: number, input: number[], output: number[]) => transform(v, input, output, MAP)
+/** Weiche Standard-Kurve (sanfter Anlauf, lange Ausklingphase), Anfahrt mit starkem Ausklingen, Chip mit leichtem Überschwingen. */
+const EASE = cubicBezier(0.45, 0, 0.15, 1)
+const EASE_OUT = cubicBezier(0.16, 1, 0.3, 1)
+const EASE_POP = cubicBezier(0.34, 1.45, 0.64, 1)
+const map = (v: number, input: number[], output: number[], ease = EASE) => transform(v, input, output, { ease })
 
 /** Verknüpft zwei MotionValues zu einer abgeleiteten (kein React-State). */
 function useCombine(a: MotionValue<number>, b: MotionValue<number>, fn: (a: number, b: number) => number) {
@@ -39,7 +45,8 @@ function useCombine(a: MotionValue<number>, b: MotionValue<number>, fn: (a: numb
  * es gibt keine React-State-Updates pro Frame. Rein dekorativ (aria-hidden).
  */
 export function Scene({ p, lite = false }: SceneProps) {
-  const areaRef = useRef<HTMLDivElement>(null)
+  const areaRef = useLoopVisible<HTMLDivElement>()
+  const paused = useMotionPaused()
   const scale = useMotionValue(0.6)
   /** 1 = breites Layout, 0 = schmal. */
   const k = useMotionValue(1)
@@ -60,22 +67,27 @@ export function Scene({ p, lite = false }: SceneProps) {
     const ro = new ResizeObserver(measure)
     ro.observe(el)
     return () => ro.disconnect()
-  }, [k, scale])
+  }, [k, scale, areaRef])
 
   // Maus-Neigung (±6°), nur bei feinem Zeiger und nicht im Lite-Modus.
   const rawMx = useMotionValue(0)
   const rawMy = useMotionValue(0)
-  const mx = useSpring(rawMx, { stiffness: 70, damping: 18, mass: 0.5 })
-  const my = useSpring(rawMy, { stiffness: 70, damping: 18, mass: 0.5 })
+  const mx = useSpring(rawMx, { stiffness: 60, damping: 17, mass: 0.6 })
+  const my = useSpring(rawMy, { stiffness: 60, damping: 17, mass: 0.6 })
   useEffect(() => {
-    if (lite || !window.matchMedia('(pointer: fine)').matches) return
+    // „Animationen anhalten“ und Lite: keine Maus-Neigung
+    if (lite || paused || !window.matchMedia('(pointer: fine)').matches) {
+      rawMx.set(0)
+      rawMy.set(0)
+      return
+    }
     const onMove = (e: PointerEvent) => {
       rawMx.set((e.clientX / window.innerWidth) * 2 - 1)
       rawMy.set((e.clientY / window.innerHeight) * 2 - 1)
     }
     window.addEventListener('pointermove', onMove, { passive: true })
     return () => window.removeEventListener('pointermove', onMove)
-  }, [lite, rawMx, rawMy])
+  }, [lite, paused, rawMx, rawMy])
 
   const endRotY = lite ? -18 : 5
   const baseRotY = useTransform(p, (v) => map(v, [0, 0.35, 0.6, 1], [-35, 0, 0, endRotY]))
@@ -110,9 +122,9 @@ export function Scene({ p, lite = false }: SceneProps) {
   // Smartphone fährt von rechts/unten heran (35–60 %)
   const phoneEndX = useTransform(k, (kv) => 143 + 7 * kv + 4 + 6 * kv)
   const phoneWrapX = useCombine(p, k, (pv, kv) =>
-    map(pv, [0, 0.33, 0.6, 1], [350 + 250 * kv, 350 + 250 * kv, 143 + 7 * kv, 147 + 13 * kv]),
+    map(pv, [0, 0.33, 0.6, 1], [350 + 250 * kv, 350 + 250 * kv, 143 + 7 * kv, 147 + 13 * kv], EASE_OUT),
   )
-  const phoneWrapY = useTransform(p, (v) => map(v, [0, 0.33, 0.6], [240, 240, -10]))
+  const phoneWrapY = useTransform(p, (v) => map(v, [0, 0.33, 0.6], [240, 240, -10], EASE_OUT))
   const phoneOpacity = useTransform(p, [0.33, 0.42], [0, 1])
   const phoneBaseRotY = useTransform(p, (v) => map(v, [0.33, 0.6, 1], [-32, -14, lite ? -8 : -6]))
   const phoneBaseRotX = useTransform(p, (v) => map(v, [0.33, 0.6], [14, 6]))
@@ -124,7 +136,19 @@ export function Scene({ p, lite = false }: SceneProps) {
   // Ergebnis-Chip (86–100 %)
   const chipOpacity = useTransform(p, [0.86, 0.92], [0, 1])
   const chipY = useTransform(p, [0.86, 0.93], [12, 0])
-  const chipScale = useTransform(p, [0.86, 0.93], [0.9, 1])
+  const chipScale = useTransform(p, [0.86, 0.94], [0.8, 1], { ease: EASE_POP })
+
+  // LED-Spirale hinter der Karte: leuchtet ab der Frontansicht auf, beim Tap (60 %) von innen nach außen gesteigert, am Ende ruhig
+  const ledOpacity = useTransform(p, (pv) => (lite ? 0.8 : map(pv, [0, 0.12, 0.33, 0.56, 0.64, 0.8, 1], [0, 0.35, 0.6, 0.7, 1, 0.8, 0.7])))
+  const ledScale = useTransform(p, [0, 0.35, 0.62, 0.8], [0.82, 1, 1.03, 1], { ease: EASE })
+  const ledX = useTransform(mx, (v) => v * -14)
+  const ledY = useTransform(my, (v) => v * -10)
+  // Welle: Tap (60–78 %) und ein zweiter, sanfterer Durchlauf zur Bestätigung (86–98 %)
+  const waveScale = useTransform(p, [0.58, 0.8, 0.86, 0.99], [0.46, 1.14, 0.5, 1.1], { ease: EASE })
+  const waveRotate = useTransform(p, [0.58, 0.8, 0.86, 0.99], [0, 260, 260, 480], { ease: EASE })
+  const waveOpacity = useTransform(p, [0.58, 0.63, 0.77, 0.8, 0.86, 0.89, 0.97, 0.99], [0, 1, 0.9, 0, 0, 0.8, 0.6, 0])
+  // Kantenlicht der Karte wird beim Tap heller
+  const edgeOpacity = useTransform(p, [0, 0.2, 0.56, 0.64, 0.82, 1], [0.35, 0.8, 0.9, 1, 0.9, 0.8])
 
   // Ruhige Schluss-Produktansicht: weicher Schein hinter der Karte
   const heroGlow = useTransform(p, [0.86, 1], [0, 1])
@@ -177,7 +201,14 @@ export function Scene({ p, lite = false }: SceneProps) {
               background: 'radial-gradient(closest-side, rgb(139 92 246 / 0.22), rgb(139 92 246 / 0))',
             }}
           />
-          <Stand p={p} rotX={standRotX} rotY={standRotY} glareX={glareX} />
+          <div aria-hidden className="absolute" style={{ left: -220, top: 4 - 220, width: 440, height: 440 }}>
+            <LedSpiral
+              className="absolute inset-0"
+              style={{ opacity: ledOpacity, scale: ledScale, x: ledX, y: ledY }}
+              waveStyle={lite ? { opacity: 0 } : { scale: waveScale, rotate: waveRotate, opacity: waveOpacity }}
+            />
+          </div>
+          <Stand p={p} rotX={standRotX} rotY={standRotY} glareX={glareX} edgeOpacity={edgeOpacity} />
           {/* NFC-Wellen */}
           {rings.map((r, i) => (
             <m.div

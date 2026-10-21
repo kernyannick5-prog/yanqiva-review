@@ -6,14 +6,16 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { LinkButton } from '../components/Button'
+import { Aurora, EdgeLight, LedSpiral } from '../components/Led'
 import { MotionToggle } from '../components/MotionToggle'
 import { ReviewCardFace } from '../components/ReviewCardFace'
 import { CARD_IMAGE_NOTE } from '../order/catalog'
 import { useLowPower } from '../lib/lowPower'
 import { useReduceMotion } from '../lib/useReduceMotion'
 import { useLoopVisible } from '../lib/useLoopVisible'
+import { useMotionPaused } from '../lib/motionPause'
 import { Container } from './ui'
 
 // Einblend-Animationen laufen als CSS (yq-in-*, siehe index.css) statt über framer-motion-Startwerte: Das vorgerenderte HTML ist damit
@@ -49,41 +51,70 @@ function Headline() {
   )
 }
 
-/** NFC-Bewertungskarte (Produktdesign, ohne Google-Logo) mit Schweben, Maus-Neigung und Glanz-Sweep. */
+/** NFC-Bewertungskarte (Produktdesign, ohne Google-Logo): Schweben, Maus-Neigung mit Glanz, Kantenlicht, LED-Spirale; Tippen löst eine NFC-Lichtwelle aus. */
 function NfcCard({ reduce }: { reduce: boolean }) {
+  const paused = useMotionPaused()
+  const lowPower = useLowPower()
+  const still = reduce || paused
   const mx = useMotionValue(0)
   const my = useMotionValue(0)
-  const sx = useSpring(mx, { stiffness: 90, damping: 18 })
-  const sy = useSpring(my, { stiffness: 90, damping: 18 })
+  const sx = useSpring(mx, { stiffness: 70, damping: 16, mass: 0.6 })
+  const sy = useSpring(my, { stiffness: 70, damping: 16, mass: 0.6 })
   const rotateX = useTransform(sy, (v) => 6 - v)
+  const glare = useTransform(sx, [-9, 9], ['-60%', '120%'])
+  const spiralX = useTransform(sx, (v) => v * -2.2)
+  const spiralY = useTransform(sy, (v) => v * -2.2)
+  const [shot, setShot] = useState(0)
 
   useEffect(() => {
-    if (reduce || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    if (still || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      mx.set(0)
+      my.set(0)
+      return
+    }
     const onMove = (e: PointerEvent) => {
       mx.set((e.clientX / window.innerWidth - 0.5) * 18)
       my.set((e.clientY / window.innerHeight - 0.5) * 14)
     }
     window.addEventListener('pointermove', onMove, { passive: true })
     return () => window.removeEventListener('pointermove', onMove)
-  }, [mx, my, reduce])
+  }, [mx, my, still])
 
   return (
-    <div className="legacy-palette [perspective:1200px]">
-      <div className={reduce ? '' : 'yq-card-float'} style={{ transformStyle: 'preserve-3d' }}>
-        <m.div
-          style={{ rotateX, rotateY: sx, transformStyle: 'preserve-3d' }}
-          className="relative mx-auto aspect-square w-full max-w-[360px] overflow-hidden rounded-[22px] shadow-[0_40px_80px_-30px_rgb(11_44_35/0.55),0_0_0_1px_rgb(255_255_255/0.6)] sm:max-w-[380px]"
-        >
-          <ReviewCardFace className="block h-full w-full" />
-          {/* Acrylkante: feiner heller Rand */}
-          <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[22px] shadow-[inset_0_0_0_2px_rgb(255_255_255/0.55)]" />
-          {!reduce && (
-            <span
-              aria-hidden
-              className="yq-sweep pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-            />
-          )}
-        </m.div>
+    <div className="legacy-palette relative mx-auto aspect-square w-full max-w-[360px] sm:max-w-[380px]" onPointerDown={still || lowPower ? undefined : () => setShot((n) => n + 1)}>
+      {/* LED-Spirale hinter der Karte (150 % der Kartenbreite, mittig) */}
+      <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[124%] -translate-x-1/2 sm:w-[150%] -translate-y-1/2">
+        <LedSpiral
+          className="absolute inset-0"
+          style={{ x: spiralX, y: spiralY }}
+          extra={shot > 0 ? <span key={shot} className="yq-loop yq-led-wave yq-led-shot" /> : undefined}
+        />
+      </div>
+      <div className="h-full w-full [perspective:1200px]">
+        <div className={`h-full w-full ${still ? '' : 'yq-card-float'}`} style={{ transformStyle: 'preserve-3d' }}>
+          <m.div
+            style={{ rotateX, rotateY: sx, transformStyle: 'preserve-3d' }}
+            className="relative h-full w-full overflow-hidden rounded-[22px] shadow-[0_40px_80px_-30px_rgb(11_44_35/0.55),0_0_0_1px_rgb(255_255_255/0.6),0_0_46px_-8px_rgb(44_91_217/0.35)]"
+          >
+            <ReviewCardFace className="block h-full w-full" />
+            {/* Acrylkante: feiner heller Rand + umlaufendes Kantenlicht */}
+            <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[22px] shadow-[inset_0_0_0_2px_rgb(255_255_255/0.55)]" />
+            <EdgeLight className="rounded-[22px]" />
+            {!still && (
+              <>
+                <span
+                  aria-hidden
+                  className="yq-sweep pointer-events-none absolute inset-y-0 left-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                />
+                <m.span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-y-0 left-0 w-1/4 -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  style={{ x: glare }}
+                />
+              </>
+            )}
+          </m.div>
+        </div>
       </div>
     </div>
   )
@@ -102,7 +133,7 @@ export function Hero() {
 
   return (
     <section id="start" ref={loop} className="section-light relative overflow-x-clip pb-14 pt-24 sm:pb-20 sm:pt-36 lg:pb-32 lg:pt-40">
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_80%_40%,rgb(124_58_237/0.07),transparent),radial-gradient(ellipse_40%_50%_at_10%_20%,rgb(15_118_110/0.06),transparent)]" />
+      <Aurora />
       <Container className="relative grid items-center gap-8 sm:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
         <div>
           <p className="yq-in-fade chip mb-5 sm:mb-6">
@@ -134,7 +165,7 @@ export function Hero() {
           style={{ y: cardY }}
           className="yq-in-pop relative mx-auto w-full max-w-[440px] px-1 py-2 sm:py-8 lg:mx-0 lg:ml-auto"
         >
-          <div aria-hidden className="absolute inset-x-6 bottom-0 h-24 rounded-full bg-[radial-gradient(closest-side,rgb(139_92_246/0.4),transparent)] opacity-80" />
+          <div aria-hidden className="yq-loop yq-glow-pulse absolute inset-x-6 bottom-0 h-24 rounded-full bg-[radial-gradient(closest-side,rgb(44_91_217/0.4),transparent)] opacity-80" />
           <NfcCard reduce={reduce} />
 
           {/* Mobil: Chips in einer Zeile unter der Karte (nichts überdeckt die Karte); ab sm als schwebende Chips */}

@@ -1,4 +1,4 @@
-import { m, useTransform, type MotionValue } from 'framer-motion'
+import { cubicBezier, m, useTransform, type MotionValue } from 'framer-motion'
 import { Face } from './primitives'
 import { NfcIcon } from './Stand'
 import { P3D, STAR_GOLD } from './constants'
@@ -6,14 +6,21 @@ import { P3D, STAR_GOLD } from './constants'
 const PW = 160
 const PH = 316
 const PD = 10
+const POP = cubicBezier(0.34, 1.5, 0.64, 1)
 const STAR_PATH = 'M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z'
 
 /** Einzelner Stern, der sich im Fenster [from, to] füllt (nur opacity/scale). */
 function Star({ p, from, to }: { p: MotionValue<number>; from: number; to: number }) {
   const fill = useTransform(p, [from, to], [0, 1])
-  const pop = useTransform(p, [from, (from + to) / 2, to], [0.85, 1.25, 1])
+  const pop = useTransform(p, [from, (from + to) / 2, to], [0.85, 1.3, 1], { ease: POP })
+  const haloScale = useTransform(p, [from, to + 0.03], [0.5, 2.1])
+  const haloOpacity = useTransform(p, [from, (from + to) / 2, to + 0.03], [0, 0.85, 0])
   return (
     <span className="relative block h-[26px] w-[26px]">
+      <m.span
+        className="absolute -inset-1 rounded-full"
+        style={{ scale: haloScale, opacity: haloOpacity, background: 'radial-gradient(closest-side, rgb(251 191 36 / 0.75), rgb(251 191 36 / 0))' }}
+      />
       <svg viewBox="0 0 24 24" className="absolute inset-0" fill="rgb(148 163 255 / 0.14)" stroke="rgb(148 163 255 / 0.35)" strokeWidth={1}>
         <path d={STAR_PATH} />
       </svg>
@@ -23,6 +30,29 @@ function Star({ p, from, to }: { p: MotionValue<number>; from: number; to: numbe
     </span>
   )
 }
+
+/** Ein Funke der Danke-Explosion: fliegt vom Mittelpunkt nach außen, wird kleiner und blendet aus (nur transform/opacity). */
+function Spark({ p, angle, dist, size, color, delay }: { p: MotionValue<number>; angle: number; dist: number; size: number; color: string; delay: number }) {
+  const t = useTransform(p, [0.84 + delay, 0.94 + delay], [0, 1], { ease: cubicBezier(0.16, 1, 0.3, 1) })
+  const x = useTransform(t, (v) => Math.cos(angle) * dist * v)
+  const y = useTransform(t, (v) => Math.sin(angle) * dist * v)
+  const scale = useTransform(t, [0, 0.3, 1], [0.2, 1, 0.3])
+  const opacity = useTransform(p, [0.84 + delay, 0.855 + delay, 0.93 + delay], [0, 1, 0])
+  return (
+    <m.span
+      className="absolute left-1/2 top-1/2 rounded-full"
+      style={{ width: size, height: size, marginLeft: -size / 2, marginTop: -size / 2, background: color, x, y, scale, opacity }}
+    />
+  )
+}
+
+const SPARKS = Array.from({ length: 16 }, (_, i) => ({
+  angle: (i / 16) * Math.PI * 2 + (i % 2) * 0.12,
+  dist: i % 2 ? 62 : 44,
+  size: i % 3 === 0 ? 6 : 4,
+  color: i % 3 === 0 ? STAR_GOLD : i % 3 === 1 ? '#5eead4' : '#a78bfa',
+  delay: (i % 4) * 0.004,
+}))
 
 interface PhoneProps {
   /** Geglätteter Szenenfortschritt 0..1. */
@@ -52,6 +82,8 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
   const doneScale = useTransform(p, [0.825, 0.87], [0.7, 1])
   const checkDraw = useTransform(p, [0.84, 0.89], [0, 1])
   const doneStars = useTransform(p, [0.87, 0.91], [0, 1])
+  const doneRingScale = useTransform(p, [0.84, 0.95], [1, 2.3], { ease: cubicBezier(0.16, 1, 0.3, 1) })
+  const doneRingOpacity = useTransform(p, [0.84, 0.86, 0.95], [0, 0.8, 0])
 
   const edge = { style: { background: 'linear-gradient(90deg, rgb(120 130 200 / 0.6), rgb(30 27 75 / 0.9))' } }
 
@@ -153,6 +185,10 @@ export function Phone({ p, rotX, rotY, z }: PhoneProps) {
                 className="relative grid h-16 w-16 place-items-center rounded-full border border-mint/50 bg-mint/10"
                 style={{ scale: doneScale }}
               >
+                <m.span className="absolute -inset-px rounded-full border-2 border-mint" style={{ scale: doneRingScale, opacity: doneRingOpacity }} />
+                {SPARKS.map((sp, i) => (
+                  <Spark key={i} p={p} {...sp} />
+                ))}
                 <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="var(--color-mint)" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
                   <m.path d="M5 12.5l4.5 4.5L19 7.5" style={{ pathLength: checkDraw }} />
                 </svg>

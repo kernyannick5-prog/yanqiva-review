@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * Endlos-Animationen nur laufen lassen, solange der Container sichtbar ist.
+ * Endlos-Animationen nur laufen lassen, solange der Container sichtbar ist (und der Tab im Vordergrund liegt).
  * Ref auf den Container setzen: der Hook schreibt data-loop="on|off" direkt ins DOM (ohne React-Re-Render),
  * CSS pausiert alle Animationen darin, solange data-loop="off" gesetzt ist (siehe index.css).
  */
@@ -10,12 +10,21 @@ export function useLoopVisible<T extends HTMLElement = HTMLDivElement>() {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    el.dataset.loop = 'off'
+    let inView = false
+    const apply = () => {
+      el.dataset.loop = inView && !document.hidden ? 'on' : 'off'
+    }
+    apply()
     const io = new IntersectionObserver(([entry]) => {
-      el.dataset.loop = entry.isIntersecting ? 'on' : 'off'
+      inView = entry.isIntersecting
+      apply()
     }, { rootMargin: '80px' })
     io.observe(el)
-    return () => io.disconnect()
+    document.addEventListener('visibilitychange', apply)
+    return () => {
+      io.disconnect()
+      document.removeEventListener('visibilitychange', apply)
+    }
   }, [])
   return ref
 }

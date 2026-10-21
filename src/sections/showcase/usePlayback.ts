@@ -4,6 +4,9 @@ import { STEP_TARGETS, TIMELINE, stepAt } from './constants'
 
 export type PlayStatus = 'idle' | 'playing' | 'paused' | 'done'
 
+/** Weiche Kurve pro Teilstück: sanfter Anlauf, lange Ausklingphase. */
+const SMOOTH = [0.45, 0, 0.15, 1] as [number, number, number, number]
+
 const END = TIMELINE[TIMELINE.length - 1][1]
 
 /** Zeitpunkt (s) im Zeitplan, an dem der Fortschritt `v` erreicht wird. */
@@ -63,7 +66,7 @@ export function usePlayback() {
       ctrl.current = animate(p, [from, ...rest.map(([v]) => v)], {
         duration: total,
         times: [0, ...rest.map(([, t]) => (t - t0) / total)],
-        ease: 'easeInOut',
+        ease: SMOOTH,
         onComplete: () => setStatus('done'),
       })
     },
@@ -130,7 +133,7 @@ export function usePlayback() {
       setStatus('idle')
       ctrl.current = animate(p, target, {
         duration: Math.min(1.8, Math.max(0.5, dist * 3.2)),
-        ease: 'easeInOut',
+        ease: SMOOTH,
         onComplete: end,
       })
     },
