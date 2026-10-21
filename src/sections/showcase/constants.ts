@@ -33,7 +33,7 @@ export const STEP_WINDOWS: ReadonlyArray<readonly [number, number]> = [
 /** Schlüsselmomente je Schritt: Frontansicht (NFC-Symbol markiert), Tap (Wellen), Ergebnis. */
 export const STEP_TARGETS: readonly number[] = [0.33, 0.62, 1]
 
-/** Zeitplan der Abspiel-Animation (Touch): [Fortschritt, Sekunde]. Gleiche Werte = Haltepunkt. */
+/** Zeitplan der Animation (Quelle für das gerenderte Video, siehe src/video-render): [Fortschritt, Sekunde]. Gleiche Werte = Haltepunkt. */
 export const TIMELINE: ReadonlyArray<readonly [number, number]> = [
   [0, 0],
   [0.33, 2.0], // Frontansicht, NFC wird hervorgehoben
@@ -49,3 +49,9 @@ export const TIMELINE: ReadonlyArray<readonly [number, number]> = [
 export function stepAt(v: number): number {
   return v < STEP_WINDOWS[1][0] ? 0 : v < STEP_WINDOWS[2][0] ? 1 : 2
 }
+
+/** Länge der Videos in Sekunden (8 s Szene + Halten + Überblendung am Schleifenrand). */
+export const VIDEO_DURATION = 8.8
+
+/** Zeitpunkt (s) des Standbilds (Poster): Frontansicht der Karte, NFC-Symbol hervorgehoben. */
+export const POSTER_TIME = 2.3

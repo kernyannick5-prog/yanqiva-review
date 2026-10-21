@@ -1,36 +1,15 @@
-import { useEffect, useRef } from 'react'
-import { useInView, useMotionValue, useScroll, useSpring } from 'framer-motion'
-import { Button } from '../components/Button'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Aurora } from '../components/Led'
-import { Reveal } from '../components/Reveal'
 import { CARD_IMAGE_NOTE } from '../order/catalog'
-import { useLowPower } from '../lib/lowPower'
-import { useMotionPaused } from '../lib/motionPause'
-import { useTouchLayout } from '../lib/useTouchLayout'
 import { Container, Eyebrow } from './ui'
-import { Scene } from './showcase/Scene'
+import { ShowcasePlayer, type ShowcasePlayerHandle } from './showcase/ShowcasePlayer'
 import { Captions, StepList } from './showcase/Steps'
-import { STEP_TARGETS } from './showcase/constants'
-import { useActiveStep, usePlayback, type PlayStatus } from './showcase/usePlayback'
-
+import { POSTER_TIME, STEP_TARGETS, stepAt } from './showcase/constants'
+import { TimeSync, sampleKeyframes } from './showcase/TimeSync'
+import { SCENE_END, captionAt, progressAt, stepBar, timeAt } from './showcase/timeline'
 
 const titleClass =
   'font-display text-[clamp(1.75rem,1.1rem+3vw,3.4rem)] font-semibold leading-[1.06] tracking-[-0.03em] text-balance'
-
-/** Auf niedrigen Desktop-Fenstern: Titel zusätzlich an die Höhe koppeln, damit die Spalte in den Sticky-Bereich passt. */
-const shortTitle = '[@media(max-height:860px)]:text-[clamp(1.75rem,6.2svh,3.4rem)] [@media(max-height:860px)]:lg:mt-3'
-
-function Heading({ fitHeight = false }: { fitHeight?: boolean }) {
-  return (
-    <>
-      <Eyebrow>Das Produkt</Eyebrow>
-      <h2 id="produkt-title" className={`mt-2.5 lg:mt-5 ${titleClass} ${fitHeight ? shortTitle : ''}`}>
-        <span className="block">Eine Karte.</span>
-        <span className="text-gradient block">Bewerten mit einem Tap.</span>
-      </h2>
-    </>
-  )
-}
 
 /** Hintergrund: langsam wandernder Aurora-Farbverlauf (Verläufe, kein Blur-Filter) + dezentes Raster. */
 function StageBackdrop() {
@@ -42,179 +21,54 @@ function StageBackdrop() {
   )
 }
 
-/** Desktop: Scroll-gesteuerte Sticky-Szene. Klick auf einen Schritt scrollt zu dessen Position. */
-function FullShowcase() {
-  const sectionRef = useRef<HTMLElement>(null)
-  // Szene nur mounten, wenn die Sektion nahe am Viewport ist.
-  const near = useInView(sectionRef, { margin: '100% 0px 100% 0px' })
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] })
-  const p = useSpring(scrollYProgress, { stiffness: 110, damping: 26, mass: 0.5, restDelta: 0.0005 })
-  const active = useActiveStep(p)
-
-  const scrollToStep = (i: number) => {
-    const el = sectionRef.current
-    if (!el) return
-    const top = el.getBoundingClientRect().top + window.scrollY
-    const range = el.offsetHeight - window.innerHeight
-    window.scrollTo({ top: top + range * Math.min(STEP_TARGETS[i], 0.98), behavior: 'smooth' })
-  }
-
-  return (
-    <section id="produkt" ref={sectionRef} aria-labelledby="produkt-title" className="section-light relative h-[260vh]">
-      <div className="sticky top-0 h-[100svh] overflow-hidden">
-        <StageBackdrop />
-        <Container className="relative grid h-full grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-center gap-10 pb-8 pt-24">
-          <div className="flex flex-col gap-8 [@media(max-height:860px)]:gap-5">
-            <div>
-              <Heading fitHeight />
-            </div>
-            <StepList p={p} active={active} onSelect={scrollToStep} layout="column" />
-            <Captions p={p} className="lg:min-h-[4.5rem]" />
-          </div>
-          <div className="relative h-[min(680px,78svh)]">{near && <Scene p={p} />}</div>
-        </Container>
-      </div>
-    </section>
-  )
-}
-
-const iconProps = { viewBox: '0 0 24 24', className: 'size-[18px] shrink-0', fill: 'currentColor', 'aria-hidden': true } as const
-
-function PlayIcon() {
-  return (
-    <svg {...iconProps}>
-      <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
-    </svg>
-  )
-}
-function PauseIcon() {
-  return (
-    <svg {...iconProps}>
-      <rect x="6" y="5" width="4" height="14" rx="1.2" />
-      <rect x="14" y="5" width="4" height="14" rx="1.2" />
-    </svg>
-  )
-}
-function ReplayIcon() {
-  return (
-    <svg {...iconProps} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 12a8 8 0 1 0 2.6-5.9" />
-      <path d="M4 4.5V8.8h4.3" />
-    </svg>
-  )
-}
-
-const PLAY_LABEL: Record<PlayStatus, string> = {
-  idle: 'Abspielen',
-  playing: 'Pause',
-  paused: 'Weiter',
-  done: 'Nochmal ansehen',
-}
-
-function PlayButton({ status, onClick }: { status: PlayStatus; onClick: () => void }) {
-  const icon = status === 'playing' ? <PauseIcon /> : status === 'done' ? <ReplayIcon /> : <PlayIcon />
-  return (
-    <Button variant="ghost" onClick={onClick} className="min-w-[11.5rem]">
-      {icon}
-      {PLAY_LABEL[status]}
-    </Button>
-  )
-}
-
 /**
- * Touch/Tablet/schmal: keine Sticky-Choreografie. Zeitbasiert abgespielter Fortschritt (MotionValue),
- * Autoplay einmal bei ~50 % Sichtbarkeit, Tippen auf die Szene = von vorn, Schritte springen zum Schlüsselmoment.
+ * Produktabschnitt: Das Video (Smartphone + NFC-Karte) ersetzt die frühere Live-3D-Szene. Schritte und Kurztexte folgen der Videozeit,
+ * ein Klick auf einen Schritt springt im Video zum passenden Moment.
  */
-function TouchShowcase() {
-  const sceneRef = useRef<HTMLDivElement>(null)
-  const sectionRef = useRef<HTMLElement>(null)
-  const near = useInView(sectionRef, { margin: '60% 0px 60% 0px' })
-  const half = useInView(sceneRef, { amount: 0.5, once: true })
-  const visible = useInView(sceneRef, { amount: 0.1 })
-  const pb = usePlayback()
-  const step = useActiveStep(pb.p)
-  const { autoplay, pause, resume } = pb
-  const autoPaused = useRef(false)
+export function ProductShowcase() {
+  const player = useRef<ShowcasePlayerHandle>(null)
+  const bars = useRef<(HTMLSpanElement | null)[]>([])
+  const [initialP] = useState(() => progressAt(POSTER_TIME))
+  // Nur Schritt und Kurztext sind React-State (wechseln selten, setState mit gleichem Wert rendert nicht neu).
+  const [active, setActive] = useState(() => stepAt(initialP))
+  const [caption, setCaption] = useState(() => captionAt(initialP))
 
-  // Einmal automatisch abspielen (~50 % sichtbar); verlässt die Szene den Viewport, pausieren.
-  // Nutzerschalter „Animationen anhalten“ (WCAG 2.2.2): kein Autoplay, laufende Wiedergabe pausieren.
-  const motionPaused = useMotionPaused()
-  const motionPauseHeld = useRef(false)
+  // Fortschrittsbalken der Schritte laufen als Compositor-Animationen im Gleichlauf mit dem Video (siehe TimeSync).
+  const [timeline] = useState(() => new TimeSync())
   useEffect(() => {
-    if (half && !motionPaused) autoplay()
-  }, [half, autoplay, motionPaused])
-  useEffect(() => {
-    if (motionPaused) motionPauseHeld.current = pause()
-    else if (motionPauseHeld.current) {
-      motionPauseHeld.current = false
-      resume()
-    }
-  }, [motionPaused, pause, resume])
-  useEffect(() => {
-    if (!visible) autoPaused.current = pause()
-    else if (autoPaused.current) {
-      autoPaused.current = false
-      resume()
-    }
-  }, [visible, pause, resume])
+    const offs = [0, 1, 2].map((i) =>
+      timeline.add(bars.current[i], sampleKeyframes((t) => `scaleX(${stepBar(progressAt(Math.min(t, SCENE_END)), i)})`)),
+    )
+    return () => offs.forEach((off) => off())
+  }, [timeline])
 
-  return (
-    <section id="produkt" ref={sectionRef} aria-labelledby="produkt-title" className="section-light relative overflow-x-clip py-10 sm:py-14">
-      <StageBackdrop />
-      <Container className="relative flex flex-col gap-3 sm:gap-4">
-        <div>
-          <Heading />
-        </div>
-        <div
-          ref={sceneRef}
-          onClick={pb.restart}
-          className="relative -mx-5 h-[min(400px,47svh)] cursor-pointer select-none rounded-3xl focus-visible:outline-offset-[-3px] sm:-mx-8 sm:h-[min(520px,50svh)] lg:mx-auto lg:w-full lg:max-w-3xl"
-        >
-          {near && <Scene p={pb.p} />}
-        </div>
-        <div className="flex flex-col items-center gap-1.5">
-          <PlayButton status={pb.status} onClick={pb.toggle} />
-          <p className="text-center text-[13px] leading-snug text-faint">Tippen Sie auf die Szene, um es nochmal zu sehen.</p>
-          <p className="text-center text-[13px] leading-snug text-faint">{CARD_IMAGE_NOTE}</p>
-        </div>
-        <Captions p={pb.p} />
-        <StepList p={pb.p} active={step} onSelect={pb.goStep} />
-      </Container>
-    </section>
-  )
-}
+  const onTime = useCallback((t: number) => {
+    const p = progressAt(Math.min(t, SCENE_END))
+    setActive(stepAt(p))
+    setCaption(captionAt(p))
+  }, [])
+  const jump = useCallback((i: number) => player.current?.jumpTo(timeAt(STEP_TARGETS[i])), [])
 
-/** Lite: normale Sektion, statische Schrägansicht, fertiger Bewertungs-Screen. Schritte springen ohne Animation. */
-function LiteShowcase() {
-  const p = useMotionValue(1)
-  const active = useActiveStep(p)
-  const jump = (i: number) => p.set(STEP_TARGETS[i])
   return (
     <section id="produkt" aria-labelledby="produkt-title" className="section-light section-y relative overflow-x-clip">
       <StageBackdrop />
-      <Container className="relative grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-10">
-        <div className="flex flex-col gap-6 sm:gap-8">
-          <Reveal>
-            <Heading />
-          </Reveal>
-          <Reveal delay={0.1}>
-            <StepList p={p} active={active} onSelect={jump} />
-          </Reveal>
-          <Reveal delay={0.15}>
-            <Captions p={p} />
-          </Reveal>
+      <Container className="relative grid gap-6 sm:gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:grid-rows-[auto_1fr] lg:gap-x-10 lg:gap-y-8">
+        <div className="lg:col-start-1 lg:row-start-1">
+          <Eyebrow>Das Produkt</Eyebrow>
+          <h2 id="produkt-title" className={`mt-2.5 lg:mt-5 ${titleClass}`}>
+            <span className="block">Eine Karte.</span>
+            <span className="text-gradient block">Bewerten mit einem Tap.</span>
+          </h2>
         </div>
-        <Reveal delay={0.1} className="relative -mx-5 h-[min(480px,112vw)] sm:-mx-8 lg:mx-0 lg:h-[560px]">
-          <Scene p={p} lite />
-        </Reveal>
+        <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center">
+          <ShowcasePlayer ref={player} onTime={onTime} timeline={timeline} />
+          <p className="mt-3 text-center text-[13px] leading-snug text-faint">{CARD_IMAGE_NOTE}</p>
+        </div>
+        <div className="flex flex-col gap-4 lg:col-start-1 lg:row-start-2 lg:gap-6">
+          <StepList initialP={initialP} bars={bars} active={active} onSelect={jump} />
+          <Captions index={caption} className="lg:min-h-[4.5rem]" />
+        </div>
       </Container>
     </section>
   )
-}
-
-export function ProductShowcase() {
-  const lite = useLowPower()
-  const touch = useTouchLayout()
-  if (lite) return <LiteShowcase />
-  return touch ? <TouchShowcase /> : <FullShowcase />
 }

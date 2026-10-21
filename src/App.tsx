@@ -2,6 +2,7 @@ import { LazyMotion } from 'framer-motion'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Navbar } from './sections/Navbar'
 import { Hero } from './sections/Hero'
+import { ProductShowcase } from './sections/ProductShowcase'
 import { ProblemSolution } from './sections/ProblemSolution'
 import { HowItWorks } from './sections/HowItWorks'
 import { QrDemo } from './sections/QrDemo'
@@ -12,20 +13,7 @@ import { Footer } from './sections/Footer'
 import { WhatsAppFab } from './components/WhatsApp'
 import { Background } from './sections/Background'
 import { loadMotionFeatures } from './lib/loadMotionFeatures'
-import { useLowPower } from './lib/lowPower'
-import { useTouchLayout } from './lib/useTouchLayout'
 import { sectionElementId, sectionFromLegacyHash, sectionFromPath, sectionHref, type SectionName } from './lib/sectionRoutes'
-
-// 3D-Produktszene als eigener Chunk: Hero und LCP warten nicht auf den Szenen-Code. Der Platzhalter ist so hoch wie die fertige Sektion (kein Layout-Shift, Anker bleiben stabil).
-const ProductShowcase = lazy(() => import('./sections/ProductShowcase').then((m) => ({ default: m.ProductShowcase })))
-
-/** Gleiche Höhe wie die Sektion je Variante: Desktop (Sticky-Szene) 260vh, Touch/Lite je nach Breite. */
-function ShowcaseFallback() {
-  const touch = useTouchLayout()
-  const lowPower = useLowPower()
-  const height = lowPower || touch ? 'min-h-[810px] sm:min-h-[900px]' : 'h-[260vh]'
-  return <section id="produkt" className={`section-light relative ${height}`} aria-busy="true" />
-}
 
 // Dashboard-Demo als eigener Chunk, damit der Hero schneller lädt.
 const DashboardDemo = lazy(() => import('./demo/DashboardDemo').then((m) => ({ default: m.DashboardDemo })))
@@ -239,9 +227,7 @@ export default function App() {
       <Navbar onLight />
       <main id="main" tabIndex={-1} className="relative outline-none">
         <Hero />
-        <Suspense fallback={<ShowcaseFallback />}>
-          <ProductShowcase />
-        </Suspense>
+        <ProductShowcase />
         <ProblemSolution />
         <HowItWorks />
         <DemoWhenNear />
