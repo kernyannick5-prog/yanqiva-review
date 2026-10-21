@@ -18,8 +18,8 @@ export function Aurora({ className = '', intensity = 1 }: { className?: string; 
           style={{
             background:
               'conic-gradient(from 0deg, rgb(44 91 217 / 0), rgb(44 91 217 / 0.11), rgb(20 184 166 / 0.12), rgb(124 58 237 / 0.1), rgb(44 91 217 / 0))',
-            WebkitMaskImage: 'radial-gradient(closest-side, #000 25%, transparent 100%)',
-            maskImage: 'radial-gradient(closest-side, #000 25%, transparent 100%)',
+            WebkitMaskImage: 'radial-gradient(closest-side, transparent 8%, #000 45%, transparent 100%)',
+            maskImage: 'radial-gradient(closest-side, transparent 8%, #000 45%, transparent 100%)',
           }}
         />
       </div>
