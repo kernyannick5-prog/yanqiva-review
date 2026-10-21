@@ -40,6 +40,24 @@ Für eine eigene Domain ohne Unterpfad: `BASE=/ npm run build`.
 
 Jeder Push auf `main` baut die Seite über GitHub Actions (`.github/workflows/deploy.yml`) und veröffentlicht sie automatisch auf GitHub Pages.
 
+## Produktvideo (Smartphone + NFC-Karte)
+
+Der Abschnitt „Das Produkt“ zeigt ein selbst gehostetes Video (`public/media/showcase-desktop.mp4` 1280x800, `showcase-mobile.mp4` 800x640, je H.264, ohne Ton, plus WebP-Poster). Es wird nicht live berechnet, sondern aus der 3D-Szene gerendert, damit es auf alten Geräten flüssig läuft.
+
+Neu rendern (z. B. nach Änderungen an Szene, Karte oder Farben):
+
+```
+FFMPEG=<Pfad zu ffmpeg> node scripts/render-showcase-video.mjs   # beide Fassungen
+node scripts/render-showcase-video.mjs --only=mobile             # nur eine
+node scripts/render-showcase-video.mjs --posters-only            # nur die Poster
+```
+
+Das Skript startet den Vite-Dev-Server, steuert die Szene über `video-render/index.html` (`src/video-render/main.tsx`, nicht Teil des Site-Bundles) Bild für Bild auf die Zeit t, macht Screenshots (30 fps) und kodiert sie mit ffmpeg. Zeitplan: `TIMELINE` in `src/sections/showcase/constants.ts`; Länge und Standbildzeit dort als `VIDEO_DURATION` und `POSTER_TIME` (im Skript gespiegelt). Die Szene (`Scene.tsx`, `Phone.tsx`, `Stand.tsx`) bleibt nur dafür im Repo.
+
+Wiedergabe: `src/sections/showcase/ShowcasePlayer.tsx` (Autoplay stumm ab 50 % sichtbar, Pause außerhalb des Sichtfelds und im Hintergrund-Tab, kein Autoplay bei „Bewegung reduzieren“, beim Schalter „Animationen anhalten“ und im Datensparmodus, Laden erst in Nähe des Viewports).
+
+LED-Spirale: Die Punktmaske (`src/led-mask.css`) ist generiert (`node scripts/gen-led-mask.mjs`).
+
 ## Redirects, Notfall-Fallback und Kundendaten
 
 - Produktionskarten laufen ausschließlich über den Worker `yanqiva-redirect` (Routen `yanqiva-bewertung.de/r/*`, „Fail open“). **Kein Karten-Snapshot im Build:** Kundendaten (Slug → Google-Link) landen nie im Repo, in Pages-Artefakten oder Logs (Audit SEC-3, behoben am 15.10.2026). Der frühere Export-Schritt (`FALLBACK_EXPORT_URL`/`FALLBACK_EXPORT_TOKEN`) und der tägliche Cron-Build sind entfernt. Im Build entstehen nur die Demo-Weiterleitungen aus `src/config/redirects.ts`.

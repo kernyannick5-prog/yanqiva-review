@@ -27,12 +27,12 @@ for (let i = 0; i < N; i++) {
   positions.push(`${(((x - box / 2) / (600 - box)) * 100).toFixed(2)}% ${(((y - box / 2) / (600 - box)) * 100).toFixed(2)}%`)
 }
 
-const images = Array(N).fill('var(--yq-dot)').join(',')
+// Wörtlich statt var(--…) wiederholt: das Auflösen von 210 var()-Verweisen je Eigenschaft kostete messbar Style-Zeit; komprimiert ist das gleich groß.
+const images = Array(N).fill('radial-gradient(closest-side, #000 70%, transparent)').join(',')
 const sz = sizes.join(',')
 const pos = positions.join(',')
 const css = `/* Generiert von scripts/gen-led-mask.mjs, nicht von Hand ändern. */
 .yq-led-dots {
-  --yq-dot: radial-gradient(closest-side, #000 70%, transparent);
   -webkit-mask-image: ${images};
   mask-image: ${images};
   -webkit-mask-size: ${sz};
