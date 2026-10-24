@@ -4,6 +4,7 @@ import { useId } from 'react'
  * Vorderseite der NFC-Bewertungskarte (12 x 12 cm) als eigene Zeichnung, angelehnt an das Produktlayout:
  * farbiger Kopf mit Welle, Symbol im weißen Kreis, "Bewerte uns auf Google", fünf Sterne, NFC-Piktogramm, "oder", QR-Feld.
  * Markenrechtlich bewusst neutral: kein Google-Logo, keine Google-Markenfarben; "Google" nur als beschreibender Text.
+ * Das G im Kreis ist ein eigenes Monogramm (einfarbig in Kartenfarbe, runde Strichenden, goldener Stern) und kein Nachbau des Google-"G".
  * Der QR-Code ist ein dekoratives Muster (kein echter Code).
  */
 
@@ -97,10 +98,10 @@ export function ReviewCardFace({ variant = 'weiss', className = '', decorative =
         <path d={`M1200 594 ${WAVE}`} fill="none" stroke="#a7b9f3" strokeWidth={14} transform="translate(0 9)" />
       )}
 
-      {/* Symbol im Kreis: Sprechblase mit Stern (statt Markenlogo) */}
+      {/* Symbol im Kreis: eigenes G-Monogramm (einfarbig, runde Enden, Stern in der Öffnung) statt Markenlogo */}
       <circle cx={300} cy={262} r={190} fill="#ffffff" />
-      <path d="M200 182a36 36 0 0 1 36-36h128a36 36 0 0 1 36 36v108a36 36 0 0 1-36 36h-92l-50 44v-44h-0a22 22 0 0 1-22-22z" fill={head} />
-      <g transform="translate(240 168) scale(5.1)">
+      <path d="M374.2 187.8A105 105 0 1 0 405 262H318" fill="none" stroke={head} strokeWidth={50} strokeLinecap="round" strokeLinejoin="round" />
+      <g transform="translate(407 151) scale(2.6)">
         <path d={STAR} fill={GOLD} />
       </g>
 
